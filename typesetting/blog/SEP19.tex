@@ -1,0 +1,129 @@
+
+% arara: pdflatex
+% arara: makeglossaries
+% arara: pdflatex
+
+\documentclass[oneside,a4paper]{memoir} % A4 paper size, default 11pt? font size and oneside for equal margins
+
+\usepackage{./sty/style_blog}
+
+\usepackage{./incl/acronyms}
+
+\makeglossaries
+%\loadglsentries{acronyms}
+
+
+% Glossary
+\newglossaryentry{Carpentry Software}{name=Carpentry Software,
+  description={framework for digital education}}
+
+% Acronym
+\setacronymstyle{long-short}
+\newacronym{AU}{AU}{Aarhus University}
+\newacronym{SDAM}{SDAM}{Social Dynamics in the Ancient Mediterranean}
+
+
+\begin{document}
+
+\chapter{B\textbf{log}}
+%\vfil
+
+\section{September 2019}
+
+\emph{September 2019} is when I formally started to work in the project \enquote{Small data - Big Challenges: Synthetic study of complexity in the Balkans and Black Sea} at the Department of History and Classical Studies, Aarhus University. 
+The team is made by 4 people, Adéla who is the team leader associated to \gls{AU}, Petra, V\v{o}jtech, and myself as postdocs. I am the only one who does not have a formal background in humanities.
+
+\bigbreak\noindent
+The two mains outputs of this project are 
+
+\begin{enumerate} %[leftmargin=20pt,labelsep=8pt]\itemsep10pt
+      \item a comparative study of proxies for evolution of social complexity in the Ancient Mediterranean, and 
+      \item digital tools, workflows and processes that scale and that historians and archaeologists can use in their own research.
+\end{enumerate}
+
+\noindent
+Starting with the first goal, the evolution of complexity, the decision of the team was whether to emphasise in the name of the project on complexity or the dynamics of the systems. Since I am interested in both aspects for my research on social networks, I will agree with any of the two options, and dynamics prevailed in the project title. Hence, the projects name is \enquote{\emph{Social Dynamics in the Ancient Mediterranean}} with the acronym \gls{SDAM}.
+
+The second goal, the digital tools, our first task has been to review available digital tools to collect data, merge data, clean data, and perform data analysis.
+
+
+\subsection{Reflexions}
+My impression is that there is a demand for \enquote{commenting} digital documents of historical character by highlighting the text. This aspect was mentioned both in our team and in the Faculty meeting.
+
+Graphemes representing letters in the alphabet seem to be called as \emph{alphanumeric} among humanists, whereas in programing languages alphabet letters are termed as \emph{characters} to differentiate them from  \emph{numbers} that are data types that can be in the form of integers, doubles, etc. We need to be aware of these distinctions to avoid misinterpretations.
+
+
+
+\subsection{Events}
+
+\subsubsection{Talk on the Link-Lives Project  (23-Sep)}
+This talk, organized by Helle, was to present facilitate access to historical records concerning the entire Danish population from 1787 to 1968. 
+
+\subsubsection{Hacky hour (27-Sep)}
+This meeting at the Faculty's library was to present the \gls{Carpentry Software} concept and activities, and to introduce ourselves to the rest of the group. There were people with different backgrounds and positions at AU, and even a participant from the private sector who in fact proposed to organize the R Group in Aarhus. Another female participant proposed to create an R Ladies group. Hence, the Carpentry Software has the potential to foster collaboration among people that goes further than teaching and education. 
+Petra and I signed as helpers in the upcoming workshop in October 22-23 and Vojtech as attendant. It is required to participate either as attendant or as a helper in order to be Carpentry instructor.
+
+
+\subsection{Software matters}
+
+Since September 2019, the collaborative digital tools we are using in the project with potential bottlenecks are:
+
+\begin{itemize}
+	\item \textbf{GitHub} is a Git repository hosting service
+	\begin{itemize}
+		\item is proprietary (since year 2018 is part of Microsoft Inc.)
+	\end{itemize}
+	\item \textbf{Google Drive} is a file storage and synchronization service  
+	\begin{itemize}
+		\item  provides \enquote{only} 15 GB is free of charge
+	\end{itemize}
+	\item \textbf{Slack} is a cloud-based team collaboration tool.
+	\begin{itemize}
+		\item  is proprietary
+	\end{itemize}
+	\item \textbf{Trello} is a card-based project management tool.
+	\begin{itemize}
+		\item  is proprietary
+	\end{itemize}
+	\item \textbf{Zotero} is a reference management software.
+	\begin{itemize}
+		\item it cannot handle book chapters
+	\end{itemize}
+\end{itemize}
+
+
+\bigbreak
+
+
+\subsection{Things for October}
+
+
+Learn more about:
+
+\begin{itemize}
+	\item \textbf{GeoJSON} is a geospatial data interchange format based on JavaScript Object Notation (JSON).
+	\item \textbf{Leaflet} is an open-source JavaScript library for mobile-friendly, cross-browser, interactive maps.
+	\item A \textbf{Web Map Service} (WMS) is a standard protocol for serving georeferenced map images over the Internet that are generated by a map server using data from a GIS database.
+	\begin{itemize}
+		\item See also \textbf{Web Feature Service} (WFS), which is...
+	\end{itemize}
+\end{itemize}
+
+
+\bigbreak
+\bigbreak
+\noindent
+Project-related events are: 
+
+\begin{itemize}
+	\item Software Carpentry Workshop (22-Oct)
+	\item Teaching Digital History Workshop (23-Oct)
+	\item Digital Approaches to Research in Humanities and Social Sciences Workshop (30 Oct)
+\end{itemize}
+
+
+
+\printglossaries
+
+\end{document}
+
