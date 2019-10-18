@@ -1,0 +1,104 @@
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{./sty/style_blog}
+
+\usepackage[a4paper]{geometry}
+\geometry{
+left=2.5cm,  
+right=2.5cm,
+top=2.5cm, bottom=3cm,
+headsep=7mm,
+footskip=7mm
+}
+% headheight=\baselineskip,
+
+\parskip=0pt
+\raggedbottom
+
+
+\usepackage{fancyhdr}
+\fancyhf{}
+\fancyhead[LO,RE]{\sffamily\itshape \leftmark}
+\fancyfoot[C]{\thepage}
+\pagestyle{fancy}
+
+
+\usepackage{titlesec}
+\titleformat*{\subsubsection}{\itshape}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\usepackage{color}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{%
+\color{lightred}\leaders\hrule height \headrulewidth\hfill}}
+
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{lightblue}{rgb}{0.68, 0.85, 0.9}
+\definecolor{darkred}{rgb}{0.55, 0.0, 0.0}
+\definecolor{lightred}{HTML}{CF1717}
+
+%%%
+
+\usepackage{tgadventor}
+\renewcommand*\familydefault{\sfdefault}  % For the base font of the document to be sans serif
+
+\usepackage[latin1]{inputenc}
+%\usepackage[utf8]{inputenc} % Required for inputting international characters
+\usepackage[T1]{fontenc} % Output font encoding for international characters
+
+\usepackage{enumitem}
+%
+\setitemize{leftmargin=3em}
+\setenumerate{leftmargin=3em,rightmargin=3em}
+\setdescription{leftmargin=0em}
+%\setlist{leftmargin=0em}
+
+\usepackage{lipsum}
+
+\usepackage{csquotes}
+
+\setsecnumdepth{none}
+
+\addtopsmarks{headings}{}{
+    \createmark{Date}{both}{nonumber}{\thechapter}{}
+}
+
+
+% adjustbox
+\usepackage{adjustbox}
+%
+\newenvironment{inline}[1][gray!50]{%
+  \begin{figure}[pth!]
+    \begin{adjustbox}{minipage=\linewidth,bgcolor={#1}}% maybe also: margin=x y
+    \centering
+%    \caption{#2}\label{#3}%
+    \vspace{10pt}%
+}{%
+    \end{adjustbox}%
+  \end{figure}%
+}
+
+
+% caption continuous numbering
+\makeatletter
+\@addtoreset{figure}{section}
+\makeatother
+\renewcommand{\thefigure}{\arabic{figure}}
+%\renewcommand{\thefigure}{\arabic{section}-\arabic{figure}}
+
+%Caron Accent
+%\usepackage{newunicodechar}
+%\makeatletter
+%\newunicodechar{o}{\add@accent{`^^^^02c7}{o}}
+%\makeatother
+
+
+% glossary
+\usepackage[acronym,nomain,nonumberlist]{glossaries}
+%\usepackage[acronym]{glossaries}
+
+
+
