@@ -1,4 +1,5 @@
-
+%pandoc reportOCT19.tex -o reportOCT19.html -t html5
+%pandoc -s reportOCT19.tex -o 2019-10-18-User_Acceptance_Testing.markdown
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{./sty/style_report}
@@ -106,4 +107,16 @@ footskip=7mm
 \linespread{1.5}
 
 \newcommand{\code}[1]{\texttt{#1}}
+
+
+% author
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large\scshape#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\makeatother
+
 
