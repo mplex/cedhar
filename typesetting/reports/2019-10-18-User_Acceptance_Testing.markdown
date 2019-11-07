@@ -57,13 +57,13 @@ package that typically are <span class="sans-serif">R</span> core
 functions to load files, write or recreate an object to a file, and the
 creation of a skeleton for a new source package.
 
+#### Machine testing
+
 Once the package is built then comes the documentation of the functions
 with files in a Latex format that conform the manual. The machine
 testing, which comes afterwards, will check among other things whether
 there is a correspondence or not between the script codes and the
 documentation.
-
-#### Machine testing
 
 <span class="sans-serif">Rtools</span> allows performing a machine
 testing of <span class="sans-serif">R</span> packages within the MS
