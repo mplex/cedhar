@@ -7,5 +7,6 @@ for the [*Social Dynamics in the Ancient Mediterranean*](https://sdam-au.github.
 
 |Notebook|Description|
 |---|---|
+|code|related `R` code to typesetting|
 |typesetting|`TeX` files for blog and reports|
 
