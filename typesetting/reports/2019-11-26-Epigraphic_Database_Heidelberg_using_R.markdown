@@ -44,7 +44,7 @@ Accessing the EDH database using R
 ----------------------------------
 
 Accessing the [EDH] database [API] using [R] is possible with a convenient function that produces
-the generic search pattern [URI]. Hence, the function `get.edh()` allows
+the generic search pattern [URI]. Hence, the function [`get.edh()`](https://github.com/mplex/cedhar/blob/master/code/get.edh.r) allows
 having access to the data with the available parameters that are
 recorded as arguments. Then the returned [JSON] file is converted into a list data object
 with function `fromJSON()` from the [rjson] package.
