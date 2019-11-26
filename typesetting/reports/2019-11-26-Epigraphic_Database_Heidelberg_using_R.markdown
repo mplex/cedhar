@@ -1,21 +1,27 @@
-Short report: Epigraphic Database Heidelberg using [R]{.sans-serif}
-===================================================================
+---
+layout: post
+title:  "Epigraphic Database Heidelberg using R"
+date:   26-11-2019 12:00:00
+author: jaro
+categories: Short-reports
+---
 
-[Antonio Rivero Ostoic\
-28-11-2019]{.smallcaps}
+<!--- # Short report: Epigraphic Database Heidelberg using R
+
+<span class="smallcaps">Antonio Rivero Ostoic  
+18-10-2019</span>
+Short report:  [R]{.sans-serif}  --->
 
 This post is about accessing the "Epigraphic Database Heidelberg" (EDH),
 which is one of the longest running database projects in digital Latin
-epigraphy. The [EDH]{acronym-label="EDH" acronym-form="singular+short"}
-database started as early as year 1986, and in 1997 the Epigraphic
+epigraphy. The [EDH] database started as early as year 1986, and in 1997 the Epigraphic
 Database Heidelberg website was launched at
 <https:/edh-www.adw.uni-heidelberg.de> where inscriptions, images,
 bibliographic and geographic records can be searched and browsed online.
 
-Despite the possibility of accessing the [EDH]{acronym-label="EDH"
-acronym-form="singular+short"} database through a Web browser, it is
+Despite the possibility of accessing the [EDH] database through a Web browser, it is
 many times convenient to get the Open Data Repository by the
-[EDH]{acronym-label="EDH" acronym-form="singular+short"} through its
+[EDH] through its
 public Application Programming Interface (API).
 
 For inscriptions, the generic search pattern Uniform Resource Identifier
@@ -37,53 +43,47 @@ format such as:
 Accessing the EDH database using R
 ----------------------------------
 
-Accessing the [EDH]{acronym-label="EDH" acronym-form="singular+short"}
-database [API]{acronym-label="API" acronym-form="singular+short"} using
-[R]{.sans-serif} is possible with a convenient function that produces
-the generic search pattern [URI]{acronym-label="URI"
-acronym-form="singular+short"}. Hence, the function `get.edh()` allows
+Accessing the [EDH] database [API] using [R] is possible with a convenient function that produces
+the generic search pattern [URI]. Hence, the function `get.edh()` allows
 having access to the data with the available parameters that are
-recorded as arguments. Then the returned [JSON]{acronym-label="JSON"
-acronym-form="singular+short"} file is converted into a list data object
-with function `fromJSON()` from the [rjson]{.sans-serif} package.
+recorded as arguments. Then the returned [JSON] file is converted into a list data object
+with function `fromJSON()` from the [rjson] package.
 
 Basically, the function `get.edh()` allows getting data with the
 `search` parameter either from `"inscriptions"` (the default option) or
-else from `"geography"`. The other two options from the
-[EDH]{acronym-label="EDH" acronym-form="singular+short"} database
-[API]{acronym-label="API" acronym-form="singular+short"}, which are
-`"photos"` and `"bibliography"` may be implemented in the future.
+else from `"geography"`. The other two options from the [EDH] database
+[API], which are `"photos"` and `"bibliography"` may be implemented in the future.
 
 The following parameter description is from
 <https://edh-www.adw.uni-heidelberg.de/data/api>:
 
-### Search parameters for inscriptions and geography {#search-parameters-for-inscriptions-and-geography .unnumbered}
+### Search parameters for inscriptions and geography
 
-`province`
+`province:`
 
-:   get list of valid values at
+   get list of valid values at
     <https://edh-www.adw.uni-heidelberg.de/data/api/terms/province>,
     case insensitive
 
-`country`
+`country:`
 
-:   get list of valid values at
+   get list of valid values at
     <https://edh-www.adw.uni-heidelberg.de/data/api/terms/country>, case
     insensitive
 
-`findspot_modern`
+`findspot_modern:`
 
-:   add leading and/or trailing truncation by asterisk \*, e.g.
+   add leading and/or trailing truncation by asterisk \*, e.g.
     findspot\_modern=köln\*, case insensitive
 
-`findspot_ancient`
+`findspot_ancient:`
 
-:   add leading and/or trailing truncation by asterisk \*, e.g.
+   add leading and/or trailing truncation by asterisk \*, e.g.
     findspot\_ancient=aquae\*, case insensitive
 
-`bbox`
+`bbox:`
 
-:   bounding box in the format bbox=minLong, minLat, maxLong, maxLat,
+   bounding box in the format bbox=minLong, minLat, maxLong, maxLat,
     example:
     <https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48>
 
@@ -94,49 +94,49 @@ for the last parameter with the two search options is written as
     R> get.edh(search="inscriptions", bbox="11,47,12,48")
     R> get.edh(search="geography", bbox="11,47,12,48")
 
-### Search parameters for inscriptions {#search-parameters-for-inscriptions .unnumbered}
+### Search parameters for inscriptions 
 
-`hd_nr`
+`hd_nr:`
 
-:   HD-No of inscription
+   HD-No of inscription
 
-`year_not_before`
+`year_not_before:`
 
-:   integer, BC years are negative integers
+   integer, BC years are negative integers
 
-`year_not_after`
+`year_not_after:`
 
-:   integer, BC years are negative integers
+   integer, BC years are negative integers
 
-`tm_nr`
+`tm_nr:`
 
-:   integer value (?)
+   integer value
 
-`transcription`
+`transcription:`
 
-:   automatic leading and trailing truncation, brackets are ignored
+   automatic leading and trailing truncation, brackets are ignored
 
-`type`
+`type:`
 
-:   of inscription, get list of values at
+   of inscription, get list of values at
     <https://edh-www.adw.uni-heidelberg.de/data/api/terms/type>, case
     insensitive
 
-### Search parameters for geography {#search-parameters-for-geography .unnumbered}
+### Search parameters for geography 
 
-`findspot`
+`findspot:`
 
-:   level of village, street etc.; add leading and/or trailing
+   level of village, street etc.; add leading and/or trailing
     truncation by asterisk \*, e.g. findspot\_modern=köln\*, case
     insensitive
 
-`pleiades_id`
+`pleiades_id:`
 
-:   Pleiades identifier of a place; integer value
+   Pleiades identifier of a place; integer value
 
-`geonames_id`
+`geonames_id:`
 
-:   Geonames identifier of a place; integer value
+   Geonames identifier of a place; integer value
 
 Since with the `"inscriptions"` option the `id` "component" of the
 output list is not with a numeric format, then function `get.edh()` adds
@@ -170,6 +170,5 @@ argument `addID` with `FALSE`.
     R> get.edh(findspot_modern="madrid", addID=FALSE)
 
 Finally, it is worth to mention that further extensions that the
-[EDH]{acronym-label="EDH" acronym-form="singular+short"} database
-[API]{acronym-label="API" acronym-form="singular+short"} may add in the
-future can be handled with similar arguments in function `get.edh()`.
+[EDH] database [API] may add in the future can be handled with similar 
+arguments in function `get.edh()`.
