@@ -1,0 +1,149 @@
+
+\documentclass[oneside,a4paper]{memoir} % A4 paper size, default 11pt? font size and oneside for equal margins
+
+\usepackage{./sty/style_report}
+
+
+
+
+% Glossary
+\newglossaryentry{}{name=,
+  description={}}
+
+% Acronym
+\setacronymstyle{long-short}
+\newacronym{AU}{AU}{Aarhus University}
+\newacronym{SDAM}{SDAM}{Social Dynamics in the Ancient Mediterranean}
+\newacronym{EDH}{EDH}{Epigraphic Database Heidelberg}
+\newacronym{API}{API}{Application Programming Interface}
+\newacronym{URI}{URI}{Uniform Resource Identifier}
+\newacronym{JSON}{JSON}{Java Script Object Notation}
+%\newacronym{DTAP}{DTAP}{development $\to$ test $\to$ acceptance $\to$ production}
+
+\makeglossaries
+%\loadglsentries{acronyms}
+
+\begin{document}
+
+
+\chapter{Short report: Epigraphic Database Heidelberg using \textsf{R}}
+\chapterauthor{Antonio Rivero Ostoic \\ \small 28-11-2019}
+%\vfil
+This post is about accessing the \enquote{Epigraphic Database Heidelberg} (EDH), which is one of the longest running database projects in digital Latin epigraphy. 
+The \gls{EDH} database started as early as year 1986, and in 1997 the Epigraphic Database Heidelberg website was launched at \url{https:/edh-www.adw.uni-heidelberg.de} where inscriptions, images, bibliographic and geographic records can be searched and browsed online.
+
+Despite the possibility of accessing the \gls{EDH} database through a Web browser, it is many times convenient to get the Open Data Repository by the \gls{EDH} through its public Application Programming Interface (API). 
+
+\noindent
+For inscriptions, the generic search pattern Uniform Resource Identifier (URI) is:
+\begin{lstlisting}
+https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&par_2=value&par_n=value
+\end{lstlisting}
+with parameters \code{par} $1,2,...n$. 
+
+\medbreak
+\noindent
+The response from a query is in a Java Script Object Notation (JSON) format such as:
+\begin{lstlisting}
+{
+   "total" : 61,
+   "limit" : "20",
+   "items" : [ ... ]
+}
+\end{lstlisting}
+
+
+
+\section{Accessing the EDH database using R}
+Accessing the \gls{EDH} database \gls{API} using \textsf{R} is possible with a convenient function that produces the generic search pattern \gls{URI}. 
+Hence, the function \code{get.edh()} allows having access to the data with the available parameters that are recorded as arguments. Then the returned \gls{JSON} file is converted into a list data object with function \code{fromJSON()} from the \textsf{rjson} package. 
+
+Basically, the function \code{get.edh()} allows getting data with the \code{search} parameter either from \code{"inscriptions"} (the default option) or else from \code{"geography"}. 
+The other two options from the \gls{EDH} database \gls{API}, which are \code{"photos"} and \code{"bibliography"} may be implemented in the future. 
+
+\bigbreak
+\noindent
+The following parameter description is from \url{https://edh-www.adw.uni-heidelberg.de/data/api}:
+
+\subsection*{Search parameters for inscriptions and geography}
+\begin{description}\small
+  \item[\code{province}]   get list of valid values at \url{https://edh-www.adw.uni-heidelberg.de/data/api/terms/province}, case insensitive
+  \item[\code{country}]   get list of valid values at \url{https://edh-www.adw.uni-heidelberg.de/data/api/terms/country}, case insensitive
+  \item[\code{findspot\_modern}]   add leading and/or trailing truncation by asterisk *, e.g. findspot\_modern=köln*, case insensitive
+  \item[\code{findspot\_ancient}]   add leading and/or trailing truncation by asterisk *, e.g. findspot\_ancient=aquae*, case insensitive
+  \item[\code{bbox}]   bounding box in the format bbox=minLong, minLat, maxLong, maxLat, example: \url{https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48}
+\end{description}
+
+\noindent
+Just make sure to quote the arguments in \code{get.edh()} for the different parameters that are not integers. 
+This means for example that the query for the last parameter with the two search options is written as 
+\begin{lstlisting}
+R> get.edh(search="inscriptions", bbox="11,47,12,48")
+R> get.edh(search="geography", bbox="11,47,12,48")
+\end{lstlisting}
+
+
+\subsection*{Search parameters for inscriptions}
+\begin{description}\small
+  \item[\code{hd\_nr}]  HD-No of inscription
+  \item[\code{year\_not\_before}]  integer, BC years are negative integers
+  \item[\code{year\_not\_after}]   integer, BC years are negative integers
+  \item[\code{tm\_nr}]  integer value (?)
+  \item[\code{transcription}]  automatic leading and trailing truncation, brackets are ignored
+  \item[\code{type}]  of inscription, get list of values at \url{https://edh-www.adw.uni-heidelberg.de/data/api/terms/type}, case insensitive
+\end{description}
+
+
+\subsection*{Search parameters for geography}
+\begin{description}\small
+  \item[\code{findspot}]  level of village, street etc.; add leading and/or trailing truncation by asterisk *, e.g. findspot\_modern=koln*, case insensitive
+  \item[\code{pleiades\_id}]  Pleiades identifier of a place; integer value
+  \item[\code{geonames\_id}]  Geonames identifier of a place; integer value
+\end{description}
+
+\noindent
+Since with the \code{"inscriptions"} option the \code{id} \enquote{component} of the output list is not with a numeric format, then function \code{get.edh()} adds an \code{ID} at the beginning of the list with the identifier with a numerical format. 
+
+\bigbreak
+\noindent
+Hence, the query 
+\begin{lstlisting}
+R> get.edh(findspot_modern="madrid")
+\end{lstlisting}
+returns this truncated output:
+\begin{verbatim}
+$ID
+[1] "041220"
+
+$commentary
+[1] " Verschollen. Mogliche Datierung: 99-100."
+
+$country
+[1] "Spain"
+
+$diplomatic_text
+[1] "[ ] / [ ] / [ ] / GER PO[ ]TIF / [ ] / [ ] / [ ] / ["
+
+...
+\end{verbatim}
+
+\noindent
+Having a numerical identifier is useful for plotting the results for example. However, it is possible to prevent this addition by disabling argument \code{addID} with \code{FALSE}.  
+\begin{lstlisting}
+R> get.edh(findspot_modern="madrid", addID=FALSE)
+\end{lstlisting}
+
+
+\bigbreak
+\noindent
+Finally, it is worth to mention that further extensions that the \gls{EDH} database \gls{API} may add in the future can be handled with similar arguments in function \code{get.edh()}. 
+
+%\subsubsection{Human testing}
+
+\printglossary
+
+\end{document}
+
+% padflatex reportNOV19.tex
+% makeglossaries reportNOV19
+% padflatex reportNOV19.tex
