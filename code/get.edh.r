@@ -76,13 +76,21 @@ function (search = c("inscriptions", "geography"), url = "https://edh-www.adw.un
     }
 ## Convert data from json into a list format
     raw.dat <- rjson::fromJSON(file = string)
+    dat <- raw.dat$items
 ## Return values with ID or ordered attribute names if needed
     if (isTRUE((raw.dat$total) == 0L) == TRUE || isTRUE(length(raw.dat) == 
         0L) == TRUE) {
-        return(NULL)
+        if (isTRUE(addID == TRUE) == TRUE & (match.arg(search) == 
+            "inscriptions" && isTRUE(length(hd_nr) > 0L)) == 
+            TRUE) {
+            dat$ID <- hd_nr
+            return(dat)
+        }
+        else {
+            return(NULL)
+        }
     }
     else {
-        dat <- raw.dat$items
         if (isTRUE(addID == TRUE) == TRUE) {
             switch(match.arg(search), inscriptions = {
                 path <- ".*inschrift/HD"
