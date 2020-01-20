@@ -1,8 +1,34 @@
+
+## 
+## FUNCTION request() to get data API from a given server
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+##
+## Aimed to interact first with DEiC's sciencedata.dk
+## version 0.1 (19-01-2020)
+##
+## Parameters
+## file (object under 'method')
+## URL (protocol and domain of the url)
+## method (the http "verb" for the object)
+##        "GET" (list)
+##        "POST" (place)
+##        "PUT" (update)
+##        "DELETE" (cancel)
+## authenticate (logical, use basic authentication?)
+## path (optional, add path to the url)
+## 
+## Additional parameters:
+## cred (vector for username and password credentials)
+## subdomain (optional, add subdomain to the url)
+## ... (extra parameters if required)
+
+
 request <-
 function (file, URL = "https://sciencedata.dk", method = c("GET", 
     "POST", "PUT", "DELETE"), authenticate = TRUE, cred = NULL, 
-    path = "/files", subdomain = NULL) 
+    path = "/files", subdomain = NULL, ...) 
 {
+    require("httr")
     ifelse(is.null(subdomain) == FALSE, URL <- gsub("//", paste0("//", 
         subdomain, sep = "."), URL), NA)
     ifelse(isTRUE(strsplit(path, "")[[1]][1] != "/") == TRUE, 
@@ -14,13 +40,13 @@ function (file, URL = "https://sciencedata.dk", method = c("GET",
     if (isTRUE(authenticate) == TRUE && is.null(cred) == TRUE) {
         getLoginDetails <- function() {
     # http://r.789695.n4.nabble.com/tkentry-that-exits-after-RETURN-tt854721.html
-            require(tcltk)
+            require("tcltk")
             tt <- tktoplevel()
-            tkwm.title(tt, "Login credentials")
-            Name <- tclVar("Username")
-            Password <- tclVar("Password")
+            tkwm.title(tt, "login credentials")
+            Name <- tclVar("username")
+            Password <- tclVar("password")
             entry.Name <- tkentry(tt, width = "25", textvariable = Name)
-            entry.Password <- tkentry(tt, width = "25", show = "*", 
+            entry.Password <- tkentry(tt, width = "25", show = "-", 
                 textvariable = Password)
             tkgrid(tklabel(tt, text = "Enter your login details."))
             tkgrid(entry.Name)
