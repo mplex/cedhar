@@ -37,8 +37,6 @@ function (search = c("inscriptions", "geography"), url = "https://edh-www.adw.un
     year_not_before, year_not_after, tm_nr, transcription, type, 
     bbox, findspot, pleiades_id, geonames_id, addID, ...) 
 {
-## Resolve parameters
-    url <- paste(url, match.arg(search), "search?", sep = "/")
     ifelse(missing(hd_nr) == FALSE, NA, hd_nr <- "")
     ifelse(missing(province) == FALSE, NA, province <- "")
     ifelse(missing(country) == FALSE, NA, country <- "")
@@ -56,28 +54,52 @@ function (search = c("inscriptions", "geography"), url = "https://edh-www.adw.un
     ifelse(missing(addID) == FALSE && isTRUE(addID == TRUE) == 
         FALSE, addID <- FALSE, addID <- TRUE)
     if (match.arg(search) == "inscriptions") {
-        string <- paste(url, "hd_nr=", hd_nr, "&", "province=", 
-            province, "&", "country=", country, "&", "findspot_modern=", 
-            findspot_modern, "&", "findspot_ancient", findspot_ancient, 
-            "&", "year_not_before=", year_not_before, "&", "year_not_after=", 
-            year_not_after, "&", "tm_nr=", tm_nr, "&", "transcription=", 
-            transcription, "&", "type=", type, "&", "bbox=", 
-            bbox, sep = "")
+        URL <- paste(url, match.arg(search), "search?", sep = "/")
+        string <- paste(URL, "hd_nr=", hd_nr, "&", "province=", 
+            "%22", province, "%22", "&", "country=", "%22", country, 
+            "%22", "&", "findspot_modern=", "%22", findspot_modern, 
+            "%22", "&", "findspot_ancient=", "%22", findspot_ancient, 
+            "%22", "&", "year_not_before=", year_not_before, 
+            "&", "year_not_after=", year_not_after, "&", "tm_nr=", 
+            tm_nr, "&", "transcription=", transcription, "&", 
+            "type=", type, "&", "bbox=", bbox, sep = "")
     }
     else if (match.arg(search) == "geography") {
-        string <- paste(url, "province=", province, "&", "country=", 
-            country, "&", "findspot_modern=", findspot_modern, 
-            "&", "findspot_ancient", findspot_ancient, "&", "findspot=", 
-            findspot, "&", "bbox=", bbox, "&", "pleiades_id", 
-            pleiades_id, "&", "geonames_id", geonames_id, sep = "")
+        URL <- paste(url, match.arg(search), "?", sep = "/")
+        string <- paste0(URL, "province=", "%22", province, "%22", 
+            "&", "country=", "%22", country, "%22", "&", "findspot_modern=", 
+            "%22", findspot_modern, "%22", "&", "findspot_ancient=", 
+            "%22", findspot_ancient, "%22", "&", "findspot=", 
+            findspot, "&", "bbox=", bbox, "&", "pleiades_id=", 
+            pleiades_id, "&", "geonames_id=", geonames_id, sep = "")
     }
     else {
         stop("Only \"inscriptions\" and \"geography\" parameters are supported.")
     }
-## Convert data from json into a list format
-    raw.dat <- rjson::fromJSON(file = string)
+    sst <- strsplit(string, "[&]")[[1]]
+    if (isTRUE(substr(sst[1], nchar(sst[1]), nchar(sst[1])) == 
+        "=") == FALSE && isTRUE(substr(sst[1], nchar(sst[1]) - 
+        5, nchar(sst[1])) == "%22%22") == FALSE) {
+        nstring <- sst[1]
+    }
+    else {
+        nstring <- paste0(strsplit(sst[1], "[?]")[[1]][1], "?", 
+            sep = "")
+    }
+    for (i in seq(2, length(sst))) {
+        if (isTRUE(substr(sst[i], nchar(sst[i]), nchar(sst[i])) == 
+            "=") == FALSE && isTRUE(substr(sst[i], nchar(sst[i]) - 
+            5, nchar(sst[i])) == "%22%22") == FALSE) {
+            nstring <- paste0(nstring, sst[i], sep = "")
+        }
+        else {
+            NA
+        }
+    }
+    rm(i)
+    print(nstring)
+    raw.dat <- rjson::fromJSON(file = nstring)
     dat <- raw.dat$items
-## Return values with ID or ordered attribute names if needed
     if (isTRUE((raw.dat$total) == 0L) == TRUE || isTRUE(length(raw.dat) == 
         0L) == TRUE) {
         if (isTRUE(addID == TRUE) == TRUE & (match.arg(search) == 
