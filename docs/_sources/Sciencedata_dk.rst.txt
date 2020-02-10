@@ -1,0 +1,278 @@
+
+
+DEiC's sciencedata.dk
+*********************
+
+
+Accessing DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_  needs another tools...
+
+This is basically a HTTP request...
+
+
+Accessing DEiC's sciencedata.dk using R
+---------------------------------------
+
+
+Function `request() <https://github.com/sdam-au/cedhar/blob/master/code/request.r>`_ is aimed to interact first with DEiC's sciencedata.dk with a current version 0.1 (19-01-2020)                            
+
+This function requires the ``R`` package ``"httr"`` and, in case to use an authentification, package ``"tcltk"`` may be needed as well. 
+
+Usage
++++++
+
+..
+    R> requires("httr")
+
+:: 
+
+    R> request(file
+              ,URL="https://sciencedata.dk"
+              ,method=c("GET","POST","PUT","DELETE")
+              ,authenticate=TRUE
+              ,path="/files"
+              ,cred=NULL
+              ,subdomain=NULL
+              ,...)
+
+
+
+
+Parameters                                          
+++++++++++
+
+- `file` (object under 'method')                        
+
+- `URL` (protocol and domain of the url)                
+
+- `method` (the http "verb" for the object)             
+
+       ``"GET"`` (list)                                 
+
+       ``"POST"`` (place)                               
+
+       ``"PUT"`` (update)                               
+
+       ``"DELETE"`` (cancel)                            
+
+
+- `authenticate` (logical, use basic authentication?)   
+
+- `path` (optional, add path to the url)                
+                                                    
+
+Additional parameters                              
++++++++++++++++++++++
+
+- `cred` (vector for username and password credentials) 
+
+- `subdomain` (optional, add subdomain to the url)      
+
+- `...` (extra parameters if required)                  
+
+
+Arguments
++++++++++
+
+Arguments of ``request`` are retrieved with ``formals``. 
+
+:: 
+    
+    R> formals(request)
+    #$file
+    #
+    #
+    #$URL
+    #[1] "https://sciencedata.dk"
+    #
+    #$method
+    #c("GET", "POST", "PUT", "DELETE")
+    #
+    #$authenticate
+    #[1] TRUE
+    #
+    #$cred
+    #NULL
+    #
+    #$path
+    #[1] "/files"
+    #
+    #$subdomain
+    #NULL
+
+
+
+Output
+++++++
+
+The output depends on the method to be used in the request. 
+
+
+
+Details
++++++++
+
+There are two types of folders in DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ that are `personal` and `shared` folders and both requires authentication with credentials. 
+
+The `path` to the shared folders where the files are located must be specified with the ``path`` argument. However, for personal folders is the ``file`` argument that includes the path information.
+
+That is, an ``R`` code will be like
+
+:: 
+
+    # personal folders
+    R> request("path/file")
+
+    # shared folders
+    R> request("file", path="/path")
+
+
+*NB:* ``R>`` at the beginning of the line means that the following code is written in R. Comments are preceded by ``#``. 
+
+
+Examples
+++++++++
+
+
+Some examples are given here, and recall that with all types of folder it is needed to perform basic authentication *with the username and password used in 'sciencedata.dk' settings*.
+
+
+::
+
+    # if you want to avoid a dialog box then save your credentials
+    R> cred <- c("YOUR-AUID@au.dk", "YOURPASSWORD")
+
+
+In this case, you do not need to use the widget toolkit ``"tcltk"`` anymore. 
+
+
+
+
+    
+Method GET 
+^^^^^^^^^^
+    
+This method is for accessing the files with the data.
+    
+
+::
+    
+    
+    # for personal data (in case you have this file)
+    R> request("df.json", cred=cred)
+
+    #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
+    
+    
+    
+    # for shared folders (example Vojtech test folder), where both options work
+    R> request("df.json", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="GET", cred=cred)
+
+    #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
+
+    
+    R> request("df.json", path="sharingin/648597@au.dk/TEST_shared_folder", method="GET", cred=cred)
+
+    #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
+    
+    
+    
+    
+
+
+    
+Method PUT
+^^^^^^^^^^
+    
+The URL typically includes a `subdomain` as well that is named `silo` followed by a number. E.g. my documents are located in ``silo1.sciencedata.dk`` and other that will follow will be at ``silo2`` etc. 
+For method ``PUT`` the sundomain is *mandatory*; otherwise the request is redirected with ``Status: 307``.
+
+
+:: 
+
+    # for personal data (in my case) I need to specify the subdomain; otherwise it gets redirected!
+    
+    R> request(system.file("CITATION"), method="PUT", cred=cred)
+
+    # Response [https://sciencedata.dk/files/CITATION]
+    #  Date: 2020-01-17 13:31
+    #  Status: 307
+    #  Content-Type: text/html; charset=UTF-8
+    #<EMPTY BODY>
+    
+    # (my data is in subdomain "silo1")
+    R> request(system.file("CITATION"), method="PUT", cred=cred, subdomain="silo1")
+
+    # Response [https://silo1.sciencedata.dk/files/CITATION]
+    #  Date: 2020-01-17 13:31
+    #  Status: 201
+    #  Content-Type: text/html; charset=UTF-8
+    #<EMPTY BODY>
+    
+
+    
+    # the PUT method for a shared folder needs 'sharingout' in the path or it gets redirected
+    
+    R> request(system.file("CITATION"), path="sharingin/648597@au.dk/TEST_shared_folder", 
+    +    method="PUT", cred=cred)
+
+    # Response [https://sciencedata.dk/sharingin/648597@au.dk/TEST_shared_folder/CITATION]
+    #  Date: 2020-01-17 13:34
+    #  Status: 307
+    #  Content-Type: text/html; charset=UTF-8
+    #<EMPTY BODY>
+    
+    
+    R> request(system.file("CITATION"), path="sharingout/648597@au.dk/TEST_shared_folder", 
+    +    method="PUT", cred=cred)
+
+    #Response [https://sciencedata.dk/sharingout/648597%40au.dk/TEST_shared_folder//CITATION]
+    #  Date: 2020-02-10 09:32
+    #  Status: 201
+    #  Content-Type: text/html; charset=UTF-8
+    #<EMPTY BODY>
+
+    
+    
+    
+
+
+Method DELETE
+^^^^^^^^^^^^^
+
+In the case of accesing with a request using methods ``GET`` or ``PUT``, the path in the url is followed by ``sharingin/userid/foldername``, and for ``DELETE`` the Response is given with ``sharingout`` in the path. 
+
+
+
+
+::
+    
+    # for personal data
+    R> request("CITATION", method="DELETE", cred=cred)
+    
+    # In my case, this is in
+    #[1] "https://silo1.sciencedata.dk/files/CITATION"
+    
+    
+    
+    # for shared folders (example Vojtech test folder)
+    R> request("df.json", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="DELETE", cred=cred)
+
+    #[[1]]
+    #[1] "https://sciencedata.dk/sharingout/648597%40au.dk/TEST_shared_folder/df.json"
+    
+    
+    
+
+
+Method POST
+^^^^^^^^^^^
+
+
+Finally, there is also the possibility to *place* files with the ``POST`` method. However, this is not yet implemented in sciencedata.dk
+
+
+:: 
+    
+    # NOT YET IMPLEMENTED IN sciencedata.dk
+
+

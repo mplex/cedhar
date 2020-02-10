@@ -1,0 +1,458 @@
+
+
+Epigraphic Database Heidelberg
+******************************
+
+.. ---
+.. layout: post
+.. title:  "Epigraphic Database Heidelberg using R"
+.. date:   26-11-2019 12:00:00
+.. author: jaro
+.. categories: Short-reports
+.. ---
+
+.. <!--- # Short report: Epigraphic Database Heidelberg using R
+.. <span class="smallcaps">Antonio Rivero Ostoic  
+.. 18-10-2019</span>
+.. Short report:  [R]{.sans-serif}  --->
+
+This post is about accessing the "Epigraphic Database Heidelberg" (EDH),
+which is one of the longest running database projects in digital Latin
+epigraphy. The [EDH] database started as early as year 1986, and in 1997 the Epigraphic
+Database Heidelberg website was launched at
+<https:/edh-www.adw.uni-heidelberg.de> where inscriptions, images,
+bibliographic and geographic records can be searched and browsed online.
+
+Despite the possibility of accessing the [EDH] database through a Web browser, it is
+many times convenient to get the Open Data Repository by the
+[EDH] through its
+public Application Programming Interface (API).
+
+For inscriptions, the generic search pattern Uniform Resource Identifier
+(URI) is:
+
+    https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&par_2=value&par_n=value
+
+with parameters `par` :math:`1,2,...n`.
+
+The response from a query is in a Java Script Object Notation (JSON)
+format such as:
+
+::
+
+    {
+       "total" : 61,
+       "limit" : "20",
+       "items" : [ ... ]
+    }
+
+
+See _target for details about JSON structure.
+
+
+
+Accessing the EDH database using R
+----------------------------------
+
+Accessing the [EDH] database [API] using [R] is possible with a convenient function that produces
+the generic search pattern [URI]. Hence, the function [`get.edh()`](https://github.com/mplex/cedhar/blob/master/code/get.edh.r) allows
+having access to the data with the available parameters that are
+recorded as arguments. Then the returned [JSON] file is converted into a list data object
+with function ``fromJSON()`` from the ``rjson`` package.
+
+Basically, the function ``get.edh()`` allows getting data with the
+`search` parameter either from `"inscriptions"` (the default option) or
+else from `"geography"`. The other two options from the [EDH] database
+[API], which are `"photos"` and `"bibliography"` may be implemented in the future.
+
+
+Usage
++++++
+
+:: 
+
+    R> get.edh(search = c("inscriptions", "geography")
+              , url = "https://edh-www.adw.uni-heidelberg.de/data/api"
+              , hd_nr, province, country, findspot_modern, findspot_ancient
+              , year_not_before, year_not_after, tm_nr, transcription, type
+              , bbox, findspot, pleiades_id, geonames_id, addID, ...)
+
+
+
+
+Search parameters
++++++++++++++++++
+
+The following parameter description is from
+<https://edh-www.adw.uni-heidelberg.de/data/api>:
+
+
+
+Inscriptions and Geography
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- `province:`
+
+   get list of valid values at
+    <https://edh-www.adw.uni-heidelberg.de/data/api/terms/province>,
+    case insensitive
+
+- `country:`
+
+   get list of valid values at
+    <https://edh-www.adw.uni-heidelberg.de/data/api/terms/country>, case
+    insensitive
+
+- `findspot_modern:`
+
+   add leading and/or trailing truncation by asterisk \*, e.g.
+    ``findspot\_modern=köln\*``, case insensitive
+
+- `findspot_ancient:`
+
+   add leading and/or trailing truncation by asterisk \*, e.g.
+    ``findspot\_ancient=aquae\*``, case insensitive
+
+- `bbox:`
+
+   bounding box in the format bbox=minLong, minLat, maxLong, maxLat,
+    example:
+    ``<https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48>``
+
+Just make sure to quote the arguments in `get.edh()` for the different
+parameters that are not integers. This means for example that the query
+for the last parameter with the two search options is written as
+
+::
+
+    R> get.edh(search="inscriptions", bbox="11,47,12,48")
+    R> get.edh(search="geography", bbox="11,47,12,48")
+
+
+Inscriptions only
+^^^^^^^^^^^^^^^^^
+
+- `hd_nr:`
+
+   HD-No of inscription
+
+- `year_not_before:`
+
+   integer, BC years are negative integers
+
+- `year_not_after:`
+
+   integer, BC years are negative integers
+
+- `tm_nr:`
+
+   integer value
+
+- `transcription:`
+
+   automatic leading and trailing truncation, brackets are ignored
+
+- `type:`
+
+   of inscription, get list of values at
+    <https://edh-www.adw.uni-heidelberg.de/data/api/terms/type>, case
+    insensitive
+
+
+Geography only
+^^^^^^^^^^^^^^
+
+- `findspot:`
+
+   level of village, street etc.; add leading and/or trailing
+    truncation by asterisk ``\*``, e.g. ``findspot\_modern=köln\*``, case
+    insensitive
+
+- `pleiades_id:`
+
+   Pleiades identifier of a place; integer value
+
+- `geonames_id:`
+
+   Geonames identifier of a place; integer value
+
+
+
+Extra parameters
+^^^^^^^^^^^^^^^^
+
+- `addID:`
+
+   Add identification to the output?
+
+Since with the `"inscriptions"` option the `id` "component" of the
+output list is not with a numeric format, then function `get.edh()` adds
+an `ID` at the beginning of the list with the identifier with a
+numerical format.
+
+Hence, the query
+
+::
+
+    R> get.edh(findspot_modern="madrid")
+
+returns this truncated output:
+
+::
+
+    $ID
+    [1] "041220"
+
+    $commentary
+    [1] " Verschollen. Mögliche Datierung: 99-100."
+
+    $country
+    [1] "Spain"
+
+    $diplomatic_text
+    [1] "[ ] / [ ] / [ ] / GER PO[ ]TIF / [ ] / [ ] / [ ] / ["
+
+    ...
+
+
+Having a numerical identifier is useful for plotting the results for
+example. However, it is possible to prevent this addition by disabling
+argument `addID` with `FALSE`.
+
+:: 
+
+    R> get.edh(findspot_modern="madrid", addID=FALSE)
+
+
+- `...`
+
+   additional parameters if needed
+
+
+Further extensions to the [EDH] database [API] may add in the future can be handled with similar 
+arguments in function ``get.edh()``...
+
+
+
+Accessing epigraphic database Heidelberg: Inscriptions
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+To study temporary uncertainty, we need to access to an epigraphic database like the Heidelberg...
+
+::
+
+    # https://cran.r-project.org/package=rjson
+    R> require("rjson")   
+
+    # get data API from EDH
+    R> source("https://github.com/sdam-au/cedhar/blob/master/code/get.edh.r")   
+
+
+::
+
+    # grab the data from EDH API and record it in 'epall'
+    R> epall <- list()
+    # 80152 INSCRIPTIONS (20-11-2019)
+    R> for(i in seq_len(80152)) { 
+    +    epall[[length(epall)+1L]] <- try(get.edh(hd_nr=i))
+    +    }
+    
+    # or load it
+    R> load(file="epall.Rdata")
+
+    # and just in case remove duplicates
+    R> epall <- unique(epall)
+
+
+
+Output
+^^^^^^
+
+The output depends on each particular case. 
+
+::
+
+
+    # check variable names of first entry
+    R> attr(epall[[1]], "names")
+    # [1] "ID"                     "commentary"             "country"                "depth"                 
+    # [5] "diplomatic_text"        "edh_geography_uri"      "findspot_ancient"       "findspot_modern"       
+    # [9] "height"                 "id"                     "language"               "last_update"           
+    #[13] "letter_size"            "literature"             "material"               "modern_region"         
+    #[17] "not_after"              "not_before"             "people"                 "province_label"        
+    #[21] "responsible_individual" "transcription"          "trismegistos_uri"       "type_of_inscription"   
+    #[25] "type_of_monument"       "uri"                    "width"                  "work_status"
+
+
+
+
+
+Check Dates
+^^^^^^^^^^^
+
+::
+
+    # recursively apply a function over the list for three variables
+    R> epallndates <- lapply(epalln, function (x) x[c("ID", "not_after", "not_before")])
+    
+    # look at it
+    R> head(epallndates, 1)
+    #[[1]]
+    #[[1]]$ID
+    #[1] "000001"
+    #
+    #[[1]]$not_after
+    #[1] "0130"
+    #
+    #[[1]]$not_before
+    #[1] "0071"
+
+
+
+::
+
+    # remove missing data
+    R> epallndt <- list()
+    R> for(n in seq_len(length(epallndates))) {
+    +    ifelse(any(is.na(attr(epallndates[[n]],"names")))==FALSE, 
+    +    epallndt[[length(epallndt)+1L]]<-epallndates[[n]], NA)
+    +    }
+
+
+
+
+::
+
+    # execute a function call on the list to convert list of data into a data frame
+    R> epallndf <- as.data.frame(do.call(rbind, epallndt))
+
+
+
+::
+
+    # look at the first ones
+    R> head(epallndf)
+    #      ID not_after not_before
+    #1 000001      0130       0071
+    #2 000002      0200       0051
+    #3 000003      0170       0131
+    #4 000004      0200       0151
+    #5 000005      0200       0001
+    #6 000006      0150       0071
+    
+    # look at the last ones
+    R> tail(epallndf)
+    #          ID not_after not_before
+    #85390 080147      0400       0201
+    #85391 080148      0400       0201
+    #85392 080149      0400       0201
+    #85393 080150      0200       0001
+    #85394 080151      0100       0001
+    #85395 080152      0100       0001
+
+
+::
+
+    # years: oldest and newest
+    R> years <- c(min(as.numeric(unlist(epallndf[,2:3]))), max(as.numeric(unlist(epallndf[,2:3]))))
+    #[1] -530 1998
+
+
+
+
+Plot results
+^^^^^^^^^^^^
+
+
+::
+
+    # plot with graphics
+    R> plot(epallndf$not_before, epallndf$ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", xlim=years, 
+    +    main="Epigraphic time intervals (ALL)")
+    R> points(epallndf$not_after, epallndf$ID, pch=20, col="#808080")
+    R> segments(as.numeric(epallndf$not_before), as.numeric(epallndf$ID), as.numeric(epallndf$not_after), 
+    +    as.numeric(epallndf$ID), col=grDevices::adjustcolor(8,alpha=.25))
+
+
+
+That produces:
+
+.. image:: ../images/EDH-times.png
+   :width: 600
+
+
+
+
+Treatig Outliers
+^^^^^^^^^^^^^^^^
+
+By looking at the plot we clearly see two outliers
+
+::
+
+    # remove newest date
+    R> epallndfx <- epallndf[-which(epallndf[,2]==1998), ]
+
+
+::
+
+    # now the maximum value is
+    R> max(as.numeric(unlist(epallndfx[,2:3])))
+    #[1] 1500
+
+    # remove it
+    R> epallndfx <- epallndfx[-which(epallndfx[,2]==1500), ]
+
+
+
+Plot without outliers
+^^^^^^^^^^^^^^^^^^^^^
+
+We remove these two outliers for another plot
+
+::
+
+    # update years that is now between 530 BC and 95 AC
+    R> years <- c(min(as.numeric(unlist(epallndfx[,2:3]))),max(as.numeric(unlist(epallndfx[,2:3]))))
+    #[1] -530  95
+
+
+
+::
+
+    # plot with graphics
+    R> plot(epallndfx$not_before, epallndfx$ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", xlim=years, 
+    +    main="Epigraphic time intervals (no outliers)")
+    R> points(epallndfx$not_after, epallndfx$ID, pch=20, col="#808080")
+    R> segments(as.numeric(epallndfx$not_before), as.numeric(epallndfx$ID), as.numeric(epallndfx$not_after), 
+    +    as.numeric(epallndfx$ID), col=grDevices::adjustcolor(8,alpha=.25))
+
+
+
+That produces a plot with no outliers:
+
+.. image:: ../images/EDH-timesNO.png
+   :width: 600
+
+
+
+Other plots
+^^^^^^^^^^^
+
+
+
+::
+
+    # plot not_after against not_before
+    R> plot(epallndfx$not_after, epallndfx$not_before, xlab="not_after", ylab="not_before", 
+    +    xlim=c(min(as.numeric(unlist(epallndfx$not_after))),max(as.numeric(unlist(epallndfx$not_after)))), 
+    +    ylim=c(min(as.numeric(unlist(epallndfx$not_before))),max(as.numeric(unlist(epallndfx$not_before)))))
+
+That produces:
+
+.. image:: ../images/EDH-BeforeAfterTimes.png
+   :width: 600
+
+Then calculate the residuals.
+
+
