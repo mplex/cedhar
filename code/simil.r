@@ -6,7 +6,7 @@
 ## version 0.1 (10-03-2020)
 ##
 ## INPUT AND ARGUMENTS
-## x  a data frame
+## x  a data frame with an 'ID' column
 ## att (vector) column(s) in x representing attributes
 ## null (optional) include NA or NULLs?
 ## uniq (optional) remove duplicates?
