@@ -15,7 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DEiC’s sciencedata.dk" href="Sciencedata_dk.html" />
+    <link rel="next" title="Epigraphic Networks using R" href="EpigraphicNetwork.html" />
     <link rel="prev" title="User Acceptance Testing" href="UAT.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -25,7 +25,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
+          <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="UAT.html" title="User Acceptance Testing"
@@ -69,8 +69,8 @@
   <p class="topless"><a href="UAT.html"
                         title="previous chapter">User Acceptance Testing</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="Sciencedata_dk.html"
-                        title="next chapter">DEiC’s sciencedata.dk</a></p>
+  <p class="topless"><a href="EpigraphicNetwork.html"
+                        title="next chapter">Epigraphic Networks using R</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -97,7 +97,7 @@
           <div class="body" role="main">
             
   <div class="section" id="epigraphic-database-heidelberg">
-<h1>Epigraphic Database Heidelberg<a class="headerlink" href="#epigraphic-database-heidelberg" title="Permalink to this headline">¶</a></h1>
+<span id="edh"></span><h1>Epigraphic Database Heidelberg<a class="headerlink" href="#epigraphic-database-heidelberg" title="Permalink to this headline">¶</a></h1>
 <p>This post is about accessing the “Epigraphic Database Heidelberg” (EDH),
 which is one of the longest running database projects in digital Latin
 epigraphy. The [EDH] database started as early as year 1986, and in 1997 the Epigraphic
@@ -137,11 +137,17 @@ else from <cite>“geography”</cite>. The other two options from the [EDH] dat
 [API], which are <cite>“photos”</cite> and <cite>“bibliography”</cite> may be implemented in the future.</p>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">get</span><span class="o">.</span><span class="n">edh</span><span class="p">(</span><span class="n">search</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="s2">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="s2">&quot;geography&quot;</span><span class="p">)</span>
-          <span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://edh-www.adw.uni-heidelberg.de/data/api&quot;</span>
+<dl class="function">
+<dt id="get.edh">
+<code class="sig-prename descclassname">get.</code><code class="sig-name descname">edh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get.edh" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># arguments supported (currently)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="s">&quot;geography&quot;</span><span class="p">)</span>
+          <span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://edh-www.adw.uni-heidelberg.de/data/api&quot;</span>
           <span class="p">,</span> <span class="n">hd_nr</span><span class="p">,</span> <span class="n">province</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span> <span class="n">findspot_modern</span><span class="p">,</span> <span class="n">findspot_ancient</span>
-          <span class="p">,</span> <span class="n">year_not_before</span><span class="p">,</span> <span class="n">year_not_after</span><span class="p">,</span> <span class="n">tm_nr</span><span class="p">,</span> <span class="n">transcription</span><span class="p">,</span> <span class="nb">type</span>
-          <span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">findspot</span><span class="p">,</span> <span class="n">pleiades_id</span><span class="p">,</span> <span class="n">geonames_id</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+          <span class="p">,</span> <span class="n">year_not_before</span><span class="p">,</span> <span class="n">year_not_after</span><span class="p">,</span> <span class="n">tm_nr</span><span class="p">,</span> <span class="n">transcription</span><span class="p">,</span> <span class="n">type</span>
+          <span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">findspot</span><span class="p">,</span> <span class="n">pleiades_id</span><span class="p">,</span> <span class="n">geonames_id</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -199,8 +205,8 @@ insensitive</p>
 <p>Just make sure to quote the arguments in <cite>get.edh()</cite> for the different
 parameters that are not integers. This means for example that the query
 for the last parameter with the two search options is written as</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">get</span><span class="o">.</span><span class="n">edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s2">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="s2">&quot;11,47,12,48&quot;</span><span class="p">)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">get</span><span class="o">.</span><span class="n">edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s2">&quot;geography&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="s2">&quot;11,47,12,48&quot;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="s">&quot;11,47,12,48&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s">&quot;geography&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="s">&quot;11,47,12,48&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -281,29 +287,29 @@ output list is not with a numeric format, then function <cite>get.edh()</cite> a
 an <cite>ID</cite> at the beginning of the list with the identifier with a
 numerical format.</p>
 <p>Hence, the query</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">get</span><span class="o">.</span><span class="n">edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s2">&quot;madrid&quot;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s">&quot;madrid&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>returns this truncated output:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ID
-[1] &quot;041220&quot;
-
-$commentary
-[1] &quot; Verschollen. Mögliche Datierung: 99-100.&quot;
-
-$country
-[1] &quot;Spain&quot;
-
-$diplomatic_text
-[1] &quot;[ ] / [ ] / [ ] / GER PO[ ]TIF / [ ] / [ ] / [ ] / [&quot;
-
-...
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#$ID</span>
+<span class="c1">#[1] &quot;041220&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#$commentary</span>
+<span class="c1">#[1] &quot; Verschollen. Mögliche Datierung: 99-100.&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#$country</span>
+<span class="c1">#[1] &quot;Spain&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#$diplomatic_text</span>
+<span class="c1">#[1] &quot;[ ] / [ ] / [ ] / GER PO[ ]TIF / [ ] / [ ] / [ ] / [&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#...</span>
 </pre></div>
 </div>
 <p>Having a numerical identifier is useful for plotting the results for
 example. However, it is possible to prevent this addition by disabling
 argument <cite>addID</cite> with <cite>FALSE</cite>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">get</span><span class="o">.</span><span class="n">edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s2">&quot;madrid&quot;</span><span class="p">,</span> <span class="n">addID</span><span class="o">=</span><span class="n">FALSE</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s">&quot;madrid&quot;</span><span class="p">,</span> <span class="n">addID</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
 <ul>
@@ -320,32 +326,32 @@ arguments in function <code class="docutils literal notranslate"><span class="pr
 <div class="section" id="accessing-epigraphic-database-heidelberg-inscriptions">
 <h3>Accessing epigraphic database Heidelberg: Inscriptions<a class="headerlink" href="#accessing-epigraphic-database-heidelberg-inscriptions" title="Permalink to this headline">¶</a></h3>
 <p>To study temporary uncertainty, we need to access to an epigraphic database like the Heidelberg…</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://cran.r-project.org/package=rjson</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">require</span><span class="p">(</span><span class="s2">&quot;rjson&quot;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># https://cran.r-project.org/package=rjson</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">require</span><span class="p">(</span><span class="s">&quot;rjson&quot;</span><span class="p">)</span>
 
 <span class="c1"># get data API from EDH</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">source</span><span class="p">(</span><span class="s2">&quot;https://github.com/sdam-au/cedhar/blob/master/code/get.edh.r&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">source</span><span class="p">(</span><span class="s">&quot;https://github.com/sdam-au/cedhar/blob/master/code/get.edh.r&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grab the data from EDH API and record it in &#39;epall&#39;</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epall</span> <span class="o">&lt;-</span> <span class="nb">list</span><span class="p">()</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># grab the data from EDH API and record it in &#39;epall&#39;</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epall</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span>
 <span class="c1"># 80152 INSCRIPTIONS (20-11-2019)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="n">seq_len</span><span class="p">(</span><span class="mi">80152</span><span class="p">))</span> <span class="p">{</span>
-<span class="o">+</span>    <span class="n">epall</span><span class="p">[[</span><span class="n">length</span><span class="p">(</span><span class="n">epall</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="n">L</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="k">try</span><span class="p">(</span><span class="n">get</span><span class="o">.</span><span class="n">edh</span><span class="p">(</span><span class="n">hd_nr</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="nf">seq_len</span><span class="p">(</span><span class="m">80152</span><span class="p">))</span> <span class="p">{</span>
+<span class="o">+</span>    <span class="n">epall[</span><span class="nf">[length</span><span class="p">(</span><span class="n">epall</span><span class="p">)</span><span class="m">+1L</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="nf">try</span><span class="p">(</span><span class="nf">get.edh</span><span class="p">(</span><span class="n">hd_nr</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
 <span class="o">+</span>    <span class="p">}</span>
 
 <span class="c1"># or load it</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s2">&quot;epall.Rdata&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">load</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s">&quot;epall.Rdata&quot;</span><span class="p">)</span>
 
 <span class="c1"># and just in case remove duplicates</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epall</span> <span class="o">&lt;-</span> <span class="n">unique</span><span class="p">(</span><span class="n">epall</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epall</span> <span class="o">&lt;-</span> <span class="nf">unique</span><span class="p">(</span><span class="n">epall</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="section" id="output">
 <h4>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h4>
 <p>The output depends on each particular case.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># check variable names of first entry</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">attr</span><span class="p">(</span><span class="n">epall</span><span class="p">[[</span><span class="mi">1</span><span class="p">]],</span> <span class="s2">&quot;names&quot;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># check variable names of first entry</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">attr</span><span class="p">(</span><span class="n">epall[[1]]</span><span class="p">,</span> <span class="s">&quot;names&quot;</span><span class="p">)</span>
 <span class="c1"># [1] &quot;ID&quot;                     &quot;commentary&quot;             &quot;country&quot;                &quot;depth&quot;</span>
 <span class="c1"># [5] &quot;diplomatic_text&quot;        &quot;edh_geography_uri&quot;      &quot;findspot_ancient&quot;       &quot;findspot_modern&quot;</span>
 <span class="c1"># [9] &quot;height&quot;                 &quot;id&quot;                     &quot;language&quot;               &quot;last_update&quot;</span>
@@ -357,12 +363,12 @@ arguments in function <code class="docutils literal notranslate"><span class="pr
 </div>
 </div>
 <div class="section" id="check-dates">
-<h4>Check Dates<a class="headerlink" href="#check-dates" title="Permalink to this headline">¶</a></h4>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># recursively apply a function over the list for three variables</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndates</span> <span class="o">&lt;-</span> <span class="n">lapply</span><span class="p">(</span><span class="n">epalln</span><span class="p">,</span> <span class="n">function</span> <span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="p">[</span><span class="n">c</span><span class="p">(</span><span class="s2">&quot;ID&quot;</span><span class="p">,</span> <span class="s2">&quot;not_after&quot;</span><span class="p">,</span> <span class="s2">&quot;not_before&quot;</span><span class="p">)])</span>
+<span id="recursively-apply"></span><h4>Check Dates<a class="headerlink" href="#check-dates" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># recursively apply a function over the list for three variables</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndates</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">epalln</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="nf">[c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span><span class="n">]</span><span class="p">)</span>
 
 <span class="c1"># look at it</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">head</span><span class="p">(</span><span class="n">epallndates</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">epallndates</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
 <span class="c1">#[[1]]</span>
 <span class="c1">#[[1]]$ID</span>
 <span class="c1">#[1] &quot;000001&quot;</span>
@@ -374,20 +380,20 @@ arguments in function <code class="docutils literal notranslate"><span class="pr
 <span class="c1">#[1] &quot;0071&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove missing data</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndt</span> <span class="o">&lt;-</span> <span class="nb">list</span><span class="p">()</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="k">for</span><span class="p">(</span><span class="n">n</span> <span class="ow">in</span> <span class="n">seq_len</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">epallndates</span><span class="p">)))</span> <span class="p">{</span>
-<span class="o">+</span>    <span class="n">ifelse</span><span class="p">(</span><span class="nb">any</span><span class="p">(</span><span class="ow">is</span><span class="o">.</span><span class="n">na</span><span class="p">(</span><span class="n">attr</span><span class="p">(</span><span class="n">epallndates</span><span class="p">[[</span><span class="n">n</span><span class="p">]],</span><span class="s2">&quot;names&quot;</span><span class="p">)))</span><span class="o">==</span><span class="n">FALSE</span><span class="p">,</span>
-<span class="o">+</span>    <span class="n">epallndt</span><span class="p">[[</span><span class="n">length</span><span class="p">(</span><span class="n">epallndt</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="n">L</span><span class="p">]]</span><span class="o">&lt;-</span><span class="n">epallndates</span><span class="p">[[</span><span class="n">n</span><span class="p">]],</span> <span class="n">NA</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove missing data</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndt</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">for</span><span class="p">(</span><span class="n">n</span> <span class="n">in</span> <span class="nf">seq_len</span><span class="p">(</span><span class="nf">length</span><span class="p">(</span><span class="n">epallndates</span><span class="p">)))</span> <span class="p">{</span>
+<span class="o">+</span>    <span class="nf">ifelse</span><span class="p">(</span><span class="nf">any</span><span class="p">(</span><span class="nf">is.na</span><span class="p">(</span><span class="nf">attr</span><span class="p">(</span><span class="n">epallndates[[n]]</span><span class="p">,</span><span class="s">&quot;names&quot;</span><span class="p">)))</span><span class="o">==</span><span class="kc">FALSE</span><span class="p">,</span>
+<span class="o">+</span>    <span class="n">epallndt[</span><span class="nf">[length</span><span class="p">(</span><span class="n">epallndt</span><span class="p">)</span><span class="m">+1L</span><span class="n">]]</span><span class="o">&lt;-</span><span class="n">epallndates[[n]]</span><span class="p">,</span> <span class="kc">NA</span><span class="p">)</span>
 <span class="o">+</span>    <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># execute a function call on the list to convert list of data into a data frame</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndf</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">do</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="n">epallndt</span><span class="p">))</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># execute a function call on the list to convert list of data into a data frame</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndf</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="n">epallndt</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the first ones</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">head</span><span class="p">(</span><span class="n">epallndf</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the first ones</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">epallndf</span><span class="p">)</span>
 <span class="c1">#      ID not_after not_before</span>
 <span class="c1">#1 000001      0130       0071</span>
 <span class="c1">#2 000002      0200       0051</span>
@@ -397,7 +403,7 @@ arguments in function <code class="docutils literal notranslate"><span class="pr
 <span class="c1">#6 000006      0150       0071</span>
 
 <span class="c1"># look at the last ones</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">tail</span><span class="p">(</span><span class="n">epallndf</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">tail</span><span class="p">(</span><span class="n">epallndf</span><span class="p">)</span>
 <span class="c1">#          ID not_after not_before</span>
 <span class="c1">#85390 080147      0400       0201</span>
 <span class="c1">#85391 080148      0400       0201</span>
@@ -417,12 +423,12 @@ arguments in function <code class="docutils literal notranslate"><span class="pr
 <div class="section" id="plot-results">
 <h4>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h4>
 <p>The plot is made with the <code class="docutils literal notranslate"><span class="pre">R</span></code> <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># plot with graphics
-R&gt; plot(epallndf$not_before, epallndf$ID, pch=20, col=&quot;#C0C0C0&quot;, xlab=&quot;Year&quot;, ylab=&quot;ID&quot;, xlim=years,
-+    main=&quot;Epigraphic time intervals (ALL)&quot;)
-R&gt; points(epallndf$not_after, epallndf$ID, pch=20, col=&quot;#808080&quot;)
-R&gt; segments(as.numeric(epallndf$not_before), as.numeric(epallndf$ID), as.numeric(epallndf$not_after),
-+    as.numeric(epallndf$ID), col=grDevices::adjustcolor(8,alpha=.25))
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">epallndf</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">epallndf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
+<span class="o">+</span>    <span class="n">main</span><span class="o">=</span><span class="s">&quot;Epigraphic time intervals (ALL)&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">points</span><span class="p">(</span><span class="n">epallndf</span><span class="o">$</span><span class="n">not_after</span><span class="p">,</span> <span class="n">epallndf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#808080&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">segments</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">epallndf</span><span class="o">$</span><span class="n">not_before</span><span class="p">),</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">epallndf</span><span class="o">$</span><span class="n">ID</span><span class="p">),</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">epallndf</span><span class="o">$</span><span class="n">not_after</span><span class="p">),</span>
+<span class="o">+</span>    <span class="nf">as.numeric</span><span class="p">(</span><span class="n">epallndf</span><span class="o">$</span><span class="n">ID</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="n">grDevices</span><span class="o">::</span><span class="nf">adjustcolor</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="m">.25</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>That produces:</p>
@@ -431,27 +437,27 @@ R&gt; segments(as.numeric(epallndf$not_before), as.numeric(epallndf$ID), as.nume
 <div class="section" id="treating-outliers">
 <h4>Treating Outliers<a class="headerlink" href="#treating-outliers" title="Permalink to this headline">¶</a></h4>
 <p>By looking at the plot, we can clearly see a couple of outliers.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># first outlier is the maximum value of the dates</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">epallndf</span><span class="p">[,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">])))</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># first outlier is the maximum value of the dates</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epallndf[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">)))</span>
 <span class="c1">#[1] 1998</span>
 </pre></div>
 </div>
 <p>We would like now to remove the two most extreme outliers.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove last date</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndfx</span> <span class="o">&lt;-</span> <span class="n">epallndf</span><span class="p">[</span><span class="o">-</span><span class="n">which</span><span class="p">(</span><span class="n">epallndf</span><span class="p">[,</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="mi">1998</span><span class="p">),</span> <span class="p">]</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove last date</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndfx</span> <span class="o">&lt;-</span> <span class="n">epallndf[</span><span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="n">epallndf[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="o">==</span><span class="m">1998</span><span class="p">),</span> <span class="n">]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># second outlier is now the maximum value</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">epallndfx</span><span class="p">[,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">])))</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># second outlier is now the maximum value</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epallndfx[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">)))</span>
 <span class="c1">#[1] 1500</span>
 
 <span class="c1"># remove the (second) last date</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndfx</span> <span class="o">&lt;-</span> <span class="n">epallndfx</span><span class="p">[</span><span class="o">-</span><span class="n">which</span><span class="p">(</span><span class="n">epallndfx</span><span class="p">[,</span><span class="mi">2</span><span class="p">]</span><span class="o">==</span><span class="mi">1500</span><span class="p">),</span> <span class="p">]</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epallndfx</span> <span class="o">&lt;-</span> <span class="n">epallndfx[</span><span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="n">epallndfx[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="o">==</span><span class="m">1500</span><span class="p">),</span> <span class="n">]</span>
 </pre></div>
 </div>
 <p>Now we need to update the years.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># update years</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">years</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">epallndfx</span><span class="p">[,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]))),</span><span class="nb">max</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">epallndfx</span><span class="p">[,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]))))</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># update years</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">years</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epallndfx[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">))),</span><span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epallndfx[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">))))</span>
 <span class="c1">#[1] -530  95</span>
 </pre></div>
 </div>
@@ -460,12 +466,12 @@ R&gt; segments(as.numeric(epallndf$not_before), as.numeric(epallndf$ID), as.nume
 <div class="section" id="plot-without-outliers">
 <h4>Plot without outliers<a class="headerlink" href="#plot-without-outliers" title="Permalink to this headline">¶</a></h4>
 <p>The plot is now constructed without the two outliers and with updated years.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># plot with graphics
-R&gt; plot(epallndfx$not_before, epallndfx$ID, pch=20, col=&quot;#C0C0C0&quot;, xlab=&quot;Year&quot;, ylab=&quot;ID&quot;, xlim=years,
-+    main=&quot;Epigraphic time intervals (no outliers)&quot;)
-R&gt; points(epallndfx$not_after, epallndfx$ID, pch=20, col=&quot;#808080&quot;)
-R&gt; segments(as.numeric(epallndfx$not_before), as.numeric(epallndfx$ID), as.numeric(epallndfx$not_after),
-+    as.numeric(epallndfx$ID), col=grDevices::adjustcolor(8,alpha=.25))
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">epallndfx</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
+<span class="o">+</span>    <span class="n">main</span><span class="o">=</span><span class="s">&quot;Epigraphic time intervals (no outliers)&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">points</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">,</span> <span class="n">epallndfx</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#808080&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">segments</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">),</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">ID</span><span class="p">),</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">),</span>
+<span class="o">+</span>    <span class="nf">as.numeric</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">ID</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="n">grDevices</span><span class="o">::</span><span class="nf">adjustcolor</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="m">.25</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>That produces a plot with no outliers:</p>
@@ -474,15 +480,15 @@ R&gt; segments(as.numeric(epallndfx$not_before), as.numeric(epallndfx$ID), as.nu
 <div class="section" id="other-plots">
 <h4>Other plots<a class="headerlink" href="#other-plots" title="Permalink to this headline">¶</a></h4>
 <p>Visualization helps to perform different kinds of analyses.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># plot not_after against not_before
-R&gt; plot(epallndfx$not_after, epallndfx$not_before, xlab=&quot;not_after&quot;, ylab=&quot;not_before&quot;,
-+    xlim=c(min(as.numeric(unlist(epallndfx$not_after))),max(as.numeric(unlist(epallndfx$not_after)))),
-+    ylim=c(min(as.numeric(unlist(epallndfx$not_before))),max(as.numeric(unlist(epallndfx$not_before)))))
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot not_after against not_before</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">,</span> <span class="n">epallndfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span>
+<span class="o">+</span>    <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">))),</span><span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">)))),</span>
+<span class="o">+</span>    <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">))),</span><span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epallndfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">)))))</span>
 </pre></div>
 </div>
 <p>That produces:</p>
 <a class="reference internal image-reference" href="_images/EDH-BeforeAfterTimes.png"><img alt="_images/EDH-BeforeAfterTimes.png" src="_images/EDH-BeforeAfterTimes.png" style="width: 600px;" /></a>
-<p>Then calculate the residuals.</p>
+<p>Then we need to calculate the residuals to start a statistic analysis of dates.</p>
 </div>
 </div>
 </div>
@@ -501,7 +507,7 @@ R&gt; plot(epallndfx$not_after, epallndfx$not_before, xlab=&quot;not_after&quot;
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
+          <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
              >next</a> |</li>
         <li class="right" >
           <a href="UAT.html" title="User Acceptance Testing"
