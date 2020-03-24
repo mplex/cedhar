@@ -1,7 +1,8 @@
 
 
+=====================
 DEiC's sciencedata.dk
-*********************
+=====================
 
 
 Accessing DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_  needs another tools...
@@ -9,22 +10,35 @@ Accessing DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_  needs another tools
 This is basically a HTTP request...
 
 
+|
+
 Accessing DEiC's sciencedata.dk using R
----------------------------------------
+***************************************
 
 
-Function `request() <https://github.com/sdam-au/cedhar/blob/master/code/request.r>`_ is aimed to interact first with DEiC's sciencedata.dk with a current version 0.1 (19-01-2020)                            
+Function [`request() <https://github.com/sdam-au/cedhar/blob/master/code/request.r>`_] is aimed 
+to interact first with DEiC's `sciencedata.dk <https://sciencedata.dk>`__ with a current version 0.1 (19-01-2020)                            
 
 This function requires the ``R`` package ``"httr"`` and, in case to use an authentification, package ``"tcltk"`` may be needed as well. 
+
+
+|
 
 Usage
 +++++
 
-..
-    R> requires("httr")
+.. function:: request
 
-:: 
+.. code-block:: R
 
+    # load required function
+    R> require("httr")
+
+
+
+.. code-block:: R
+
+    # arguments supported (currently)
     R> request(file
               ,URL="https://sciencedata.dk"
               ,method=c("GET","POST","PUT","DELETE")
@@ -60,6 +74,8 @@ Parameters
 - `path` (optional, add path to the url)                
                                                     
 
+|
+
 Additional parameters                              
 +++++++++++++++++++++
 
@@ -69,13 +85,14 @@ Additional parameters
 
 - `...` (extra parameters if required)                  
 
+|
 
 Arguments
 +++++++++
 
 Arguments of ``request`` are retrieved with ``formals``. 
 
-:: 
+.. code-block:: R
     
     R> formals(request)
     #$file
@@ -99,14 +116,14 @@ Arguments of ``request`` are retrieved with ``formals``.
     #$subdomain
     #NULL
 
-
+|
 
 Output
 ++++++
 
 The output depends on the method to be used in the request. 
 
-
+|
 
 Details
 +++++++
@@ -117,7 +134,7 @@ The `path` to the shared folders where the files are located must be specified w
 
 That is, an ``R`` code will be like
 
-:: 
+.. code-block:: R
 
     # personal folders
     R> request("path/file")
@@ -128,6 +145,7 @@ That is, an ``R`` code will be like
 
 *NB:* ``R>`` at the beginning of the line means that the following code is written in R. Comments are preceded by ``#``. 
 
+|
 
 Examples
 ++++++++
@@ -136,7 +154,7 @@ Examples
 Some examples are given here, and recall that with all types of folder it is needed to perform basic authentication *with the username and password used in 'sciencedata.dk' settings*.
 
 
-::
+.. code-block:: R
 
     # if you want to avoid a dialog box then save your credentials
     R> cred <- c("YOUR-AUID@au.dk", "YOURPASSWORD")
@@ -144,7 +162,7 @@ Some examples are given here, and recall that with all types of folder it is nee
 
 In this case, you do not need to use the widget toolkit ``"tcltk"`` anymore. 
 
-
+|
 
 
     
@@ -154,7 +172,7 @@ Method GET
 This method is for accessing the files with the data.
     
 
-::
+.. code-block:: R
     
     
     # for personal data (in case you have this file)
@@ -178,7 +196,7 @@ This method is for accessing the files with the data.
     
     
 
-
+|
     
 Method PUT
 ^^^^^^^^^^
@@ -187,7 +205,7 @@ The URL typically includes a `subdomain` as well that is named `silo` followed b
 For method ``PUT`` the sundomain is *mandatory*; otherwise the request is redirected with ``Status: 307``.
 
 
-:: 
+.. code-block:: R
 
     # for personal data (in my case) I need to specify the subdomain; otherwise it gets redirected!
     
@@ -210,7 +228,8 @@ For method ``PUT`` the sundomain is *mandatory*; otherwise the request is redire
     
 
     
-    # the PUT method for a shared folder needs 'sharingout' in the path or it gets redirected
+    # the PUT method for a shared folder (example Vojtech test folder) needs 'sharingout' in the path;
+    # otherwise it gets redirected
     
     R> request(system.file("CITATION"), path="sharingin/648597@au.dk/TEST_shared_folder", 
     +    method="PUT", cred=cred)
@@ -234,7 +253,7 @@ For method ``PUT`` the sundomain is *mandatory*; otherwise the request is redire
     
     
     
-
+|
 
 Method DELETE
 ^^^^^^^^^^^^^
@@ -244,25 +263,25 @@ In the case of accesing with a request using methods ``GET`` or ``PUT``, the pat
 
 
 
-::
+.. code-block:: R
     
     # for personal data
-    R> request("CITATION", method="DELETE", cred=cred)
+    R> request("df.json", method="DELETE", cred=cred)
     
     # In my case, this is in
-    #[1] "https://silo1.sciencedata.dk/files/CITATION"
+    #[1] "https://silo1.sciencedata.dk/files/df.json"
     
     
     
     # for shared folders (example Vojtech test folder)
-    R> request("df.json", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="DELETE", cred=cred)
+    R> request("CITATION", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="DELETE", cred=cred)
 
     #[[1]]
-    #[1] "https://sciencedata.dk/sharingout/648597%40au.dk/TEST_shared_folder/df.json"
+    #[1] "https://sciencedata.dk/sharingout/648597%40au.dk/TEST_shared_folder/CITATION"
     
     
     
-
+|
 
 Method POST
 ^^^^^^^^^^^
@@ -271,8 +290,10 @@ Method POST
 Finally, there is also the possibility to *place* files with the ``POST`` method. However, this is not yet implemented in sciencedata.dk
 
 
-:: 
+.. code-block:: R
     
     # NOT YET IMPLEMENTED IN sciencedata.dk
 
+
+|
 

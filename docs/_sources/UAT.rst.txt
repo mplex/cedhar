@@ -1,7 +1,9 @@
 
 
+=======================
 User Acceptance Testing
-***********************
+=======================
+
 
 User Acceptance Test or
 <span data-acronym-label="UAT" data-acronym-form="singular+short">UAT</span>
@@ -13,7 +15,8 @@ in developing, testing, and releasing a new or updated
 <span class="sans-serif">R</span> package.
 
 User Acceptance Test for R package release
-------------------------------------------
+******************************************
+
 
 In the DTAP process (development :math:`\to` test :math:`\to` acceptance :math:`\to` production),
 which is part of a software development process, the release of a new

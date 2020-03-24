@@ -1,0 +1,343 @@
+
+
+===========================
+Epigraphic Networks using R
+===========================
+
+.. ---
+.. layout: post
+.. title:  "Epigraphic Networks: Measures of similarity of artefact assemblages and geographic proximity"
+.. date:   10-03-2020 12:00:00
+.. author: jaro
+.. categories: Short-reports
+.. ---
+
+.. <!--- # Short report: Epigraphic Networks using R
+.. <span class="smallcaps">Antonio Rivero Ostoic  
+.. 18-10-2019</span>
+.. Short report:  [R]{.sans-serif}  --->
+
+This post is about Epigraphic Networks based on measures of similarity of artefact assemblages and geographic proximity. 
+
+
+|
+
+
+
+Measuring similarity of artefact assemblages and geographic proximity
+*********************************************************************
+
+The [R] function [`simil() <https://github.com/mplex/cedhar/blob/master/code/simil.r>`_] 
+allows assesing similarity by comparing columns representing --in this case-- different 
+attributes for epigraphic inscriptions. 
+
+
+
+|
+
+Usage
++++++
+
+.. function:: simil
+
+.. code-block:: R
+
+    # arguments supported (currently)
+    R> simil(x, att, null, uniq, diag.incl)
+
+
+Which returns a square and valued matrix with similarity meassures based on simple match among variables. 
+
+Formal arguments of ``simil()`` are:
+
+.. code-block:: R
+
+    # FUNCTION simil() to compute similarity of entries in a given data frame
+    # (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+    #
+    # version 0.1 (10-03-2020)
+    #
+    # INPUT AND ARGUMENTS
+    # x  a data frame with an ID column
+    # att (vector) column(s) in x representing attributes
+    # null (optional) include NA or NULLs?
+    # uniq (optional) remove duplicates?
+    # diag.incl (optional) include entries in matrix diagonal?
+
+
+At this point, the ID column represents the labels of the nodes. In 
+case that an ID column does not exists, then the first column is taken 
+provided that there are not duplicated entry names. 
+
+
+
+|
+
+
+Epigraphic data
++++++++++++++++
+
+Follow the entry :ref:`Epigraphic Database Heidelberg <EDH>` to see how accessing the EDH database using R.
+
+.. code-block:: R
+
+    # load the data       
+    R> load(file="epalln.Rdata")
+
+
+
+|
+
+Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity. 
+For example, we create a list object ``epinetl`` with the `ID` of the inscription plus seven other characteristics, , see :ref:`"Check Dates" in Epigraphic Database Heidelberg <recursively-apply>` for details. 
+
+
+.. code-block:: R
+
+    # choose variables
+    R> epinetl <- lapply(epalln, function (x) x[c("ID", "type_of_monument", "language", "material", 
+                        "country", "findspot_ancient", "not_after", "not_before")] )
+
+
+
+|
+
+
+Now we execute a function call on the list to convert list of data into a data frame object named ``epinet``.
+
+.. code-block:: R
+
+    # make a data frame from this variable
+    R> epinet <- as.data.frame(do.call(rbind, epinetl))
+
+
+
+|
+
+
+Take a look at this data:
+
+.. code-block:: R
+
+    # first eight entries in the data frame
+    R> head(epinet, 8)
+    #      ID type_of_monument language                                material country findspot_ancient not_after not_before
+    #1 000001           tabula    Latin                Marmor, geädert / farbig   Italy       Cumae, bei      0130       0071
+    #2 000002           tabula    Latin       marble: rocks - metamorphic rocks   Italy             Roma      0200       0051
+    #3 000003      statue base    Latin       marble: rocks - metamorphic rocks   Spain             NULL      0170       0131
+    #4 000004            altar    Latin    limestone: rocks - clastic sediments   Spain    Ipolcobulcula      0200       0151
+    #5 000005            stele    Latin                                    NULL   Italy             Roma      0200       0001
+    #6 000006            stele    Latin    limestone: rocks - clastic sediments   Spain      Sabora, bei      0150       0071
+    #7 000007           tabula    Latin travertine: rocks - chemische Sedimente   Italy             Roma     -0051      -0100
+    #8 000008           tabula    Latin       marble: rocks - metamorphic rocks   Italy            Roma?      0200       0101
+
+
+For instance, entry `8` indicates that this ancient findspot is uncertain. 
+
+
+|
+
+To remove question marks, we use a regular expression
+
+.. code-block:: R
+
+    # a new data frame for the same variables but without question marks
+    R> epinet2 <- as.data.frame(do.call(rbind, lapply(epinetl, function (x)  as.list(gsub('\\?', '', x)) )) )
+    R> colnames(epinet2) <- names(epinetl[[1]])
+
+
+
+|
+
+And then we take a look at ``epinet2`` again, and we assume the questioned entries. 
+
+.. code-block:: R
+
+    # first eight entries in the new data frame
+    R> head(epinet2, 8)
+    #      ID type_of_monument language                                material country findspot_ancient not_after not_before
+    #1 000001           tabula    Latin                Marmor, geädert / farbig   Italy       Cumae, bei      0130       0071
+    #2 000002           tabula    Latin       marble: rocks - metamorphic rocks   Italy             Roma      0200       0051
+    #3 000003      statue base    Latin       marble: rocks - metamorphic rocks   Spain             NULL      0170       0131
+    #4 000004            altar    Latin    limestone: rocks - clastic sediments   Spain    Ipolcobulcula      0200       0151
+    #5 000005            stele    Latin                                    NULL   Italy             Roma      0200       0001
+    #6 000006            stele    Latin    limestone: rocks - clastic sediments   Spain      Sabora, bei      0150       0071
+    #7 000007           tabula    Latin travertine: rocks - chemische Sedimente   Italy             Roma     -0051      -0100
+    #8 000008           tabula    Latin       marble: rocks - metamorphic rocks   Italy             Roma      0200       0101
+
+
+|
+
+
+The countries in ``epinet2`` are:
+
+.. code-block:: R
+
+    # need to unlist first
+    R> unique(unlist(epinet2$country))
+    # [1] "Italy"                  "Spain"                  "United Kingdom"         "Portugal"
+    # [5] "France"                 "Libyan Arab Jamahiriya" "Germany"                "Hungary"
+    # [9] "Austria"                "Bulgaria"               "Bosnia and Herzegovina" "Montenegro"
+    #[13] "Netherlands"            "Tunisia"                "Romania"                "Algeria"
+    #[17] "Jordan"                 "NULL"                   "Croatia"                "Switzerland"
+    #[21] "Belgium"                "Albania"                "Serbia"                 "Egypt"
+    #[25] "Syrian Arab Republic"   "Morocco"                "Turkey"                 "Lebanon"
+    #[29] "Kosovo"                 "Macedonia"              "Slovakia"               "Greece"
+    #[33] "Slovenia"               "Iraq"                   "Israel"                 "unknown"
+    #[37] "Vatican City State"     "Ukraine"                "Cyprus"                 "Yemen"
+    #[41] "Sudan"                  "Luxembourg"             "Czech Republic"         "Malta"
+    #[45] "Poland"                 "Armenia"                "Monaco"                 "Azerbaijan"
+    #[49] "Sweden"                 "Denmark"                "Moldova"                "Saudi Arabia"
+    #[53] "Uzbekistan"             "Liechtenstein"          "Georgia"
+
+
+|
+
+
+For example, we use the [base] [R] function ``subset()`` to substract epigraphic material in "greek-latin" from Egypt.
+
+
+.. code-block:: R
+
+    # a subset of a subset
+    R> subset(subset(epinet2, country=="Egypt"), language=="Greek-Latin")
+    #          ID     type_of_monument    language    material country findspot_ancient not_after not_before
+    #2003  002003 architectural member Greek-Latin        NULL   Egypt           Philae      NULL      -0116
+    #23091 023091              diptych Greek-Latin Holz, Wachs   Egypt             NULL      NULL       0145
+    #23138 023138                 NULL Greek-Latin        NULL   Egypt            Syene      NULL      -0029
+    #29256 023091              diptych Greek-Latin Holz, Wachs   Egypt             NULL      NULL       0145
+    #29302 023138                 NULL Greek-Latin        NULL   Egypt            Syene      NULL      -0029
+    #36306 030147                 NULL Greek-Latin        NULL   Egypt       Alexandria      0011       0010
+    #38242 032079                 NULL Greek-Latin        NULL   Egypt          Schedia      NULL       NULL
+    #55004 048625                cliff Greek-Latin        NULL   Egypt         Berenice      NULL       0006
+    #58000 051485                stele Greek-Latin        NULL   Egypt       Alexandria      0225       0155
+    #62124 055974                stele Greek-Latin        NULL   Egypt         Berenice      0200       0001
+    #73916 067781                 NULL Greek-Latin        NULL   Egypt      Leontopolis     -0030      -0037
+
+
+
+|
+
+
+To calculate frequency of different **kinds of inscriptions** in ``epinet2``.
+
+
+.. code-block:: R
+
+    R> data.frame(sort(table(unlist(epinet2$type_of_inscription)), decreasing=TRUE))
+    #                              Var1  Freq
+    #1                          epitaph 27960
+    #2                             NULL 25172
+    #3               votive inscription 14373
+    #4         owner/artist inscription  4980
+    #5            honorific inscription  4362
+    #6  building/dedicatory inscription  3423
+    #7                mile-/leaguestone  1723
+    #8       identification inscription  1368
+    #9                 military diploma   536
+    #10                     acclamation   506
+    #11                            list   358
+    #12                         defixio   312
+    #13                           label   274
+    #14        public legal inscription   263
+    #15            boundary inscription   261
+    #16                         elogium   155
+    #17                seat inscription    87
+    #18                          prayer    56
+    #19                          letter    39
+    #20       private legal inscription    34
+    #21         assignation inscription    13
+    #22                        calendar    12
+    #23                     adnuntiatio     3
+
+
+
+
+|
+
+
+Similarity among Egyptian epigraphs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+We can compute similarity among Egyptian epigraphs with function ``simil()``. 
+For this, we look at the attribute types stored in different columns.
+
+
+
+.. code-block:: R
+
+    R> as.data.frame(colnames(epinet2))
+    #     colnames(epinet2)
+    #1                   ID
+    #2     type_of_monument
+    #3             language
+    #4             material
+    #5              country
+    #6     findspot_ancient
+    #7  type_of_inscription
+    #8            not_after
+    #9           not_before
+    #10      province_label
+
+
+
+|
+
+
+In this case, we choose ``'type_of_monument'``, ``'material'``, and ``'findspot_ancient'``.
+
+.. code-block:: R
+
+    # similarity function on the subset for the three variables
+    R> epEgs <- simil(subset(epinet2, country=="Egypt"), c(2,4,6))
+
+
+|
+
+And then look at how many inscriptions there are.
+
+.. code-block:: R
+
+    # number of rows in the square matrix
+    R> nrow(epEgs)
+    #[1] 170
+
+
+|
+
+
+
+Plot similarities
+^^^^^^^^^^^^^^^^^
+
+
+To produce a graph for the similarity among Egyptian epigraphs, we employ the [R] package ``multigraph`` that 
+depends on ``multiplex``. 
+
+
+
+.. code-block:: R
+
+    # define scope for the graph
+    R> scp <- list(directed=FALSE, ecol=8, pos=0, valued=TRUE)
+
+    # load "multigraph" where "multiplex" get invoked
+    R> library(multigraph)
+
+    # plot similarity graph of 'epEgs' for the chosen variables
+    R> multigraph(epEgs, layout="force", maxiter=70, scope=scp, main="Similarity among Egyptian epigraphs")
+
+
+
+
+|
+
+.. image:: ../images/epEgs.png
+   :width: 500
+
+
+
+
+.. index:: graph 
+

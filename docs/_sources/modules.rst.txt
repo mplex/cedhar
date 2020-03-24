@@ -2,10 +2,11 @@ Modules
 =======
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    cedhar
    HASS
    UAT
    Epigraphic
+   EpigraphicNetwork
    Sciencedata_dk
