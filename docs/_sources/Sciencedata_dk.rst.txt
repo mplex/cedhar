@@ -9,20 +9,22 @@ Accessing DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_  needs another tools
 
 This is basically a HTTP request...
 
+.. with a current version 0.1 (19-01-2020)
 
-|
 
 Accessing DEiC's sciencedata.dk using R
 ***************************************
 
 
-Function [`request() <https://github.com/sdam-au/cedhar/blob/master/code/request.r>`_] is aimed 
-to interact first with DEiC's `sciencedata.dk <https://sciencedata.dk>`__ with a current version 0.1 (19-01-2020)                            
+Function [`request() <https://github.com/mplex/cedhar/blob/master/code/request.r>`_] is aimed 
+to interact first with DEiC's `sciencedata.dk <https://sciencedata.dk>`__                             
 
-This function requires the ``R`` package ``"httr"`` and, in case to use an authentification, package ``"tcltk"`` may be needed as well. 
+This function requires the [R] package ``"httr"`` at this moment. 
+In case that accessing the server requires basic authentification, 
+then package ``"tcltk"`` may be needed as well to input the credentials with a widget prompt. 
+It is possible to prevent this by recording this information in a vector object. 
 
 
-|
 
 Usage
 +++++
@@ -130,9 +132,10 @@ Details
 
 There are two types of folders in DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ that are `personal` and `shared` folders and both requires authentication with credentials. 
 
-The `path` to the shared folders where the files are located must be specified with the ``path`` argument. However, for personal folders is the ``file`` argument that includes the path information.
+The `path` to the shared folders where the files are located must be specified with the ``path`` argument. 
+However, for personal folders is the ``file`` argument that includes the path information.
 
-That is, an ``R`` code will be like
+That is, an [R] code will be like
 
 .. code-block:: R
 
@@ -201,8 +204,10 @@ This method is for accessing the files with the data.
 Method PUT
 ^^^^^^^^^^
     
-The URL typically includes a `subdomain` as well that is named `silo` followed by a number. E.g. my documents are located in ``silo1.sciencedata.dk`` and other that will follow will be at ``silo2`` etc. 
-For method ``PUT`` the sundomain is *mandatory*; otherwise the request is redirected with ``Status: 307``.
+The URL typically includes also a `subdomain` that is for DEiC's `sciencedata.dk <https://sciencedata.dk>`__ 
+is named ``silo`` followed by a number. For instance, my documents are located in ``silo1.sciencedata.dk``, 
+and other users that will follow are (probably) located at ``silo2``, etc. 
+For method ``PUT``, the subdomain is mandatory; otherwise the request is redirected with ``Status: 307``.
 
 
 .. code-block:: R
@@ -258,8 +263,9 @@ For method ``PUT`` the sundomain is *mandatory*; otherwise the request is redire
 Method DELETE
 ^^^^^^^^^^^^^
 
-In the case of accesing with a request using methods ``GET`` or ``PUT``, the path in the url is followed by ``sharingin/userid/foldername``, and for ``DELETE`` the Response is given with ``sharingout`` in the path. 
-
+In the case of accesing with a request using methods ``GET`` or ``PUT``, 
+the path in the url is followed by ``sharingin/userid/foldername``, 
+and for ``DELETE`` the `response` is given with ``sharingout`` in the path. 
 
 
 
@@ -287,7 +293,8 @@ Method POST
 ^^^^^^^^^^^
 
 
-Finally, there is also the possibility to *place* files with the ``POST`` method. However, this is not yet implemented in sciencedata.dk
+Finally, there is also the possibility to *place* files with the ``POST`` method. 
+However, this is not yet implemented in `sciencedata.dk <https://sciencedata.dk>`__
 
 
 .. code-block:: R

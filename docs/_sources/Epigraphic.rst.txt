@@ -58,15 +58,15 @@ Accessing the EDH database using R
 **********************************
 
 Accessing the [EDH] database [API] using [R] is possible with a convenient function that produces
-the generic search pattern [URI]. Hence, the function [`get.edh()`](https://github.com/mplex/cedhar/blob/master/code/get.edh.r) allows
-having access to the data with the available parameters that are
+the generic search pattern [URI]. Hence, the function [`get.edh() <https://github.com/mplex/cedhar/blob/master/code/get.edh.r>`_] 
+allows having access to the data with the available parameters that are
 recorded as arguments. Then the returned [JSON] file is converted into a list data object
 with function ``fromJSON()`` from the ``rjson`` package.
 
-Basically, the function ``get.edh()`` allows getting data with the
-`search` parameter either from `"inscriptions"` (the default option) or
-else from `"geography"`. The other two options from the [EDH] database
-[API], which are `"photos"` and `"bibliography"` may be implemented in the future.
+Currently, function ``get.edh()`` allows getting data with the `search` parameter 
+either from `"inscriptions"` (the default option) or else from `"geography"`. 
+The other two search options from the [EDH] database [API], which are `"photos"` 
+and `"bibliography"` may be implemented in the future. 
 
 
 Usage
@@ -191,8 +191,17 @@ Extra parameters
 
    Add identification to the output?
 
+
+- `...`
+
+   additional parameters if needed
+
+
+|
+
+
 Since with the `"inscriptions"` option the `id` "component" of the
-output list is not with a numeric format, then function `get.edh()` adds
+output list is not with a numeric format, then function ``get.edh()`` adds
 an `ID` at the beginning of the list with the identifier with a
 numerical format.
 
@@ -223,16 +232,11 @@ returns this truncated output:
 
 Having a numerical identifier is useful for plotting the results for
 example. However, it is possible to prevent this addition by disabling
-argument `addID` with `FALSE`.
+argument ``addID`` with ``FALSE``.
 
 .. code-block:: R
 
     R> get.edh(findspot_modern="madrid", addID=FALSE)
-
-
-- `...`
-
-   additional parameters if needed
 
 
 Further extensions to the [EDH] database [API] may add in the future can be handled with similar 
@@ -251,7 +255,7 @@ To study temporary uncertainty, we need to access to an epigraphic database like
     R> require("rjson")   
 
     # get data API from EDH
-    R> source("https://github.com/sdam-au/cedhar/blob/master/code/get.edh.r")   
+    R> source("https://github.com/mplex/cedhar/blob/master/code/get.edh.r")   
 
 
 .. code-block:: R
@@ -372,7 +376,7 @@ Years are between 530 BC and 1998 AC.
 Plot results
 ^^^^^^^^^^^^
 
-The plot is made with the ``R`` ``graphics`` core package. 
+The plot is made with the [R] ``graphics`` core package. 
 
 
 .. code-block:: R

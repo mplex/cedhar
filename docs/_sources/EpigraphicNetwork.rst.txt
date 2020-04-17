@@ -77,7 +77,7 @@ provided that there are not duplicated entry names.
 Epigraphic data
 +++++++++++++++
 
-Follow the entry :ref:`Epigraphic Database Heidelberg <EDH>` to see how accessing the EDH database using R.
+Follow the entry :ref:`Epigraphic Database Heidelberg <EDH>` to see how accessing the EDH database using [R].
 
 .. code-block:: R
 
@@ -89,7 +89,8 @@ Follow the entry :ref:`Epigraphic Database Heidelberg <EDH>` to see how accessin
 |
 
 Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity. 
-For example, we create a list object ``epinetl`` with the `ID` of the inscription plus seven other characteristics, , see :ref:`"Check Dates" in Epigraphic Database Heidelberg <recursively-apply>` for details. 
+For example, we create a list object ``epinetl`` with the `ID` of the inscription plus seven other characteristics, 
+see :ref:`"Check Dates" in Epigraphic Database Heidelberg <recursively-apply>` for details. 
 
 
 .. code-block:: R
@@ -132,7 +133,7 @@ Take a look at this data:
     #8 000008           tabula    Latin       marble: rocks - metamorphic rocks   Italy            Roma?      0200       0101
 
 
-For instance, entry `8` indicates that this ancient findspot is uncertain. 
+For instance, entry ``8`` indicates that this ancient findspot is uncertain. 
 
 
 |
@@ -194,7 +195,7 @@ The countries in ``epinet2`` are:
 |
 
 
-For example, we use the [base] [R] function ``subset()`` to substract epigraphic material in "greek-latin" from Egypt.
+For example, we use the ``base`` [R] function ``subset()`` to substract epigraphic material in "Greek-Latin" from Egypt.
 
 
 .. code-block:: R
@@ -219,7 +220,7 @@ For example, we use the [base] [R] function ``subset()`` to substract epigraphic
 |
 
 
-To calculate frequency of different **kinds of inscriptions** in ``epinet2``.
+To calculate frequency of different `'kinds of inscriptions'` in ``epinet2``.
 
 
 .. code-block:: R
@@ -322,7 +323,7 @@ depends on ``multiplex``.
     # define scope for the graph
     R> scp <- list(directed=FALSE, ecol=8, pos=0, valued=TRUE)
 
-    # load "multigraph" where "multiplex" get invoked
+    # load "multigraph" where "multiplex" gets invoked
     R> library(multigraph)
 
     # plot similarity graph of 'epEgs' for the chosen variables
