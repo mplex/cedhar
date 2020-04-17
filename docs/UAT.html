@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>User Acceptance Testing &#8212; cedhar 0.0.1 documentation</title>
+    <title>User Acceptance Testing &#8212; cedhar 0.0.2 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -30,7 +30,7 @@
         <li class="right" >
           <a href="HASS.html" title="Digital Humanities"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -94,12 +94,12 @@ respect to the requirements that was agreed upon. This report is to
 illustrate the application of
 &lt;span data-acronym-label=”UAT” data-acronym-form=”singular+short”&gt;UAT&lt;/span&gt;
 in developing, testing, and releasing a new or updated
-&lt;span class=”sans-serif”&gt;R&lt;/span&gt; package.</p>
+<code class="docutils literal notranslate"><span class="pre">R</span></code> package.</p>
 <div class="section" id="user-acceptance-test-for-r-package-release">
 <h2>User Acceptance Test for R package release<a class="headerlink" href="#user-acceptance-test-for-r-package-release" title="Permalink to this headline">¶</a></h2>
 <p>In the DTAP process (development <span class="math notranslate nohighlight">\(\to\)</span> test <span class="math notranslate nohighlight">\(\to\)</span> acceptance <span class="math notranslate nohighlight">\(\to\)</span> production),
 which is part of a software development process, the release of a new
-version of an &lt;span class=”sans-serif”&gt;R&lt;/span&gt; package is at the final
+version of an <code class="docutils literal notranslate"><span class="pre">R</span></code> package is at the final
 step where the deployment needs to meet certain requirements. The
 “acceptance” portion in this process comes from both <em>humans</em>
 (developer and clients) and <em>machines</em> (a list of rules that the
@@ -116,18 +116,18 @@ containing a set of functions in a structure like this</p>
 </pre></div>
 </div>
 <p>where the testing of the software occurs in the three parts.</p>
-<p>A set of &lt;span class=”sans-serif”&gt;R&lt;/span&gt; functions are written in
+<p>A set of <code class="docutils literal notranslate"><span class="pre">R</span></code> functions are written in
 <cite>FOLDER-BUILD</cite> with a version control, and then the functions are tested
-manually in the &lt;span class=”sans-serif”&gt;R&lt;/span&gt; console or other
+manually in the <code class="docutils literal notranslate"><span class="pre">R</span></code> console or other
 environment. It is important at this stage that the test involves random
 data, different data sets, and the extreme cases that the input data may
-have like zeroes, empty arrays, etc. Once there is an acceptance from the developer, <cite>FOLDER-PUB</cite> hosts
-a copy of the functions to publish and then the building with the <cite>batch
-file</cite>.</p>
+have like zeroes, empty arrays, etc. Once there is an acceptance from the
+developer, <cite>FOLDER-PUB</cite> hosts a copy of the functions to publish and then
+the building with the <cite>batch file</cite>.</p>
 <p>The batch file has the instructions in a sequential list to build the
-package that typically are &lt;span class=”sans-serif”&gt;R&lt;/span&gt; core
-functions to load files, write or recreate an object to a file, and the
-creation of a skeleton for a new source package.</p>
+package that typically are <code class="docutils literal notranslate"><span class="pre">R</span></code> core functions to load files, write or
+recreate an object to a file, and the creation of a skeleton for a new
+source package.</p>
 <p>Once the package is built then comes the documentation of the functions
 with files in a Latex format that conform the manual. The machine
 testing, which comes afterwards, will check among other things whether
@@ -136,11 +136,10 @@ documentation.</p>
 </div>
 <div class="section" id="machine-testing">
 <h3>Machine testing<a class="headerlink" href="#machine-testing" title="Permalink to this headline">¶</a></h3>
-<p>&lt;span class=”sans-serif”&gt;Rtools&lt;/span&gt; allows performing a machine
-testing of &lt;span class=”sans-serif”&gt;R&lt;/span&gt; packages within the MS
-Windows operating system. First the package is constructed as a tarball
-file with the command line and by typing <cite>R CMD build</cite>. Then the <cite>R CMD
-check</cite> performs different types of tests on this file based on pass/fail
+<p><code class="docutils literal notranslate"><span class="pre">Rtools</span></code> allows performing a machine testing of <code class="docutils literal notranslate"><span class="pre">R</span></code> packages within
+the MS Windows operating system. First the package is constructed as a
+tarball file with the command line and by typing <cite>R CMD build</cite>. Then the
+<cite>R CMD check</cite> performs different types of tests on this file based on pass/fail
 results where “fail” involves errors, warnings, and notes. The option
 <code class="docutils literal notranslate"><span class="pre">--as-cran</span></code> applies the most strict rules on the package and allows a
 successful submission for a publication on the CRAN repository whenever
@@ -154,7 +153,7 @@ data.</p>
 <div class="section" id="uat-for-users-in-github">
 <h4>UAT for users in GitHub<a class="headerlink" href="#uat-for-users-in-github" title="Permalink to this headline">¶</a></h4>
 <p>As with machine testing, the acceptance tests among users of the
-&lt;span class=”sans-serif”&gt;R&lt;/span&gt; package should reveal as well a
+<code class="docutils literal notranslate"><span class="pre">R</span></code> package should reveal as well a
 straightforward yes/no or pass/fail results. This means that the user
 should be able to download, install, uninstal, and run the software
 without any errors.</p>
@@ -206,7 +205,7 @@ to use the package in his/her own work.</p>
         <li class="right" >
           <a href="HASS.html" title="Digital Humanities"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Epigraphic Database Heidelberg &#8212; cedhar 0.0.1 documentation</title>
+    <title>Epigraphic Database Heidelberg &#8212; cedhar 0.0.2 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -30,7 +30,7 @@
         <li class="right" >
           <a href="UAT.html" title="User Acceptance Testing"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -127,14 +127,14 @@ format such as:</p>
 <div class="section" id="accessing-the-edh-database-using-r">
 <h2>Accessing the EDH database using R<a class="headerlink" href="#accessing-the-edh-database-using-r" title="Permalink to this headline">¶</a></h2>
 <p>Accessing the [EDH] database [API] using [R] is possible with a convenient function that produces
-the generic search pattern [URI]. Hence, the function [<cite>get.edh()</cite>](<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/get.edh.r">https://github.com/mplex/cedhar/blob/master/code/get.edh.r</a>) allows
-having access to the data with the available parameters that are
+the generic search pattern [URI]. Hence, the function [<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/get.edh.r">get.edh()</a>]
+allows having access to the data with the available parameters that are
 recorded as arguments. Then the returned [JSON] file is converted into a list data object
 with function <code class="docutils literal notranslate"><span class="pre">fromJSON()</span></code> from the <code class="docutils literal notranslate"><span class="pre">rjson</span></code> package.</p>
-<p>Basically, the function <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> allows getting data with the
-<cite>search</cite> parameter either from <cite>“inscriptions”</cite> (the default option) or
-else from <cite>“geography”</cite>. The other two options from the [EDH] database
-[API], which are <cite>“photos”</cite> and <cite>“bibliography”</cite> may be implemented in the future.</p>
+<p>Currently, function <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> allows getting data with the <cite>search</cite> parameter
+either from <cite>“inscriptions”</cite> (the default option) or else from <cite>“geography”</cite>.
+The other two search options from the [EDH] database [API], which are <cite>“photos”</cite>
+and <cite>“bibliography”</cite> may be implemented in the future.</p>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -281,9 +281,17 @@ insensitive</p>
 <div><p>Add identification to the output?</p>
 </div></blockquote>
 </li>
+<li><p><cite>…</cite></p>
+<blockquote>
+<div><p>additional parameters if needed</p>
+</div></blockquote>
+</li>
 </ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>Since with the <cite>“inscriptions”</cite> option the <cite>id</cite> “component” of the
-output list is not with a numeric format, then function <cite>get.edh()</cite> adds
+output list is not with a numeric format, then function <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> adds
 an <cite>ID</cite> at the beginning of the list with the identifier with a
 numerical format.</p>
 <p>Hence, the query</p>
@@ -308,17 +316,10 @@ numerical format.</p>
 </div>
 <p>Having a numerical identifier is useful for plotting the results for
 example. However, it is possible to prevent this addition by disabling
-argument <cite>addID</cite> with <cite>FALSE</cite>.</p>
+argument <code class="docutils literal notranslate"><span class="pre">addID</span></code> with <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s">&quot;madrid&quot;</span><span class="p">,</span> <span class="n">addID</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
 </pre></div>
 </div>
-<ul>
-<li><p><cite>…</cite></p>
-<blockquote>
-<div><p>additional parameters if needed</p>
-</div></blockquote>
-</li>
-</ul>
 <p>Further extensions to the [EDH] database [API] may add in the future can be handled with similar
 arguments in function <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code>…</p>
 </div>
@@ -330,7 +331,7 @@ arguments in function <code class="docutils literal notranslate"><span class="pr
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">require</span><span class="p">(</span><span class="s">&quot;rjson&quot;</span><span class="p">)</span>
 
 <span class="c1"># get data API from EDH</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">source</span><span class="p">(</span><span class="s">&quot;https://github.com/sdam-au/cedhar/blob/master/code/get.edh.r&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">source</span><span class="p">(</span><span class="s">&quot;https://github.com/mplex/cedhar/blob/master/code/get.edh.r&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># grab the data from EDH API and record it in &#39;epall&#39;</span>
@@ -422,7 +423,7 @@ arguments in function <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="plot-results">
 <h4>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h4>
-<p>The plot is made with the <code class="docutils literal notranslate"><span class="pre">R</span></code> <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package.</p>
+<p>The plot is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">epallndf</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">epallndf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
 <span class="o">+</span>    <span class="n">main</span><span class="o">=</span><span class="s">&quot;Epigraphic time intervals (ALL)&quot;</span><span class="p">)</span>
@@ -512,7 +513,7 @@ arguments in function <code class="docutils literal notranslate"><span class="pr
         <li class="right" >
           <a href="UAT.html" title="User Acceptance Testing"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

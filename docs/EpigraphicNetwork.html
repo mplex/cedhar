@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Epigraphic Networks using R &#8212; cedhar 0.0.1 documentation</title>
+    <title>Epigraphic Networks using R &#8212; cedhar 0.0.2 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -30,7 +30,7 @@
         <li class="right" >
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -134,7 +134,7 @@ provided that there are not duplicated entry names.</p>
 </div>
 <div class="section" id="epigraphic-data">
 <h3>Epigraphic data<a class="headerlink" href="#epigraphic-data" title="Permalink to this headline">¶</a></h3>
-<p>Follow the entry <a class="reference internal" href="Epigraphic.html#edh"><span class="std std-ref">Epigraphic Database Heidelberg</span></a> to see how accessing the EDH database using R.</p>
+<p>Follow the entry <a class="reference internal" href="Epigraphic.html#edh"><span class="std std-ref">Epigraphic Database Heidelberg</span></a> to see how accessing the EDH database using [R].</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the data</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">load</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s">&quot;epalln.Rdata&quot;</span><span class="p">)</span>
 </pre></div>
@@ -143,7 +143,8 @@ provided that there are not duplicated entry names.</p>
 <div class="line"><br /></div>
 </div>
 <p>Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity.
-For example, we create a list object <code class="docutils literal notranslate"><span class="pre">epinetl</span></code> with the <cite>ID</cite> of the inscription plus seven other characteristics, , see <a class="reference internal" href="Epigraphic.html#recursively-apply"><span class="std std-ref">“Check Dates” in Epigraphic Database Heidelberg</span></a> for details.</p>
+For example, we create a list object <code class="docutils literal notranslate"><span class="pre">epinetl</span></code> with the <cite>ID</cite> of the inscription plus seven other characteristics,
+see <a class="reference internal" href="Epigraphic.html#recursively-apply"><span class="std std-ref">“Check Dates” in Epigraphic Database Heidelberg</span></a> for details.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose variables</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">epinetl</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">epalln</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="nf">[c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;type_of_monument&quot;</span><span class="p">,</span> <span class="s">&quot;language&quot;</span><span class="p">,</span> <span class="s">&quot;material&quot;</span><span class="p">,</span>
                     <span class="s">&quot;country&quot;</span><span class="p">,</span> <span class="s">&quot;findspot_ancient&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span><span class="n">]</span> <span class="p">)</span>
@@ -174,7 +175,7 @@ For example, we create a list object <code class="docutils literal notranslate">
 <span class="c1">#8 000008           tabula    Latin       marble: rocks - metamorphic rocks   Italy            Roma?      0200       0101</span>
 </pre></div>
 </div>
-<p>For instance, entry <cite>8</cite> indicates that this ancient findspot is uncertain.</p>
+<p>For instance, entry <code class="docutils literal notranslate"><span class="pre">8</span></code> indicates that this ancient findspot is uncertain.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -226,7 +227,7 @@ For example, we create a list object <code class="docutils literal notranslate">
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>For example, we use the [base] [R] function <code class="docutils literal notranslate"><span class="pre">subset()</span></code> to substract epigraphic material in “greek-latin” from Egypt.</p>
+<p>For example, we use the <code class="docutils literal notranslate"><span class="pre">base</span></code> [R] function <code class="docutils literal notranslate"><span class="pre">subset()</span></code> to substract epigraphic material in “Greek-Latin” from Egypt.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a subset of a subset</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">subset</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">epinet2</span><span class="p">,</span> <span class="n">country</span><span class="o">==</span><span class="s">&quot;Egypt&quot;</span><span class="p">),</span> <span class="n">language</span><span class="o">==</span><span class="s">&quot;Greek-Latin&quot;</span><span class="p">)</span>
 <span class="c1">#          ID     type_of_monument    language    material country findspot_ancient not_after not_before</span>
@@ -246,7 +247,7 @@ For example, we create a list object <code class="docutils literal notranslate">
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>To calculate frequency of different <strong>kinds of inscriptions</strong> in <code class="docutils literal notranslate"><span class="pre">epinet2</span></code>.</p>
+<p>To calculate frequency of different <cite>‘kinds of inscriptions’</cite> in <code class="docutils literal notranslate"><span class="pre">epinet2</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nf">table</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epinet2</span><span class="o">$</span><span class="n">type_of_inscription</span><span class="p">)),</span> <span class="n">decreasing</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="c1">#                              Var1  Freq</span>
 <span class="c1">#1                          epitaph 27960</span>
@@ -323,7 +324,7 @@ depends on <code class="docutils literal notranslate"><span class="pre">multiple
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># define scope for the graph</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">scp</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">directed</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">ecol</span><span class="o">=</span><span class="m">8</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="m">0</span><span class="p">,</span> <span class="n">valued</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
 
-<span class="c1"># load &quot;multigraph&quot; where &quot;multiplex&quot; get invoked</span>
+<span class="c1"># load &quot;multigraph&quot; where &quot;multiplex&quot; gets invoked</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="n">multigraph</span><span class="p">)</span>
 
 <span class="c1"># plot similarity graph of &#39;epEgs&#39; for the chosen variables</span>
@@ -357,7 +358,7 @@ depends on <code class="docutils literal notranslate"><span class="pre">multiple
         <li class="right" >
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

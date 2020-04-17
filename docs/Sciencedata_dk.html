@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>DEiC’s sciencedata.dk &#8212; cedhar 0.0.1 documentation</title>
+    <title>DEiC’s sciencedata.dk &#8212; cedhar 0.0.2 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -30,7 +30,7 @@
         <li class="right" >
           <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -96,17 +96,14 @@
 <h1>DEiC’s sciencedata.dk<a class="headerlink" href="#deic-s-sciencedata-dk" title="Permalink to this headline">¶</a></h1>
 <p>Accessing DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a>  needs another tools…</p>
 <p>This is basically a HTTP request…</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <div class="section" id="accessing-deic-s-sciencedata-dk-using-r">
 <h2>Accessing DEiC’s sciencedata.dk using R<a class="headerlink" href="#accessing-deic-s-sciencedata-dk-using-r" title="Permalink to this headline">¶</a></h2>
-<p>Function [<a class="reference external" href="https://github.com/sdam-au/cedhar/blob/master/code/request.r">request()</a>] is aimed
-to interact first with DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a> with a current version 0.1 (19-01-2020)</p>
-<p>This function requires the <code class="docutils literal notranslate"><span class="pre">R</span></code> package <code class="docutils literal notranslate"><span class="pre">&quot;httr&quot;</span></code> and, in case to use an authentification, package <code class="docutils literal notranslate"><span class="pre">&quot;tcltk&quot;</span></code> may be needed as well.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+<p>Function [<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/request.r">request()</a>] is aimed
+to interact first with DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
+<p>This function requires the [R] package <code class="docutils literal notranslate"><span class="pre">&quot;httr&quot;</span></code> at this moment.
+In case that accessing the server requires basic authentification,
+then package <code class="docutils literal notranslate"><span class="pre">&quot;tcltk&quot;</span></code> may be needed as well to input the credentials with a widget prompt.
+It is possible to prevent this by recording this information in a vector object.</p>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -201,8 +198,9 @@ to interact first with DEiC’s <a class="reference external" href="https://scie
 <div class="section" id="details">
 <h3>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h3>
 <p>There are two types of folders in DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> that are <cite>personal</cite> and <cite>shared</cite> folders and both requires authentication with credentials.</p>
-<p>The <cite>path</cite> to the shared folders where the files are located must be specified with the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument. However, for personal folders is the <code class="docutils literal notranslate"><span class="pre">file</span></code> argument that includes the path information.</p>
-<p>That is, an <code class="docutils literal notranslate"><span class="pre">R</span></code> code will be like</p>
+<p>The <cite>path</cite> to the shared folders where the files are located must be specified with the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument.
+However, for personal folders is the <code class="docutils literal notranslate"><span class="pre">file</span></code> argument that includes the path information.</p>
+<p>That is, an [R] code will be like</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># personal folders</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;path/file&quot;</span><span class="p">)</span>
 
@@ -253,8 +251,10 @@ to interact first with DEiC’s <a class="reference external" href="https://scie
 </div>
 <div class="section" id="method-put">
 <h4>Method PUT<a class="headerlink" href="#method-put" title="Permalink to this headline">¶</a></h4>
-<p>The URL typically includes a <cite>subdomain</cite> as well that is named <cite>silo</cite> followed by a number. E.g. my documents are located in <code class="docutils literal notranslate"><span class="pre">silo1.sciencedata.dk</span></code> and other that will follow will be at <code class="docutils literal notranslate"><span class="pre">silo2</span></code> etc.
-For method <code class="docutils literal notranslate"><span class="pre">PUT</span></code> the sundomain is <em>mandatory</em>; otherwise the request is redirected with <code class="docutils literal notranslate"><span class="pre">Status:</span> <span class="pre">307</span></code>.</p>
+<p>The URL typically includes also a <cite>subdomain</cite> that is for DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a>
+is named <code class="docutils literal notranslate"><span class="pre">silo</span></code> followed by a number. For instance, my documents are located in <code class="docutils literal notranslate"><span class="pre">silo1.sciencedata.dk</span></code>,
+and other users that will follow are (probably) located at <code class="docutils literal notranslate"><span class="pre">silo2</span></code>, etc.
+For method <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, the subdomain is mandatory; otherwise the request is redirected with <code class="docutils literal notranslate"><span class="pre">Status:</span> <span class="pre">307</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for personal data (in my case) I need to specify the subdomain; otherwise it gets redirected!</span>
 
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
@@ -305,7 +305,9 @@ For method <code class="docutils literal notranslate"><span class="pre">PUT</spa
 </div>
 <div class="section" id="method-delete">
 <h4>Method DELETE<a class="headerlink" href="#method-delete" title="Permalink to this headline">¶</a></h4>
-<p>In the case of accesing with a request using methods <code class="docutils literal notranslate"><span class="pre">GET</span></code> or <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, the path in the url is followed by <code class="docutils literal notranslate"><span class="pre">sharingin/userid/foldername</span></code>, and for <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> the Response is given with <code class="docutils literal notranslate"><span class="pre">sharingout</span></code> in the path.</p>
+<p>In the case of accesing with a request using methods <code class="docutils literal notranslate"><span class="pre">GET</span></code> or <code class="docutils literal notranslate"><span class="pre">PUT</span></code>,
+the path in the url is followed by <code class="docutils literal notranslate"><span class="pre">sharingin/userid/foldername</span></code>,
+and for <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> the <cite>response</cite> is given with <code class="docutils literal notranslate"><span class="pre">sharingout</span></code> in the path.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for personal data</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
 
@@ -327,7 +329,8 @@ For method <code class="docutils literal notranslate"><span class="pre">PUT</spa
 </div>
 <div class="section" id="method-post">
 <h4>Method POST<a class="headerlink" href="#method-post" title="Permalink to this headline">¶</a></h4>
-<p>Finally, there is also the possibility to <em>place</em> files with the <code class="docutils literal notranslate"><span class="pre">POST</span></code> method. However, this is not yet implemented in sciencedata.dk</p>
+<p>Finally, there is also the possibility to <em>place</em> files with the <code class="docutils literal notranslate"><span class="pre">POST</span></code> method.
+However, this is not yet implemented in <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># NOT YET IMPLEMENTED IN sciencedata.dk</span>
 </pre></div>
 </div>
@@ -357,7 +360,7 @@ For method <code class="docutils literal notranslate"><span class="pre">PUT</spa
         <li class="right" >
           <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
