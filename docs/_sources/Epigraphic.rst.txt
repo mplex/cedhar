@@ -41,7 +41,7 @@ with parameters `par` :math:`1,2,...n`.
 The response from a query is in a Java Script Object Notation (JSON)
 format such as:
 
-::
+.. code-block:: 
 
     {
        "total" : 61,
@@ -50,23 +50,24 @@ format such as:
     }
 
 
-See _target for details about JSON structure.
+See `JSON structure`_ for details.
 
+|
 
 
 Accessing the EDH database using R
 **********************************
 
 Accessing the [EDH] database [API] using [R] is possible with a convenient function that produces
-the generic search pattern [URI]. Hence, the function [`get.edh() <https://github.com/mplex/cedhar/blob/master/code/get.edh.r>`_] 
+the generic search pattern [URI]. Hence, the function [`get.edh() <https://github.com/mplex/cedhar/blob/master/pkg/sdam/R/get.edh.R>`_] 
 allows having access to the data with the available parameters that are
 recorded as arguments. Then the returned [JSON] file is converted into a list data object
 with function ``fromJSON()`` from the ``rjson`` package.
 
-Currently, function ``get.edh()`` allows getting data with the `search` parameter 
-either from `"inscriptions"` (the default option) or else from `"geography"`. 
-The other two search options from the [EDH] database [API], which are `"photos"` 
-and `"bibliography"` may be implemented in the future. 
+Currently, function ``get.edh()`` allows getting data with the ``search`` parameter 
+either from ``"inscriptions"`` (the default option) or else from `"geography"`. 
+The other two search options from the [EDH] database [API], which are ``"photos"`` 
+and ``"bibliography"`` may be implemented in the future. 
 
 
 Usage
@@ -81,7 +82,7 @@ Usage
               , url = "https://edh-www.adw.uni-heidelberg.de/data/api"
               , hd_nr, province, country, findspot_modern, findspot_ancient
               , year_not_before, year_not_after, tm_nr, transcription, type
-              , bbox, findspot, pleiades_id, geonames_id, addID, ...)
+              , bbox, findspot, pleiades_id, geonames_id, addID, printQ)
 
 
 
@@ -152,7 +153,7 @@ Inscriptions only
 
 - `tm_nr:`
 
-   integer value
+   Trismegistos database number (?)
 
 - `transcription:`
 
@@ -191,24 +192,48 @@ Extra parameters
 
    Add identification to the output?
 
+- `printQ:`
 
-- `...`
+   Also print query?
 
-   additional parameters if needed
 
 
 |
 
 
-Since with the `"inscriptions"` option the `id` "component" of the
-output list is not with a numeric format, then function ``get.edh()`` adds
-an `ID` at the beginning of the list with the identifier with a
-numerical format.
+Installing
+++++++++++
 
-Hence, the query
+You can install ``sdam`` from these GitHub repositories
 
 .. code-block:: R
 
+    R> devtools::install_github("mplex/cedhar", subdir="pkg/sdam")
+    R> devtools::install_github("sdam-au/sdam")
+
+Since  the ``get.edh()`` function needs to transform JSON output using ``rjson::fromJSON()``,
+you need to have this package installed as well. 
+
+
+Now you can load the ``sdam`` package in the ``R`` console or RStudio if you wish.
+
+.. code-block:: R
+
+    R> library("sdam")
+
+
+|
+
+
+Examples
+++++++++
+
+
+The query
+
+.. code-block:: R
+
+    R> require("rjson")  # https://cran.r-project.org/package=rjson 
     R> get.edh(findspot_modern="madrid")
 
 returns this truncated output:
@@ -228,10 +253,27 @@ returns this truncated output:
     #[1] "[ ] / [ ] / [ ] / GER PO[ ]TIF / [ ] / [ ] / [ ] / ["
     #
     #...
+    #
+    #$findspot_modern
+    #[1] "Madrid"
+    #
+    #$id
+    #[1] "HD041220"
+    #
+    #$language
+    #[1] "Latin"
+    #
+    #...
+    #
+
+With ``"inscriptions"``, which is the default option of ``get.edh()`` and of the wrapper 
+function ``get.edhw()``, the ``id`` "component" of the output list has not a numeric 
+format. However, many times is convenient to have a numerical identifier in each record, 
+and function ``get.edh()`` adds an ``ID`` with a numerical format at the beginning of the list.
 
 
-Having a numerical identifier is useful for plotting the results for
-example. However, it is possible to prevent this addition by disabling
+Having a numerical identifier is useful for plotting the results, and  an ``ID`` is added 
+to the output by default. You can prevent such addition by disabling 
 argument ``addID`` with ``FALSE``.
 
 .. code-block:: R
@@ -239,40 +281,45 @@ argument ``addID`` with ``FALSE``.
     R> get.edh(findspot_modern="madrid", addID=FALSE)
 
 
-Further extensions to the [EDH] database [API] may add in the future can be handled with similar 
-arguments in function ``get.edh()``...
+Further extensions to the [EDH] database [API] may be added in the future, and this will be 
+handled with similar arguments in the ``get.edh()`` function ...
 
+
+|
 
 
 Accessing epigraphic database Heidelberg: Inscriptions
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-To study temporary uncertainty, we need to access to an epigraphic database like the Heidelberg...
+To study temporary uncertainty, for example, we need to access to an epigraphic database like the Heidelberg. 
+The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelberg number ``hd_nr``.
 
 .. code-block:: R
 
-    # https://cran.r-project.org/package=rjson
-    R> require("rjson")   
+    # get data API from EDH with a wrapper function
+    R> EDH <- get.edhw(hd_nr=1:82464)  # (20-11-2019)
+..     R> source("https://github.com/mplex/cedhar/blob/master/code/get.edh.r")   
 
-    # get data API from EDH
-    R> source("https://github.com/mplex/cedhar/blob/master/code/get.edh.r")   
+    R> length(EDH)
+    #[1] 82464
 
-
-.. code-block:: R
-
-    # grab the data from EDH API and record it in 'epall'
-    R> epall <- list()
-    # 80152 INSCRIPTIONS (20-11-2019)
-    R> for(i in seq_len(80152)) { 
-    +    epall[[length(epall)+1L]] <- try(get.edh(hd_nr=i))
-    +    }
+..     # grab the data from EDH API and record it in 'epall'
+..     R> epall <- list()
+..     # 80152 INSCRIPTIONS (20-11-2019)
+..     R> for(i in seq_len(80152)) { 
+..     +    epall[[length(epall)+1L]] <- try(get.edh(hd_nr=i))
+..     +    }
     
-    # or load it
-    R> load(file="epall.Rdata")
+    # or load it from the package
+    R> data(EDH)
 
-    # and just in case remove duplicates
-    R> epall <- unique(epall)
 
+which will produce a list object with the existing entries for each inscription, some longer some shorter.
+
+Beware that retrieving such a large number of records will take a very long time. Hence, you can do it by parts and then collate the lists into another object. 
+
+
+|
 
 
 Output
@@ -282,8 +329,16 @@ The output depends on each particular case.
 
 .. code-block:: R
 
+    R> is(EDH)
+    #[1] "list"   "vector"
+
+
+The first record has 28 `attribute` names
+
+.. code-block:: R
+
     # check variable names of first entry
-    R> attr(epall[[1]], "names")
+    R> attr(EDH[[1]], "names")
     # [1] "ID"                     "commentary"             "country"                "depth"                 
     # [5] "diplomatic_text"        "edh_geography_uri"      "findspot_ancient"       "findspot_modern"       
     # [9] "height"                 "id"                     "language"               "last_update"           
@@ -293,6 +348,53 @@ The output depends on each particular case.
     #[25] "type_of_monument"       "uri"                    "width"                  "work_status"
 
 
+While record 21 has 34 items.
+
+
+.. code-block:: R
+
+    R> attr(EDH[[21]], "names")
+    # [1] "ID"                            "commentary"                    "country"                      
+    # [4] "depth"                         "diplomatic_text"               "edh_geography_uri"            
+    # [7] "findspot"                      "findspot_ancient"              "findspot_modern"              
+    #[10] "geography"                     "height"                        "id"                           
+    #[13] "language"                      "last_update"                   "letter_size"                  
+    #[16] "literature"                    "material"                      "military"                     
+    #[19] "modern_region"                 "not_after"                     "not_before"                   
+    #[22] "people"                        "present_location"              "province_label"               
+    #[25] "responsible_individual"        "social_economic_legal_history" "transcription"                
+    #[28] "trismegistos_uri"              "type_of_inscription"           "type_of_monument"             
+    #[31] "uri"                           "width"                         "work_status"                  
+    #[34] "year_of_find"
+
+
+
+
+people
+======
+
+Attribute ``people`` is another list with other `attribute` names
+
+
+.. code-block:: R
+
+    R> length(EDH[[1]]$people)
+    #[1] 3
+
+    R> attr(EDH[[1]]$people[[1]], "names")
+    #[1] "name"      "gender"    "nomen"     "person_id" "cognomen"
+
+    ...
+
+    R> attr(EDH[[1]]$people[[3]], "names")
+    [1] "cognomen"  "praenomen" "person_id" "gender"    "name"      "nomen"
+    
+
+
+You can fin in the ``sdam`` manual a complete list of attribute names in the ``EDH`` dataset.
+
+
+| 
 
 
 .. _recursively-apply:
@@ -300,13 +402,18 @@ The output depends on each particular case.
 Check Dates
 ^^^^^^^^^^^
 
+In order to check the dates of the inscriptions, for example, we need to transform the 
+"attribute-components" of ``EDH`` into a data frame. Such transformation is possible 
+with the ``base`` ``lapply`` function
+
+
 .. code-block:: R
 
     # recursively apply a function over the list for three variables
-    R> epallndates <- lapply(epalln, function (x) x[c("ID", "not_after", "not_before")])
+    R> EDHdates <- lapply(EDH, function (x) x[c("ID", "not_after", "not_before")])
     
     # look at it
-    R> head(epallndates, 1)
+    R> head(EDHdates, 1)
     #[[1]]
     #[[1]]$ID
     #[1] "000001"
@@ -322,10 +429,10 @@ Check Dates
 .. code-block:: R
 
     # remove missing data
-    R> epallndt <- list()
-    R> for(n in seq_len(length(epallndates))) {
-    +    ifelse(any(is.na(attr(epallndates[[n]],"names")))==FALSE, 
-    +    epallndt[[length(epallndt)+1L]]<-epallndates[[n]], NA)
+    R> EDHdt <- list()
+    R> for(n in seq_len(length(EDHdates))) {
+    +    ifelse(any(is.na(attr(EDHdates[[n]],"names")))==FALSE, 
+    +    EDHdt[[length(EDHdt)+1L]]<-EDHdates[[n]], NA)
     +    }
 
 
@@ -334,14 +441,14 @@ Check Dates
 .. code-block:: R
 
     # execute a function call on the list to convert list of data into a data frame
-    R> epallndf <- as.data.frame(do.call(rbind, epallndt))
+    R> EDHdtdf <- as.data.frame(do.call(rbind, EDHdt))
 
 
 
 .. code-block:: R
 
     # look at the first ones
-    R> head(epallndf)
+    R> head(EDHdtdf)
     #      ID not_after not_before
     #1 000001      0130       0071
     #2 000002      0200       0051
@@ -351,7 +458,7 @@ Check Dates
     #6 000006      0150       0071
     
     # look at the last ones
-    R> tail(epallndf)
+    R> tail(EDHdtdf)
     #          ID not_after not_before
     #85390 080147      0400       0201
     #85391 080148      0400       0201
@@ -364,7 +471,7 @@ Check Dates
 ::
 
     # years: oldest and latest
-    R> years <- c(min(as.numeric(unlist(epallndf[,2:3]))), max(as.numeric(unlist(epallndf[,2:3]))))
+    R> years <- c(min(as.numeric(unlist(EDHdtdf[,2:3]))), max(as.numeric(unlist(EDHdtdf[,2:3]))))
     #[1] -530 1998
 
 
@@ -382,11 +489,11 @@ The plot is made with the [R] ``graphics`` core package.
 .. code-block:: R
 
     # plot with graphics
-    R> plot(epallndf$not_before, epallndf$ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", xlim=years, 
+    R> plot(EDHdtdf$not_before, EDHdtdf$ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", xlim=years, 
     +    main="Epigraphic time intervals (ALL)")
-    R> points(epallndf$not_after, epallndf$ID, pch=20, col="#808080")
-    R> segments(as.numeric(epallndf$not_before), as.numeric(epallndf$ID), as.numeric(epallndf$not_after), 
-    +    as.numeric(epallndf$ID), col=grDevices::adjustcolor(8, alpha=.25))
+    R> points(EDHdtdf$not_after, EDHdtdf$ID, pch=20, col="#808080")
+    R> segments(as.numeric(EDHdtdf$not_before), as.numeric(EDHdtdf$ID), as.numeric(EDHdtdf$not_after), 
+    +    as.numeric(EDHdtdf$ID), col=grDevices::adjustcolor(8, alpha=.25))
 
 
 That produces:
@@ -406,7 +513,7 @@ By looking at the plot, we can clearly see a couple of outliers.
 .. code-block:: R
 
     # first outlier is the maximum value of the dates
-    R> max(as.numeric(unlist(epallndf[,2:3])))
+    R> max(as.numeric(unlist(EDHdtdf[,2:3])))
     #[1] 1998
 
 
@@ -416,17 +523,17 @@ We would like now to remove the two most extreme outliers.
 .. code-block:: R
 
     # remove last date
-    R> epallndfx <- epallndf[-which(epallndf[,2]==1998), ]
+    R> EDHdtdfx <- EDHdtdf[-which(EDHdtdf[,2]==1998), ]
 
 
 .. code-block:: R
 
     # second outlier is now the maximum value
-    R> max(as.numeric(unlist(epallndfx[,2:3])))
+    R> max(as.numeric(unlist(EDHdtdfx[,2:3])))
     #[1] 1500
 
     # remove the (second) last date
-    R> epallndfx <- epallndfx[-which(epallndfx[,2]==1500), ]
+    R> EDHdtdfx <- EDHdtdfx[-which(EDHdtdfx[,2]==1500), ]
 
 
 Now we need to update the years. 
@@ -435,7 +542,7 @@ Now we need to update the years.
 .. code-block:: R
 
     # update years 
-    R> years <- c(min(as.numeric(unlist(epallndfx[,2:3]))),max(as.numeric(unlist(epallndfx[,2:3]))))
+    R> years <- c(min(as.numeric(unlist(EDHdtdfx[,2:3]))),max(as.numeric(unlist(EDHdtdfx[,2:3]))))
     #[1] -530  95
 
 
@@ -453,11 +560,11 @@ The plot is now constructed without the two outliers and with updated years.
 .. code-block:: R
 
     # plot with graphics
-    R> plot(epallndfx$not_before, epallndfx$ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", xlim=years, 
+    R> plot(EDHdtdfx$not_before, EDHdtdfx$ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", xlim=years, 
     +    main="Epigraphic time intervals (no outliers)")
-    R> points(epallndfx$not_after, epallndfx$ID, pch=20, col="#808080")
-    R> segments(as.numeric(epallndfx$not_before), as.numeric(epallndfx$ID), as.numeric(epallndfx$not_after), 
-    +    as.numeric(epallndfx$ID), col=grDevices::adjustcolor(8, alpha=.25))
+    R> points(EDHdtdfx$not_after, EDHdtdfx$ID, pch=20, col="#808080")
+    R> segments(as.numeric(EDHdtdfx$not_before), as.numeric(EDHdtdfx$ID), as.numeric(EDHdtdfx$not_after), 
+    +    as.numeric(EDHdtdfx$ID), col=grDevices::adjustcolor(8, alpha=.25))
 
 
 
@@ -477,9 +584,9 @@ Visualization helps to perform different kinds of analyses.
 .. code-block:: R
 
     # plot not_after against not_before
-    R> plot(epallndfx$not_after, epallndfx$not_before, xlab="not_after", ylab="not_before", 
-    +    xlim=c(min(as.numeric(unlist(epallndfx$not_after))),max(as.numeric(unlist(epallndfx$not_after)))), 
-    +    ylim=c(min(as.numeric(unlist(epallndfx$not_before))),max(as.numeric(unlist(epallndfx$not_before)))))
+    R> plot(EDHdtdfx$not_after, EDHdtdfx$not_before, xlab="not_after", ylab="not_before", 
+    +    xlim=c(min(as.numeric(unlist(EDHdtdfx$not_after))),max(as.numeric(unlist(EDHdtdfx$not_after)))), 
+    +    ylim=c(min(as.numeric(unlist(EDHdtdfx$not_before))),max(as.numeric(unlist(EDHdtdfx$not_before)))))
 
 That produces:
 
@@ -488,6 +595,37 @@ That produces:
 
 Then we need to calculate the residuals to start a statistic analysis of dates.
 
+
+
+
+
+
+
+JSON structure
+==============
+
+JSON stands for JavaScript Object Notation and it is based on the JavaScript Programming Language Standard ECMA-262. 
+JSON is built on two structures, namely a collection of name/value pairs, and an ordered list of values. 
+
+A JSON structure looks like:
+
+.. code-block:: 
+
+    Object {
+            Identifier: Value
+
+            Identifier: Array [
+
+               Object {
+                       Identifier: Value
+              }
+
+            ]
+
+    }
+
+Where ``Identifiers`` are delimited by quotes, and a ``Value`` can be a ``string``, a ``number``, ``"true"``, ``"false"``, ``"null"``, 
+or an ``Array`` or another JSON ``Object`` as the above example.
 
 
 
