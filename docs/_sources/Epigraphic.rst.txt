@@ -50,9 +50,12 @@ format such as:
     }
 
 
-See `JSON structure`_ for details.
+In this case, ``"items"`` are located in an array. 
+See :ref:`"JSON structure" in Digital Humanities <json-str>`
+
 
 |
+
 
 
 Accessing the EDH database using R
@@ -65,9 +68,9 @@ recorded as arguments. Then the returned [JSON] file is converted into a list da
 with function ``fromJSON()`` from the ``rjson`` package.
 
 Currently, function ``get.edh()`` allows getting data with the ``search`` parameter 
-either from ``"inscriptions"`` (the default option) or else from `"geography"`. 
+either from ``"inscriptions"`` (the default option) or else from ``"geography"``. 
 The other two search options from the [EDH] database [API], which are ``"photos"`` 
-and ``"bibliography"`` may be implemented in the future. 
+and ``"bibliography"``, may be implemented in the future in this function. 
 
 
 Usage
@@ -85,6 +88,23 @@ Usage
               , bbox, findspot, pleiades_id, geonames_id, addID, printQ)
 
 
+*NB:* ``R>`` at the beginning of the line means that the following code is written in ``R``. Comments are preceded by ``#``. 
+
+
+|
+
+
+.. function:: get.edhw
+
+.. code-block:: R
+
+    # a wrapper function for several queries
+    R> get.edhw(hd_nr, ...)
+
+Note that function ``get.edw()`` works only for inscriptions. 
+
+
+|
 
 
 Search parameters
@@ -196,30 +216,46 @@ Extra parameters
 
    Also print query?
 
+- `...`
+
+   additional parameters if needed
+
+
+
+
 
 
 |
 
 
-Installing
-++++++++++
+The two functions we have seen so far, ``get.edh()`` and ``get.edhw()``, 
+are available in the ``sdam`` package.
 
-You can install ``sdam`` from these GitHub repositories
+
+
+|
+
+
+Installing the ``sdam`` package
++++++++++++++++++++++++++++++++
+
+
+You can install the ``sdam`` package from these GitHub repositories using  the ``R`` console 
+or RStudio if you wish.
 
 .. code-block:: R
 
     R> devtools::install_github("mplex/cedhar", subdir="pkg/sdam")
+
     R> devtools::install_github("sdam-au/sdam")
+
+|
 
 Since  the ``get.edh()`` function needs to transform JSON output using ``rjson::fromJSON()``,
 you need to have this package installed as well. 
 
 
-Now you can load the ``sdam`` package in the ``R`` console or RStudio if you wish.
 
-.. code-block:: R
-
-    R> library("sdam")
 
 
 |
@@ -228,12 +264,19 @@ Now you can load the ``sdam`` package in the ``R`` console or RStudio if you wis
 Examples
 ++++++++
 
+To run the examples you need to load the required libraries. 
+
+.. code-block:: R
+
+    R> library("sdam")
+    R> require("rjson")  # https://cran.r-project.org/package=rjson 
+
+
 
 The query
 
 .. code-block:: R
 
-    R> require("rjson")  # https://cran.r-project.org/package=rjson 
     R> get.edh(findspot_modern="madrid")
 
 returns this truncated output:
@@ -311,7 +354,7 @@ The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelb
 ..     +    }
     
     # or load it from the package
-    R> data(EDH)
+    R> data("EDH")
 
 
 which will produce a list object with the existing entries for each inscription, some longer some shorter.
@@ -391,7 +434,11 @@ Attribute ``people`` is another list with other `attribute` names
     
 
 
-You can fin in the ``sdam`` manual a complete list of attribute names in the ``EDH`` dataset.
+|
+
+
+You can find a complete list of attribute names in the ``EDH`` dataset in 
+the ``sdam`` manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>.
 
 
 | 
@@ -478,12 +525,14 @@ with the ``base`` ``lapply`` function
 Years are between 530 BC and 1998 AC. 
 
 
+|
+
 
 
 Plot results
-^^^^^^^^^^^^
+++++++++++++
 
-The plot is made with the [R] ``graphics`` core package. 
+The plot is made with the [R] ``graphics`` core package (and the ``base`` package if you are using R version 4.0.0). 
 
 
 .. code-block:: R
@@ -507,7 +556,7 @@ That produces:
 Treating Outliers
 ^^^^^^^^^^^^^^^^^
 
-By looking at the plot, we can clearly see a couple of outliers. 
+By looking at the above plot, we can clearly see a couple of outliers. 
 
 
 .. code-block:: R
@@ -601,31 +650,31 @@ Then we need to calculate the residuals to start a statistic analysis of dates.
 
 
 
-JSON structure
-==============
-
-JSON stands for JavaScript Object Notation and it is based on the JavaScript Programming Language Standard ECMA-262. 
-JSON is built on two structures, namely a collection of name/value pairs, and an ordered list of values. 
-
-A JSON structure looks like:
-
-.. code-block:: 
-
-    Object {
-            Identifier: Value
-
-            Identifier: Array [
-
-               Object {
-                       Identifier: Value
-              }
-
-            ]
-
-    }
-
-Where ``Identifiers`` are delimited by quotes, and a ``Value`` can be a ``string``, a ``number``, ``"true"``, ``"false"``, ``"null"``, 
-or an ``Array`` or another JSON ``Object`` as the above example.
+..    JSON structure
+..    ==============
+..    
+..    JSON stands for JavaScript Object Notation and it is based on the JavaScript Programming Language Standard ECMA-262. 
+..    JSON is built on two structures, namely a collection of name/value pairs, and an ordered list of values. 
+..    
+..    A JSON structure looks like:
+..    
+..    .. code-block:: 
+..    
+..        Object {
+..                Identifier: Value
+..    
+..                Identifier: Array [
+..    
+..                   Object {
+..                           Identifier: Value
+..                  }
+..    
+..                ]
+..    
+..        }
+..    
+..    Where ``Identifiers`` are delimited by quotes, and a ``Value`` can be a ``string``, a ``number``, ``"true"``, ``"false"``, ``"null"``, 
+..    or an ``Array`` or another JSON ``Object`` as the above example.
 
 
 

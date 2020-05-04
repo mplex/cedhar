@@ -98,12 +98,9 @@
 <p>This is basically a HTTP request…</p>
 <div class="section" id="accessing-deic-s-sciencedata-dk-using-r">
 <h2>Accessing DEiC’s sciencedata.dk using R<a class="headerlink" href="#accessing-deic-s-sciencedata-dk-using-r" title="Permalink to this headline">¶</a></h2>
-<p>Function [<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/request.r">request()</a>] is aimed
-to interact first with DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
-<p>This function requires the [R] package <code class="docutils literal notranslate"><span class="pre">&quot;httr&quot;</span></code> at this moment.
-In case that accessing the server requires basic authentification,
-then package <code class="docutils literal notranslate"><span class="pre">&quot;tcltk&quot;</span></code> may be needed as well to input the credentials with a widget prompt.
-It is possible to prevent this by recording this information in a vector object.</p>
+<p>To interact with DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
+<p>Function [<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/request.r">request()</a>] is aimed</p>
+<p>Note that this function requires the [R] package <code class="docutils literal notranslate"><span class="pre">&quot;httr&quot;</span></code> at this moment.</p>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -208,19 +205,26 @@ However, for personal folders is the <code class="docutils literal notranslate">
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/path&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>NB:</em> <code class="docutils literal notranslate"><span class="pre">R&gt;</span></code> at the beginning of the line means that the following code is written in R. Comments are preceded by <code class="docutils literal notranslate"><span class="pre">#</span></code>.</p>
+<p><em>subdomain</em></p>
+<p>In case that accessing the server requires basic authentification,
+then package <code class="docutils literal notranslate"><span class="pre">&quot;tcltk&quot;</span></code> may be needed as well to input the credentials with a widget prompt.</p>
+<p>It is possible to prevent the widget by recording this information in a vector object.
+If you want to avoid a dialog box then save your credentials.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># user credentials</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">cred</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;YOUR-AUID@au.dk&quot;</span><span class="p">,</span> <span class="s">&quot;YOURPASSWORD&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">request()</span></code> has the <code class="docutils literal notranslate"><span class="pre">cred</span></code> argument for performing a basic authentification.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<p>Some examples are given here, and recall that with all types of folder it is needed to perform basic authentication <em>with the username and password used in ‘sciencedata.dk’ settings</em>.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># if you want to avoid a dialog box then save your credentials</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">cred</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;YOUR-AUID@au.dk&quot;</span><span class="p">,</span> <span class="s">&quot;YOURPASSWORD&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>In this case, you do not need to use the widget toolkit <code class="docutils literal notranslate"><span class="pre">&quot;tcltk&quot;</span></code> anymore.</p>
+<p>Some examples are given here.</p>
+<p>Recall that in in DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> both personal and shared folders
+need some sort of authentication. With the basic authentication, the credentials are given
+<em>with the username and password used in ‘sciencedata.dk’ settings</em>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

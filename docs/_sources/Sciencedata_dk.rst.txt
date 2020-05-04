@@ -15,14 +15,12 @@ This is basically a HTTP request...
 Accessing DEiC's sciencedata.dk using R
 ***************************************
 
+To interact with DEiC's `sciencedata.dk <https://sciencedata.dk>`__  
 
 Function [`request() <https://github.com/mplex/cedhar/blob/master/code/request.r>`_] is aimed 
-to interact first with DEiC's `sciencedata.dk <https://sciencedata.dk>`__                             
+                           
 
-This function requires the [R] package ``"httr"`` at this moment. 
-In case that accessing the server requires basic authentification, 
-then package ``"tcltk"`` may be needed as well to input the credentials with a widget prompt. 
-It is possible to prevent this by recording this information in a vector object. 
+Note that this function requires the [R] package ``"httr"`` at this moment. 
 
 
 
@@ -146,24 +144,40 @@ That is, an [R] code will be like
     R> request("file", path="/path")
 
 
-*NB:* ``R>`` at the beginning of the line means that the following code is written in R. Comments are preceded by ``#``. 
+
+*subdomain* 
+
+In case that accessing the server requires basic authentification, 
+then package ``"tcltk"`` may be needed as well to input the credentials with a widget prompt. 
+
+It is possible to prevent the widget by recording this information in a vector object. 
+If you want to avoid a dialog box then save your credentials.
+
+.. code-block:: R
+
+    # user credentials
+    R> cred <- c("YOUR-AUID@au.dk", "YOURPASSWORD")
+
+
+
+``request()`` has the ``cred`` argument for performing a basic authentification.
+
+
 
 |
+
 
 Examples
 ++++++++
 
 
-Some examples are given here, and recall that with all types of folder it is needed to perform basic authentication *with the username and password used in 'sciencedata.dk' settings*.
+Some examples are given here. 
+
+Recall that in in DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ both personal and shared folders 
+need some sort of authentication. With the basic authentication, the credentials are given 
+*with the username and password used in 'sciencedata.dk' settings*.
 
 
-.. code-block:: R
-
-    # if you want to avoid a dialog box then save your credentials
-    R> cred <- c("YOUR-AUID@au.dk", "YOURPASSWORD")
-
-
-In this case, you do not need to use the widget toolkit ``"tcltk"`` anymore. 
 
 |
 

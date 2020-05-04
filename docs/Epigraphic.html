@@ -50,7 +50,7 @@
 <li><a class="reference internal" href="#extra-parameters">Extra parameters</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#installing">Installing</a></li>
+<li><a class="reference internal" href="#installing-the-sdam-package">Installing the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 <li><a class="reference internal" href="#accessing-epigraphic-database-heidelberg-inscriptions">Accessing epigraphic database Heidelberg: Inscriptions</a><ul>
 <li><a class="reference internal" href="#output">Output</a><ul>
@@ -58,13 +58,12 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#check-dates">Check Dates</a></li>
-<li><a class="reference internal" href="#plot-results">Plot results</a></li>
-<li><a class="reference internal" href="#treating-outliers">Treating Outliers</a></li>
-<li><a class="reference internal" href="#plot-without-outliers">Plot without outliers</a></li>
-<li><a class="reference internal" href="#other-plots">Other plots</a><ul>
-<li><a class="reference internal" href="#json-structure">JSON structure</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#plot-results">Plot results</a><ul>
+<li><a class="reference internal" href="#treating-outliers">Treating Outliers</a></li>
+<li><a class="reference internal" href="#plot-without-outliers">Plot without outliers</a></li>
+<li><a class="reference internal" href="#other-plots">Other plots</a></li>
 </ul>
 </li>
 </ul>
@@ -131,7 +130,8 @@ format such as:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>See <a class="reference internal" href="#json-structure">JSON structure</a> for details.</p>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">&quot;items&quot;</span></code> are located in an array.
+See <a class="reference internal" href="DDHH.html#json-str"><span class="std std-ref">“JSON structure” in Digital Humanities</span></a></p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -143,9 +143,9 @@ allows having access to the data with the available parameters that are
 recorded as arguments. Then the returned [JSON] file is converted into a list data object
 with function <code class="docutils literal notranslate"><span class="pre">fromJSON()</span></code> from the <code class="docutils literal notranslate"><span class="pre">rjson</span></code> package.</p>
 <p>Currently, function <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> allows getting data with the <code class="docutils literal notranslate"><span class="pre">search</span></code> parameter
-either from <code class="docutils literal notranslate"><span class="pre">&quot;inscriptions&quot;</span></code> (the default option) or else from <cite>“geography”</cite>.
+either from <code class="docutils literal notranslate"><span class="pre">&quot;inscriptions&quot;</span></code> (the default option) or else from <code class="docutils literal notranslate"><span class="pre">&quot;geography&quot;</span></code>.
 The other two search options from the [EDH] database [API], which are <code class="docutils literal notranslate"><span class="pre">&quot;photos&quot;</span></code>
-and <code class="docutils literal notranslate"><span class="pre">&quot;bibliography&quot;</span></code> may be implemented in the future.</p>
+and <code class="docutils literal notranslate"><span class="pre">&quot;bibliography&quot;</span></code>, may be implemented in the future in this function.</p>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -160,6 +160,23 @@ and <code class="docutils literal notranslate"><span class="pre">&quot;bibliogra
           <span class="p">,</span> <span class="n">year_not_before</span><span class="p">,</span> <span class="n">year_not_after</span><span class="p">,</span> <span class="n">tm_nr</span><span class="p">,</span> <span class="n">transcription</span><span class="p">,</span> <span class="n">type</span>
           <span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">findspot</span><span class="p">,</span> <span class="n">pleiades_id</span><span class="p">,</span> <span class="n">geonames_id</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">printQ</span><span class="p">)</span>
 </pre></div>
+</div>
+<p><em>NB:</em> <code class="docutils literal notranslate"><span class="pre">R&gt;</span></code> at the beginning of the line means that the following code is written in <code class="docutils literal notranslate"><span class="pre">R</span></code>. Comments are preceded by <code class="docutils literal notranslate"><span class="pre">#</span></code>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="function">
+<dt id="get.edhw">
+<code class="sig-prename descclassname">get.</code><code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get.edhw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a wrapper function for several queries</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edhw</span><span class="p">(</span><span class="n">hd_nr</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that function <code class="docutils literal notranslate"><span class="pre">get.edw()</span></code> works only for inscriptions.</p>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="search-parameters">
@@ -297,34 +314,49 @@ insensitive</p>
 <div><p>Also print query?</p>
 </div></blockquote>
 </li>
+<li><p><cite>…</cite></p>
+<blockquote>
+<div><p>additional parameters if needed</p>
+</div></blockquote>
+</li>
 </ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The two functions we have seen so far, <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> and <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code>,
+are available in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </div>
 </div>
-<div class="section" id="installing">
-<h3>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h3>
-<p>You can install <code class="docutils literal notranslate"><span class="pre">sdam</span></code> from these GitHub repositories</p>
+<div class="section" id="installing-the-sdam-package">
+<h3>Installing the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package<a class="headerlink" href="#installing-the-sdam-package" title="Permalink to this headline">¶</a></h3>
+<p>You can install the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package from these GitHub repositories using  the <code class="docutils literal notranslate"><span class="pre">R</span></code> console
+or RStudio if you wish.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;mplex/cedhar&quot;</span><span class="p">,</span> <span class="n">subdir</span><span class="o">=</span><span class="s">&quot;pkg/sdam&quot;</span><span class="p">)</span>
+
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;sdam-au/sdam&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>Since  the <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> function needs to transform JSON output using <code class="docutils literal notranslate"><span class="pre">rjson::fromJSON()</span></code>,
 you need to have this package installed as well.</p>
-<p>Now you can load the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package in the <code class="docutils literal notranslate"><span class="pre">R</span></code> console or RStudio if you wish.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="s">&quot;sdam&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>To run the examples you need to load the required libraries.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="s">&quot;sdam&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">require</span><span class="p">(</span><span class="s">&quot;rjson&quot;</span><span class="p">)</span>  <span class="c1"># https://cran.r-project.org/package=rjson</span>
+</pre></div>
+</div>
 <p>The query</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">require</span><span class="p">(</span><span class="s">&quot;rjson&quot;</span><span class="p">)</span>  <span class="c1"># https://cran.r-project.org/package=rjson</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s">&quot;madrid&quot;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s">&quot;madrid&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>returns this truncated output:</p>
@@ -434,7 +466,11 @@ The wrapper function <code class="docutils literal notranslate"><span class="pre
 <span class="n">[1]</span> <span class="s">&quot;cognomen&quot;</span>  <span class="s">&quot;praenomen&quot;</span> <span class="s">&quot;person_id&quot;</span> <span class="s">&quot;gender&quot;</span>    <span class="s">&quot;name&quot;</span>      <span class="s">&quot;nomen&quot;</span>
 </pre></div>
 </div>
-<p>You can fin in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> manual a complete list of attribute names in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>You can find a complete list of attribute names in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset in
+the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> manual &lt;<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf">https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf</a>&gt;.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -500,10 +536,14 @@ with the <code class="docutils literal notranslate"><span class="pre">base</span
 </pre></div>
 </div>
 <p>Years are between 530 BC and 1998 AC.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
 </div>
 <div class="section" id="plot-results">
-<h4>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h4>
-<p>The plot is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package.</p>
+<h3>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h3>
+<p>The plot is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package (and the <code class="docutils literal notranslate"><span class="pre">base</span></code> package if you are using R version 4.0.0).</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">EDHdtdf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
 <span class="o">+</span>    <span class="n">main</span><span class="o">=</span><span class="s">&quot;Epigraphic time intervals (ALL)&quot;</span><span class="p">)</span>
@@ -514,10 +554,9 @@ with the <code class="docutils literal notranslate"><span class="pre">base</span
 </div>
 <p>That produces:</p>
 <a class="reference internal image-reference" href="_images/EDH-times.png"><img alt="_images/EDH-times.png" src="_images/EDH-times.png" style="width: 600px;" /></a>
-</div>
 <div class="section" id="treating-outliers">
 <h4>Treating Outliers<a class="headerlink" href="#treating-outliers" title="Permalink to this headline">¶</a></h4>
-<p>By looking at the plot, we can clearly see a couple of outliers.</p>
+<p>By looking at the above plot, we can clearly see a couple of outliers.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># first outlier is the maximum value of the dates</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdf[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">)))</span>
 <span class="c1">#[1] 1998</span>
@@ -570,28 +609,6 @@ with the <code class="docutils literal notranslate"><span class="pre">base</span
 <p>That produces:</p>
 <a class="reference internal image-reference" href="_images/EDH-BeforeAfterTimes.png"><img alt="_images/EDH-BeforeAfterTimes.png" src="_images/EDH-BeforeAfterTimes.png" style="width: 600px;" /></a>
 <p>Then we need to calculate the residuals to start a statistic analysis of dates.</p>
-<div class="section" id="json-structure">
-<h5>JSON structure<a class="headerlink" href="#json-structure" title="Permalink to this headline">¶</a></h5>
-<p>JSON stands for JavaScript Object Notation and it is based on the JavaScript Programming Language Standard ECMA-262.
-JSON is built on two structures, namely a collection of name/value pairs, and an ordered list of values.</p>
-<p>A JSON structure looks like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Object</span> <span class="p">{</span>
-        <span class="n">Identifier</span><span class="p">:</span> <span class="n">Value</span>
-
-        <span class="n">Identifier</span><span class="p">:</span> <span class="n">Array</span> <span class="p">[</span>
-
-           <span class="n">Object</span> <span class="p">{</span>
-                   <span class="n">Identifier</span><span class="p">:</span> <span class="n">Value</span>
-          <span class="p">}</span>
-
-        <span class="p">]</span>
-
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Where <code class="docutils literal notranslate"><span class="pre">Identifiers</span></code> are delimited by quotes, and a <code class="docutils literal notranslate"><span class="pre">Value</span></code> can be a <code class="docutils literal notranslate"><span class="pre">string</span></code>, a <code class="docutils literal notranslate"><span class="pre">number</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;true&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;false&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;null&quot;</span></code>,
-or an <code class="docutils literal notranslate"><span class="pre">Array</span></code> or another JSON <code class="docutils literal notranslate"><span class="pre">Object</span></code> as the above example.</p>
-</div>
 </div>
 </div>
 </div>

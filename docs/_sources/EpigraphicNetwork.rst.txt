@@ -27,13 +27,17 @@ This post is about Epigraphic Networks based on measures of similarity of artefa
 Measuring similarity of artefact assemblages and geographic proximity
 *********************************************************************
 
-The [R] function [`simil() <https://github.com/mplex/cedhar/blob/master/code/simil.r>`_] 
-allows assesing similarity by comparing columns representing --in this case-- different 
-attributes for epigraphic inscriptions. 
+.. function [`simil() <https://github.com/mplex/cedhar/blob/master/code/simil.r>`_] 
+
+To measure similarity of artefact assemblages and geographic proximity, [R] package 
+``sdam`` provides the function ``simil()``, which allows assesing similarity by comparing 
+columns representing --in this case-- different attributes for epigraphic inscriptions. 
+
 
 
 
 |
+
 
 Usage
 +++++
@@ -48,26 +52,54 @@ Usage
 
 Which returns a square and valued matrix with similarity meassures based on simple match among variables. 
 
+| 
+
+Parameters
+++++++++++
+
+
 Formal arguments of ``simil()`` are:
 
-.. code-block:: R
 
-    # FUNCTION simil() to compute similarity of entries in a given data frame
-    # (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
-    #
-    # version 0.1 (10-03-2020)
-    #
-    # INPUT AND ARGUMENTS
-    # x  a data frame with an ID column
-    # att (vector) column(s) in x representing attributes
-    # null (optional) include NA or NULLs?
-    # uniq (optional) remove duplicates?
-    # diag.incl (optional) include entries in matrix diagonal?
+- `x:`
 
+   a data frame with an ID column
+
+- `att:`
+
+   (vector) column(s) in ``x`` representing attributes 
+
+- `null:`
+
+   (optional) include in computation ``NA`` or ``NULLs``?
+
+- `uniq:`
+
+   (optional) remove duplicates from ``x``?
+
+- `diag.incl:`
+
+   (optional) include entries in the matrix diagonal?
+
+
+..     # FUNCTION simil() to compute similarity of entries in a given data frame
+..     # (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+..     #
+..     # version 0.1 (10-03-2020)
+..     #
+..     # INPUT AND ARGUMENTS
+..     # x  a data frame with an ID column
+..     # att (vector) column(s) in x representing attributes
+..     # null (optional) include NA or NULLs?
+..     # uniq (optional) remove duplicates?
+..     # diag.incl (optional) include entries in matrix diagonal?
+
+
+|
 
 At this point, the ID column represents the labels of the nodes. In 
 case that an ID column does not exists, then the first column is taken 
-provided that there are not duplicated entry names. 
+provided that there are not duplicated entry names in ``x``. 
 
 
 
@@ -77,27 +109,35 @@ provided that there are not duplicated entry names.
 Epigraphic data
 +++++++++++++++
 
-Follow the entry :ref:`Epigraphic Database Heidelberg <EDH>` to see how accessing the EDH database using [R].
+
+We illustrate the use of the ``simil()`` function with ancient inscriptions from 
+the Epigraphic Database Heidelberg, and we first follow the entry :ref:`Epigraphic Database Heidelberg <EDH>` 
+to see how accessing the EDH database using ``sdam`` in [R].
+
+|
 
 .. code-block:: R
 
-    # load the data       
-    R> load(file="epalln.Rdata")
+    R> library("sdam")
+
+    # load the data from 'sdam'
+    R> data("EDH")
 
 
 
 |
 
 Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity. 
-For example, we create a list object ``epinetl`` with the `ID` of the inscription plus seven other characteristics, 
-see :ref:`"Check Dates" in Epigraphic Database Heidelberg <recursively-apply>` for details. 
+For example, we create a list object ``epinetl`` with the ``ID`` of the inscription plus seven other characteristics from
+the EDH dataset ``EDH``. 
+See :ref:`"Check Dates" in Epigraphic Database Heidelberg <recursively-apply>` for another use of functional programming with ``lapply``. 
 
 
 .. code-block:: R
 
-    # choose variables
-    R> epinetl <- lapply(epalln, function (x) x[c("ID", "type_of_monument", "language", "material", 
-                        "country", "findspot_ancient", "not_after", "not_before")] )
+    # choose variables of interest
+    R> EDH1 <- lapply(EDH, function (x) x[c("ID", "type_of_monument", "language", "material", 
+                     "country", "findspot_ancient", "not_after", "not_before")] )
 
 
 
@@ -109,7 +149,7 @@ Now we execute a function call on the list to convert list of data into a data f
 .. code-block:: R
 
     # make a data frame from this variable
-    R> epinet <- as.data.frame(do.call(rbind, epinetl))
+    R> epinet <- as.data.frame(do.call(rbind, EDH1))
 
 
 
@@ -142,9 +182,9 @@ To remove question marks, we use a regular expression
 
 .. code-block:: R
 
-    # a new data frame for the same variables but without question marks
-    R> epinet2 <- as.data.frame(do.call(rbind, lapply(epinetl, function (x)  as.list(gsub('\\?', '', x)) )) )
-    R> colnames(epinet2) <- names(epinetl[[1]])
+    # a new data frame for the same variables but now without question marks
+    R> epinet2 <- as.data.frame(do.call(rbind, lapply(EDH1, function (x)  as.list(gsub('\\?', '', x)) )) )
+    R> colnames(epinet2) <- names(EDH1[[1]])
 
 
 
@@ -286,21 +326,19 @@ For this, we look at the attribute types stored in different columns.
 |
 
 
-In this case, we choose ``'type_of_monument'``, ``'material'``, and ``'findspot_ancient'``.
+For instance, in case we want to choose ``'type_of_monument'``, ``'material'``, and ``'findspot_ancient'``, 
+these correspond to columns 2, 4, and 6. 
+
+Similarities among Egyptian epigraphs `by simple matching` with the above attribute variables are recorded in 
+a matrix object named ``epEgs`` where the ``ID`` in ``epinet2`` corresponds to the dimensions labels.
+
 
 .. code-block:: R
 
     # similarity function on the subset for the three variables
     R> epEgs <- simil(subset(epinet2, country=="Egypt"), c(2,4,6))
 
-
-|
-
-And then look at how many inscriptions there are.
-
-.. code-block:: R
-
-    # number of rows in the square matrix
+    # number of rows in this square matrix
     R> nrow(epEgs)
     #[1] 170
 
@@ -308,9 +346,30 @@ And then look at how many inscriptions there are.
 |
 
 
+And then we look at some cell entries
+
+.. code-block:: R
+
+    # similarity between the first six inscriptions in 'epEgs'
+    R> epEgs[1:6, 1:6]
+    #       000741 002003 003126 006782 006785 008142
+    #000741      0      0      0      0      0      0
+    #002003      0      0      0      0      0      0
+    #003126      0      0      0      0      0      0
+    #006782      0      0      0      0      1      1
+    #006785      0      0      0      1      0      1
+    #008142      0      0      0      1      1      0
+
+
+where we observe six records of a single similarity. 
+
+
+|
+
+
 
 Plot similarities
-^^^^^^^^^^^^^^^^^
++++++++++++++++++
 
 
 To produce a graph for the similarity among Egyptian epigraphs, we employ the [R] package ``multigraph`` that 

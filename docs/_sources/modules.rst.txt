@@ -4,8 +4,8 @@ Modules
 .. toctree::
    :maxdepth: 2
 
-   cedhar
    HASS
+   DDHH
    UAT
    Epigraphic
    EpigraphicNetwork

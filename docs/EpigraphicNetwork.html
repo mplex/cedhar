@@ -43,11 +43,12 @@
 <li><a class="reference internal" href="#">Epigraphic Networks using R</a><ul>
 <li><a class="reference internal" href="#measuring-similarity-of-artefact-assemblages-and-geographic-proximity">Measuring similarity of artefact assemblages and geographic proximity</a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
 <li><a class="reference internal" href="#epigraphic-data">Epigraphic data</a><ul>
 <li><a class="reference internal" href="#similarity-among-egyptian-epigraphs">Similarity among Egyptian epigraphs</a></li>
-<li><a class="reference internal" href="#plot-similarities">Plot similarities</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#plot-similarities">Plot similarities</a></li>
 </ul>
 </li>
 </ul>
@@ -93,17 +94,17 @@
 </div>
 <div class="section" id="measuring-similarity-of-artefact-assemblages-and-geographic-proximity">
 <h2>Measuring similarity of artefact assemblages and geographic proximity<a class="headerlink" href="#measuring-similarity-of-artefact-assemblages-and-geographic-proximity" title="Permalink to this headline">¶</a></h2>
-<p>The [R] function [<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/simil.r">simil()</a>]
-allows assesing similarity by comparing columns representing –in this case– different
-attributes for epigraphic inscriptions.</p>
+<p>To measure similarity of artefact assemblages and geographic proximity, [R] package
+<code class="docutils literal notranslate"><span class="pre">sdam</span></code> provides the function <code class="docutils literal notranslate"><span class="pre">simil()</span></code>, which allows assesing similarity by comparing
+columns representing –in this case– different attributes for epigraphic inscriptions.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt>
-<code class="sig-name descname">simil</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt id="simil">
+<code class="sig-name descname">simil</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simil" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># arguments supported (currently)</span>
@@ -111,43 +112,74 @@ attributes for epigraphic inscriptions.</p>
 </pre></div>
 </div>
 <p>Which returns a square and valued matrix with similarity meassures based on simple match among variables.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
 <p>Formal arguments of <code class="docutils literal notranslate"><span class="pre">simil()</span></code> are:</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># FUNCTION simil() to compute similarity of entries in a given data frame</span>
-<span class="c1"># (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk</span>
-<span class="c1">#</span>
-<span class="c1"># version 0.1 (10-03-2020)</span>
-<span class="c1">#</span>
-<span class="c1"># INPUT AND ARGUMENTS</span>
-<span class="c1"># x  a data frame with an ID column</span>
-<span class="c1"># att (vector) column(s) in x representing attributes</span>
-<span class="c1"># null (optional) include NA or NULLs?</span>
-<span class="c1"># uniq (optional) remove duplicates?</span>
-<span class="c1"># diag.incl (optional) include entries in matrix diagonal?</span>
-</pre></div>
+<ul>
+<li><p><cite>x:</cite></p>
+<blockquote>
+<div><p>a data frame with an ID column</p>
+</div></blockquote>
+</li>
+<li><p><cite>att:</cite></p>
+<blockquote>
+<div><p>(vector) column(s) in <code class="docutils literal notranslate"><span class="pre">x</span></code> representing attributes</p>
+</div></blockquote>
+</li>
+<li><p><cite>null:</cite></p>
+<blockquote>
+<div><p>(optional) include in computation <code class="docutils literal notranslate"><span class="pre">NA</span></code> or <code class="docutils literal notranslate"><span class="pre">NULLs</span></code>?</p>
+</div></blockquote>
+</li>
+<li><p><cite>uniq:</cite></p>
+<blockquote>
+<div><p>(optional) remove duplicates from <code class="docutils literal notranslate"><span class="pre">x</span></code>?</p>
+</div></blockquote>
+</li>
+<li><p><cite>diag.incl:</cite></p>
+<blockquote>
+<div><p>(optional) include entries in the matrix diagonal?</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 <p>At this point, the ID column represents the labels of the nodes. In
 case that an ID column does not exists, then the first column is taken
-provided that there are not duplicated entry names.</p>
+provided that there are not duplicated entry names in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="epigraphic-data">
 <h3>Epigraphic data<a class="headerlink" href="#epigraphic-data" title="Permalink to this headline">¶</a></h3>
-<p>Follow the entry <a class="reference internal" href="Epigraphic.html#edh"><span class="std std-ref">Epigraphic Database Heidelberg</span></a> to see how accessing the EDH database using [R].</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># load the data</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">load</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s">&quot;epalln.Rdata&quot;</span><span class="p">)</span>
+<p>We illustrate the use of the <code class="docutils literal notranslate"><span class="pre">simil()</span></code> function with ancient inscriptions from
+the Epigraphic Database Heidelberg, and we first follow the entry <a class="reference internal" href="Epigraphic.html#edh"><span class="std std-ref">Epigraphic Database Heidelberg</span></a>
+to see how accessing the EDH database using <code class="docutils literal notranslate"><span class="pre">sdam</span></code> in [R].</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="s">&quot;sdam&quot;</span><span class="p">)</span>
+
+<span class="c1"># load the data from &#39;sdam&#39;</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">data</span><span class="p">(</span><span class="s">&quot;EDH&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity.
-For example, we create a list object <code class="docutils literal notranslate"><span class="pre">epinetl</span></code> with the <cite>ID</cite> of the inscription plus seven other characteristics,
-see <a class="reference internal" href="Epigraphic.html#recursively-apply"><span class="std std-ref">“Check Dates” in Epigraphic Database Heidelberg</span></a> for details.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose variables</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinetl</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">epalln</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="nf">[c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;type_of_monument&quot;</span><span class="p">,</span> <span class="s">&quot;language&quot;</span><span class="p">,</span> <span class="s">&quot;material&quot;</span><span class="p">,</span>
-                    <span class="s">&quot;country&quot;</span><span class="p">,</span> <span class="s">&quot;findspot_ancient&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span><span class="n">]</span> <span class="p">)</span>
+For example, we create a list object <code class="docutils literal notranslate"><span class="pre">epinetl</span></code> with the <code class="docutils literal notranslate"><span class="pre">ID</span></code> of the inscription plus seven other characteristics from
+the EDH dataset <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.
+See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span class="std std-ref">“Check Dates” in Epigraphic Database Heidelberg</span></a> for another use of functional programming with <code class="docutils literal notranslate"><span class="pre">lapply</span></code>.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose variables of interest</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDH1</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="nf">[c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;type_of_monument&quot;</span><span class="p">,</span> <span class="s">&quot;language&quot;</span><span class="p">,</span> <span class="s">&quot;material&quot;</span><span class="p">,</span>
+                 <span class="s">&quot;country&quot;</span><span class="p">,</span> <span class="s">&quot;findspot_ancient&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span><span class="n">]</span> <span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -155,7 +187,7 @@ see <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 </div>
 <p>Now we execute a function call on the list to convert list of data into a data frame object named <code class="docutils literal notranslate"><span class="pre">epinet</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a data frame from this variable</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="n">epinetl</span><span class="p">))</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="n">EDH1</span><span class="p">))</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -180,9 +212,9 @@ see <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <div class="line"><br /></div>
 </div>
 <p>To remove question marks, we use a regular expression</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a new data frame for the same variables but without question marks</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet2</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">epinetl</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="nf">as.list</span><span class="p">(</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;\\?&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="p">))</span> <span class="p">)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">epinet2</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">names</span><span class="p">(</span><span class="n">epinetl[[1]]</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a new data frame for the same variables but now without question marks</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet2</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH1</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="nf">as.list</span><span class="p">(</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;\\?&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="p">))</span> <span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">epinet2</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">names</span><span class="p">(</span><span class="n">EDH1[[1]]</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -299,16 +331,14 @@ For this, we look at the attribute types stored in different columns.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>In this case, we choose <code class="docutils literal notranslate"><span class="pre">'type_of_monument'</span></code>, <code class="docutils literal notranslate"><span class="pre">'material'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'findspot_ancient'</span></code>.</p>
+<p>For instance, in case we want to choose <code class="docutils literal notranslate"><span class="pre">'type_of_monument'</span></code>, <code class="docutils literal notranslate"><span class="pre">'material'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'findspot_ancient'</span></code>,
+these correspond to columns 2, 4, and 6.</p>
+<p>Similarities among Egyptian epigraphs <cite>by simple matching</cite> with the above attribute variables are recorded in
+a matrix object named <code class="docutils literal notranslate"><span class="pre">epEgs</span></code> where the <code class="docutils literal notranslate"><span class="pre">ID</span></code> in <code class="docutils literal notranslate"><span class="pre">epinet2</span></code> corresponds to the dimensions labels.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># similarity function on the subset for the three variables</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">epEgs</span> <span class="o">&lt;-</span> <span class="nf">simil</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">epinet2</span><span class="p">,</span> <span class="n">country</span><span class="o">==</span><span class="s">&quot;Egypt&quot;</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span><span class="m">4</span><span class="p">,</span><span class="m">6</span><span class="p">))</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>And then look at how many inscriptions there are.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># number of rows in the square matrix</span>
+
+<span class="c1"># number of rows in this square matrix</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">epEgs</span><span class="p">)</span>
 <span class="c1">#[1] 170</span>
 </pre></div>
@@ -316,9 +346,26 @@ For this, we look at the attribute types stored in different columns.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<p>And then we look at some cell entries</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># similarity between the first six inscriptions in &#39;epEgs&#39;</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epEgs[1</span><span class="o">:</span><span class="m">6</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="n">]</span>
+<span class="c1">#       000741 002003 003126 006782 006785 008142</span>
+<span class="c1">#000741      0      0      0      0      0      0</span>
+<span class="c1">#002003      0      0      0      0      0      0</span>
+<span class="c1">#003126      0      0      0      0      0      0</span>
+<span class="c1">#006782      0      0      0      0      1      1</span>
+<span class="c1">#006785      0      0      0      1      0      1</span>
+<span class="c1">#008142      0      0      0      1      1      0</span>
+</pre></div>
+</div>
+<p>where we observe six records of a single similarity.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
 </div>
 <div class="section" id="plot-similarities">
-<h4>Plot similarities<a class="headerlink" href="#plot-similarities" title="Permalink to this headline">¶</a></h4>
+<h3>Plot similarities<a class="headerlink" href="#plot-similarities" title="Permalink to this headline">¶</a></h3>
 <p>To produce a graph for the similarity among Egyptian epigraphs, we employ the [R] package <code class="docutils literal notranslate"><span class="pre">multigraph</span></code> that
 depends on <code class="docutils literal notranslate"><span class="pre">multiplex</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># define scope for the graph</span>
@@ -336,7 +383,6 @@ depends on <code class="docutils literal notranslate"><span class="pre">multiple
 </div>
 <a class="reference internal image-reference" href="_images/epEgs.png"><img alt="_images/epEgs.png" src="_images/epEgs.png" style="width: 500px;" /></a>
 <span class="target" id="index-0"></span></div>
-</div>
 </div>
 </div>
 
