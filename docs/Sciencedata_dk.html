@@ -47,7 +47,10 @@
 <li><a class="reference internal" href="#additional-parameters">Additional parameters</a></li>
 <li><a class="reference internal" href="#arguments">Arguments</a></li>
 <li><a class="reference internal" href="#output">Output</a></li>
-<li><a class="reference internal" href="#details">Details</a></li>
+<li><a class="reference internal" href="#details">Details</a><ul>
+<li><a class="reference internal" href="#authentification">Authentification</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#examples">Examples</a><ul>
 <li><a class="reference internal" href="#method-get">Method GET</a></li>
 <li><a class="reference internal" href="#method-put">Method PUT</a></li>
@@ -98,9 +101,9 @@
 <p>This is basically a HTTP request…</p>
 <div class="section" id="accessing-deic-s-sciencedata-dk-using-r">
 <h2>Accessing DEiC’s sciencedata.dk using R<a class="headerlink" href="#accessing-deic-s-sciencedata-dk-using-r" title="Permalink to this headline">¶</a></h2>
-<p>To interact with DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
-<p>Function [<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/request.r">request()</a>] is aimed</p>
-<p>Note that this function requires the [R] package <code class="docutils literal notranslate"><span class="pre">&quot;httr&quot;</span></code> at this moment.</p>
+<p>Function [<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/request.r">request()</a>] is aimed
+to interact with DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
+<p>Note that at this moment this function requires the [R] package <code class="docutils literal notranslate"><span class="pre">&quot;httr&quot;</span></code>.</p>
 <div class="section" id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -122,6 +125,9 @@
           <span class="p">,</span><span class="n">subdomain</span><span class="o">=</span><span class="kc">NULL</span>
           <span class="p">,</span><span class="kc">...</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="parameters">
@@ -194,8 +200,9 @@
 </div>
 <div class="section" id="details">
 <h3>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h3>
-<p>There are two types of folders in DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> that are <cite>personal</cite> and <cite>shared</cite> folders and both requires authentication with credentials.</p>
-<p>The <cite>path</cite> to the shared folders where the files are located must be specified with the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument.
+<p>There are two types of folders in DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> that are <em>personal</em>
+and <em>shared</em> folders and both requires authentication with credentials.</p>
+<p>The <em>path</em> to the shared folders where the files are located must be specified with the <code class="docutils literal notranslate"><span class="pre">path</span></code> argument.
 However, for personal folders is the <code class="docutils literal notranslate"><span class="pre">file</span></code> argument that includes the path information.</p>
 <p>That is, an [R] code will be like</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># personal folders</span>
@@ -205,7 +212,13 @@ However, for personal folders is the <code class="docutils literal notranslate">
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/path&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><em>subdomain</em></p>
+<p>Many times, DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> places the data on a <em>subdomain</em>, and
+for some methods like <code class="docutils literal notranslate"><span class="pre">PUT</span></code> it is required to specify the suddomain as well.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="authentification">
+<h4>Authentification<a class="headerlink" href="#authentification" title="Permalink to this headline">¶</a></h4>
 <p>In case that accessing the server requires basic authentification,
 then package <code class="docutils literal notranslate"><span class="pre">&quot;tcltk&quot;</span></code> may be needed as well to input the credentials with a widget prompt.</p>
 <p>It is possible to prevent the widget by recording this information in a vector object.
@@ -217,6 +230,7 @@ If you want to avoid a dialog box then save your credentials.</p>
 <p><code class="docutils literal notranslate"><span class="pre">request()</span></code> has the <code class="docutils literal notranslate"><span class="pre">cred</span></code> argument for performing a basic authentification.</p>
 <div class="line-block">
 <div class="line"><br /></div>
+</div>
 </div>
 </div>
 <div class="section" id="examples">
@@ -255,7 +269,7 @@ need some sort of authentication. With the basic authentication, the credentials
 </div>
 <div class="section" id="method-put">
 <h4>Method PUT<a class="headerlink" href="#method-put" title="Permalink to this headline">¶</a></h4>
-<p>The URL typically includes also a <cite>subdomain</cite> that is for DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a>
+<p>The URL typically includes also a <em>subdomain</em> that is for DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a>
 is named <code class="docutils literal notranslate"><span class="pre">silo</span></code> followed by a number. For instance, my documents are located in <code class="docutils literal notranslate"><span class="pre">silo1.sciencedata.dk</span></code>,
 and other users that will follow are (probably) located at <code class="docutils literal notranslate"><span class="pre">silo2</span></code>, etc.
 For method <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, the subdomain is mandatory; otherwise the request is redirected with <code class="docutils literal notranslate"><span class="pre">Status:</span> <span class="pre">307</span></code>.</p>
@@ -311,7 +325,7 @@ For method <code class="docutils literal notranslate"><span class="pre">PUT</spa
 <h4>Method DELETE<a class="headerlink" href="#method-delete" title="Permalink to this headline">¶</a></h4>
 <p>In the case of accesing with a request using methods <code class="docutils literal notranslate"><span class="pre">GET</span></code> or <code class="docutils literal notranslate"><span class="pre">PUT</span></code>,
 the path in the url is followed by <code class="docutils literal notranslate"><span class="pre">sharingin/userid/foldername</span></code>,
-and for <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> the <cite>response</cite> is given with <code class="docutils literal notranslate"><span class="pre">sharingout</span></code> in the path.</p>
+and for <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> the <em>response</em> is given with <code class="docutils literal notranslate"><span class="pre">sharingout</span></code> in the path.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for personal data</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
 
