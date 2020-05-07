@@ -99,7 +99,7 @@ Formal arguments of ``simil()`` are:
 
 At this point, the ID column represents the labels of the nodes. In 
 case that an ID column does not exists, then the first column is taken 
-provided that there are not duplicated entry names in ``x``. 
+as *id* provided that there are not duplicated entry names in ``x``. 
 
 
 
@@ -118,9 +118,11 @@ to see how accessing the EDH database using ``sdam`` in [R].
 
 .. code-block:: R
 
+    # devtools::install_github("mplex/cedhar", subdir="pkg/sdam")
+    # devtools::install_github("sdam-au/sdam")
     R> library("sdam")
 
-    # load the data from 'sdam'
+    # load the EDH data from this package
     R> data("EDH")
 
 

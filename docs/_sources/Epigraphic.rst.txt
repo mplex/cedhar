@@ -38,8 +38,7 @@ For inscriptions, the generic search pattern Uniform Resource Identifier
 
 with parameters `par` :math:`1,2,...n`.
 
-The response from a query is in a Java Script Object Notation (JSON)
-format such as:
+The response from a query is in a Java Script Object Notation or JSON format such as:
 
 .. code-block:: 
 
@@ -49,9 +48,11 @@ format such as:
        "items" : [ ... ]
     }
 
+(see :ref:`"JSON structure" in Digital Humanities <json-str>`)
 
-In this case, ``"items"`` are located in an array. 
-See :ref:`"JSON structure" in Digital Humanities <json-str>`
+In this case, ``"items"`` has an array as a value where the returned records are located. The ``"total"`` 
+and ``"limit"`` values correspond to the *total* number of records of the query, and the *limit* number is 
+the amount of records to appear in the browser after the query. 
 
 
 |
@@ -85,7 +86,8 @@ Usage
               , url = "https://edh-www.adw.uni-heidelberg.de/data/api"
               , hd_nr, province, country, findspot_modern, findspot_ancient
               , year_not_before, year_not_after, tm_nr, transcription, type
-              , bbox, findspot, pleiades_id, geonames_id, addID, printQ)
+              , bbox, findspot, pleiades_id, geonames_id, offset, limit
+              , addID, printQ)
 
 
 *NB:* ``R>`` at the beginning of the line means that the following code is written in ``R``. Comments are preceded by ``#``. 
@@ -140,6 +142,14 @@ Inscriptions and Geography
    add leading and/or trailing truncation by asterisk \*, e.g.
     ``findspot\_ancient=aquae\*``, case insensitive
 
+- `offset:`
+
+   clause to specify which row to start from retrieving data, integer
+
+- `limit:`
+
+   clause to limit the number of results, integer (by default includes all records)
+
 - `bbox:`
 
    bounding box in the format bbox=minLong, minLat, maxLong, maxLat,
@@ -154,6 +164,9 @@ for the last parameter with the two search options is written as
 
     R> get.edh(search="inscriptions", bbox="11,47,12,48")
     R> get.edh(search="geography", bbox="11,47,12,48")
+
+
+|
 
 
 Inscriptions only
@@ -185,6 +198,8 @@ Inscriptions only
     <https://edh-www.adw.uni-heidelberg.de/data/api/terms/type>, case
     insensitive
 
+|
+
 
 Geography only
 ^^^^^^^^^^^^^^
@@ -203,6 +218,7 @@ Geography only
 
    Geonames identifier of a place; integer value
 
+|
 
 
 Extra parameters

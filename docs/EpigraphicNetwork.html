@@ -151,7 +151,7 @@ columns representing –in this case– different attributes for epigraphic insc
 </div>
 <p>At this point, the ID column represents the labels of the nodes. In
 case that an ID column does not exists, then the first column is taken
-provided that there are not duplicated entry names in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+as <em>id</em> provided that there are not duplicated entry names in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -164,9 +164,11 @@ to see how accessing the EDH database using <code class="docutils literal notran
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="s">&quot;sdam&quot;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># devtools::install_github(&quot;mplex/cedhar&quot;, subdir=&quot;pkg/sdam&quot;)</span>
+<span class="c1"># devtools::install_github(&quot;sdam-au/sdam&quot;)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="s">&quot;sdam&quot;</span><span class="p">)</span>
 
-<span class="c1"># load the data from &#39;sdam&#39;</span>
+<span class="c1"># load the EDH data from this package</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">data</span><span class="p">(</span><span class="s">&quot;EDH&quot;</span><span class="p">)</span>
 </pre></div>
 </div>

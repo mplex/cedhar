@@ -111,7 +111,7 @@ to interact with DEiC’s <a class="reference external" href="https://sciencedat
 <code class="sig-name descname">request</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># load required function</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># load required package</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">require</span><span class="p">(</span><span class="s">&quot;httr&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -254,11 +254,6 @@ need some sort of authentication. With the basic authentication, the credentials
 
 <span class="c1"># for shared folders (example Vojtech test folder), where both options work</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/sharingin/648597@au.dk/TEST_shared_folder/&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
-
-<span class="c1">#[1] {&quot;a&quot;:{&quot;0&quot;:&quot;a1&quot;,&quot;1&quot;:&quot;a2&quot;},&quot;b&quot;:{&quot;0&quot;:&quot;b1&quot;,&quot;1&quot;:&quot;b2&quot;},&quot;c&quot;:{&quot;0&quot;:&quot;c1&quot;,&quot;1&quot;:&quot;c2&quot;}}</span>
-
-
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;sharingin/648597@au.dk/TEST_shared_folder&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
 
 <span class="c1">#[1] {&quot;a&quot;:{&quot;0&quot;:&quot;a1&quot;,&quot;1&quot;:&quot;a2&quot;},&quot;b&quot;:{&quot;0&quot;:&quot;b1&quot;,&quot;1&quot;:&quot;b2&quot;},&quot;c&quot;:{&quot;0&quot;:&quot;c1&quot;,&quot;1&quot;:&quot;c2&quot;}}</span>
 </pre></div>

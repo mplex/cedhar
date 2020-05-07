@@ -31,7 +31,7 @@ Usage
 
 .. code-block:: R
 
-    # load required function
+    # load required package
     R> require("httr")
 
 
@@ -213,11 +213,6 @@ This method is for accessing the files with the data.
 
     #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
 
-    
-    R> request("df.json", path="sharingin/648597@au.dk/TEST_shared_folder", method="GET", cred=cred)
-
-    #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
-    
     
     
     

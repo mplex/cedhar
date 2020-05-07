@@ -121,8 +121,7 @@ public Application Programming Interface (API).</p>
 <div><p><a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&amp;par_2=value&amp;par_n=value">https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&amp;par_2=value&amp;par_n=value</a></p>
 </div></blockquote>
 <p>with parameters <cite>par</cite> <span class="math notranslate nohighlight">\(1,2,...n\)</span>.</p>
-<p>The response from a query is in a Java Script Object Notation (JSON)
-format such as:</p>
+<p>The response from a query is in a Java Script Object Notation or JSON format such as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
    <span class="s2">&quot;total&quot;</span> <span class="p">:</span> <span class="mi">61</span><span class="p">,</span>
    <span class="s2">&quot;limit&quot;</span> <span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
@@ -130,8 +129,10 @@ format such as:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>In this case, <code class="docutils literal notranslate"><span class="pre">&quot;items&quot;</span></code> are located in an array.
-See <a class="reference internal" href="DDHH.html#json-str"><span class="std std-ref">“JSON structure” in Digital Humanities</span></a></p>
+<p>(see <a class="reference internal" href="DDHH.html#json-str"><span class="std std-ref">“JSON structure” in Digital Humanities</span></a>)</p>
+<p>In this case, <code class="docutils literal notranslate"><span class="pre">&quot;items&quot;</span></code> has an array as a value where the returned records are located. The <code class="docutils literal notranslate"><span class="pre">&quot;total&quot;</span></code>
+and <code class="docutils literal notranslate"><span class="pre">&quot;limit&quot;</span></code> values correspond to the <em>total</em> number of records of the query, and the <em>limit</em> number is
+the amount of records to appear in the browser after the query.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -158,7 +159,8 @@ and <code class="docutils literal notranslate"><span class="pre">&quot;bibliogra
           <span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://edh-www.adw.uni-heidelberg.de/data/api&quot;</span>
           <span class="p">,</span> <span class="n">hd_nr</span><span class="p">,</span> <span class="n">province</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span> <span class="n">findspot_modern</span><span class="p">,</span> <span class="n">findspot_ancient</span>
           <span class="p">,</span> <span class="n">year_not_before</span><span class="p">,</span> <span class="n">year_not_after</span><span class="p">,</span> <span class="n">tm_nr</span><span class="p">,</span> <span class="n">transcription</span><span class="p">,</span> <span class="n">type</span>
-          <span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">findspot</span><span class="p">,</span> <span class="n">pleiades_id</span><span class="p">,</span> <span class="n">geonames_id</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">printQ</span><span class="p">)</span>
+          <span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">findspot</span><span class="p">,</span> <span class="n">pleiades_id</span><span class="p">,</span> <span class="n">geonames_id</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">limit</span>
+          <span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">printQ</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><em>NB:</em> <code class="docutils literal notranslate"><span class="pre">R&gt;</span></code> at the beginning of the line means that the following code is written in <code class="docutils literal notranslate"><span class="pre">R</span></code>. Comments are preceded by <code class="docutils literal notranslate"><span class="pre">#</span></code>.</p>
@@ -220,6 +222,16 @@ insensitive</p>
 </dl>
 </div></blockquote>
 </li>
+<li><p><cite>offset:</cite></p>
+<blockquote>
+<div><p>clause to specify which row to start from retrieving data, integer</p>
+</div></blockquote>
+</li>
+<li><p><cite>limit:</cite></p>
+<blockquote>
+<div><p>clause to limit the number of results, integer (by default includes all records)</p>
+</div></blockquote>
+</li>
 <li><p><cite>bbox:</cite></p>
 <blockquote>
 <div><dl class="simple">
@@ -236,6 +248,9 @@ for the last parameter with the two search options is written as</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="s">&quot;11,47,12,48&quot;</span><span class="p">)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s">&quot;geography&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="s">&quot;11,47,12,48&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="inscriptions-only">
@@ -276,6 +291,9 @@ insensitive</p>
 </div></blockquote>
 </li>
 </ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="geography-only">
 <h4>Geography only<a class="headerlink" href="#geography-only" title="Permalink to this headline">¶</a></h4>
@@ -300,6 +318,9 @@ insensitive</p>
 </div></blockquote>
 </li>
 </ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="extra-parameters">
 <h4>Extra parameters<a class="headerlink" href="#extra-parameters" title="Permalink to this headline">¶</a></h4>
