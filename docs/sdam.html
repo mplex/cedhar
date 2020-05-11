@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>The sdam R package &#8212; cedhar 0.0.2 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modules" href="modules.html" />
+    <link rel="prev" title="DEiC’s sciencedata.dk" href="Sciencedata_dk.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modules.html" title="Modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CEDHAR_logo_black_large_800x100.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The <code class="docutils literal notranslate"><span class="pre">sdam</span></code> R package</a><ul>
+<li><a class="reference internal" href="#package-description">Package Description</a><ul>
+<li><a class="reference internal" href="#package-assembly">Package Assembly</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Sciencedata_dk.html"
+                        title="previous chapter">DEiC’s sciencedata.dk</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="next chapter">Modules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sdam.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-sdam-r-package">
+<h1>The <code class="docutils literal notranslate"><span class="pre">sdam</span></code> R package<a class="headerlink" href="#the-sdam-r-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="package-description">
+<h2>Package Description<a class="headerlink" href="#package-description" title="Permalink to this headline">¶</a></h2>
+<p>This package provides tools for performing analyses within Social Dynamics and complexity
+in the Ancient Mediterranean (<a class="reference external" href="https://sdam-au.github.io/sdam-au/">SDAM</a>), which is a
+research group based at the <a class="reference external" href="https://cas.au.dk/">School of Culture and Society</a> at
+Aarhus University (AU).</p>
+<ul class="simple">
+<li><p>See <a class="reference internal" href="DDHH.html#sdam-proj"><span class="std std-ref">“SDAM project” in Digital Humanities</span></a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Currently, it is possible with sdam to access data from the Epigraphic Database Heidelberg API
+with <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code>, and the wrapper function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> as well. Most of the data is available
+in the dataset attached to the package, which is called <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.</p>
+<ul class="simple">
+<li><p>See <a class="reference internal" href="Epigraphic.html#edh"><span class="std std-ref">Epigraphic Database Heidelberg</span></a> and <a class="reference internal" href="EpigraphicNetwork.html#edh-net"><span class="std std-ref">Epigraphic Networks using R</span></a> for applications of these functions and use of this dataset.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Besides, the <code class="docutils literal notranslate"><span class="pre">request()</span></code> function allows performing different types of HTTP requests to a cloud
+repository like DEiC’S <a class="reference external" href="https://sciencedata.dk">https://sciencedata.dk</a> or another customized URL address.</p>
+<ul class="simple">
+<li><p>See <a class="reference internal" href="Sciencedata_dk.html#deic-sddk"><span class="std std-ref">DEiC’s sciencedata.dk</span></a> for applications of this function.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Similarity by simple matching among column vectors is achieved by the <code class="docutils literal notranslate"><span class="pre">simil()</span></code> function in order
+to make analyses of assemblages or artifacts. Note that this latter function still under early
+development.</p>
+<ul class="simple">
+<li><p>See <a class="reference internal" href="EpigraphicNetwork.html#edh-net"><span class="std std-ref">Epigraphic Networks using R</span></a> for applications of this function.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="package-assembly">
+<h3>Package Assembly<a class="headerlink" href="#package-assembly" title="Permalink to this headline">¶</a></h3>
+<p>TBD.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modules.html" title="Modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, CEDHAR - Aarhus University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

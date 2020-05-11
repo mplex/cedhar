@@ -10,12 +10,13 @@
    :maxdepth: 2
    :caption: Contents:
    
-   HASS
    DDHH
+   HASS
    UAT
    Epigraphic
    EpigraphicNetwork
    Sciencedata_dk
+   sdam
    modules
 
 

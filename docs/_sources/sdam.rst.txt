@@ -1,0 +1,53 @@
+
+
+======================
+The ``sdam`` R package
+======================
+
+
+Package Description
+-------------------
+
+
+This package provides tools for performing analyses within Social Dynamics and complexity 
+in the Ancient Mediterranean (`SDAM <https://sdam-au.github.io/sdam-au/>`_), which is a 
+research group based at the `School of Culture and Society <https://cas.au.dk/>`_ at 
+Aarhus University (AU).
+
+* See :ref:`"SDAM project" in Digital Humanities <sdam-proj>`
+
+
+|
+
+Currently, it is possible with sdam to access data from the Epigraphic Database Heidelberg API
+with ``get.edh()``, and the wrapper function ``get.edhw()`` as well. Most of the data is available 
+in the dataset attached to the package, which is called ``EDH``.
+
+* See :ref:`Epigraphic Database Heidelberg <EDH>` and :ref:`Epigraphic Networks using R <EDH-net>` for applications of these functions and use of this dataset. 
+
+
+|
+
+Besides, the ``request()`` function allows performing different types of HTTP requests to a cloud
+repository like DEiC'S https://sciencedata.dk or another customized URL address.
+
+* See :ref:`DEiC's sciencedata.dk <DEiC-sddk>` for applications of this function. 
+
+
+|
+
+Similarity by simple matching among column vectors is achieved by the ``simil()`` function in order
+to make analyses of assemblages or artifacts. Note that this latter function still under early
+development.
+
+* See :ref:`Epigraphic Networks using R <EDH-net>` for applications of this function. 
+
+
+|
+
+
+Package Assembly
+++++++++++++++++
+
+TBD.
+

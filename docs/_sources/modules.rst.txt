@@ -4,9 +4,10 @@ Modules
 .. toctree::
    :maxdepth: 2
 
-   HASS
    DDHH
+   HASS
    UAT
    Epigraphic
    EpigraphicNetwork
    Sciencedata_dk
+   sdam

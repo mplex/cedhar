@@ -1,9 +1,15 @@
 
+.. _HASS:
 
-Tools for HASS
-==============
+================================================
+Tools for Humanities and Social Sciences -- HASS
+================================================
 
    | In this site, there are some digital tools for Humanities and Social Sciences (HASS) used at `CEDHAR <https://cas.au.dk/en/cedhar/>`_. 
+
+
+
+.. _HASS-dgtls:
 
 
 Digital tools
@@ -25,7 +31,7 @@ Since September 2019, the collaborative digital tools we are using in the projec
 
 - **Google Drive** is a file storage and synchronization service  
 
-  - provides 'only' 15 GB is free of charge
+  - provided only 15 GB is free of charge
 
 - **Slack** is a cloud-based team collaboration tool.
 

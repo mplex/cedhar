@@ -1,4 +1,6 @@
 
+.. _EDH-net:
+
 
 ===========================
 Epigraphic Networks using R
@@ -107,7 +109,7 @@ as *id* provided that there are not duplicated entry names in ``x``.
 
 
 Epigraphic data
-+++++++++++++++
+***************
 
 
 We illustrate the use of the ``simil()`` function with ancient inscriptions from 
@@ -129,6 +131,9 @@ to see how accessing the EDH database using ``sdam`` in [R].
 
 |
 
+Epigraphic network data
++++++++++++++++++++++++
+
 Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity. 
 For example, we create a list object ``epinetl`` with the ``ID`` of the inscription plus seven other characteristics from
 the EDH dataset ``EDH``. 
@@ -145,6 +150,8 @@ See :ref:`"Check Dates" in Epigraphic Database Heidelberg <recursively-apply>` f
 
 |
 
+Data frame
+^^^^^^^^^^
 
 Now we execute a function call on the list to convert list of data into a data frame object named ``epinet``.
 
@@ -180,7 +187,10 @@ For instance, entry ``8`` indicates that this ancient findspot is uncertain.
 
 |
 
-To remove question marks, we use a regular expression
+Regular expressions
+^^^^^^^^^^^^^^^^^^^
+
+To remove question marks, for example, we use a regular expression
 
 .. code-block:: R
 
@@ -234,8 +244,12 @@ The countries in ``epinet2`` are:
     #[53] "Uzbekistan"             "Liechtenstein"          "Georgia"
 
 
+
 |
 
+
+Subsetting the data
+^^^^^^^^^^^^^^^^^^^
 
 For example, we use the ``base`` [R] function ``subset()`` to substract epigraphic material in "Greek-Latin" from Egypt.
 
@@ -299,8 +313,8 @@ To calculate frequency of different `'kinds of inscriptions'` in ``epinet2``.
 |
 
 
-Similarity among Egyptian epigraphs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Example: Similarity among Egyptian epigraphs
+********************************************
 
 
 We can compute similarity among Egyptian epigraphs with function ``simil()``. 
@@ -371,7 +385,7 @@ where we observe six records of a single similarity.
 
 
 Plot similarities
-+++++++++++++++++
+*****************
 
 
 To produce a graph for the similarity among Egyptian epigraphs, we employ the [R] package ``multigraph`` that 

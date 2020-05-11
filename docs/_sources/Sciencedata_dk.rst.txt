@@ -1,22 +1,48 @@
 
+.. _DEiC-sddk:
+
 
 =====================
 DEiC's sciencedata.dk
 =====================
 
 
-Accessing DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_  needs another tools...
+Accessing DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_  needs another tools, 
+and this is basically achieved by performing a HTTP request as a **client** to one of 
+DEiC's **server**.
 
-This is basically a HTTP request...
 
-.. with a current version 0.1 (19-01-2020)
+.. code-block:: 
+
+     `                                                                                                      `    
+     `                                                                                                      `    
+     `                                                                                                      `    
+     `                     ************        \-------|\                                                   `    
+     `                     |  CLIENT  | -->-- > request  > -->-->-->-->.                                    `    
+     `                     |  ======  |        /-------|/              |                                    `    
+     `                     ************                                .                                    `    
+     `                          `                                      |                                    `    
+     `                          ^               /|--------/       ************                              `    
+     `                          `-<--<--<--<-- <  response <  <-- |  SERVER  |                              `    
+     `                                          \|--------\       |  ======  |                              `    
+     `                                                            ************                              `    
+     `                                                                                                      `    
+     `                                                                                                      `    
+
+|
+
+The server's response depends on the method used in the request.
+
+|
 
 
 Accessing DEiC's sciencedata.dk using R
 ***************************************
 
-Function [`request() <https://github.com/mplex/cedhar/blob/master/code/request.r>`_] is aimed 
-to interact with DEiC's `sciencedata.dk <https://sciencedata.dk>`__  
+Function [`request() <https://github.com/mplex/cedhar/blob/master/code/request.r>`_] from the ``sdam`` 
+packahe is aimed to interact with DEiC's `sciencedata.dk <https://sciencedata.dk>`__  
+
+.. with a current version 0.1 (19-01-2020)
 
                            
 
@@ -72,7 +98,7 @@ Parameters
 
 - `authenticate` (logical, use basic authentication?)   
 
-- `path` (optional, add path to the url)                
+- `path` (optional path or subdirectory to add to the url)                
                                                     
 
 |
@@ -91,7 +117,7 @@ Additional parameters
 Arguments
 +++++++++
 
-Arguments of ``request`` are retrieved with ``formals``. 
+Arguments of ``request()`` are retrieved with the ``formals()`` function. 
 
 .. code-block:: R
     
@@ -122,7 +148,7 @@ Arguments of ``request`` are retrieved with ``formals``.
 Output
 ++++++
 
-The output depends on the method to be used in the request. 
+The output is the server's response that depends on the method to be used in the request. 
 
 |
 
@@ -154,7 +180,7 @@ for some methods like ``PUT`` it is required to specify the suddomain as well.
 |
 
 Authentification
-^^^^^^^^^^^^^^^^
+++++++++++++++++
 
 In case that accessing the server requires basic authentification, 
 then package ``"tcltk"`` may be needed as well to input the credentials with a widget prompt. 
@@ -172,20 +198,36 @@ If you want to avoid a dialog box then save your credentials.
 ``request()`` has the ``cred`` argument for performing a basic authentification.
 
 
+In DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_, both personal and shared folders 
+need some sort of authentication. With the basic authentication, the credentials are given 
+**with the username and password used under your personal** 'sciencedata.dk' **settings**.
+
+
+|
+
+
+Responses
++++++++++
+
+Server responses carry a code called *HTTP status code* where ``2xx`` means **success**, 
+and ``4xx`` means **client error**. There is also a status code like ``5xx`` for server 
+error, and ``3xx`` for redirection (and where codes ``1xx`` are just informative).
+
+When using the ``request()`` function, the HTTP status code is given under ``Status`` in the 
+response message below the time stamp.  
+
+
+
 
 |
 
 
 Examples
-++++++++
+********
 
 
-Some examples are given here. 
-
-Recall that in in DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ both personal and shared folders 
-need some sort of authentication. With the basic authentication, the credentials are given 
-*with the username and password used in 'sciencedata.dk' settings*.
-
+Some examples of HTTP requests are given next where reponse messages in some cases are given 
+afterwards. 
 
 
 |
@@ -193,7 +235,7 @@ need some sort of authentication. With the basic authentication, the credentials
 
     
 Method GET 
-^^^^^^^^^^
+++++++++++
     
 This method is for accessing the files with the data.
     
@@ -216,16 +258,19 @@ This method is for accessing the files with the data.
     
     
     
+If there is any error, then the HTTP status code with the ``GET`` method is ``200`` or OK but it is not returned. 
+
 
 |
     
 Method PUT
-^^^^^^^^^^
+++++++++++
     
-The URL typically includes also a *subdomain* that is for DEiC's `sciencedata.dk <https://sciencedata.dk>`__ 
-is named ``silo`` followed by a number. For instance, my documents are located in ``silo1.sciencedata.dk``, 
-and other users that will follow are (probably) located at ``silo2``, etc. 
-For method ``PUT``, the subdomain is mandatory; otherwise the request is redirected with ``Status: 307``.
+The URL typically includes also a *subdomain* that for DEiC's `sciencedata.dk <https://sciencedata.dk>`__ 
+is named ``silo`` followed by a number. For instance, my personal documents are located in ``silo1.sciencedata.dk``, 
+and other users that will follow are probably located at ``silo2``, etc. 
+For method ``PUT``, the subdomain is mandatory; otherwise the request is redirected with ``Status: 307`` that is 
+temporary redirect.
 
 
 .. code-block:: R
@@ -274,12 +319,17 @@ For method ``PUT``, the subdomain is mandatory; otherwise the request is redirec
     #<EMPTY BODY>
 
     
+
     
+The HTTP status code ``201`` means that the file was created in the server side, and ``@`` in the 
+path was "escaped" as ``%40``. 
+
+
     
 |
 
 Method DELETE
-^^^^^^^^^^^^^
++++++++++++++
 
 In the case of accesing with a request using methods ``GET`` or ``PUT``, 
 the path in the url is followed by ``sharingin/userid/foldername``, 
@@ -308,7 +358,7 @@ and for ``DELETE`` the *response* is given with ``sharingout`` in the path.
 |
 
 Method POST
-^^^^^^^^^^^
++++++++++++
 
 
 Finally, there is also the possibility to *place* files with the ``POST`` method. 

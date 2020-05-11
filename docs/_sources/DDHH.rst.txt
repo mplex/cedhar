@@ -1,5 +1,8 @@
 
+.. _DDHH:
 
+
+******************
 Digital Humanities
 ******************
 
@@ -7,8 +10,30 @@ The use of digital technologies to pursue research questions in the humanities.
 
 
 
+| 
+
+.. _sdam-proj:
+
+The SDAM project
+++++++++++++++++
+
+The SDAM project is carried out by the research group Social Dynamics and complexity
+in the Ancient Mediterranean (`SDAM <https://sdam-au.github.io/sdam-au/>`_) at Aarhus University. 
+
+The two mains outputs of this project are expected to be
+
+    * A comparative study of proxies for evolution of social complexity in the Ancient Mediterranean.
+    * Digital tools, workflows and processes that scale and that historians and archaeologists can use in their own research.
+
+
+* See :ref:`"Digital tools" in Tools for Humanities and Social Sciences <HASS-dgtls>`
+
+
+|
+
+
 Data for humanities
--------------------
++++++++++++++++++++
 
 
 1) Document markup languages
@@ -42,16 +67,23 @@ Data for humanities
      - See also Web Feature Service (**WFS**)
 
 
+|
+
 
 Data formats
-^^^^^^^^^^^^
+------------
+
+Data can be storaged in different formats.
+
+
+|
 
 
 .. _json-str:
 
 
 JSON structure
-==============
+^^^^^^^^^^^^^^
 
 JSON stands for JavaScript Object Notation and it is based on the JavaScript Programming Language Standard ECMA-262. 
 JSON is built on two structures, namely a collection of name/value pairs, and an ordered list of values. 
@@ -85,7 +117,7 @@ or an ``Array`` or another JSON ``Object`` as the above example.
 
 
 XML structure
-=============
+^^^^^^^^^^^^^
 
 
 TBD

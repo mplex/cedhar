@@ -252,6 +252,16 @@ are available in the ``sdam`` package.
 |
 
 
+
+
+Examples
+********
+
+The examples are made with the ``sdam`` ``R`` package. 
+
+|
+
+
 Installing the ``sdam`` package
 +++++++++++++++++++++++++++++++
 
@@ -272,15 +282,11 @@ you need to have this package installed as well.
 
 
 
-
-
 |
 
 
-Examples
-++++++++
 
-To run the examples you need to load the required libraries. 
+Then, to run the examples you need to load the required libraries. 
 
 .. code-block:: R
 
@@ -288,6 +294,7 @@ To run the examples you need to load the required libraries.
     R> require("rjson")  # https://cran.r-project.org/package=rjson 
 
 
+|
 
 The query
 
@@ -545,8 +552,8 @@ Years are between 530 BC and 1998 AC.
 
 
 
-Plot results
-++++++++++++
+Plotting the results
+********************
 
 The plot is made with the [R] ``graphics`` core package (and the ``base`` package if you are using R version 4.0.0). 
 
@@ -567,10 +574,10 @@ That produces:
    :width: 600
 
 
-
+|
 
 Treating Outliers
-^^^^^^^^^^^^^^^^^
++++++++++++++++++
 
 By looking at the above plot, we can clearly see a couple of outliers. 
 
@@ -615,8 +622,11 @@ Years are now between 530 BC and 95 AC.
 
 
 
-Plot without outliers
-^^^^^^^^^^^^^^^^^^^^^
+|
+
+
+Plotting without outliers
++++++++++++++++++++++++++
 
 
 The plot is now constructed without the two outliers and with updated years. 
@@ -640,8 +650,10 @@ That produces a plot with no outliers:
 
 
 
+|
+
 Other plots
-^^^^^^^^^^^
++++++++++++
 
 Visualization helps to perform different kinds of analyses.
 
@@ -659,7 +671,6 @@ That produces:
    :width: 600
 
 Then we need to calculate the residuals to start a statistic analysis of dates.
-
 
 
 

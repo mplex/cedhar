@@ -44,13 +44,19 @@
 <li><a class="reference internal" href="#measuring-similarity-of-artefact-assemblages-and-geographic-proximity">Measuring similarity of artefact assemblages and geographic proximity</a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#epigraphic-data">Epigraphic data</a><ul>
-<li><a class="reference internal" href="#similarity-among-egyptian-epigraphs">Similarity among Egyptian epigraphs</a></li>
+<li><a class="reference internal" href="#epigraphic-network-data">Epigraphic network data</a><ul>
+<li><a class="reference internal" href="#data-frame">Data frame</a></li>
+<li><a class="reference internal" href="#regular-expressions">Regular expressions</a></li>
+<li><a class="reference internal" href="#subsetting-the-data">Subsetting the data</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example-similarity-among-egyptian-epigraphs">Example: Similarity among Egyptian epigraphs</a></li>
 <li><a class="reference internal" href="#plot-similarities">Plot similarities</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -87,7 +93,7 @@
           <div class="body" role="main">
             
   <div class="section" id="epigraphic-networks-using-r">
-<h1>Epigraphic Networks using R<a class="headerlink" href="#epigraphic-networks-using-r" title="Permalink to this headline">¶</a></h1>
+<span id="edh-net"></span><h1>Epigraphic Networks using R<a class="headerlink" href="#epigraphic-networks-using-r" title="Permalink to this headline">¶</a></h1>
 <p>This post is about Epigraphic Networks based on measures of similarity of artefact assemblages and geographic proximity.</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -156,8 +162,9 @@ as <em>id</em> provided that there are not duplicated entry names in <code class
 <div class="line"><br /></div>
 </div>
 </div>
+</div>
 <div class="section" id="epigraphic-data">
-<h3>Epigraphic data<a class="headerlink" href="#epigraphic-data" title="Permalink to this headline">¶</a></h3>
+<h2>Epigraphic data<a class="headerlink" href="#epigraphic-data" title="Permalink to this headline">¶</a></h2>
 <p>We illustrate the use of the <code class="docutils literal notranslate"><span class="pre">simil()</span></code> function with ancient inscriptions from
 the Epigraphic Database Heidelberg, and we first follow the entry <a class="reference internal" href="Epigraphic.html#edh"><span class="std std-ref">Epigraphic Database Heidelberg</span></a>
 to see how accessing the EDH database using <code class="docutils literal notranslate"><span class="pre">sdam</span></code> in [R].</p>
@@ -175,6 +182,8 @@ to see how accessing the EDH database using <code class="docutils literal notran
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<div class="section" id="epigraphic-network-data">
+<h3>Epigraphic network data<a class="headerlink" href="#epigraphic-network-data" title="Permalink to this headline">¶</a></h3>
 <p>Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity.
 For example, we create a list object <code class="docutils literal notranslate"><span class="pre">epinetl</span></code> with the <code class="docutils literal notranslate"><span class="pre">ID</span></code> of the inscription plus seven other characteristics from
 the EDH dataset <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.
@@ -187,6 +196,8 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<div class="section" id="data-frame">
+<h4>Data frame<a class="headerlink" href="#data-frame" title="Permalink to this headline">¶</a></h4>
 <p>Now we execute a function call on the list to convert list of data into a data frame object named <code class="docutils literal notranslate"><span class="pre">epinet</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a data frame from this variable</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="n">EDH1</span><span class="p">))</span>
@@ -213,7 +224,10 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>To remove question marks, we use a regular expression</p>
+</div>
+<div class="section" id="regular-expressions">
+<h4>Regular expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h4>
+<p>To remove question marks, for example, we use a regular expression</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a new data frame for the same variables but now without question marks</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet2</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH1</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="nf">as.list</span><span class="p">(</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;\\?&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="p">))</span> <span class="p">)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">epinet2</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">names</span><span class="p">(</span><span class="n">EDH1[[1]]</span><span class="p">)</span>
@@ -261,6 +275,9 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+</div>
+<div class="section" id="subsetting-the-data">
+<h4>Subsetting the data<a class="headerlink" href="#subsetting-the-data" title="Permalink to this headline">¶</a></h4>
 <p>For example, we use the <code class="docutils literal notranslate"><span class="pre">base</span></code> [R] function <code class="docutils literal notranslate"><span class="pre">subset()</span></code> to substract epigraphic material in “Greek-Latin” from Egypt.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a subset of a subset</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">subset</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">epinet2</span><span class="p">,</span> <span class="n">country</span><span class="o">==</span><span class="s">&quot;Egypt&quot;</span><span class="p">),</span> <span class="n">language</span><span class="o">==</span><span class="s">&quot;Greek-Latin&quot;</span><span class="p">)</span>
@@ -312,8 +329,11 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="section" id="similarity-among-egyptian-epigraphs">
-<h4>Similarity among Egyptian epigraphs<a class="headerlink" href="#similarity-among-egyptian-epigraphs" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+</div>
+<div class="section" id="example-similarity-among-egyptian-epigraphs">
+<h2>Example: Similarity among Egyptian epigraphs<a class="headerlink" href="#example-similarity-among-egyptian-epigraphs" title="Permalink to this headline">¶</a></h2>
 <p>We can compute similarity among Egyptian epigraphs with function <code class="docutils literal notranslate"><span class="pre">simil()</span></code>.
 For this, we look at the attribute types stored in different columns.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">epinet2</span><span class="p">))</span>
@@ -365,9 +385,8 @@ a matrix object named <code class="docutils literal notranslate"><span class="pr
 <div class="line"><br /></div>
 </div>
 </div>
-</div>
 <div class="section" id="plot-similarities">
-<h3>Plot similarities<a class="headerlink" href="#plot-similarities" title="Permalink to this headline">¶</a></h3>
+<h2>Plot similarities<a class="headerlink" href="#plot-similarities" title="Permalink to this headline">¶</a></h2>
 <p>To produce a graph for the similarity among Egyptian epigraphs, we employ the [R] package <code class="docutils literal notranslate"><span class="pre">multigraph</span></code> that
 depends on <code class="docutils literal notranslate"><span class="pre">multiplex</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># define scope for the graph</span>
@@ -385,7 +404,6 @@ depends on <code class="docutils literal notranslate"><span class="pre">multiple
 </div>
 <a class="reference internal image-reference" href="_images/epEgs.png"><img alt="_images/epEgs.png" src="_images/epEgs.png" style="width: 500px;" /></a>
 <span class="target" id="index-0"></span></div>
-</div>
 </div>
 
 

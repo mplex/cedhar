@@ -50,8 +50,10 @@
 <li><a class="reference internal" href="#extra-parameters">Extra parameters</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples">Examples</a><ul>
 <li><a class="reference internal" href="#installing-the-sdam-package">Installing the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package</a></li>
-<li><a class="reference internal" href="#examples">Examples</a></li>
 <li><a class="reference internal" href="#accessing-epigraphic-database-heidelberg-inscriptions">Accessing epigraphic database Heidelberg: Inscriptions</a><ul>
 <li><a class="reference internal" href="#output">Output</a><ul>
 <li><a class="reference internal" href="#people">people</a></li>
@@ -60,12 +62,12 @@
 <li><a class="reference internal" href="#check-dates">Check Dates</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#plot-results">Plot results</a><ul>
-<li><a class="reference internal" href="#treating-outliers">Treating Outliers</a></li>
-<li><a class="reference internal" href="#plot-without-outliers">Plot without outliers</a></li>
-<li><a class="reference internal" href="#other-plots">Other plots</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#plotting-the-results">Plotting the results</a><ul>
+<li><a class="reference internal" href="#treating-outliers">Treating Outliers</a></li>
+<li><a class="reference internal" href="#plotting-without-outliers">Plotting without outliers</a></li>
+<li><a class="reference internal" href="#other-plots">Other plots</a></li>
 </ul>
 </li>
 </ul>
@@ -351,6 +353,13 @@ are available in the <code class="docutils literal notranslate"><span class="pre
 </div>
 </div>
 </div>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>The examples are made with the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> <code class="docutils literal notranslate"><span class="pre">R</span></code> package.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="section" id="installing-the-sdam-package">
 <h3>Installing the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package<a class="headerlink" href="#installing-the-sdam-package" title="Permalink to this headline">¶</a></h3>
 <p>You can install the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package from these GitHub repositories using  the <code class="docutils literal notranslate"><span class="pre">R</span></code> console
@@ -368,13 +377,13 @@ you need to have this package installed as well.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
-<div class="section" id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<p>To run the examples you need to load the required libraries.</p>
+<p>Then, to run the examples you need to load the required libraries.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">library</span><span class="p">(</span><span class="s">&quot;sdam&quot;</span><span class="p">)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">require</span><span class="p">(</span><span class="s">&quot;rjson&quot;</span><span class="p">)</span>  <span class="c1"># https://cran.r-project.org/package=rjson</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 <p>The query</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s">&quot;madrid&quot;</span><span class="p">)</span>
@@ -562,8 +571,9 @@ with the <code class="docutils literal notranslate"><span class="pre">base</span
 </div>
 </div>
 </div>
-<div class="section" id="plot-results">
-<h3>Plot results<a class="headerlink" href="#plot-results" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="plotting-the-results">
+<h2>Plotting the results<a class="headerlink" href="#plotting-the-results" title="Permalink to this headline">¶</a></h2>
 <p>The plot is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package (and the <code class="docutils literal notranslate"><span class="pre">base</span></code> package if you are using R version 4.0.0).</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">EDHdtdf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
@@ -575,8 +585,11 @@ with the <code class="docutils literal notranslate"><span class="pre">base</span
 </div>
 <p>That produces:</p>
 <a class="reference internal image-reference" href="_images/EDH-times.png"><img alt="_images/EDH-times.png" src="_images/EDH-times.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="section" id="treating-outliers">
-<h4>Treating Outliers<a class="headerlink" href="#treating-outliers" title="Permalink to this headline">¶</a></h4>
+<h3>Treating Outliers<a class="headerlink" href="#treating-outliers" title="Permalink to this headline">¶</a></h3>
 <p>By looking at the above plot, we can clearly see a couple of outliers.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># first outlier is the maximum value of the dates</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdf[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">)))</span>
@@ -603,9 +616,12 @@ with the <code class="docutils literal notranslate"><span class="pre">base</span
 </pre></div>
 </div>
 <p>Years are now between 530 BC and 95 AC.</p>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
-<div class="section" id="plot-without-outliers">
-<h4>Plot without outliers<a class="headerlink" href="#plot-without-outliers" title="Permalink to this headline">¶</a></h4>
+</div>
+<div class="section" id="plotting-without-outliers">
+<h3>Plotting without outliers<a class="headerlink" href="#plotting-without-outliers" title="Permalink to this headline">¶</a></h3>
 <p>The plot is now constructed without the two outliers and with updated years.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
@@ -617,9 +633,12 @@ with the <code class="docutils literal notranslate"><span class="pre">base</span
 </div>
 <p>That produces a plot with no outliers:</p>
 <a class="reference internal image-reference" href="_images/EDH-timesNO.png"><img alt="_images/EDH-timesNO.png" src="_images/EDH-timesNO.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="other-plots">
-<h4>Other plots<a class="headerlink" href="#other-plots" title="Permalink to this headline">¶</a></h4>
+<h3>Other plots<a class="headerlink" href="#other-plots" title="Permalink to this headline">¶</a></h3>
 <p>Visualization helps to perform different kinds of analyses.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot not_after against not_before</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">,</span> <span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span>
@@ -630,7 +649,6 @@ with the <code class="docutils literal notranslate"><span class="pre">base</span
 <p>That produces:</p>
 <a class="reference internal image-reference" href="_images/EDH-BeforeAfterTimes.png"><img alt="_images/EDH-BeforeAfterTimes.png" src="_images/EDH-BeforeAfterTimes.png" style="width: 600px;" /></a>
 <p>Then we need to calculate the residuals to start a statistic analysis of dates.</p>
-</div>
 </div>
 </div>
 </div>
