@@ -1,22 +1,17 @@
 
 
-=======================
+***********************
 User Acceptance Testing
-=======================
+***********************
 
-
-User Acceptance Test or
-<span data-acronym-label="UAT" data-acronym-form="singular+short">UAT</span>
-is a type of testing performed by the Client to certify the system with
-respect to the requirements that was agreed upon. This report is to
-illustrate the application of
-<span data-acronym-label="UAT" data-acronym-form="singular+short">UAT</span>
-in developing, testing, and releasing a new or updated
+User Acceptance Test or [UTA] is a type of testing performed by the Client to certify 
+the system with respect to the requirements that was agreed upon. This report is to
+illustrate the application of [UTA] in developing, testing, and releasing a new or updated
 ``R`` package.
 
 
 User Acceptance Test for R package release
-******************************************
+==========================================
 
 In the DTAP process (development :math:`\to` test :math:`\to` acceptance :math:`\to` production),
 which is part of a software development process, the release of a new
@@ -28,8 +23,10 @@ software must conform). Of course, human testing involves machines as
 well, and this distinction is made for referring to a systematic way of
 testing.
 
+|
+
 Human testing
-^^^^^^^^^^^^^
+-------------
 
 The development of a software component on a local machine has folders
 containing a set of functions in a structure like this
@@ -63,8 +60,10 @@ there is a correspondence or not between the script codes and the
 documentation.
 
 
+|
+
 Machine testing
-^^^^^^^^^^^^^^^
+---------------
 
 ``Rtools`` allows performing a machine testing of ``R`` packages within 
 the MS Windows operating system. First the package is constructed as a 
@@ -82,9 +81,10 @@ things like whether the package can be loaded and unloaded, and
 consistencies both in the code and the documentation including meta
 data.
 
+|
 
 UAT for users in GitHub
------------------------
+=======================
 
 As with machine testing, the acceptance tests among users of the
 ``R`` package should reveal as well a
@@ -104,8 +104,10 @@ report bugs, and where ideally users should become developers of the
 package as well.
 
 
+|
+
 UAT exercise
-------------
+============
 
 1) Install the beta version of the package from GitHub plus dependencies into the R environment
 
@@ -119,3 +121,10 @@ UAT exercise
 
 A successful user acceptance test has no errors, and the user is willing
 to use the package in his/her own work.
+
+
+
+.. meta::
+   :description: Software User Acceptance Testing
+   :keywords: digital-tools, documentation, software
+

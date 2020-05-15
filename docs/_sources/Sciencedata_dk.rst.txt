@@ -2,9 +2,9 @@
 .. _DEiC-sddk:
 
 
-=====================
+*********************
 DEiC's sciencedata.dk
-=====================
+*********************
 
 
 Accessing DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_  needs another tools, 
@@ -12,22 +12,22 @@ and this is basically achieved by performing a HTTP request as a **client** to o
 DEiC's **server**.
 
 
-.. code-block:: 
-
-     `                                                                                                      `    
-     `                                                                                                      `    
-     `                                                                                                      `    
-     `                     ************        \-------|\                                                   `    
-     `                     |  CLIENT  | -->-- > request  > -->-->-->-->.                                    `    
-     `                     |  ======  |        /-------|/              |                                    `    
-     `                     ************                                .                                    `    
-     `                          `                                      |                                    `    
-     `                          ^               /|--------/       ************                              `    
-     `                          `-<--<--<--<-- <  response <  <-- |  SERVER  |                              `    
-     `                                          \|--------\       |  ======  |                              `    
-     `                                                            ************                              `    
-     `                                                                                                      `    
-     `                                                                                                      `    
+    .. code-block:: 
+    
+                                                                 
+                                                                 
+                                                                 
+         ************        \-------|\                          
+         |  CLIENT  | -->-- > request  > -->-->-->-->.           
+         |  ======  |        /-------|/              |           
+         ************                                .           
+              `                                      |           
+              ^               /|--------/       ************     
+              `-<--<--<--<-- <  response <  <-- |  SERVER  |     
+                              \|--------\       |  ======  |     
+                                                ************     
+                                                                 
+                                                                 
 
 |
 
@@ -37,7 +37,7 @@ The server's response depends on the method used in the request.
 
 
 Accessing DEiC's sciencedata.dk using R
-***************************************
+=======================================
 
 Function [`request() <https://github.com/mplex/cedhar/blob/master/code/request.r>`_] from the ``sdam`` 
 packahe is aimed to interact with DEiC's `sciencedata.dk <https://sciencedata.dk>`__  
@@ -50,8 +50,8 @@ Note that at this moment this function requires the [R] package ``"httr"``.
 
 
 
-Usage
-+++++
+Functions Usage
+---------------
 
 .. function:: request
 
@@ -79,7 +79,7 @@ Usage
 
 
 Parameters                                          
-++++++++++
+----------
 
 - `file` (object under 'method')                        
 
@@ -104,7 +104,7 @@ Parameters
 |
 
 Additional parameters                              
-+++++++++++++++++++++
+---------------------
 
 - `cred` (vector for username and password credentials) 
 
@@ -115,7 +115,7 @@ Additional parameters
 |
 
 Arguments
-+++++++++
+---------
 
 Arguments of ``request()`` are retrieved with the ``formals()`` function. 
 
@@ -146,14 +146,18 @@ Arguments of ``request()`` are retrieved with the ``formals()`` function.
 |
 
 Output
-++++++
+------
 
 The output is the server's response that depends on the method to be used in the request. 
+
+A ``Response`` message is returned when the method is ``PUT`` with the url and items 
+``Date``, ``Status``, ``Content-Type``.
+
 
 |
 
 Details
-+++++++
+-------
 
 There are two types of folders in DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ that are *personal* 
 and *shared* folders and both requires authentication with credentials. 
@@ -172,29 +176,17 @@ That is, an [R] code will be like
     R> request("file", path="/path")
 
 
-Many times, DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ places the data on a *subdomain*, and 
-for some methods like ``PUT`` it is required to specify the suddomain as well.
+Many times, DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ places the data on a *subdomain*, and for some methods like ``PUT`` it is required to specify the suddomain as well.
 
 
 
 |
 
 Authentification
-++++++++++++++++
+================
 
 In case that accessing the server requires basic authentification, 
 then package ``"tcltk"`` may be needed as well to input the credentials with a widget prompt. 
-
-It is possible to prevent the widget by recording this information in a vector object. 
-If you want to avoid a dialog box then save your credentials.
-
-.. code-block:: R
-
-    # user credentials
-    R> cred <- c("YOUR-AUID@au.dk", "YOURPASSWORD")
-
-
-
 ``request()`` has the ``cred`` argument for performing a basic authentification.
 
 
@@ -203,15 +195,35 @@ need some sort of authentication. With the basic authentication, the credentials
 **with the username and password used under your personal** 'sciencedata.dk' **settings**.
 
 
+    .. hint::
+    
+        It is possible to prevent the widget by recording this information in a vector object. 
+        If you want to avoid a dialog box then save your credentials.
+        
+        .. code-block:: R
+        
+            # user credentials
+            R> cred <- c("YOUR-AUID@au.dk", "YOURPASSWORD")
+
+
+
+
 |
 
 
 Responses
-+++++++++
+=========
 
 Server responses carry a code called *HTTP status code* where ``2xx`` means **success**, 
 and ``4xx`` means **client error**. There is also a status code like ``5xx`` for server 
 error, and ``3xx`` for redirection (and where codes ``1xx`` are just informative).
+
+    .. todo:: 
+    
+        Typical staus codes in the response are ``404``, ``201``, ``307``...
+
+
+
 
 When using the ``request()`` function, the HTTP status code is given under ``Status`` in the 
 response message below the time stamp.  
@@ -223,7 +235,7 @@ response message below the time stamp.
 
 
 Examples
-********
+========
 
 
 Some examples of HTTP requests are given next where reponse messages in some cases are given 
@@ -235,13 +247,12 @@ afterwards.
 
     
 Method GET 
-++++++++++
+----------
     
 This method is for accessing the files with the data.
     
 
 .. code-block:: R
-    
     
     # for personal data (in case you have this file)
     R> request("df.json", cred=cred)
@@ -249,22 +260,27 @@ This method is for accessing the files with the data.
     #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
     
     
+.. code-block:: R
     
     # for shared folders (example Vojtech test folder), where both options work
     R> request("df.json", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="GET", cred=cred)
 
     #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
 
+
+
+|
+
+    .. note:: 
     
-    
-    
-If there is any error, then the HTTP status code with the ``GET`` method is ``200`` or OK but it is not returned. 
+        If there is any error, then the HTTP status code with the ``GET`` method 
+        is ``200`` or OK but it is not returned. 
 
 
 |
     
 Method PUT
-++++++++++
+----------
     
 The URL typically includes also a *subdomain* that for DEiC's `sciencedata.dk <https://sciencedata.dk>`__ 
 is named ``silo`` followed by a number. For instance, my personal documents are located in ``silo1.sciencedata.dk``, 
@@ -276,7 +292,6 @@ temporary redirect.
 .. code-block:: R
 
     # for personal data (in my case) I need to specify the subdomain; otherwise it gets redirected!
-    
     R> request(system.file("CITATION"), method="PUT", cred=cred)
 
     # Response [https://sciencedata.dk/files/CITATION]
@@ -285,7 +300,13 @@ temporary redirect.
     #  Content-Type: text/html; charset=UTF-8
     #<EMPTY BODY>
     
-    # (my data is in subdomain "silo1")
+
+The HTTP status code ``307`` means temporary redirect. 
+
+
+.. code-block:: R
+    
+    # my data is in subdomain "silo1"
     R> request(system.file("CITATION"), method="PUT", cred=cred, subdomain="silo1")
 
     # Response [https://silo1.sciencedata.dk/files/CITATION]
@@ -295,9 +316,15 @@ temporary redirect.
     #<EMPTY BODY>
     
 
+The HTTP status code ``201`` means that the file was created in the server side. 
+
+
+``PUT`` in a sharing folder
+"""""""""""""""""""""""""""
+
+.. code-block:: R
     
-    # the PUT method for a shared folder (example Vojtech test folder) needs 'sharingout' in the path;
-    # otherwise it gets redirected
+    # (example Vojtech test folder) 
     
     R> request(system.file("CITATION"), path="sharingin/648597@au.dk/TEST_shared_folder", 
     +    method="PUT", cred=cred)
@@ -309,6 +336,7 @@ temporary redirect.
     #<EMPTY BODY>
     
     
+    
     R> request(system.file("CITATION"), path="sharingout/648597@au.dk/TEST_shared_folder", 
     +    method="PUT", cred=cred)
 
@@ -318,18 +346,20 @@ temporary redirect.
     #  Content-Type: text/html; charset=UTF-8
     #<EMPTY BODY>
 
-    
+Hence, the ``PUT`` method for a shared folder needs ``'sharingout'`` in the path; 
+otherwise it gets redirected.
 
+
+    .. note:: 
     
-The HTTP status code ``201`` means that the file was created in the server side, and ``@`` in the 
-path was "escaped" as ``%40``. 
+        In some cases, the metacharacter ``@`` in the path is "escaped" as ``%40``. 
 
 
     
 |
 
 Method DELETE
-+++++++++++++
+-------------
 
 In the case of accesing with a request using methods ``GET`` or ``PUT``, 
 the path in the url is followed by ``sharingin/userid/foldername``, 
@@ -346,6 +376,7 @@ and for ``DELETE`` the *response* is given with ``sharingout`` in the path.
     #[1] "https://silo1.sciencedata.dk/files/df.json"
     
     
+.. code-block:: R
     
     # for shared folders (example Vojtech test folder)
     R> request("CITATION", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="DELETE", cred=cred)
@@ -358,17 +389,31 @@ and for ``DELETE`` the *response* is given with ``sharingout`` in the path.
 |
 
 Method POST
-+++++++++++
+-----------
 
 
 Finally, there is also the possibility to *place* files with the ``POST`` method. 
-However, this is not yet implemented in `sciencedata.dk <https://sciencedata.dk>`__
 
 
 .. code-block:: R
     
-    # NOT YET IMPLEMENTED IN sciencedata.dk
+    R> request(FILE, URL, method="POST")
+
+Typically with a ``path`` argument and ``subdomain`` if required. 
+
+
+    .. note:: 
+    
+        Method ``POST`` is not yet implemented in `sciencedata.dk <https://sciencedata.dk>`__
+
+
+.. However, this is not yet implemented in `sciencedata.dk <https://sciencedata.dk>`__
+
 
 
 |
 
+
+.. meta::
+   :description: Accessing DEiC's sciencedata.dk and other HTTP Requests
+   :keywords: HTTP-request, documentation, cloud-computing

@@ -3,7 +3,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /><meta content="Accessing DEiC's sciencedata.dk and other HTTP Requests" name="description" />
+<meta content="HTTP-request, documentation, cloud-computing" name="keywords" />
+
     <title>DEiC’s sciencedata.dk &#8212; cedhar 0.0.2 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -42,19 +44,22 @@
   <ul>
 <li><a class="reference internal" href="#">DEiC’s sciencedata.dk</a><ul>
 <li><a class="reference internal" href="#accessing-deic-s-sciencedata-dk-using-r">Accessing DEiC’s sciencedata.dk using R</a><ul>
-<li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#functions-usage">Functions Usage</a></li>
 <li><a class="reference internal" href="#parameters">Parameters</a></li>
 <li><a class="reference internal" href="#additional-parameters">Additional parameters</a></li>
 <li><a class="reference internal" href="#arguments">Arguments</a></li>
 <li><a class="reference internal" href="#output">Output</a></li>
 <li><a class="reference internal" href="#details">Details</a></li>
-<li><a class="reference internal" href="#authentification">Authentification</a></li>
-<li><a class="reference internal" href="#responses">Responses</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#authentification">Authentification</a></li>
+<li><a class="reference internal" href="#responses">Responses</a></li>
 <li><a class="reference internal" href="#examples">Examples</a><ul>
 <li><a class="reference internal" href="#method-get">Method GET</a></li>
-<li><a class="reference internal" href="#method-put">Method PUT</a></li>
+<li><a class="reference internal" href="#method-put">Method PUT</a><ul>
+<li><a class="reference internal" href="#put-in-a-sharing-folder"><code class="docutils literal notranslate"><span class="pre">PUT</span></code> in a sharing folder</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#method-delete">Method DELETE</a></li>
 <li><a class="reference internal" href="#method-post">Method POST</a></li>
 </ul>
@@ -99,22 +104,19 @@
 <p>Accessing DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a>  needs another tools,
 and this is basically achieved by performing a HTTP request as a <strong>client</strong> to one of
 DEiC’s <strong>server</strong>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>`                                                                                                      `
-`                                                                                                      `
-`                                                                                                      `
-`                     ************        \-------|\                                                   `
-`                     |  CLIENT  | --&gt;-- &gt; request  &gt; --&gt;--&gt;--&gt;--&gt;.                                    `
-`                     |  ======  |        /-------|/              |                                    `
-`                     ************                                .                                    `
-`                          `                                      |                                    `
-`                          ^               /|--------/       ************                              `
-`                          `-&lt;--&lt;--&lt;--&lt;-- &lt;  response &lt;  &lt;-- |  SERVER  |                              `
-`                                          \|--------\       |  ======  |                              `
-`                                                            ************                              `
-`                                                                                                      `
-`                                                                                                      `
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>************        \-------|\
+|  CLIENT  | --&gt;-- &gt; request  &gt; --&gt;--&gt;--&gt;--&gt;.
+|  ======  |        /-------|/              |
+************                                .
+     `                                      |
+     ^               /|--------/       ************
+     `-&lt;--&lt;--&lt;--&lt;-- &lt;  response &lt;  &lt;-- |  SERVER  |
+                     \|--------\       |  ======  |
+                                       ************
 </pre></div>
 </div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -127,8 +129,8 @@ DEiC’s <strong>server</strong>.</p>
 <p>Function [<a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/request.r">request()</a>] from the <code class="docutils literal notranslate"><span class="pre">sdam</span></code>
 packahe is aimed to interact with DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
 <p>Note that at this moment this function requires the [R] package <code class="docutils literal notranslate"><span class="pre">&quot;httr&quot;</span></code>.</p>
-<div class="section" id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="functions-usage">
+<h3>Functions Usage<a class="headerlink" href="#functions-usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt>
 <code class="sig-name descname">request</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
@@ -217,6 +219,8 @@ packahe is aimed to interact with DEiC’s <a class="reference external" href="h
 <div class="section" id="output">
 <h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <p>The output is the server’s response that depends on the method to be used in the request.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Response</span></code> message is returned when the method is <code class="docutils literal notranslate"><span class="pre">PUT</span></code> with the url and items
+<code class="docutils literal notranslate"><span class="pre">Date</span></code>, <code class="docutils literal notranslate"><span class="pre">Status</span></code>, <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -235,40 +239,50 @@ However, for personal folders is the <code class="docutils literal notranslate">
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/path&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Many times, DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> places the data on a <em>subdomain</em>, and
-for some methods like <code class="docutils literal notranslate"><span class="pre">PUT</span></code> it is required to specify the suddomain as well.</p>
+<p>Many times, DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> places the data on a <em>subdomain</em>, and for some methods like <code class="docutils literal notranslate"><span class="pre">PUT</span></code> it is required to specify the suddomain as well.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </div>
+</div>
 <div class="section" id="authentification">
-<h3>Authentification<a class="headerlink" href="#authentification" title="Permalink to this headline">¶</a></h3>
+<h2>Authentification<a class="headerlink" href="#authentification" title="Permalink to this headline">¶</a></h2>
 <p>In case that accessing the server requires basic authentification,
-then package <code class="docutils literal notranslate"><span class="pre">&quot;tcltk&quot;</span></code> may be needed as well to input the credentials with a widget prompt.</p>
+then package <code class="docutils literal notranslate"><span class="pre">&quot;tcltk&quot;</span></code> may be needed as well to input the credentials with a widget prompt.
+<code class="docutils literal notranslate"><span class="pre">request()</span></code> has the <code class="docutils literal notranslate"><span class="pre">cred</span></code> argument for performing a basic authentification.</p>
+<p>In DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a>, both personal and shared folders
+need some sort of authentication. With the basic authentication, the credentials are given
+<strong>with the username and password used under your personal</strong> ‘sciencedata.dk’ <strong>settings</strong>.</p>
+<blockquote>
+<div><div class="admonition hint">
+<p class="admonition-title">Hint</p>
 <p>It is possible to prevent the widget by recording this information in a vector object.
 If you want to avoid a dialog box then save your credentials.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># user credentials</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">cred</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;YOUR-AUID@au.dk&quot;</span><span class="p">,</span> <span class="s">&quot;YOURPASSWORD&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">request()</span></code> has the <code class="docutils literal notranslate"><span class="pre">cred</span></code> argument for performing a basic authentification.</p>
-<p>In DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a>, both personal and shared folders
-need some sort of authentication. With the basic authentication, the credentials are given
-<strong>with the username and password used under your personal</strong> ‘sciencedata.dk’ <strong>settings</strong>.</p>
+</div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="responses">
-<h3>Responses<a class="headerlink" href="#responses" title="Permalink to this headline">¶</a></h3>
+<h2>Responses<a class="headerlink" href="#responses" title="Permalink to this headline">¶</a></h2>
 <p>Server responses carry a code called <em>HTTP status code</em> where <code class="docutils literal notranslate"><span class="pre">2xx</span></code> means <strong>success</strong>,
 and <code class="docutils literal notranslate"><span class="pre">4xx</span></code> means <strong>client error</strong>. There is also a status code like <code class="docutils literal notranslate"><span class="pre">5xx</span></code> for server
 error, and <code class="docutils literal notranslate"><span class="pre">3xx</span></code> for redirection (and where codes <code class="docutils literal notranslate"><span class="pre">1xx</span></code> are just informative).</p>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id4">
+<p class="admonition-title">Todo</p>
+<p>Typical staus codes in the response are <code class="docutils literal notranslate"><span class="pre">404</span></code>, <code class="docutils literal notranslate"><span class="pre">201</span></code>, <code class="docutils literal notranslate"><span class="pre">307</span></code>…</p>
+</div>
+</div></blockquote>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">request()</span></code> function, the HTTP status code is given under <code class="docutils literal notranslate"><span class="pre">Status</span></code> in the
 response message below the time stamp.</p>
 <div class="line-block">
 <div class="line"><br /></div>
-</div>
 </div>
 </div>
 <div class="section" id="examples">
@@ -285,16 +299,24 @@ afterwards.</p>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
 
 <span class="c1">#[1] {&quot;a&quot;:{&quot;0&quot;:&quot;a1&quot;,&quot;1&quot;:&quot;a2&quot;},&quot;b&quot;:{&quot;0&quot;:&quot;b1&quot;,&quot;1&quot;:&quot;b2&quot;},&quot;c&quot;:{&quot;0&quot;:&quot;c1&quot;,&quot;1&quot;:&quot;c2&quot;}}</span>
-
-
-
-<span class="c1"># for shared folders (example Vojtech test folder), where both options work</span>
+</pre></div>
+</div>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for shared folders (example Vojtech test folder), where both options work</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/sharingin/648597@au.dk/TEST_shared_folder/&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
 
 <span class="c1">#[1] {&quot;a&quot;:{&quot;0&quot;:&quot;a1&quot;,&quot;1&quot;:&quot;a2&quot;},&quot;b&quot;:{&quot;0&quot;:&quot;b1&quot;,&quot;1&quot;:&quot;b2&quot;},&quot;c&quot;:{&quot;0&quot;:&quot;c1&quot;,&quot;1&quot;:&quot;c2&quot;}}</span>
 </pre></div>
 </div>
-<p>If there is any error, then the HTTP status code with the <code class="docutils literal notranslate"><span class="pre">GET</span></code> method is <code class="docutils literal notranslate"><span class="pre">200</span></code> or OK but it is not returned.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there is any error, then the HTTP status code with the <code class="docutils literal notranslate"><span class="pre">GET</span></code> method
+is <code class="docutils literal notranslate"><span class="pre">200</span></code> or OK but it is not returned.</p>
+</div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -307,7 +329,6 @@ and other users that will follow are probably located at <code class="docutils l
 For method <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, the subdomain is mandatory; otherwise the request is redirected with <code class="docutils literal notranslate"><span class="pre">Status:</span> <span class="pre">307</span></code> that is
 temporary redirect.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for personal data (in my case) I need to specify the subdomain; otherwise it gets redirected!</span>
-
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
 
 <span class="c1"># Response [https://sciencedata.dk/files/CITATION]</span>
@@ -315,8 +336,10 @@ temporary redirect.</p>
 <span class="c1">#  Status: 307</span>
 <span class="c1">#  Content-Type: text/html; charset=UTF-8</span>
 <span class="c1">#&lt;EMPTY BODY&gt;</span>
-
-<span class="c1"># (my data is in subdomain &quot;silo1&quot;)</span>
+</pre></div>
+</div>
+<p>The HTTP status code <code class="docutils literal notranslate"><span class="pre">307</span></code> means temporary redirect.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># my data is in subdomain &quot;silo1&quot;</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">,</span> <span class="n">subdomain</span><span class="o">=</span><span class="s">&quot;silo1&quot;</span><span class="p">)</span>
 
 <span class="c1"># Response [https://silo1.sciencedata.dk/files/CITATION]</span>
@@ -324,11 +347,12 @@ temporary redirect.</p>
 <span class="c1">#  Status: 201</span>
 <span class="c1">#  Content-Type: text/html; charset=UTF-8</span>
 <span class="c1">#&lt;EMPTY BODY&gt;</span>
-
-
-
-<span class="c1"># the PUT method for a shared folder (example Vojtech test folder) needs &#39;sharingout&#39; in the path;</span>
-<span class="c1"># otherwise it gets redirected</span>
+</pre></div>
+</div>
+<p>The HTTP status code <code class="docutils literal notranslate"><span class="pre">201</span></code> means that the file was created in the server side.</p>
+<div class="section" id="put-in-a-sharing-folder">
+<h4><code class="docutils literal notranslate"><span class="pre">PUT</span></code> in a sharing folder<a class="headerlink" href="#put-in-a-sharing-folder" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># (example Vojtech test folder)</span>
 
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;sharingin/648597@au.dk/TEST_shared_folder&quot;</span><span class="p">,</span>
 <span class="o">+</span>    <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
@@ -338,6 +362,7 @@ temporary redirect.</p>
 <span class="c1">#  Status: 307</span>
 <span class="c1">#  Content-Type: text/html; charset=UTF-8</span>
 <span class="c1">#&lt;EMPTY BODY&gt;</span>
+
 
 
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;sharingout/648597@au.dk/TEST_shared_folder&quot;</span><span class="p">,</span>
@@ -350,10 +375,17 @@ temporary redirect.</p>
 <span class="c1">#&lt;EMPTY BODY&gt;</span>
 </pre></div>
 </div>
-<p>The HTTP status code <code class="docutils literal notranslate"><span class="pre">201</span></code> means that the file was created in the server side, and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> in the
-path was “escaped” as <code class="docutils literal notranslate"><span class="pre">%40</span></code>.</p>
+<p>Hence, the <code class="docutils literal notranslate"><span class="pre">PUT</span></code> method for a shared folder needs <code class="docutils literal notranslate"><span class="pre">'sharingout'</span></code> in the path;
+otherwise it gets redirected.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In some cases, the metacharacter <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> in the path is “escaped” as <code class="docutils literal notranslate"><span class="pre">%40</span></code>.</p>
+</div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
+</div>
 </div>
 </div>
 <div class="section" id="method-delete">
@@ -366,10 +398,9 @@ and for <code class="docutils literal notranslate"><span class="pre">DELETE</spa
 
 <span class="c1"># In my case, this is in</span>
 <span class="c1">#[1] &quot;https://silo1.sciencedata.dk/files/df.json&quot;</span>
-
-
-
-<span class="c1"># for shared folders (example Vojtech test folder)</span>
+</pre></div>
+</div>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for shared folders (example Vojtech test folder)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/sharingin/648597@au.dk/TEST_shared_folder/&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
 
 <span class="c1">#[[1]]</span>
@@ -382,11 +413,17 @@ and for <code class="docutils literal notranslate"><span class="pre">DELETE</spa
 </div>
 <div class="section" id="method-post">
 <h3>Method POST<a class="headerlink" href="#method-post" title="Permalink to this headline">¶</a></h3>
-<p>Finally, there is also the possibility to <em>place</em> files with the <code class="docutils literal notranslate"><span class="pre">POST</span></code> method.
-However, this is not yet implemented in <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># NOT YET IMPLEMENTED IN sciencedata.dk</span>
+<p>Finally, there is also the possibility to <em>place</em> files with the <code class="docutils literal notranslate"><span class="pre">POST</span></code> method.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="n">URL</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>Typically with a <code class="docutils literal notranslate"><span class="pre">path</span></code> argument and <code class="docutils literal notranslate"><span class="pre">subdomain</span></code> if required.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Method <code class="docutils literal notranslate"><span class="pre">POST</span></code> is not yet implemented in <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
+</div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>

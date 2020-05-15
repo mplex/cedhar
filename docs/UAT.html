@@ -3,7 +3,9 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /><meta content="Software User Acceptance Testing" name="description" />
+<meta content="digital-tools, documentation, software" name="keywords" />
+
     <title>User Acceptance Testing &#8212; cedhar 0.0.2 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -16,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Epigraphic Database Heidelberg" href="Epigraphic.html" />
-    <link rel="prev" title="Digital Humanities" href="DDHH.html" /> 
+    <link rel="prev" title="Tools for Humanities and Social Sciences – HASS" href="HASS.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,7 +30,7 @@
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="DDHH.html" title="Digital Humanities"
+          <a href="HASS.html" title="Tools for Humanities and Social Sciences – HASS"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>
@@ -43,20 +45,18 @@
 <li><a class="reference internal" href="#">User Acceptance Testing</a><ul>
 <li><a class="reference internal" href="#user-acceptance-test-for-r-package-release">User Acceptance Test for R package release</a><ul>
 <li><a class="reference internal" href="#human-testing">Human testing</a></li>
-<li><a class="reference internal" href="#machine-testing">Machine testing</a><ul>
+<li><a class="reference internal" href="#machine-testing">Machine testing</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#uat-for-users-in-github">UAT for users in GitHub</a></li>
 <li><a class="reference internal" href="#uat-exercise">UAT exercise</a></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="DDHH.html"
-                        title="previous chapter">Digital Humanities</a></p>
+  <p class="topless"><a href="HASS.html"
+                        title="previous chapter">Tools for Humanities and Social Sciences – HASS</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="Epigraphic.html"
                         title="next chapter">Epigraphic Database Heidelberg</a></p>
@@ -87,13 +87,9 @@
             
   <div class="section" id="user-acceptance-testing">
 <h1>User Acceptance Testing<a class="headerlink" href="#user-acceptance-testing" title="Permalink to this headline">¶</a></h1>
-<p>User Acceptance Test or
-&lt;span data-acronym-label=”UAT” data-acronym-form=”singular+short”&gt;UAT&lt;/span&gt;
-is a type of testing performed by the Client to certify the system with
-respect to the requirements that was agreed upon. This report is to
-illustrate the application of
-&lt;span data-acronym-label=”UAT” data-acronym-form=”singular+short”&gt;UAT&lt;/span&gt;
-in developing, testing, and releasing a new or updated
+<p>User Acceptance Test or [UTA] is a type of testing performed by the Client to certify
+the system with respect to the requirements that was agreed upon. This report is to
+illustrate the application of [UTA] in developing, testing, and releasing a new or updated
 <code class="docutils literal notranslate"><span class="pre">R</span></code> package.</p>
 <div class="section" id="user-acceptance-test-for-r-package-release">
 <h2>User Acceptance Test for R package release<a class="headerlink" href="#user-acceptance-test-for-r-package-release" title="Permalink to this headline">¶</a></h2>
@@ -106,6 +102,9 @@ step where the deployment needs to meet certain requirements. The
 software must conform). Of course, human testing involves machines as
 well, and this distinction is made for referring to a systematic way of
 testing.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="section" id="human-testing">
 <h3>Human testing<a class="headerlink" href="#human-testing" title="Permalink to this headline">¶</a></h3>
 <p>The development of a software component on a local machine has folders
@@ -133,6 +132,9 @@ with files in a Latex format that conform the manual. The machine
 testing, which comes afterwards, will check among other things whether
 there is a correspondence or not between the script codes and the
 documentation.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="machine-testing">
 <h3>Machine testing<a class="headerlink" href="#machine-testing" title="Permalink to this headline">¶</a></h3>
@@ -150,8 +152,13 @@ basic information about the package. Then there is also a testing of
 things like whether the package can be loaded and unloaded, and
 consistencies both in the code and the documentation including meta
 data.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
 <div class="section" id="uat-for-users-in-github">
-<h4>UAT for users in GitHub<a class="headerlink" href="#uat-for-users-in-github" title="Permalink to this headline">¶</a></h4>
+<h2>UAT for users in GitHub<a class="headerlink" href="#uat-for-users-in-github" title="Permalink to this headline">¶</a></h2>
 <p>As with machine testing, the acceptance tests among users of the
 <code class="docutils literal notranslate"><span class="pre">R</span></code> package should reveal as well a
 straightforward yes/no or pass/fail results. This means that the user
@@ -166,9 +173,12 @@ such as periodical reflection and implementation for others.</p>
 disaster recovery. In many cases GitHub is the place where the users
 report bugs, and where ideally users should become developers of the
 package as well.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="uat-exercise">
-<h4>UAT exercise<a class="headerlink" href="#uat-exercise" title="Permalink to this headline">¶</a></h4>
+<h2>UAT exercise<a class="headerlink" href="#uat-exercise" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Install the beta version of the package from GitHub plus dependencies into the R environment</p></li>
 <li><p>Load the package and run the scripts of the <cite>README.md</cite> file</p></li>
@@ -182,8 +192,6 @@ package as well.</p>
 </div></blockquote>
 <p>A successful user acceptance test has no errors, and the user is willing
 to use the package in his/her own work.</p>
-</div>
-</div>
 </div>
 </div>
 
@@ -203,7 +211,7 @@ to use the package in his/her own work.</p>
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              >next</a> |</li>
         <li class="right" >
-          <a href="DDHH.html" title="Digital Humanities"
+          <a href="HASS.html" title="Tools for Humanities and Social Sciences – HASS"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
       </ul>

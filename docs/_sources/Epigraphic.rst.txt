@@ -2,9 +2,9 @@
 .. _EDH:
 
 
-==============================
+******************************
 Epigraphic Database Heidelberg
-==============================
+******************************
 
 .. ---
 .. layout: post
@@ -26,6 +26,10 @@ Database Heidelberg website was launched at
 <https:/edh-www.adw.uni-heidelberg.de> where inscriptions, images,
 bibliographic and geographic records can be searched and browsed online.
 
+
+Open Data Repository
+====================
+
 Despite the possibility of accessing the [EDH] database through a Web browser, it is
 many times convenient to get the Open Data Repository by the
 [EDH] through its
@@ -34,9 +38,17 @@ public Application Programming Interface (API).
 For inscriptions, the generic search pattern Uniform Resource Identifier
 (URI) is:
 
+..  code-block:: 
+    
     https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&par_2=value&par_n=value
 
 with parameters `par` :math:`1,2,...n`.
+
+
+|
+
+Response
+========
 
 The response from a query is in a Java Script Object Notation or JSON format such as:
 
@@ -48,7 +60,7 @@ The response from a query is in a Java Script Object Notation or JSON format suc
        "items" : [ ... ]
     }
 
-(see :ref:`"JSON structure" in Digital Humanities <json-str>`)
+* (see :ref:`"JSON structure" in Digital Humanities <json-str>`)
 
 In this case, ``"items"`` has an array as a value where the returned records are located. The ``"total"`` 
 and ``"limit"`` values correspond to the *total* number of records of the query, and the *limit* number is 
@@ -60,13 +72,13 @@ the amount of records to appear in the browser after the query.
 
 
 Accessing the EDH database using R
-**********************************
+==================================
 
-Accessing the [EDH] database [API] using [R] is possible with a convenient function that produces
-the generic search pattern [URI]. Hence, the function [`get.edh() <https://github.com/mplex/cedhar/blob/master/pkg/sdam/R/get.edh.R>`_] 
-allows having access to the data with the available parameters that are
-recorded as arguments. Then the returned [JSON] file is converted into a list data object
-with function ``fromJSON()`` from the ``rjson`` package.
+Accessing the [EDH] database [API] using ``R`` is possible with a convenient function that produces
+the generic search pattern [URI]. Hence, the function ``get.edh()`` from the ``sdam`` package allows 
+having access to the data with the available parameters that are recorded as arguments. Then the 
+returned [JSON] file is converted into a list data object with function ``fromJSON()`` from the 
+``rjson`` package. 
 
 Currently, function ``get.edh()`` allows getting data with the ``search`` parameter 
 either from ``"inscriptions"`` (the default option) or else from ``"geography"``. 
@@ -74,8 +86,14 @@ The other two search options from the [EDH] database [API], which are ``"photos"
 and ``"bibliography"``, may be implemented in the future in this function. 
 
 
-Usage
-+++++
+* (see :ref:`The "sdam" package <sdam-pkg>`)
+
+
+|
+
+
+Functions Usage
+---------------
 
 .. function:: get.edh
 
@@ -84,13 +102,10 @@ Usage
     # arguments supported (currently)
     R> get.edh(search = c("inscriptions", "geography")
               , url = "https://edh-www.adw.uni-heidelberg.de/data/api"
-              , hd_nr, province, country, findspot_modern, findspot_ancient
-              , year_not_before, year_not_after, tm_nr, transcription, type
-              , bbox, findspot, pleiades_id, geonames_id, offset, limit
-              , addID, printQ)
-
-
-*NB:* ``R>`` at the beginning of the line means that the following code is written in ``R``. Comments are preceded by ``#``. 
+              , hd_nr, province, country, findspot_modern
+              , findspot_ancient, year_not_before, year_not_after
+              , tm_nr, transcription, type, bbox, findspot, pleiades_id
+              , geonames_id, offset, limit, addID, printQ)
 
 
 |
@@ -103,14 +118,21 @@ Usage
     # a wrapper function for several queries
     R> get.edhw(hd_nr, ...)
 
-Note that function ``get.edw()`` works only for inscriptions. 
+Currently, function ``get.edw()`` works only for inscriptions. 
 
+
+|
+
+    .. note:: 
+    
+        "``R>``" at the beginning of the line means that the following code is 
+        written in ``R``. Comments are preceded by "``#``". 
 
 |
 
 
 Search parameters
-+++++++++++++++++
+-----------------
 
 The following parameter description is from
 <https://edh-www.adw.uni-heidelberg.de/data/api>:
@@ -156,14 +178,17 @@ Inscriptions and Geography
     example:
     ``<https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48>``
 
-Just make sure to quote the arguments in `get.edh()` for the different
-parameters that are not integers. This means for example that the query
-for the last parameter with the two search options is written as
 
-.. code-block:: R
-
-    R> get.edh(search="inscriptions", bbox="11,47,12,48")
-    R> get.edh(search="geography", bbox="11,47,12,48")
+    .. hint::
+    
+        Just make sure to quote the arguments in ``get.edh()`` for the different
+        parameters that are not integers. This means for example that the query
+        for the last parameter with the two search options is written as
+        
+        .. code-block:: R
+        
+            R> get.edh(search="inscriptions", bbox="11,47,12,48")
+            R> get.edh(search="geography", bbox="11,47,12,48")
 
 
 |
@@ -247,6 +272,15 @@ Extra parameters
 The two functions we have seen so far, ``get.edh()`` and ``get.edhw()``, 
 are available in the ``sdam`` package.
 
+|
+
+    .. seealso:: 
+    
+        * :ref:`Installing the "sdam" package <sdam-inst>`. 
+
+
+..    * :ref:`The "sdam" package <sdam-inst>`
+
 
 
 |
@@ -255,27 +289,10 @@ are available in the ``sdam`` package.
 
 
 Examples
-********
+========
 
 The examples are made with the ``sdam`` ``R`` package. 
 
-|
-
-
-Installing the ``sdam`` package
-+++++++++++++++++++++++++++++++
-
-
-You can install the ``sdam`` package from these GitHub repositories using  the ``R`` console 
-or RStudio if you wish.
-
-.. code-block:: R
-
-    R> devtools::install_github("mplex/cedhar", subdir="pkg/sdam")
-
-    R> devtools::install_github("sdam-au/sdam")
-
-|
 
 Since  the ``get.edh()`` function needs to transform JSON output using ``rjson::fromJSON()``,
 you need to have this package installed as well. 
@@ -355,7 +372,7 @@ handled with similar arguments in the ``get.edh()`` function ...
 
 
 Accessing epigraphic database Heidelberg: Inscriptions
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+------------------------------------------------------
 
 To study temporary uncertainty, for example, we need to access to an epigraphic database like the Heidelberg. 
 The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelberg number ``hd_nr``.
@@ -398,6 +415,7 @@ The output depends on each particular case.
     R> is(EDH)
     #[1] "list"   "vector"
 
+|
 
 The first record has 28 `attribute` names
 
@@ -405,14 +423,19 @@ The first record has 28 `attribute` names
 
     # check variable names of first entry
     R> attr(EDH[[1]], "names")
-    # [1] "ID"                     "commentary"             "country"                "depth"                 
-    # [5] "diplomatic_text"        "edh_geography_uri"      "findspot_ancient"       "findspot_modern"       
-    # [9] "height"                 "id"                     "language"               "last_update"           
-    #[13] "letter_size"            "literature"             "material"               "modern_region"         
-    #[17] "not_after"              "not_before"             "people"                 "province_label"        
-    #[21] "responsible_individual" "transcription"          "trismegistos_uri"       "type_of_inscription"   
-    #[25] "type_of_monument"       "uri"                    "width"                  "work_status"
+    # [1] "ID"                     "commentary"             "country"               
+    # [4] "depth"                  "diplomatic_text"        "edh_geography_uri"     
+    # [7] "findspot_ancient"       "findspot_modern"        "height"                
+    #[10] "id"                     "language"               "last_update"           
+    #[13] "letter_size"            "literature"             "material"              
+    #[16] "modern_region"          "not_after"              "not_before"            
+    #[19] "people"                 "province_label"         "responsible_individual"
+    #[22] "transcription"          "trismegistos_uri"       "type_of_inscription"   
+    #[25] "type_of_monument"       "uri"                    "width"                 
+    #[28] "work_status"
 
+
+|
 
 While record 21 has 34 items.
 
@@ -420,24 +443,29 @@ While record 21 has 34 items.
 .. code-block:: R
 
     R> attr(EDH[[21]], "names")
-    # [1] "ID"                            "commentary"                    "country"                      
-    # [4] "depth"                         "diplomatic_text"               "edh_geography_uri"            
-    # [7] "findspot"                      "findspot_ancient"              "findspot_modern"              
-    #[10] "geography"                     "height"                        "id"                           
-    #[13] "language"                      "last_update"                   "letter_size"                  
-    #[16] "literature"                    "material"                      "military"                     
-    #[19] "modern_region"                 "not_after"                     "not_before"                   
-    #[22] "people"                        "present_location"              "province_label"               
-    #[25] "responsible_individual"        "social_economic_legal_history" "transcription"                
-    #[28] "trismegistos_uri"              "type_of_inscription"           "type_of_monument"             
-    #[31] "uri"                           "width"                         "work_status"                  
-    #[34] "year_of_find"
+    # [1] "ID"                            "commentary"                   
+    # [3] "country"                       "depth"                        
+    # [5] "diplomatic_text"               "edh_geography_uri"            
+    # [7] "findspot"                      "findspot_ancient"             
+    # [9] "findspot_modern"               "geography"                    
+    #[11] "height"                        "id"                           
+    #[13] "language"                      "last_update"                  
+    #[15] "letter_size"                   "literature"                   
+    #[17] "material"                      "military"                     
+    #[19] "modern_region"                 "not_after"                    
+    #[21] "not_before"                    "people"                       
+    #[23] "present_location"              "province_label"               
+    #[25] "responsible_individual"        "social_economic_legal_history"
+    #[27] "transcription"                 "trismegistos_uri"             
+    #[29] "type_of_inscription"           "type_of_monument"             
+    #[31] "uri"                           "width"                        
+    #[33] "work_status"                   "year_of_find"
 
 
-
+|
 
 people
-======
+""""""
 
 Attribute ``people`` is another list with other `attribute` names
 
@@ -480,7 +508,7 @@ with the ``base`` ``lapply`` function
 .. code-block:: R
 
     # recursively apply a function over the list for three variables
-    R> EDHdates <- lapply(EDH, function (x) x[c("ID", "not_after", "not_before")])
+    R> EDHdates <- lapply(EDH, `[`, c("ID", "not_after", "not_before") )
     
     # look at it
     R> head(EDHdates, 1)
@@ -495,6 +523,22 @@ with the ``base`` ``lapply`` function
     #[1] "0071"
 
 
+``EDHdates`` is a new list object with the three items. 
+
+|
+
+    .. note::    
+    
+        A pair of backquotes (aka "backticks") is a way to refer in ``R`` to names or combinations 
+        of symbols that are otherwise reserved or illegal or *non-syntactic names*. 
+        Hence, e.g. ``apply(foo, `[`, c(...) )`` is the same as ``apply(foo, function (x) x[c(...)])``.
+
+|
+
+
+missing data
+^^^^^^^^^^^^
+
 
 .. code-block:: R
 
@@ -508,11 +552,16 @@ with the ``base`` ``lapply`` function
 
 
 
+data frames
+^^^^^^^^^^^
+
+
 .. code-block:: R
 
-    # execute a function call on the list to convert list of data into a data frame
+    # convert list of data into a data frame with a function call
     R> EDHdtdf <- as.data.frame(do.call(rbind, EDHdt))
 
+..     # execute a function call on the list to convert list of data into a data frame
 
 
 .. code-block:: R
@@ -527,6 +576,9 @@ with the ``base`` ``lapply`` function
     #5 000005      0200       0001
     #6 000006      0150       0071
     
+
+.. code-block:: R
+
     # look at the last ones
     R> tail(EDHdtdf)
     #          ID not_after not_before
@@ -553,7 +605,7 @@ Years are between 530 BC and 1998 AC.
 
 
 Plotting the results
-********************
+====================
 
 The plot is made with the [R] ``graphics`` core package (and the ``base`` package if you are using R version 4.0.0). 
 
@@ -571,13 +623,13 @@ The plot is made with the [R] ``graphics`` core package (and the ``base`` packag
 That produces:
 
 .. image:: ../images/EDH-times.png
-   :width: 600
+   :width: 450
 
 
 |
 
 Treating Outliers
-+++++++++++++++++
+-----------------
 
 By looking at the above plot, we can clearly see a couple of outliers. 
 
@@ -626,7 +678,7 @@ Years are now between 530 BC and 95 AC.
 
 
 Plotting without outliers
-+++++++++++++++++++++++++
+-------------------------
 
 
 The plot is now constructed without the two outliers and with updated years. 
@@ -646,14 +698,14 @@ The plot is now constructed without the two outliers and with updated years.
 That produces a plot with no outliers:
 
 .. image:: ../images/EDH-timesNO.png
-   :width: 600
+   :width: 450
 
 
 
 |
 
 Other plots
-+++++++++++
+-----------
 
 Visualization helps to perform different kinds of analyses.
 
@@ -668,40 +720,13 @@ Visualization helps to perform different kinds of analyses.
 That produces:
 
 .. image:: ../images/EDH-BeforeAfterTimes.png
-   :width: 600
+   :width: 450
 
 Then we need to calculate the residuals to start a statistic analysis of dates.
 
 
 
-
-
-
-..    JSON structure
-..    ==============
-..    
-..    JSON stands for JavaScript Object Notation and it is based on the JavaScript Programming Language Standard ECMA-262. 
-..    JSON is built on two structures, namely a collection of name/value pairs, and an ordered list of values. 
-..    
-..    A JSON structure looks like:
-..    
-..    .. code-block:: 
-..    
-..        Object {
-..                Identifier: Value
-..    
-..                Identifier: Array [
-..    
-..                   Object {
-..                           Identifier: Value
-..                  }
-..    
-..                ]
-..    
-..        }
-..    
-..    Where ``Identifiers`` are delimited by quotes, and a ``Value`` can be a ``string``, a ``number``, ``"true"``, ``"false"``, ``"null"``, 
-..    or an ``Array`` or another JSON ``Object`` as the above example.
-
-
+.. meta::
+   :description: Accessing the Epigraphic Database Heidelberg
+   :keywords: epigraphic, documentation, dataset, HTTP-request
 
