@@ -17,14 +17,14 @@ DEiC's **server**.
                                                                  
                                                                  
                                                                  
-         ************        \-------|\                          
+         ************                                            
          |  CLIENT  | -->-- > request  > -->-->-->-->.           
-         |  ======  |        /-------|/              |           
+         |  ======  |                                |           
          ************                                .           
               `                                      |           
-              ^               /|--------/       ************     
-              `-<--<--<--<-- <  response <  <-- |  SERVER  |     
-                              \|--------\       |  ======  |     
+              ^                                 ************     
+              `-<--<--<--<--<-  response <-- <- |  SERVER  |     
+                                                |  ======  |     
                                                 ************     
                                                                  
                                                                  
@@ -54,12 +54,6 @@ Functions Usage
 ---------------
 
 .. function:: request
-
-.. code-block:: R
-
-    # load required package
-    R> require("httr")
-
 
 
 .. code-block:: R
@@ -239,7 +233,15 @@ Examples
 
 
 Some examples of HTTP requests are given next where reponse messages in some cases are given 
-afterwards. 
+afterwards, and recall that ``request()`` requires the ``httr`` package.
+
+
+.. code-block:: R
+
+    # load required package
+    R> require("httr")
+
+
 
 
 |
@@ -285,8 +287,9 @@ Method PUT
 The URL typically includes also a *subdomain* that for DEiC's `sciencedata.dk <https://sciencedata.dk>`__ 
 is named ``silo`` followed by a number. For instance, my personal documents are located in ``silo1.sciencedata.dk``, 
 and other users that will follow are probably located at ``silo2``, etc. 
-For method ``PUT``, the subdomain is mandatory; otherwise the request is redirected with ``Status: 307`` that is 
-temporary redirect.
+For method ``PUT``, the subdomain is mandatory; otherwise the request is redirected.
+
+..  with ``Status: 307`` that is temporary redirect.
 
 
 .. code-block:: R

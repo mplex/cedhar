@@ -142,23 +142,29 @@ See :ref:`"Check Dates" in Epigraphic Database Heidelberg <recursively-apply>` f
 
 .. code-block:: R
 
-    # choose variables of interest
-    R> EDH1 <- lapply(EDH, function (x) x[c("ID", "type_of_monument", "language", "material", 
-                     "country", "findspot_ancient", "not_after", "not_before")] )
+    # choose variables of interest and record it as a data frame
+    R> epinet <- edhw(c("ID", "type_of_monument", "language", "material", "country", "findspot_ancient", 
+                        "not_after", "not_before"), as="df")
 
-
-
-|
-
-Data frame
-^^^^^^^^^^
-
-Now we execute a function call on the list to convert list of data into a data frame object named ``epinet``.
-
-.. code-block:: R
-
-    # make a data frame from this variable
-    R> epinet <- as.data.frame(do.call(rbind, EDH1))
+..  .. code-block:: R
+..  
+..      # choose variables of interest
+..      R> EDH1 <- lapply(EDH, `[`, c("ID", "type_of_monument", "language", "material", 
+..                       "country", "findspot_ancient", "not_after", "not_before") )
+..  
+..  
+..  
+..  |
+..  
+..  Data frame
+..  ^^^^^^^^^^
+..  
+..  Now we execute a function call on the list to convert list of data into a data frame object named ``epinet``.
+..  
+..  .. code-block:: R
+..  
+..      # make a data frame from this variable
+..      R> epinet <- as.data.frame(do.call(rbind, EDH1))
 
 
 
@@ -194,10 +200,19 @@ To remove question marks, for example, we use a regular expression
 
 .. code-block:: R
 
-    # a new data frame for the same variables but now without question marks
-    R> epinet2 <- as.data.frame(do.call(rbind, lapply(EDH1, function (x)  as.list(gsub('\\?', '', x)) )) )
-    R> colnames(epinet2) <- names(EDH1[[1]])
+    R> epinet2 <- as.data.frame(sapply(epinet, function (x)  as.list(gsub('\\?', '', x)) ))
 
+..  .. code-block:: R
+..  
+..      # a new data frame for the same variables but now without question marks
+..      R> epinet2 <- as.data.frame(do.call(rbind, lapply(EDH1, function (x)  as.list(gsub('\\?', '', x)) )) )
+..      R> colnames(epinet2) <- names(EDH1[[1]])
+
+
+|
+
+    ..  todo::
+        Make another function for cleaning?
 
 
 |
@@ -226,7 +241,7 @@ The countries in ``epinet2`` are:
 
 .. code-block:: R
 
-    # need to unlist first
+    # need first to unlist the component object
     R> unique(unlist(epinet2$country))
     # [1] "Italy"                  "Spain"                  "United Kingdom"         "Portugal"
     # [5] "France"                 "Libyan Arab Jamahiriya" "Germany"                "Hungary"
@@ -276,7 +291,10 @@ For example, we use the ``base`` [R] function ``subset()`` to substract epigraph
 |
 
 
-To calculate frequency of different `'kinds of inscriptions'` in ``epinet2``.
+Ranked frequency
+^^^^^^^^^^^^^^^^
+
+A ranked frequency of different *kinds of inscriptions* is computed as follows: 
 
 
 .. code-block:: R
@@ -307,6 +325,10 @@ To calculate frequency of different `'kinds of inscriptions'` in ``epinet2``.
     #22                        calendar    12
     #23                     adnuntiatio     3
 
+
+That is, a decreasing sorted table given as data frame of the ``type_of_inscription`` 
+component of ``epinet2``. Since this is a list object, it is required to *unlist* the 
+data object to produce a table. 
 
 
 

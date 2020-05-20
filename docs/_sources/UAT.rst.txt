@@ -65,17 +65,17 @@ documentation.
 Machine testing
 ---------------
 
-``Rtools`` allows performing a machine testing of ``R`` packages within 
-the MS Windows operating system. First the package is constructed as a 
-tarball file with the command line and by typing `R CMD build`. Then the 
-`R CMD check` performs different types of tests on this file based on pass/fail
+In the MS Windows operating system, `Rtools <https://cran.r-project.org/bin/windows/Rtools/>`_ 
+allows performing a machine testing of ``R`` packages. First the package is constructed as a 
+tarball file with the command line and by typing ``R CMD build``. Then the 
+``R CMD check`` performs different types of tests on this file based on pass/fail
 results where "fail" involves errors, warnings, and notes. The option
 ``--as-cran`` applies the most strict rules on the package and allows a
 successful submission for a publication on the CRAN repository whenever
 there is any fail.
 
 An example of a successful testing is in the ``.log`` file given as
-appendix where the checking starts in the `DESCRIPTION` file with the
+appendix where the checking starts in the ``DESCRIPTION`` file with the
 basic information about the package. Then there is also a testing of
 things like whether the package can be loaded and unloaded, and
 consistencies both in the code and the documentation including meta

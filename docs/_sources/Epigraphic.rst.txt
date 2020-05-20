@@ -115,7 +115,7 @@ Functions Usage
 
 .. code-block:: R
 
-    # a wrapper function for several queries
+    # a wrapper function to perform several queries
     R> get.edhw(hd_nr, ...)
 
 Currently, function ``get.edw()`` works only for inscriptions. 
@@ -255,11 +255,11 @@ Extra parameters
 
 - `printQ:`
 
-   Also print query?
+   Print also the query?
 
-- `...`
-
-   additional parameters if needed
+..  - `...`
+..  
+..     additional parameters if needed
 
 
 
@@ -377,6 +377,9 @@ Accessing epigraphic database Heidelberg: Inscriptions
 To study temporary uncertainty, for example, we need to access to an epigraphic database like the Heidelberg. 
 The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelberg number ``hd_nr``.
 
+
+.. index:: EDH-dataset 
+
 .. code-block:: R
 
     # get data API from EDH with a wrapper function
@@ -397,9 +400,10 @@ The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelb
     R> data("EDH")
 
 
-which will produce a list object with the existing entries for each inscription, some longer some shorter.
+which will produce a list object with the existing entries for each inscription, and where entries have different length. 
 
-Beware that retrieving such a large number of records will take a very long time. Hence, you can do it by parts and then collate the lists into another object. 
+Beware that retrieving such a large number of records will take a very long time. Hence, you can do it by parts and then 
+collate the lists into another object. 
 
 
 |
@@ -492,103 +496,233 @@ You can find a complete list of attribute names in the ``EDH`` dataset in
 the ``sdam`` manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>.
 
 
-| 
+
+|
 
 
-.. _recursively-apply:
+.. _edhw-fun:
 
-Check Dates
-^^^^^^^^^^^
 
-In order to check the dates of the inscriptions, for example, we need to transform the 
-"attribute-components" of ``EDH`` into a data frame. Such transformation is possible 
-with the ``base`` ``lapply`` function
+.. function:: edhw
+
+
+Function ``edhw()``
+-------------------
 
 
 .. code-block:: R
 
-    # recursively apply a function over the list for three variables
-    R> EDHdates <- lapply(EDH, `[`, c("ID", "not_after", "not_before") )
-    
-    # look at it
-    R> head(EDHdates, 1)
-    #[[1]]
-    #[[1]]$ID
-    #[1] "000001"
-    #
-    #[[1]]$not_after
-    #[1] "0130"
-    #
-    #[[1]]$not_before
-    #[1] "0071"
+    # wrapper function for EDH manipulation
+    R> edhw(vars, as = c("list", "df"), limit, id, na.rm, ...)
 
 
-``EDHdates`` is a new list object with the three items. 
+
+Parameters
+----------
+
+
+Formal arguments of ``edw()`` are:
+
+
+- `vars:`
+
+   Chosen variables from the ``EDH`` data set (vector)
+
+
+- `as:`
+
+   Format to return the output. Currently either as a ``list`` or a data frame ``df`` object.
+
+
+- `limit:`
+
+   Limit the returned output. Ignored if ``id`` is specified (optional, integer or vector)
+
+
+- `id:`
+
+   Select only the ``hd_nr`` `id(s)`  (optional, integer or character)
+
+
+- `na.rm:`
+
+   Remove entries with ``NA`` information? (logical and optional)
+
+
+- `...`
+
+   Optional arguments if needed.
+
+
 
 |
 
-    .. note::    
+
+
+
+Choose variables
+^^^^^^^^^^^^^^^^
+
+We are going to apply the ``edhw`` function to check the dates of the inscriptions in the ``EDH`` 
+dataset. Hence, we choose three *variables* from the EDH list that are ``"not_after"`` and 
+``"not_before"`` with an identification number in ``"ID"``. 
+
+
+..  In order , for example, we need to transform the 
+..  "attribute-components" of  into a data frame. Such transformation is possible 
+..  with the ``base`` ``lapply`` function, which is implemented in the ``edw()`` wrapper function.
+
+
+.. code-block:: R
+
+    # make a list for three variables in 'EDH'
+    R> EDHdates <- edhw(c("ID", "not_after", "not_before") )
     
-        A pair of backquotes (aka "backticks") is a way to refer in ``R`` to names or combinations 
-        of symbols that are otherwise reserved or illegal or *non-syntactic names*. 
+
+
+|
+
+.. _recursively-apply:
+
+    .. hint::    
+    
+        The above function is the same as
+
+        .. code-block:: R
+
+            # recursively apply a function over the list for three variables
+            R> EDHdates <- lapply(EDH, `[`, c("ID", "not_after", "not_before") )
+
+
+        where a pair of backquotes (aka "backticks") is a way to refer in ``R`` to names or combinations 
+        of symbols that are otherwise reserved or illegal, called *non-syntactic names*. 
         Hence, e.g. ``apply(foo, `[`, c(...) )`` is the same as ``apply(foo, function (x) x[c(...)])``.
 
 |
 
 
-missing data
+
+As a result, ``EDHdates`` is a new list object with the three items and all entries in ``EDH``.
+
+    .. code-block:: R
+    
+        R> length(EDHdates)
+        #[1] 82465
+
+
+where the first entry is
+
+
+    .. code-block:: R
+    
+        # look at the new object 'EDHdates'
+        R> head(EDHdates, 1)
+        #[[1]]
+        #[[1]]$ID
+        #[1] "000001"
+        #
+        #[[1]]$not_after
+        #[1] "0130"
+        #
+        #[[1]]$not_before
+        #[1] "0071"
+
+
+|
+
+
+Missing data
 ^^^^^^^^^^^^
 
+It is also possible to remove missing data from ``EDH`` by activating the ``na.rm`` argument in function 
+``edhw()``.
 
 .. code-block:: R
 
     # remove missing data
-    R> EDHdt <- list()
-    R> for(n in seq_len(length(EDHdates))) {
-    +    ifelse(any(is.na(attr(EDHdates[[n]],"names")))==FALSE, 
-    +    EDHdt[[length(EDHdt)+1L]]<-EDHdates[[n]], NA)
-    +    }
+    R> EDHdt <- edhw(c("ID", "not_after", "not_before"), na.rm=TRUE)
+
+
+and now the object has a shorter length
+
+    .. code-block:: R
+    
+        R> length(EDHdt)
+        #[1] 55207
 
 
 
 
-data frames
+..  .. code-block:: R
+..  
+..      # remove missing data
+..      R> EDHdt <- list()
+..      R> for(n in seq_len(length(EDHdates))) {
+..      +    ifelse(any(is.na(attr(EDHdates[[n]],"names")))==FALSE, 
+..      +    EDHdt[[length(EDHdt)+1L]]<-EDHdates[[n]], NA)
+..      +    }
+
+
+|
+
+
+Data frames
 ^^^^^^^^^^^
 
+To produce data frames, we need to make it explicit in the function.
 
 .. code-block:: R
 
-    # convert list of data into a data frame with a function call
-    R> EDHdtdf <- as.data.frame(do.call(rbind, EDHdt))
+    # produce a data frame with three variables and remove missing data
+    R> EDHdtdf  <- edhw(c("ID", "not_after", "not_before"), as="df", na.rm=TRUE )
+
+
+..  .. code-block:: R
+..  
+..      # convert list of data into a data frame with a function call
+..      R> EDHdtdf <- as.data.frame(do.call(rbind, EDHdt))
 
 ..     # execute a function call on the list to convert list of data into a data frame
 
 
-.. code-block:: R
+..   :linenos:
 
-    # look at the first ones
-    R> head(EDHdtdf)
-    #      ID not_after not_before
-    #1 000001      0130       0071
-    #2 000002      0200       0051
-    #3 000003      0170       0131
-    #4 000004      0200       0151
-    #5 000005      0200       0001
-    #6 000006      0150       0071
+The first entries are
+
+    .. code-block:: R
+    
+        # look at the first ones
+        R> head(EDHdtdf)
+        #      ID not_after not_before
+        #1 000001      0130       0071
+        #2 000002      0200       0051
+        #3 000003      0170       0131
+        #4 000004      0200       0151
+        #5 000005      0200       0001
+        #6 000006      0150       0071
     
 
-.. code-block:: R
+..   :lineno-start: 85390
 
-    # look at the last ones
-    R> tail(EDHdtdf)
-    #          ID not_after not_before
-    #85390 080147      0400       0201
-    #85391 080148      0400       0201
-    #85392 080149      0400       0201
-    #85393 080150      0200       0001
-    #85394 080151      0100       0001
-    #85395 080152      0100       0001
+and the last entries
 
+    .. code-block:: R
+    
+        # look at the last ones
+        R> tail(EDHdtdf)
+        #          ID not_after not_before
+        #55202 080147      0400       0201
+        #55203 080148      0400       0201
+        #55204 080149      0400       0201
+        #55205 080150      0200       0001
+        #55206 080151      0100       0001
+        #55207 080152      0100       0001
+
+
+|
+
+To compute the years, which are in the second and third column of ``EDHdtdf`` we need to *unlist* 
+the data frame first and treat the data as numeric format. 
 
 ::
 

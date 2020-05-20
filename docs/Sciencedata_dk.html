@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Accessing DEiC's sciencedata.dk and other HTTP Requests" name="description" />
 <meta content="HTTP-request, documentation, cloud-computing" name="keywords" />
 
-    <title>DEiC’s sciencedata.dk &#8212; cedhar 0.0.2 documentation</title>
+    <title>DEiC’s sciencedata.dk &#8212; cedhar 0.0.3 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="The sdam R package" href="sdam.html" />
+    <link rel="next" title="The SDAM project" href="sdam.html" />
     <link rel="prev" title="Epigraphic Networks using R" href="EpigraphicNetwork.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -27,12 +27,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="sdam.html" title="The sdam R package"
+          <a href="sdam.html" title="The SDAM project"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.3 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -73,7 +73,7 @@
                         title="previous chapter">Epigraphic Networks using R</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sdam.html"
-                        title="next chapter">The <code class="docutils literal notranslate"><span class="pre">sdam</span></code> R package</a></p>
+                        title="next chapter">The SDAM project</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -105,14 +105,14 @@
 and this is basically achieved by performing a HTTP request as a <strong>client</strong> to one of
 DEiC’s <strong>server</strong>.</p>
 <blockquote>
-<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>************        \-------|\
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>************
 |  CLIENT  | --&gt;-- &gt; request  &gt; --&gt;--&gt;--&gt;--&gt;.
-|  ======  |        /-------|/              |
+|  ======  |                                |
 ************                                .
      `                                      |
-     ^               /|--------/       ************
-     `-&lt;--&lt;--&lt;--&lt;-- &lt;  response &lt;  &lt;-- |  SERVER  |
-                     \|--------\       |  ======  |
+     ^                                 ************
+     `-&lt;--&lt;--&lt;--&lt;--&lt;-  response &lt;-- &lt;- |  SERVER  |
+                                       |  ======  |
                                        ************
 </pre></div>
 </div>
@@ -136,10 +136,6 @@ packahe is aimed to interact with DEiC’s <a class="reference external" href="h
 <code class="sig-name descname">request</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
 <dd></dd></dl>
 
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># load required package</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">require</span><span class="p">(</span><span class="s">&quot;httr&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># arguments supported (currently)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="n">file</span>
           <span class="p">,</span><span class="n">URL</span><span class="o">=</span><span class="s">&quot;https://sciencedata.dk&quot;</span>
@@ -288,7 +284,11 @@ response message below the time stamp.</p>
 <div class="section" id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>Some examples of HTTP requests are given next where reponse messages in some cases are given
-afterwards.</p>
+afterwards, and recall that <code class="docutils literal notranslate"><span class="pre">request()</span></code> requires the <code class="docutils literal notranslate"><span class="pre">httr</span></code> package.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># load required package</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">require</span><span class="p">(</span><span class="s">&quot;httr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -326,8 +326,7 @@ is <code class="docutils literal notranslate"><span class="pre">200</span></code
 <p>The URL typically includes also a <em>subdomain</em> that for DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a>
 is named <code class="docutils literal notranslate"><span class="pre">silo</span></code> followed by a number. For instance, my personal documents are located in <code class="docutils literal notranslate"><span class="pre">silo1.sciencedata.dk</span></code>,
 and other users that will follow are probably located at <code class="docutils literal notranslate"><span class="pre">silo2</span></code>, etc.
-For method <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, the subdomain is mandatory; otherwise the request is redirected with <code class="docutils literal notranslate"><span class="pre">Status:</span> <span class="pre">307</span></code> that is
-temporary redirect.</p>
+For method <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, the subdomain is mandatory; otherwise the request is redirected.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for personal data (in my case) I need to specify the subdomain; otherwise it gets redirected!</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
 
@@ -444,12 +443,12 @@ and for <code class="docutils literal notranslate"><span class="pre">DELETE</spa
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="sdam.html" title="The sdam R package"
+          <a href="sdam.html" title="The SDAM project"
              >next</a> |</li>
         <li class="right" >
           <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.3 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

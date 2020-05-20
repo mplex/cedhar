@@ -1,20 +1,76 @@
 
+
+.. _sdam-proj:
+
+****************
+The SDAM project
+****************
+
+SDAM stands for **Social Dynamics and complexity in the Ancient Mediterranean**, 
+which is a research group at the `School of Culture and Society <https://cas.au.dk/>`_ at 
+Aarhus University (AU). 
+
+
+|
+
++---------------------------------------+--------------------------------------+-----------------------------------+
+|  .. image:: ../images/sdam_logo2.png  |  .. image:: ../images/sdam_logo.png  |  .. image:: ../images/AUlogo.png  |
+|     :width: 200                       |                                      |                                   |
++---------------------------------------+--------------------------------------+-----------------------------------+
+
+
+..  
+..  
+..  
+..  
+
+
+|
+
+Objectives
+----------
+
+
+The two mains outputs of this project are expected to be
+
+    * A comparative study of proxies for evolution of social complexity in the Ancient Mediterranean.
+    * Digital tools, workflows and processes that scale and that historians and archaeologists can use in their own research.
+
+|
+
+Team
+----
+
+    .. todo:: 
+     
+        Team members.
+
+
+|
+
+* See `SDAM Website <https://sdam-au.github.io/sdam-au/>`_
+* See `SDAM on GitHub <https://github.com/sdam-au/>`_
+
+
+|
+
+
 .. _sdam-pkg:
 
 
-**********************
-The ``sdam`` R package
-**********************
+******************
+R package ``sdam``
+******************
 
 
 Package Description
-===================
+-------------------
 
 
 This package provides tools for performing analyses within Social Dynamics and complexity 
-in the Ancient Mediterranean (`SDAM <https://sdam-au.github.io/sdam-au/>`_), which is a 
-research group based at the `School of Culture and Society <https://cas.au.dk/>`_ at 
-Aarhus University (AU).
+in the Ancient Mediterranean (`SDAM <https://sdam-au.github.io/sdam-au/>`_) project. 
+
+..  , which is a research group based 
 
 * (See :ref:`"SDAM project" in Digital Humanities <sdam-proj>`)
 
@@ -64,8 +120,8 @@ development.
 
 .. _sdam-inst:
 
-Installing the package
-----------------------
+Package installation
+--------------------
 
 
 You can install the ``sdam`` package from these GitHub repositories using  the ``R`` console 
@@ -104,11 +160,15 @@ Making Documentation
 .. _news:
 
 
-Package News
-============
+Package News for ``sdam``
+-------------------------
 
 
-* 6-5-2020 ``sdam`` version 0.1.0 released.
+* 19-5-2020  version 0.2.0 released.
+    - **New function** ``edhw()`` for manipulation of the ``EDH`` dataset
+
+* 6-5-2020  version 0.1.0 released.
+    - **First functions** ``get.edh()``, ``get.edhw()``, ``request()``, ``simil()``, and the ``EDH`` dataset
 
 
 

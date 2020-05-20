@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Compute similarity in Epigraphic Networks" name="description" />
 <meta content="epigraphic, documentation, dataset, networks" name="keywords" />
 
-    <title>Epigraphic Networks using R &#8212; cedhar 0.0.2 documentation</title>
+    <title>Epigraphic Networks using R &#8212; cedhar 0.0.3 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.3 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -50,9 +50,9 @@
 </li>
 <li><a class="reference internal" href="#epigraphic-data">Epigraphic data</a><ul>
 <li><a class="reference internal" href="#epigraphic-network-data">Epigraphic network data</a><ul>
-<li><a class="reference internal" href="#data-frame">Data frame</a></li>
 <li><a class="reference internal" href="#regular-expressions">Regular expressions</a></li>
 <li><a class="reference internal" href="#subsetting-the-data">Subsetting the data</a></li>
+<li><a class="reference internal" href="#ranked-frequency">Ranked frequency</a></li>
 </ul>
 </li>
 </ul>
@@ -190,19 +190,9 @@ to see how accessing the EDH database using <code class="docutils literal notran
 For example, we create a list object <code class="docutils literal notranslate"><span class="pre">epinetl</span></code> with the <code class="docutils literal notranslate"><span class="pre">ID</span></code> of the inscription plus seven other characteristics from
 the EDH dataset <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.
 See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span class="std std-ref">“Check Dates” in Epigraphic Database Heidelberg</span></a> for another use of functional programming with <code class="docutils literal notranslate"><span class="pre">lapply</span></code>.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose variables of interest</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDH1</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="nf">[c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;type_of_monument&quot;</span><span class="p">,</span> <span class="s">&quot;language&quot;</span><span class="p">,</span> <span class="s">&quot;material&quot;</span><span class="p">,</span>
-                 <span class="s">&quot;country&quot;</span><span class="p">,</span> <span class="s">&quot;findspot_ancient&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span><span class="n">]</span> <span class="p">)</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="section" id="data-frame">
-<h4>Data frame<a class="headerlink" href="#data-frame" title="Permalink to this headline">¶</a></h4>
-<p>Now we execute a function call on the list to convert list of data into a data frame object named <code class="docutils literal notranslate"><span class="pre">epinet</span></code>.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a data frame from this variable</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="n">EDH1</span><span class="p">))</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose variables of interest and record it as a data frame</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;type_of_monument&quot;</span><span class="p">,</span> <span class="s">&quot;language&quot;</span><span class="p">,</span> <span class="s">&quot;material&quot;</span><span class="p">,</span> <span class="s">&quot;country&quot;</span><span class="p">,</span> <span class="s">&quot;findspot_ancient&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -226,15 +216,21 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
 <div class="section" id="regular-expressions">
 <h4>Regular expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h4>
 <p>To remove question marks, for example, we use a regular expression</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a new data frame for the same variables but now without question marks</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet2</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">do.call</span><span class="p">(</span><span class="n">rbind</span><span class="p">,</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH1</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="nf">as.list</span><span class="p">(</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;\\?&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="p">))</span> <span class="p">)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">epinet2</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">names</span><span class="p">(</span><span class="n">EDH1[[1]]</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet2</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">sapply</span><span class="p">(</span><span class="n">epinet</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="nf">as.list</span><span class="p">(</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;\\?&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="p">))</span>
 </pre></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Make another function for cleaning?</p>
+</div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -256,7 +252,7 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <div class="line"><br /></div>
 </div>
 <p>The countries in <code class="docutils literal notranslate"><span class="pre">epinet2</span></code> are:</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># need to unlist first</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># need first to unlist the component object</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">unique</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epinet2</span><span class="o">$</span><span class="n">country</span><span class="p">))</span>
 <span class="c1"># [1] &quot;Italy&quot;                  &quot;Spain&quot;                  &quot;United Kingdom&quot;         &quot;Portugal&quot;</span>
 <span class="c1"># [5] &quot;France&quot;                 &quot;Libyan Arab Jamahiriya&quot; &quot;Germany&quot;                &quot;Hungary&quot;</span>
@@ -300,7 +296,10 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>To calculate frequency of different <cite>‘kinds of inscriptions’</cite> in <code class="docutils literal notranslate"><span class="pre">epinet2</span></code>.</p>
+</div>
+<div class="section" id="ranked-frequency">
+<h4>Ranked frequency<a class="headerlink" href="#ranked-frequency" title="Permalink to this headline">¶</a></h4>
+<p>A ranked frequency of different <em>kinds of inscriptions</em> is computed as follows:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">data.frame</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nf">table</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epinet2</span><span class="o">$</span><span class="n">type_of_inscription</span><span class="p">)),</span> <span class="n">decreasing</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="c1">#                              Var1  Freq</span>
 <span class="c1">#1                          epitaph 27960</span>
@@ -328,6 +327,9 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <span class="c1">#23                     adnuntiatio     3</span>
 </pre></div>
 </div>
+<p>That is, a decreasing sorted table given as data frame of the <code class="docutils literal notranslate"><span class="pre">type_of_inscription</span></code>
+component of <code class="docutils literal notranslate"><span class="pre">epinet2</span></code>. Since this is a list object, it is required to <em>unlist</em> the
+data object to produce a table.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -426,7 +428,7 @@ depends on <code class="docutils literal notranslate"><span class="pre">multiple
         <li class="right" >
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.2 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.3 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
