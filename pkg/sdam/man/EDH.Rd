@@ -5,7 +5,7 @@
 Epigraphic Database Heidelberg Data Set
 }
 \description{
-This is the Epigraphic Database Heidelberg data set. 
+This is a data set retrieved from the Epigraphic Database Heidelberg. 
 }
 \usage{
 data("EDH")
@@ -32,4 +32,7 @@ https://edh-www.adw.uni-heidelberg.de/data/api
 }
 %\references{
 %}
+\seealso{
+\code{\link{get.edh}}, \code{\link{get.edhw}},\code{\link{edhw}}
+}
 \keyword{datasets}
