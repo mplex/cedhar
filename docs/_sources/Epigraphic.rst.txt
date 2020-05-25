@@ -86,7 +86,7 @@ The other two search options from the [EDH] database [API], which are ``"photos"
 and ``"bibliography"``, may be implemented in the future in this function. 
 
 
-* (see :ref:`The "sdam" package <sdam-pkg>`)
+* (see :ref:`R package "sdam" <sdam-pkg>`)
 
 
 |
@@ -118,7 +118,7 @@ Functions Usage
     # a wrapper function to perform several queries
     R> get.edhw(hd_nr, ...)
 
-Currently, function ``get.edw()`` works only for inscriptions. 
+Currently, function ``get.edhw()`` works only for inscriptions. 
 
 
 |
@@ -276,7 +276,7 @@ are available in the ``sdam`` package.
 
     .. seealso:: 
     
-        * :ref:`Installing the "sdam" package <sdam-inst>`. 
+        * :ref:`"sdam" package installation <sdam-inst>`. 
 
 
 ..    * :ref:`The "sdam" package <sdam-inst>`
@@ -503,11 +503,14 @@ the ``sdam`` manual <https://github.com/mplex/cedhar/blob/master/typesetting/rep
 .. _edhw-fun:
 
 
+.. Function ``edhw()``
+
+
+Function usage
+--------------
+
+
 .. function:: edhw
-
-
-Function ``edhw()``
--------------------
 
 
 .. code-block:: R
@@ -521,7 +524,7 @@ Parameters
 ----------
 
 
-Formal arguments of ``edw()`` are:
+Formal arguments of ``edhw()`` are:
 
 
 - `vars:`
@@ -559,18 +562,17 @@ Formal arguments of ``edw()`` are:
 
 
 
+Relative dating
+===============
 
-Choose variables
-^^^^^^^^^^^^^^^^
-
-We are going to apply the ``edhw`` function to check the dates of the inscriptions in the ``EDH`` 
-dataset. Hence, we choose three *variables* from the EDH list that are ``"not_after"`` and 
-``"not_before"`` with an identification number in ``"ID"``. 
+We are going to apply the ``edhw()`` function to check the relative dating of the inscriptions in the ``EDH`` 
+dataset. For this, we choose *variables* from the EDH list that are ``"not_after"`` and 
+``"not_before"`` with an identification number in ``"ID"``. Hence, in this case there are three variables. 
 
 
 ..  In order , for example, we need to transform the 
 ..  "attribute-components" of  into a data frame. Such transformation is possible 
-..  with the ``base`` ``lapply`` function, which is implemented in the ``edw()`` wrapper function.
+..  with , which is implemented in the ``edhw()`` wrapper function.
 
 
 .. code-block:: R
@@ -586,7 +588,7 @@ dataset. Hence, we choose three *variables* from the EDH list that are ``"not_af
 
     .. hint::    
     
-        The above function is the same as
+        The above use of function ``edhw()`` is wrapping the ``base`` ``lapply`` function as
 
         .. code-block:: R
 
@@ -632,7 +634,7 @@ where the first entry is
 
 
 Missing data
-^^^^^^^^^^^^
+------------
 
 It is also possible to remove missing data from ``EDH`` by activating the ``na.rm`` argument in function 
 ``edhw()``.
@@ -667,7 +669,7 @@ and now the object has a shorter length
 
 
 Data frames
-^^^^^^^^^^^
+-----------
 
 To produce data frames, we need to make it explicit in the function.
 
@@ -738,8 +740,8 @@ Years are between 530 BC and 1998 AC.
 
 
 
-Plotting the results
-====================
+Plotting relative dating
+========================
 
 The plot is made with the [R] ``graphics`` core package (and the ``base`` package if you are using R version 4.0.0). 
 

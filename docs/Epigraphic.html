@@ -64,16 +64,16 @@
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#function-edhw">Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code></a></li>
-<li><a class="reference internal" href="#parameters">Parameters</a><ul>
-<li><a class="reference internal" href="#choose-variables">Choose variables</a></li>
+<li><a class="reference internal" href="#function-usage">Function usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#relative-dating">Relative dating</a><ul>
 <li><a class="reference internal" href="#missing-data">Missing data</a></li>
 <li><a class="reference internal" href="#data-frames">Data frames</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a class="reference internal" href="#plotting-the-results">Plotting the results</a><ul>
+<li><a class="reference internal" href="#plotting-relative-dating">Plotting relative dating</a><ul>
 <li><a class="reference internal" href="#treating-outliers">Treating Outliers</a></li>
 <li><a class="reference internal" href="#plotting-without-outliers">Plotting without outliers</a></li>
 <li><a class="reference internal" href="#other-plots">Other plots</a></li>
@@ -170,7 +170,7 @@ either from <code class="docutils literal notranslate"><span class="pre">&quot;i
 The other two search options from the [EDH] database [API], which are <code class="docutils literal notranslate"><span class="pre">&quot;photos&quot;</span></code>
 and <code class="docutils literal notranslate"><span class="pre">&quot;bibliography&quot;</span></code>, may be implemented in the future in this function.</p>
 <ul class="simple">
-<li><p>(see <a class="reference internal" href="sdam.html#sdam-pkg"><span class="std std-ref">The “sdam” package</span></a>)</p></li>
+<li><p>(see <a class="reference internal" href="sdam.html#sdam-pkg"><span class="std std-ref">R package “sdam”</span></a>)</p></li>
 </ul>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -203,7 +203,7 @@ and <code class="docutils literal notranslate"><span class="pre">&quot;bibliogra
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edhw</span><span class="p">(</span><span class="n">hd_nr</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Currently, function <code class="docutils literal notranslate"><span class="pre">get.edw()</span></code> works only for inscriptions.</p>
+<p>Currently, function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> works only for inscriptions.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -388,7 +388,7 @@ are available in the <code class="docutils literal notranslate"><span class="pre
 <div><div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="sdam.html#sdam-inst"><span class="std std-ref">Installing the “sdam” package</span></a>.</p></li>
+<li><p><a class="reference internal" href="sdam.html#sdam-inst"><span class="std std-ref">“sdam” package installation</span></a>.</p></li>
 </ul>
 </div>
 </div></blockquote>
@@ -550,16 +550,16 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<span class="target" id="edhw-fun"></span><dl class="function">
+<span class="target" id="edhw-fun"></span></div>
+</div>
+</div>
+<div class="section" id="function-usage">
+<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
 <dt id="edhw">
 <code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#edhw" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</div>
-</div>
-</div>
-<div class="section" id="function-edhw">
-<h3>Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code><a class="headerlink" href="#function-edhw" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># wrapper function for EDH manipulation</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">as</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
@@ -567,7 +567,7 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 </div>
 <div class="section" id="parameters">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
-<p>Formal arguments of <code class="docutils literal notranslate"><span class="pre">edw()</span></code> are:</p>
+<p>Formal arguments of <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> are:</p>
 <ul>
 <li><p><cite>vars:</cite></p>
 <blockquote>
@@ -603,11 +603,13 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="section" id="choose-variables">
-<h4>Choose variables<a class="headerlink" href="#choose-variables" title="Permalink to this headline">¶</a></h4>
-<p>We are going to apply the <code class="docutils literal notranslate"><span class="pre">edhw</span></code> function to check the dates of the inscriptions in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code>
-dataset. Hence, we choose three <em>variables</em> from the EDH list that are <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code> and
-<code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code> with an identification number in <code class="docutils literal notranslate"><span class="pre">&quot;ID&quot;</span></code>.</p>
+</div>
+</div>
+<div class="section" id="relative-dating">
+<h2>Relative dating<a class="headerlink" href="#relative-dating" title="Permalink to this headline">¶</a></h2>
+<p>We are going to apply the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function to check the relative dating of the inscriptions in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code>
+dataset. For this, we choose <em>variables</em> from the EDH list that are <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code> with an identification number in <code class="docutils literal notranslate"><span class="pre">&quot;ID&quot;</span></code>. Hence, in this case there are three variables.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list for three variables in &#39;EDH&#39;</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
@@ -618,7 +620,7 @@ dataset. Hence, we choose three <em>variables</em> from the EDH list that are <c
 <blockquote id="recursively-apply">
 <div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>The above function is the same as</p>
+<p>The above use of function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> is wrapping the <code class="docutils literal notranslate"><span class="pre">base</span></code> <code class="docutils literal notranslate"><span class="pre">lapply</span></code> function as</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># recursively apply a function over the list for three variables</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH</span><span class="p">,</span> <span class="n">`[`</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
@@ -657,9 +659,8 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
 <div class="section" id="missing-data">
-<h4>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h4>
+<h3>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h3>
 <p>It is also possible to remove missing data from <code class="docutils literal notranslate"><span class="pre">EDH</span></code> by activating the <code class="docutils literal notranslate"><span class="pre">na.rm</span></code> argument in function
 <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove missing data</span>
@@ -678,7 +679,7 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 </div>
 </div>
 <div class="section" id="data-frames">
-<h4>Data frames<a class="headerlink" href="#data-frames" title="Permalink to this headline">¶</a></h4>
+<h3>Data frames<a class="headerlink" href="#data-frames" title="Permalink to this headline">¶</a></h3>
 <p>To produce data frames, we need to make it explicit in the function.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># produce a data frame with three variables and remove missing data</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdtdf</span>  <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span> <span class="p">)</span>
@@ -728,9 +729,8 @@ the data frame first and treat the data as numeric format.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="plotting-the-results">
-<h2>Plotting the results<a class="headerlink" href="#plotting-the-results" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="plotting-relative-dating">
+<h2>Plotting relative dating<a class="headerlink" href="#plotting-relative-dating" title="Permalink to this headline">¶</a></h2>
 <p>The plot is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package (and the <code class="docutils literal notranslate"><span class="pre">base</span></code> package if you are using R version 4.0.0).</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">EDHdtdf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>

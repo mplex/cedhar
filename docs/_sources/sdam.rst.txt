@@ -72,7 +72,7 @@ in the Ancient Mediterranean (`SDAM <https://sdam-au.github.io/sdam-au/>`_) proj
 
 ..  , which is a research group based 
 
-* (See :ref:`"SDAM project" in Digital Humanities <sdam-proj>`)
+* (See :ref:`"The SDAM project" <sdam-proj>`)
 
 
 |
@@ -109,7 +109,7 @@ development.
         [`CRAN <https://CRAN.R-project.org/package=multigraph>`_], 
         [`GitHub <https:\\github.com/mplex/multigraph>`_].
     
-        Package ``multiplex``: 
+        Package ``multiplex``. Versions: 
         [`CRAN <https://CRAN.R-project.org/package=multiplex>`_], 
         [`GitHub <https:\\github.com/mplex/multiplex>`_].
 
@@ -160,7 +160,7 @@ Making Documentation
 .. _news:
 
 
-Package News for ``sdam``
+News for ``sdam`` package
 -------------------------
 
 
