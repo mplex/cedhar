@@ -1,0 +1,294 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta content="Digital Technologies for Humanities" name="description" />
+<meta content="digital-humanities, documentation, data-formats" name="keywords" />
+
+    <title>Digital Humanities &#8212; cedhar 0.0.3 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tools for Humanities and Social Sciences – HASS" href="HASS.html" />
+    <link rel="prev" title="CEDHAR’s ‘howto’ docs" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="HASS.html" title="Tools for Humanities and Social Sciences – HASS"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="CEDHAR’s ‘howto’ docs"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.3 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CEDHAR_logo_black_large_800x100.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Digital Humanities</a><ul>
+<li><a class="reference internal" href="#data-for-humanities">Data for humanities</a></li>
+<li><a class="reference internal" href="#data-formats">Data formats</a><ul>
+<li><a class="reference internal" href="#json-structure">JSON structure</a></li>
+<li><a class="reference internal" href="#extensible-markup-language-structure">eXtensible Markup Language structure</a></li>
+<li><a class="reference internal" href="#lightweight-markup-languages">Lightweight markup languages</a><ul>
+<li><a class="reference internal" href="#markdown">Markdown</a></li>
+<li><a class="reference internal" href="#restructuredtext">reStructuredText</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tex-and-latex">TeX and LaTeX</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">CEDHAR</span></code>’s ‘howto’ docs</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="HASS.html"
+                        title="next chapter">Tools for Humanities and Social Sciences – HASS</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/DDHH.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="digital-humanities">
+<span id="ddhh"></span><h1>Digital Humanities<a class="headerlink" href="#digital-humanities" title="Permalink to this headline">¶</a></h1>
+<p>The use of digital technologies to pursue research questions in the humanities.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="data-for-humanities">
+<h2>Data for humanities<a class="headerlink" href="#data-for-humanities" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Document markup languages</p>
+<ul class="simple">
+<li><p><strong>ConTeXt</strong> a TeX macro package that has a cleaner interface to control typography of the document while retaining LaTeX’s structure-oriented approach</p>
+<ul>
+<li><p>with separation of content and presentation, it can format XML text, …</p></li>
+</ul>
+</li>
+<li><p><strong>EAD</strong> (<em>Encoded Archival Description</em>)</p></li>
+<li><p>…</p></li>
+</ul>
+</li>
+<li><p>Citation</p>
+<ul class="simple">
+<li><p><em>Arts and Humanities Citation Index</em> (AHCI)</p>
+<ul>
+<li><p>Machine-readable bibliographic record - MARC, RIS, BibTeX</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Geospatial/geographical data</p>
+<ul class="simple">
+<li><p><strong>GeoJSON</strong> is a geospatial data interchange format based on <em>JavaScript Object Notation</em> (JSON).</p></li>
+<li><p><strong>Leaflet</strong> is an open-source JavaScript library for mobile-friendly, cross-browser, interactive maps.</p></li>
+<li><p>A Web Map Service (<strong>WMS</strong>) is a standard protocol for serving georeferenced map images over the Internet that are generated by a map server using data from a GIS database.</p>
+<ul>
+<li><p>See also Web Feature Service (<strong>WFS</strong>)</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="data-formats">
+<span id="index-0"></span><h2>Data formats<a class="headerlink" href="#data-formats" title="Permalink to this headline">¶</a></h2>
+<p>Data can be stored in different formats.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="json-structure">
+<span id="json-str"></span><h3>JSON structure<a class="headerlink" href="#json-structure" title="Permalink to this headline">¶</a></h3>
+<p>JSON stands for JavaScript Object Notation and it is based on the JavaScript Programming Language Standard ECMA-262.</p>
+<p>JSON is built on two structures, namely a collection of name/value pairs, and an ordered list of values.
+A JSON structure looks like:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Object</span> <span class="p">{</span>
+        <span class="n">Identifier</span><span class="p">:</span> <span class="n">Value</span>
+        <span class="n">Identifier</span><span class="p">:</span> <span class="n">Array</span> <span class="p">[</span>
+           <span class="n">Object</span> <span class="p">{</span>
+                   <span class="n">Identifier</span><span class="p">:</span> <span class="n">Value</span>
+          <span class="p">}</span>
+        <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Where an <code class="docutils literal notranslate"><span class="pre">Identifier</span></code> is delimited by quotes, and a <code class="docutils literal notranslate"><span class="pre">Value</span></code> can be a <code class="docutils literal notranslate"><span class="pre">string</span></code>, a <code class="docutils literal notranslate"><span class="pre">number</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;true&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;false&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;null&quot;</span></code>,
+or an <code class="docutils literal notranslate"><span class="pre">Array</span></code> or another JSON <code class="docutils literal notranslate"><span class="pre">Object</span></code> as the above example.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="extensible-markup-language-structure">
+<span id="xml-str"></span><h3>eXtensible Markup Language structure<a class="headerlink" href="#extensible-markup-language-structure" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>eXtensible markup language (XML)</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="lightweight-markup-languages">
+<span id="rst-str"></span><h3>Lightweight markup languages<a class="headerlink" href="#lightweight-markup-languages" title="Permalink to this headline">¶</a></h3>
+<p>Lightweight markup languages are for producing documentation on the Web.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="markdown">
+<h4>Markdown<a class="headerlink" href="#markdown" title="Permalink to this headline">¶</a></h4>
+<p><strong>Markdown</strong> (MD), with suffixes <code class="docutils literal notranslate"><span class="pre">.md</span></code>, <code class="docutils literal notranslate"><span class="pre">.Rmd</span></code>, etc., is currently the markup language for GitHub,
+and hence very popular among developers using this platform. The popularity of this format for writing
+for the web is however challenging its consistency and robustness, and today there are several flavours of MD:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Basics and syntax of the <em>“Gruber Markdown”</em> are in the <a class="reference external" href="https://daringfireball.net/projects/markdown/">creator’s webpage</a></p></li>
+<li><p><em>CommonMark</em> is an extension of the Gruber Markdown by users including representatives from GitHub, Stack Exchange, and Reddit, and therefore today “de facto” standard on the Web.</p></li>
+<li><p><em>Github Flavored Markdown</em> or <em>GFM</em> is a superset of CommonMark with Github-specific extensions on syntax features.</p></li>
+<li><p>Other flavours of Markdown include <em>MultiMarkdown</em>, <em>Markdown Extra</em>, <em>CriticMarkup</em>, <em>Ghost Markdown</em>, and others…</p></li>
+</ul>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="restructuredtext">
+<h4>reStructuredText<a class="headerlink" href="#restructuredtext" title="Permalink to this headline">¶</a></h4>
+<p><strong>reStructuredText</strong> (RST) is written with the suffix <code class="docutils literal notranslate"><span class="pre">.rst</span></code> or <code class="docutils literal notranslate"><span class="pre">.txt</span></code> since is plaintext, which use simple and intuitive
+constructs to structure complex technical documentation. Here “complex” means things like indexing, glossaries, etc.</p>
+<p>One significant innovation of Markdown was the use of headers and interpreted text. However, a step further
+of RST over MD is the use of <em>directives</em> and <em>specialized roles</em>. For example, these features allow reStructuredText
+rendering text and math formulae directly into LaTeX format.</p>
+<p>The directive syntax in RST is</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span> <span class="n">directive</span><span class="o">-</span><span class="nb">type</span> <span class="p">::</span> <span class="n">directive</span>
+<span class="n">block</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>and an illustration of a standard and specialized role is</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="n">emphasis</span><span class="o">*</span> <span class="k">as</span> <span class="n">standard</span> <span class="n">role</span>
+<span class="p">:</span><span class="n">title</span><span class="p">:</span><span class="o">*</span><span class="n">emphasis</span><span class="o">*</span> <span class="k">with</span> <span class="n">explicit</span> <span class="n">role</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>where (most) of standard roles are common for interpreted text in MD and RST.</p>
+<p>In order to produce a documentation, either in HTML or in LaTeX, reStructuredText needs a <em>builder</em>, which is
+a program that convert the RST source code into the desired format.</p>
+<p>Popular builders are  the <code class="docutils literal notranslate"><span class="pre">Python</span></code> package <code class="docutils literal notranslate"><span class="pre">docutils</span></code> with different options:</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">rst2html</span><span class="o">.</span><span class="n">py</span> <span class="n">text</span><span class="o">.</span><span class="n">rst</span> <span class="o">&gt;</span> <span class="n">text</span><span class="o">.</span><span class="n">html</span>
+<span class="n">prompt</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">rst2latex</span><span class="o">.</span><span class="n">py</span> <span class="n">text</span><span class="o">.</span><span class="n">rst</span> <span class="o">&gt;</span> <span class="n">text</span><span class="o">.</span><span class="n">tex</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>where RST sources are in a <code class="docutils literal notranslate"><span class="pre">source</span></code> folder and constructs go into a <code class="docutils literal notranslate"><span class="pre">build</span></code> folder.</p>
+<p>Another alternative is <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code> that constructs the API documentation with the two folders and perform
+the transformation afterwards.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prompt</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="n">html</span> <span class="n">source</span> <span class="n">build</span>
+<span class="n">prompt</span><span class="o">&gt;</span> <span class="o">./</span><span class="n">sphinx</span><span class="o">-</span><span class="n">build</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span> <span class="n">latex</span> <span class="n">source</span> <span class="n">build</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="tex-and-latex">
+<h3>TeX and LaTeX<a class="headerlink" href="#tex-and-latex" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>TBD</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="HASS.html#hass-dgtls"><span class="std std-ref">“Digital tools” in Tools for Humanities and Social Sciences</span></a></p>
+</div>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="HASS.html" title="Tools for Humanities and Social Sciences – HASS"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="CEDHAR’s ‘howto’ docs"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.3 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, CEDHAR - Aarhus University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>
