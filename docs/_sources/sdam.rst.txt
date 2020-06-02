@@ -107,11 +107,11 @@ development.
     
         Package ``multigraph``. Versions: 
         [`CRAN <https://CRAN.R-project.org/package=multigraph>`_], 
-        [`GitHub <https:\\github.com/mplex/multigraph>`_].
+        [`GitHub <https://github.com/mplex/multigraph>`_].
     
         Package ``multiplex``. Versions: 
         [`CRAN <https://CRAN.R-project.org/package=multiplex>`_], 
-        [`GitHub <https:\\github.com/mplex/multiplex>`_].
+        [`GitHub <https://github.com/mplex/multiplex>`_].
 
 
 
@@ -164,11 +164,16 @@ News for ``sdam`` package
 -------------------------
 
 
-* 19-5-2020  version 0.2.0 released.
-    - **New function** ``edhw()`` for manipulation of the ``EDH`` dataset
+* **Version 0.2.0** released (19-5-2020).
+    - *New function* ``edhw()`` for manipulation of the ``EDH`` dataset
 
-* 6-5-2020  version 0.1.0 released.
-    - **First functions** ``get.edh()``, ``get.edhw()``, ``request()``, ``simil()``, and the ``EDH`` dataset
+    * v.0.2.1  (26-5-2020)  Function ``edhw()`` can extract variables from ``EDH`` *fragments*
+
+|
+
+
+* **Version 0.1.0** released (6-5-2020).
+    - *First functions* ``get.edh()``, ``get.edhw()``, ``request()``, ``simil()``, and the ``EDH`` dataset
 
 
 

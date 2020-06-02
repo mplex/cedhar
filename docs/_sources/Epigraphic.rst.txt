@@ -577,8 +577,8 @@ dataset. For this, we choose *variables* from the EDH list that are ``"not_after
 
 .. code-block:: R
 
-    # make a list for three variables in 'EDH'
-    R> EDHdates <- edhw(c("ID", "not_after", "not_before") )
+    # make a list for three variables in 'EDH' (default)
+    R> EDHdates <- edhw(vars=c("ID", "not_after", "not_before") )
     
 
 
@@ -642,7 +642,7 @@ It is also possible to remove missing data from ``EDH`` by activating the ``na.r
 .. code-block:: R
 
     # remove missing data
-    R> EDHdt <- edhw(c("ID", "not_after", "not_before"), na.rm=TRUE)
+    R> EDHdt <- edhw(vars=c("ID", "not_after", "not_before"), na.rm=TRUE)
 
 
 and now the object has a shorter length
@@ -676,7 +676,7 @@ To produce data frames, we need to make it explicit in the function.
 .. code-block:: R
 
     # produce a data frame with three variables and remove missing data
-    R> EDHdtdf  <- edhw(c("ID", "not_after", "not_before"), as="df", na.rm=TRUE )
+    R> EDHdtdf  <- edhw(vars=c("ID", "not_after", "not_before"), as="df", na.rm=TRUE )
 
 
 ..  .. code-block:: R
