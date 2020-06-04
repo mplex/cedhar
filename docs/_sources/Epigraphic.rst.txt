@@ -42,9 +42,11 @@ For inscriptions, the generic search pattern Uniform Resource Identifier
     
     https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&par_2=value&par_n=value
 
-with parameters `par` *1,2,...n*.
+with parameters `par` :math:`1,2,...n`.
 
-..  with parameters `par` :math:`1,2,...n`.
+
+.. with parameters `par` *1,2,...n*.
+
 
 
 
@@ -137,7 +139,7 @@ Currently, function ``get.edhw()`` works only for inscriptions.
 Search parameters
 -----------------
 
-The following parameter description is from
+The following parameter description is from the [EDH] database [API] 
 <https://edh-www.adw.uni-heidelberg.de/data/api>:
 
 
@@ -147,25 +149,25 @@ Inscriptions and Geography
 
 - `province:`
 
-   get list of valid values at
-    <https://edh-www.adw.uni-heidelberg.de/data/api/terms/province>,
-    case insensitive
+   get list of valid values at `province terms 
+   <https://edh-www.adw.uni-heidelberg.de/data/api/terms/province>`_,
+   in the [EDH] database [API], case insensitive
 
 - `country:`
 
-   get list of valid values at
-    <https://edh-www.adw.uni-heidelberg.de/data/api/terms/country>, case
-    insensitive
+   get list of valid values at `country terms 
+   <https://edh-www.adw.uni-heidelberg.de/data/api/terms/country>`_ 
+   in the [EDH] database [API], case insensitive
 
 - `findspot_modern:`
 
    add leading and/or trailing truncation by asterisk \*, e.g.
-    ``findspot\_modern=köln\*``, case insensitive
+   ``findspot\_modern=köln\*``, case insensitive
 
 - `findspot_ancient:`
 
    add leading and/or trailing truncation by asterisk \*, e.g.
-    ``findspot\_ancient=aquae\*``, case insensitive
+   ``findspot\_ancient=aquae\*``, case insensitive
 
 - `offset:`
 
@@ -177,9 +179,19 @@ Inscriptions and Geography
 
 - `bbox:`
 
-   bounding box in the format bbox=minLong, minLat, maxLong, maxLat,
-    example:
-    ``<https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48>``
+   bounding box with the format ``bbox=minLong, minLat, maxLong, maxLat``.
+   
+
+   
+   The query example:
+
+..  code-block:: 
+    
+    https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48
+
+
+that in [R] is a vector character.
+
 
 
     .. hint::
@@ -222,9 +234,9 @@ Inscriptions only
 
 - `type:`
 
-   of inscription, get list of values at
-    <https://edh-www.adw.uni-heidelberg.de/data/api/terms/type>, case
-    insensitive
+   of inscription, get list of values at `terms type 
+   <https://edh-www.adw.uni-heidelberg.de/data/api/terms/type>`_ 
+   in the [EDH] database [API], case insensitive
 
 |
 
@@ -512,7 +524,7 @@ the ``sdam`` `manual <https://github.com/mplex/cedhar/blob/master/typesetting/re
 Function ``edhw()``
 ===================
 
-A wrapper function for EDH manipulation is found in function ``edhw()``.
+A wrapper function for EDH manipulation is found in routine ``edhw()``.
 
 |
 

@@ -136,7 +136,7 @@ public Application Programming Interface (API).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&amp;par_2=value&amp;par_n=value
 </pre></div>
 </div>
-<p>with parameters <cite>par</cite> <em>1,2,…n</em>.</p>
+<p>with parameters <cite>par</cite> <span class="math notranslate nohighlight">\(1,2,...n\)</span>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -223,43 +223,33 @@ written in <code class="docutils literal notranslate"><span class="pre">R</span>
 </div>
 <div class="section" id="search-parameters">
 <h3>Search parameters<a class="headerlink" href="#search-parameters" title="Permalink to this headline">¶</a></h3>
-<p>The following parameter description is from
+<p>The following parameter description is from the [EDH] database [API]
 &lt;<a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api">https://edh-www.adw.uni-heidelberg.de/data/api</a>&gt;:</p>
 <div class="section" id="inscriptions-and-geography">
 <h4>Inscriptions and Geography<a class="headerlink" href="#inscriptions-and-geography" title="Permalink to this headline">¶</a></h4>
 <ul>
 <li><p><cite>province:</cite></p>
 <blockquote>
-<div><dl class="simple">
-<dt>get list of valid values at</dt><dd><p>&lt;<a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api/terms/province">https://edh-www.adw.uni-heidelberg.de/data/api/terms/province</a>&gt;,
-case insensitive</p>
-</dd>
-</dl>
+<div><p>get list of valid values at <a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api/terms/province">province terms</a>,
+in the [EDH] database [API], case insensitive</p>
 </div></blockquote>
 </li>
 <li><p><cite>country:</cite></p>
 <blockquote>
-<div><dl class="simple">
-<dt>get list of valid values at</dt><dd><p>&lt;<a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api/terms/country">https://edh-www.adw.uni-heidelberg.de/data/api/terms/country</a>&gt;, case
-insensitive</p>
-</dd>
-</dl>
+<div><p>get list of valid values at <a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api/terms/country">country terms</a>
+in the [EDH] database [API], case insensitive</p>
 </div></blockquote>
 </li>
 <li><p><cite>findspot_modern:</cite></p>
 <blockquote>
-<div><dl class="simple">
-<dt>add leading and/or trailing truncation by asterisk *, e.g.</dt><dd><p><code class="docutils literal notranslate"><span class="pre">findspot\_modern=köln\*</span></code>, case insensitive</p>
-</dd>
-</dl>
+<div><p>add leading and/or trailing truncation by asterisk *, e.g.
+<code class="docutils literal notranslate"><span class="pre">findspot\_modern=köln\*</span></code>, case insensitive</p>
 </div></blockquote>
 </li>
 <li><p><cite>findspot_ancient:</cite></p>
 <blockquote>
-<div><dl class="simple">
-<dt>add leading and/or trailing truncation by asterisk *, e.g.</dt><dd><p><code class="docutils literal notranslate"><span class="pre">findspot\_ancient=aquae\*</span></code>, case insensitive</p>
-</dd>
-</dl>
+<div><p>add leading and/or trailing truncation by asterisk *, e.g.
+<code class="docutils literal notranslate"><span class="pre">findspot\_ancient=aquae\*</span></code>, case insensitive</p>
 </div></blockquote>
 </li>
 <li><p><cite>offset:</cite></p>
@@ -274,10 +264,17 @@ insensitive</p>
 </li>
 <li><p><cite>bbox:</cite></p>
 <blockquote>
-<div><dl>
-<dt>bounding box in the format bbox=minLong, minLat, maxLong, maxLat,</dt><dd><p>example:
-<code class="docutils literal notranslate"><span class="pre">&lt;https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48&gt;</span></code></p>
-<div class="admonition hint">
+<div><p>bounding box with the format <code class="docutils literal notranslate"><span class="pre">bbox=minLong,</span> <span class="pre">minLat,</span> <span class="pre">maxLong,</span> <span class="pre">maxLat</span></code>.</p>
+<p>The query example:</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48
+</pre></div>
+</div>
+<p>that in [R] is a vector character.</p>
+<blockquote>
+<div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>Just make sure to quote the arguments in <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> for the different
 parameters that are not integers. This means for example that the query
@@ -287,11 +284,7 @@ for the last parameter with the two search options is written as</p>
 </pre></div>
 </div>
 </div>
-</dd>
-</dl>
 </div></blockquote>
-</li>
-</ul>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -326,11 +319,8 @@ for the last parameter with the two search options is written as</p>
 </li>
 <li><p><cite>type:</cite></p>
 <blockquote>
-<div><dl class="simple">
-<dt>of inscription, get list of values at</dt><dd><p>&lt;<a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api/terms/type">https://edh-www.adw.uni-heidelberg.de/data/api/terms/type</a>&gt;, case
-insensitive</p>
-</dd>
-</dl>
+<div><p>of inscription, get list of values at <a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api/terms/type">terms type</a>
+in the [EDH] database [API], case insensitive</p>
 </div></blockquote>
 </li>
 </ul>
@@ -567,7 +557,7 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 </div>
 <div class="section" id="function-edhw">
 <h2>Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code><a class="headerlink" href="#function-edhw" title="Permalink to this headline">¶</a></h2>
-<p>A wrapper function for EDH manipulation is found in function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
+<p>A wrapper function for EDH manipulation is found in routine <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
