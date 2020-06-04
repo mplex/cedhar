@@ -496,7 +496,7 @@ Attribute ``people`` is another list with other `attribute` names
 
 
 You can find a complete list of attribute names in the ``EDH`` dataset in 
-the ``sdam`` manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>.
+the ``sdam`` `manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_.
 
 
 
