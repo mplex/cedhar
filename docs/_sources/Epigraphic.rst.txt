@@ -42,7 +42,10 @@ For inscriptions, the generic search pattern Uniform Resource Identifier
     
     https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&par_2=value&par_n=value
 
-with parameters `par` :math:`1,2,...n`.
+with parameters `par` *1,2,...n*.
+
+..  with parameters `par` :math:`1,2,...n`.
+
 
 
 |
@@ -499,26 +502,31 @@ the ``sdam`` manual <https://github.com/mplex/cedhar/blob/master/typesetting/rep
 
 |
 
+|
 
 .. _edhw-fun:
 
+.. function:: edhw
 
-.. Function ``edhw()``
 
+Function ``edhw()``
+===================
+
+A wrapper function for EDH manipulation is found in function ``edhw()``.
+
+|
 
 Function usage
 --------------
 
 
-.. function:: edhw
-
 
 .. code-block:: R
 
-    # wrapper function for EDH manipulation
-    R> edhw(vars, as = c("list", "df"), limit, id, na.rm, ...)
+    # list of accepted parameter arguments
+    R> edhw(vars, x=NULL, as=c("list", "df"), limit, id, na.rm, ...)
 
-
+|
 
 Parameters
 ----------
@@ -530,6 +538,11 @@ Formal arguments of ``edhw()`` are:
 - `vars:`
 
    Chosen variables from the ``EDH`` data set (vector)
+ 
+
+- `x:`
+
+   An optional list object name with *fragments* of the ``EDH`` dataset
 
 
 - `as:`
@@ -567,7 +580,9 @@ Relative dating
 
 We are going to apply the ``edhw()`` function to check the relative dating of the inscriptions in the ``EDH`` 
 dataset. For this, we choose *variables* from the EDH list that are ``"not_after"`` and 
-``"not_before"`` with an identification number in ``"ID"``. Hence, in this case there are three variables. 
+``"not_before"`` with an identification number in ``"ID"``. 
+
+For a simple relative dating analysis of ``EDH`` inscriptions, it is enough to choose three variables: 
 
 
 ..  In order , for example, we need to transform the 

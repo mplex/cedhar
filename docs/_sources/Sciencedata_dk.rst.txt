@@ -40,7 +40,7 @@ Accessing DEiC's sciencedata.dk using R
 =======================================
 
 Function [`request() <https://github.com/mplex/cedhar/blob/master/code/request.r>`_] from the ``sdam`` 
-packahe is aimed to interact with DEiC's `sciencedata.dk <https://sciencedata.dk>`__  
+package is aimed to interact with DEiC's `sciencedata.dk <https://sciencedata.dk>`__  
 
 .. with a current version 0.1 (19-01-2020)
 
@@ -239,7 +239,7 @@ afterwards, and recall that ``request()`` requires the ``httr`` package.
 .. code-block:: R
 
     # load required package
-    R> require("httr")
+    R> require("httr")  # https://cran.r-project.org/package=httr 
 
 
 

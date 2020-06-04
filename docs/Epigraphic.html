@@ -64,6 +64,9 @@
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-edhw">Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code></a><ul>
 <li><a class="reference internal" href="#function-usage">Function usage</a></li>
 <li><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
@@ -133,7 +136,7 @@ public Application Programming Interface (API).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?par_1=value&amp;par_2=value&amp;par_n=value
 </pre></div>
 </div>
-<p>with parameters <cite>par</cite> <span class="math notranslate nohighlight">\(1,2,...n\)</span>.</p>
+<p>with parameters <cite>par</cite> <em>1,2,…n</em>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -550,19 +553,32 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<span class="target" id="edhw-fun"></span></div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
-</div>
-<div class="section" id="function-usage">
-<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
-<dl class="function">
+<span class="target" id="edhw-fun"></span><dl class="function">
 <dt id="edhw">
 <code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#edhw" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># wrapper function for EDH manipulation</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">as</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="function-edhw">
+<h2>Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code><a class="headerlink" href="#function-edhw" title="Permalink to this headline">¶</a></h2>
+<p>A wrapper function for EDH manipulation is found in function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="function-usage">
+<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of accepted parameter arguments</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="parameters">
@@ -572,6 +588,11 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <li><p><cite>vars:</cite></p>
 <blockquote>
 <div><p>Chosen variables from the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> data set (vector)</p>
+</div></blockquote>
+</li>
+<li><p><cite>x:</cite></p>
+<blockquote>
+<div><p>An optional list object name with <em>fragments</em> of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</p>
 </div></blockquote>
 </li>
 <li><p><cite>as:</cite></p>
@@ -609,7 +630,8 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <h2>Relative dating<a class="headerlink" href="#relative-dating" title="Permalink to this headline">¶</a></h2>
 <p>We are going to apply the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function to check the relative dating of the inscriptions in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code>
 dataset. For this, we choose <em>variables</em> from the EDH list that are <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code> and
-<code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code> with an identification number in <code class="docutils literal notranslate"><span class="pre">&quot;ID&quot;</span></code>. Hence, in this case there are three variables.</p>
+<code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code> with an identification number in <code class="docutils literal notranslate"><span class="pre">&quot;ID&quot;</span></code>.</p>
+<p>For a simple relative dating analysis of <code class="docutils literal notranslate"><span class="pre">EDH</span></code> inscriptions, it is enough to choose three variables:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list for three variables in &#39;EDH&#39; (default)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
