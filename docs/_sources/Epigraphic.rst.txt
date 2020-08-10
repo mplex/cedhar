@@ -549,7 +549,7 @@ Formal arguments of ``edhw()`` are:
 
 - `vars:`
 
-   Chosen variables from the ``EDH`` data set (vector)
+   Chosen variables from the ``EDH`` dataset (vector)
  
 
 - `x:`
@@ -624,7 +624,7 @@ For a simple relative dating analysis of ``EDH`` inscriptions, it is enough to c
 
 
         where a pair of backquotes (aka "backticks") is a way to refer in ``R`` to names or combinations 
-        of symbols that are otherwise reserved or illegal, called *non-syntactic names*. 
+        of symbols that are otherwise reserved or illegal, or *non-syntactic names*. 
         Hence, e.g. ``apply(foo, `[`, c(...) )`` is the same as ``apply(foo, function (x) x[c(...)])``.
 
 |

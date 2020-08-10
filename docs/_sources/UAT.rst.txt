@@ -84,7 +84,7 @@ data.
 |
 
 UAT for users in GitHub
-=======================
+-----------------------
 
 As with machine testing, the acceptance tests among users of the
 ``R`` package should reveal as well a
@@ -107,7 +107,7 @@ package as well.
 |
 
 UAT exercise
-============
+------------
 
 1) Install the beta version of the package from GitHub plus dependencies into the R environment
 
@@ -121,6 +121,19 @@ UAT exercise
 
 A successful user acceptance test has no errors, and the user is willing
 to use the package in his/her own work.
+
+
+
+
+|
+
+
+Data science and ML engineering
+===============================
+
+
+
+
 
 
 

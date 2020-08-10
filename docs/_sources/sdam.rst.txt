@@ -77,7 +77,7 @@ in the Ancient Mediterranean (`SDAM <https://sdam-au.github.io/sdam-au/>`_) proj
 
 |
 
-Currently, it is possible with sdam to access data from the Epigraphic Database Heidelberg API
+Currently, it is possible with ``sdam`` to access data from the Epigraphic Database Heidelberg API
 with ``get.edh()``, and the wrapper function ``get.edhw()`` as well. Most of the data is available 
 in the dataset attached to the package, which is called ``EDH``.
 
@@ -167,9 +167,15 @@ News for ``sdam`` package
 * **Version 0.2.0** released (19-5-2020).
     - *New function* ``edhw()`` for manipulation of the ``EDH`` dataset
 
-    * v.0.2.1  (26-5-2020)  Function ``edhw()`` can extract variables from ``EDH`` *fragments*
+    * v.0.2.1 available (26-5-2020)  Function ``edhw()`` can extract variables from ``EDH`` *fragments*
     
     * Documentation `website <https://sdam-au.github.io/sdam/>`_ lunched
+    
+    * v.0.2.2 available  (2-7-2020)  Argument ``force`` is added to ``request()``
+
+    * v.0.2.3 available  (4-8-2020)  Argument ``rm.file`` is added to ``request()``
+
+    
 
 
 |

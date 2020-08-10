@@ -7,9 +7,9 @@ DEiC's sciencedata.dk
 *********************
 
 
-Accessing DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_  needs another tools, 
-and this is basically achieved by performing a HTTP request as a **client** to one of 
-DEiC's **server**.
+Accessing DEiC's (Danish e-Infrastructure Cooperation) `sciencedata.dk <https:\\sciencedata.dk>`_  
+needs another tools, and this is basically achieved by performing a HTTP request as a **client** 
+to one of DEiC's **server**.
 
 
     .. code-block:: 
@@ -170,7 +170,7 @@ That is, an [R] code will be like
     R> request("file", path="/path")
 
 
-Many times, DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ places the data on a *subdomain*, and for some methods like ``PUT`` it is required to specify the suddomain as well.
+Many times, DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ places the data on a *subdomain*, and for some request methods like ``PUT`` it is needed to specify the subdomain as well.
 
 
 
@@ -197,7 +197,7 @@ need some sort of authentication. With the basic authentication, the credentials
         .. code-block:: R
         
             # user credentials
-            R> cred <- c("YOUR-AUID@au.dk", "YOURPASSWORD")
+            R> mycred <- c("YOUR-AUID@au.dk", "YOURPASSWORD")
 
 
 
@@ -257,7 +257,7 @@ This method is for accessing the files with the data.
 .. code-block:: R
     
     # for personal data (in case you have this file)
-    R> request("df.json", cred=cred)
+    R> request("df.json", cred=mycred)
 
     #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
     
@@ -265,7 +265,7 @@ This method is for accessing the files with the data.
 .. code-block:: R
     
     # for shared folders (example Vojtech test folder), where both options work
-    R> request("df.json", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="GET", cred=cred)
+    R> request("df.json", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="GET", cred=mycred)
 
     #[1] {"a":{"0":"a1","1":"a2"},"b":{"0":"b1","1":"b2"},"c":{"0":"c1","1":"c2"}}
 
@@ -295,7 +295,7 @@ For method ``PUT``, the subdomain is mandatory; otherwise the request is redirec
 .. code-block:: R
 
     # for personal data (in my case) I need to specify the subdomain; otherwise it gets redirected!
-    R> request(system.file("CITATION"), method="PUT", cred=cred)
+    R> request(system.file("CITATION"), method="PUT", cred=mycred)
 
     # Response [https://sciencedata.dk/files/CITATION]
     #  Date: 2020-01-17 13:31
@@ -310,7 +310,7 @@ The HTTP status code ``307`` means temporary redirect.
 .. code-block:: R
     
     # my data is in subdomain "silo1"
-    R> request(system.file("CITATION"), method="PUT", cred=cred, subdomain="silo1")
+    R> request(system.file("CITATION"), method="PUT", cred=mycred, subdomain="silo1")
 
     # Response [https://silo1.sciencedata.dk/files/CITATION]
     #  Date: 2020-01-17 13:31
@@ -330,7 +330,7 @@ The HTTP status code ``201`` means that the file was created in the server side.
     # (example Vojtech test folder) 
     
     R> request(system.file("CITATION"), path="sharingin/648597@au.dk/TEST_shared_folder", 
-    +    method="PUT", cred=cred)
+    +    method="PUT", cred=mycred)
 
     # Response [https://sciencedata.dk/sharingin/648597@au.dk/TEST_shared_folder/CITATION]
     #  Date: 2020-01-17 13:34
@@ -341,7 +341,7 @@ The HTTP status code ``201`` means that the file was created in the server side.
     
     
     R> request(system.file("CITATION"), path="sharingout/648597@au.dk/TEST_shared_folder", 
-    +    method="PUT", cred=cred)
+    +    method="PUT", cred=mycred)
 
     #Response [https://sciencedata.dk/sharingout/648597%40au.dk/TEST_shared_folder//CITATION]
     #  Date: 2020-02-10 09:32
@@ -373,7 +373,7 @@ and for ``DELETE`` the *response* is given with ``sharingout`` in the path.
 .. code-block:: R
     
     # for personal data
-    R> request("df.json", method="DELETE", cred=cred)
+    R> request("df.json", method="DELETE", cred=mycred)
     
     # In my case, this is in
     #[1] "https://silo1.sciencedata.dk/files/df.json"
@@ -382,7 +382,7 @@ and for ``DELETE`` the *response* is given with ``sharingout`` in the path.
 .. code-block:: R
     
     # for shared folders (example Vojtech test folder)
-    R> request("CITATION", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="DELETE", cred=cred)
+    R> request("CITATION", path="/sharingin/648597@au.dk/TEST_shared_folder/", method="DELETE", cred=mycred)
 
     #[[1]]
     #[1] "https://sciencedata.dk/sharingout/648597%40au.dk/TEST_shared_folder/CITATION"
@@ -395,7 +395,8 @@ Method POST
 -----------
 
 
-Finally, there is also the possibility to *place* files with the ``POST`` method. 
+Finally, there is also the possibility to *place* files with the ``POST`` method along with extra 
+information. 
 
 
 .. code-block:: R

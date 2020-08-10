@@ -11,3 +11,4 @@ Modules
    EpigraphicNetwork
    Sciencedata_dk
    sdam
+..   trapz

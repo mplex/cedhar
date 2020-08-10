@@ -96,10 +96,10 @@ or an ``Array`` or another JSON ``Object`` as the above example.
 
 .. _xml-str:
 
-eXtensible Markup Language structure
-------------------------------------
+eXtensible Markup Language
+--------------------------
 
-    .. todo::  eXtensible markup language (XML) 
+    .. todo::  eXtensible markup language (XML) structure 
 
 
 |
@@ -206,6 +206,18 @@ TeX and LaTeX
 
 
      .. todo::  TBD
+
+
+|
+
+
+Another data format
+-------------------
+
+
+     .. todo::  TBD
+
+
 
 
 |

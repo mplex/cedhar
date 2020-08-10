@@ -101,9 +101,9 @@
             
   <div class="section" id="deic-s-sciencedata-dk">
 <span id="deic-sddk"></span><h1>DEiC’s sciencedata.dk<a class="headerlink" href="#deic-s-sciencedata-dk" title="Permalink to this headline">¶</a></h1>
-<p>Accessing DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a>  needs another tools,
-and this is basically achieved by performing a HTTP request as a <strong>client</strong> to one of
-DEiC’s <strong>server</strong>.</p>
+<p>Accessing DEiC’s (Danish e-Infrastructure Cooperation) <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a>
+needs another tools, and this is basically achieved by performing a HTTP request as a <strong>client</strong>
+to one of DEiC’s <strong>server</strong>.</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>************
 |  CLIENT  | --&gt;-- &gt; request  &gt; --&gt;--&gt;--&gt;--&gt;.
@@ -235,7 +235,7 @@ However, for personal folders is the <code class="docutils literal notranslate">
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;file&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/path&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Many times, DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> places the data on a <em>subdomain</em>, and for some methods like <code class="docutils literal notranslate"><span class="pre">PUT</span></code> it is required to specify the suddomain as well.</p>
+<p>Many times, DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a> places the data on a <em>subdomain</em>, and for some request methods like <code class="docutils literal notranslate"><span class="pre">PUT</span></code> it is needed to specify the subdomain as well.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -255,7 +255,7 @@ need some sort of authentication. With the basic authentication, the credentials
 <p>It is possible to prevent the widget by recording this information in a vector object.
 If you want to avoid a dialog box then save your credentials.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># user credentials</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">cred</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;YOUR-AUID@au.dk&quot;</span><span class="p">,</span> <span class="s">&quot;YOURPASSWORD&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">mycred</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;YOUR-AUID@au.dk&quot;</span><span class="p">,</span> <span class="s">&quot;YOURPASSWORD&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -296,13 +296,13 @@ afterwards, and recall that <code class="docutils literal notranslate"><span cla
 <h3>Method GET<a class="headerlink" href="#method-get" title="Permalink to this headline">¶</a></h3>
 <p>This method is for accessing the files with the data.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for personal data (in case you have this file)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">mycred</span><span class="p">)</span>
 
 <span class="c1">#[1] {&quot;a&quot;:{&quot;0&quot;:&quot;a1&quot;,&quot;1&quot;:&quot;a2&quot;},&quot;b&quot;:{&quot;0&quot;:&quot;b1&quot;,&quot;1&quot;:&quot;b2&quot;},&quot;c&quot;:{&quot;0&quot;:&quot;c1&quot;,&quot;1&quot;:&quot;c2&quot;}}</span>
 </pre></div>
 </div>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for shared folders (example Vojtech test folder), where both options work</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/sharingin/648597@au.dk/TEST_shared_folder/&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/sharingin/648597@au.dk/TEST_shared_folder/&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;GET&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">mycred</span><span class="p">)</span>
 
 <span class="c1">#[1] {&quot;a&quot;:{&quot;0&quot;:&quot;a1&quot;,&quot;1&quot;:&quot;a2&quot;},&quot;b&quot;:{&quot;0&quot;:&quot;b1&quot;,&quot;1&quot;:&quot;b2&quot;},&quot;c&quot;:{&quot;0&quot;:&quot;c1&quot;,&quot;1&quot;:&quot;c2&quot;}}</span>
 </pre></div>
@@ -328,7 +328,7 @@ is named <code class="docutils literal notranslate"><span class="pre">silo</span
 and other users that will follow are probably located at <code class="docutils literal notranslate"><span class="pre">silo2</span></code>, etc.
 For method <code class="docutils literal notranslate"><span class="pre">PUT</span></code>, the subdomain is mandatory; otherwise the request is redirected.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for personal data (in my case) I need to specify the subdomain; otherwise it gets redirected!</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">mycred</span><span class="p">)</span>
 
 <span class="c1"># Response [https://sciencedata.dk/files/CITATION]</span>
 <span class="c1">#  Date: 2020-01-17 13:31</span>
@@ -339,7 +339,7 @@ For method <code class="docutils literal notranslate"><span class="pre">PUT</spa
 </div>
 <p>The HTTP status code <code class="docutils literal notranslate"><span class="pre">307</span></code> means temporary redirect.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># my data is in subdomain &quot;silo1&quot;</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">,</span> <span class="n">subdomain</span><span class="o">=</span><span class="s">&quot;silo1&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">mycred</span><span class="p">,</span> <span class="n">subdomain</span><span class="o">=</span><span class="s">&quot;silo1&quot;</span><span class="p">)</span>
 
 <span class="c1"># Response [https://silo1.sciencedata.dk/files/CITATION]</span>
 <span class="c1">#  Date: 2020-01-17 13:31</span>
@@ -354,7 +354,7 @@ For method <code class="docutils literal notranslate"><span class="pre">PUT</spa
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># (example Vojtech test folder)</span>
 
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;sharingin/648597@au.dk/TEST_shared_folder&quot;</span><span class="p">,</span>
-<span class="o">+</span>    <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
+<span class="o">+</span>    <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">mycred</span><span class="p">)</span>
 
 <span class="c1"># Response [https://sciencedata.dk/sharingin/648597@au.dk/TEST_shared_folder/CITATION]</span>
 <span class="c1">#  Date: 2020-01-17 13:34</span>
@@ -365,7 +365,7 @@ For method <code class="docutils literal notranslate"><span class="pre">PUT</spa
 
 
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="nf">system.file</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">),</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;sharingout/648597@au.dk/TEST_shared_folder&quot;</span><span class="p">,</span>
-<span class="o">+</span>    <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
+<span class="o">+</span>    <span class="n">method</span><span class="o">=</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">mycred</span><span class="p">)</span>
 
 <span class="c1">#Response [https://sciencedata.dk/sharingout/648597%40au.dk/TEST_shared_folder//CITATION]</span>
 <span class="c1">#  Date: 2020-02-10 09:32</span>
@@ -393,14 +393,14 @@ otherwise it gets redirected.</p>
 the path in the url is followed by <code class="docutils literal notranslate"><span class="pre">sharingin/userid/foldername</span></code>,
 and for <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> the <em>response</em> is given with <code class="docutils literal notranslate"><span class="pre">sharingout</span></code> in the path.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for personal data</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;df.json&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">mycred</span><span class="p">)</span>
 
 <span class="c1"># In my case, this is in</span>
 <span class="c1">#[1] &quot;https://silo1.sciencedata.dk/files/df.json&quot;</span>
 </pre></div>
 </div>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># for shared folders (example Vojtech test folder)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/sharingin/648597@au.dk/TEST_shared_folder/&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">cred</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="s">&quot;CITATION&quot;</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s">&quot;/sharingin/648597@au.dk/TEST_shared_folder/&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">cred</span><span class="o">=</span><span class="n">mycred</span><span class="p">)</span>
 
 <span class="c1">#[[1]]</span>
 <span class="c1">#[1] &quot;https://sciencedata.dk/sharingout/648597%40au.dk/TEST_shared_folder/CITATION&quot;</span>
@@ -412,7 +412,8 @@ and for <code class="docutils literal notranslate"><span class="pre">DELETE</spa
 </div>
 <div class="section" id="method-post">
 <h3>Method POST<a class="headerlink" href="#method-post" title="Permalink to this headline">¶</a></h3>
-<p>Finally, there is also the possibility to <em>place</em> files with the <code class="docutils literal notranslate"><span class="pre">POST</span></code> method.</p>
+<p>Finally, there is also the possibility to <em>place</em> files with the <code class="docutils literal notranslate"><span class="pre">POST</span></code> method along with extra
+information.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="n">FILE</span><span class="p">,</span> <span class="n">URL</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
