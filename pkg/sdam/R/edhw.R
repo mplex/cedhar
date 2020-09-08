@@ -21,10 +21,25 @@ function (vars, x = NULL, as = c("list", "df"), limit, id, na.rm,
         ifelse(isTRUE(is.character(x) == TRUE) == TRUE, x <- eval(parse(text = x)), 
             NA)
     }
-    if (all(vars %in% unique(names(unlist(x)))) == FALSE) {
-        warning(paste("Variable(s)", vars[which(!(vars %in% unique(names(unlist(x)))))], 
-            "is/are disregarded", sep = " "))
-        vars <- vars[which(vars %in% unique(names(unlist(x))))]
+    if (missing(vars) == TRUE) {
+        if (match.arg(as) == "list") {
+            ifelse(isTRUE(flgdf == TRUE) == TRUE, return(as.list(x)), 
+                return(x))
+        }
+        else if (match.arg(as) == "df") {
+            ifelse(isTRUE(flgdf == FALSE) == TRUE, vars <- unique(names(unlist(x))), 
+                return(x))
+        }
+    }
+    else {
+        NA
+    }
+    ifelse(isTRUE(flgdf == FALSE) == TRUE, xvars <- unique(names(unlist(x))), 
+        xvars <- colnames(x))
+    if (all(vars %in% xvars) == FALSE) {
+        warning(paste("Variable(s)", vars[which(!(vars %in% xvars))], 
+            "is/are not present and disregarded.", sep = " "))
+        vars <- vars[which(vars %in% xvars)]
     }
     else {
         NA
