@@ -1,0 +1,186 @@
+
+.. _MCMC:
+
+
+************************
+Monte Carlo Markov chain
+************************
+
+
+Monte Carlo
+===========
+
+
+*Monte Carlo* refers to the method (created by Stanislaw Ulam) of generating random 
+numbers from a certain distribution. 
+
+.. For archaeological applications, 
+
+For dealing with temporary uncertainty, for example, a Monte Carlo method consists on 
+creating artificial "potential" time series within the boundary of existence, and then 
+assessing the likelihood of the variable's character state over time. 
+
+
+
+Markov chain
+============
+
+A *Markov chain* is a sequence of numbers where each number is dependent on the previous 
+number in the sequence.
+
+
+To simulate a Markov chain whose equilibrium distribution is :math:`p(x)`, we use Monte 
+Carlo Markov chain (MCMC) methods.
+
+
+MCMC algorithms: 
+
+* Metropolis-Hastings
+* Gibbs sampling
+* Random walk Metropolis  
+
+
+.. * Importance/rejection sampling (related, not MCMC)
+
+|
+
+
+Metropolis-Hastings
+-------------------
+
+The *Metropolis-Hastings* algorithm serves to generate a sample from the posterior distribution 
+of :math:`\theta`, which is the parameter of the data point's distribution. 
+
+
+
+
+|
+
+
+Diagnostics
+===========
+
+Diagnostics is to assess the MCMC performance.
+
+The trace plot (or time-series plot) is to judge how quickly the MCMC procedure converges in distribution. 
+
+When the variability is not the same over all iterations, the trace plot presents a "random walk" pattern. 
+
+
+
+
+|
+
+
+Burn-in
+--------
+
+First generate a series of random numbers from a normal distribution with a mean value and some arbitrary variance. 
+
+
+    .. todo:: 
+    
+        Throwing away early samples is called burn-in...
+
+
+|
+
+
+MCMC Simulation
+---------------
+
+    .. todo:: 
+    
+        After the burn-in, are the MCM iterations...
+
+
+
+
+
+
+|
+
+
+Thinning
+--------
+
+    .. todo:: 
+    
+        Thinning is to reduce degree of auto-correlation...
+
+
+|
+
+
+Convergence
+-----------
+
+Convergence in MCMC is obtained when these outcomes become minimal with the increase of :math:`n`:
+
+* the change in the variance
+* the standard error
+
+
+|
+
+
+Bayesian statistics
+===================
+
+MCMC is for sampling from distributions with high dimensionality, which is a need typically 
+found in some Bayesian statistics contexts. 
+
+Bayesian analysis implies Bayesian inference, model fitting, and performing inferential and 
+predictive summaries with predictive checks. 
+
+As mentioned in :ref:`temporal uncertainty <uncertainty>`, the subjective approach in 
+assigning probabilities includes a certain degree of belief or knowledge to the probability, 
+and this is to arrive at a posterior distribution to updated the state of knowledge about the 
+parameters. 
+
+
+
+|
+
+
+
+Bayes theorem
+-------------
+
+Key concepts in Bayesian statistics are related in Bayes theorem, which is a rule 
+that provides the conditional probability of :math:`A` (model or hypothesis) 
+occurring given that :math:`B` (data or observation) already happened.  
+
+:math:`P(A \mid B) \;=\; \frac{ P(A)~P(B \mid A)  } { P(B)  }` 
+
+That is, the posterior probability of :math:`A` given :math:`B` where
+
+* :math:`P(A \mid B)` is the **posterior** probability of :math:`A`
+* :math:`P(A)` is the **prior** probability of :math:`A`
+* :math:`P(B \mid A)` is the **likelihood** of :math:`A`
+* :math:`P(B)` is the **unconditional** probability of :math:`B`
+
+
+Hence, the posterior is an updated degree of belief or knowledge based on the prior 
+with known probabilities. 
+
+On the other hand, the likelihood is the probability that the hypothesis confers upon 
+the observation, and the probability of the observation irrespective of any hypothesis 
+is the unconditional probability of the observation. 
+
+
+.. We are interested in the probability given all of the observations, and Bayes theorem 
+
+
+
+|
+
+
+.. :math:`\theta =` the probability of 
+
+
+
+.. meta::
+   :description: Monte Carlo methods and Markov chain
+   :keywords: Bayesian, MCMC
+

@@ -137,7 +137,7 @@ Epigraphic network data
 Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity. 
 For example, we create a list object ``epinetl`` with the ``ID`` of the inscription plus seven other characteristics from
 the EDH dataset ``EDH``. 
-See :ref:`"Check Dates" in Epigraphic Database Heidelberg <recursively-apply>` for another use of functional programming with ``lapply``. 
+See :ref:`"Relative Dating" in Epigraphic Database Heidelberg <recursively-apply>` for another use of functional programming with ``lapply``. 
 
 
 .. code-block:: R

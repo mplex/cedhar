@@ -18,12 +18,12 @@ to one of DEiC's **server**.
                                                                  
                                                                  
          ************                                            
-         |  CLIENT  | -->-- > request  > -->-->-->-->.           
+         |  CLIENT  | -->-->  request  ->-->-->-->-->.           
          |  ======  |                                |           
          ************                                .           
               `                                      |           
               ^                                 ************     
-              `-<--<--<--<--<-  response <-- <- |  SERVER  |     
+              `<--<--<--<--<  response  <-- <-- |  SERVER  |     
                                                 |  ======  |     
                                                 ************     
                                                                  
@@ -31,7 +31,7 @@ to one of DEiC's **server**.
 
 |
 
-The server's response depends on the method used in the request.
+The server's response depends on the method used in the HTTP request.
 
 |
 
@@ -39,10 +39,11 @@ The server's response depends on the method used in the request.
 Accessing DEiC's sciencedata.dk using R
 =======================================
 
-Function [`request() <https://github.com/mplex/cedhar/blob/master/code/request.r>`_] from the ``sdam`` 
-package is aimed to interact with DEiC's `sciencedata.dk <https://sciencedata.dk>`__  
+Function `request() <https://github.com/mplex/cedhar/blob/master/code/request.r>`_ 
+from the `R package "sdam" <https://sdam-au.github.io/sdam/>`_ is aimed to interact 
+with DEiC's `sciencedata.dk <https://sciencedata.dk>`__  
 
-.. with a current version 0.1 (19-01-2020)
+.. first version 0.1 (19-01-2020)
 
                            
 
@@ -139,6 +140,17 @@ Arguments of ``request()`` are retrieved with the ``formals()`` function.
 
 |
 
+
+
+    .. note:: 
+    
+        Aliases for ``request()`` are ``sddk()`` and ``SDDK()``. 
+
+
+
+|
+
+
 Output
 ------
 
@@ -157,7 +169,7 @@ There are two types of folders in DEiC's `sciencedata.dk <https:\\sciencedata.dk
 and *shared* folders and both requires authentication with credentials. 
 
 The *path* to the shared folders where the files are located must be specified with the ``path`` argument. 
-However, for personal folders is the ``file`` argument that includes the path information.
+However, for personal folders is the ``file`` argument that includes the path information. 
 
 That is, an [R] code will be like
 
@@ -170,7 +182,8 @@ That is, an [R] code will be like
     R> request("file", path="/path")
 
 
-Many times, DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ places the data on a *subdomain*, and for some request methods like ``PUT`` it is needed to specify the subdomain as well.
+Many times, DEiC's `sciencedata.dk <https:\\sciencedata.dk>`_ places the data on a *subdomain*, and 
+for some request methods like ``PUT`` it is needed to specify the subdomain as well. 
 
 
 
@@ -287,6 +300,11 @@ Method PUT
 The URL typically includes also a *subdomain* that for DEiC's `sciencedata.dk <https://sciencedata.dk>`__ 
 is named ``silo`` followed by a number. For instance, my personal documents are located in ``silo1.sciencedata.dk``, 
 and other users that will follow are probably located at ``silo2``, etc. 
+
+
+``PUT`` in own folder
+"""""""""""""""""""""
+
 For method ``PUT``, the subdomain is mandatory; otherwise the request is redirected.
 
 ..  with ``Status: 307`` that is temporary redirect.
@@ -365,14 +383,14 @@ Method DELETE
 -------------
 
 In the case of accesing with a request using methods ``GET`` or ``PUT``, 
-the path in the url is followed by ``sharingin/userid/foldername``, 
+the path in the url is followed by ``sharingin/USERID/FOLDERNAME``, 
 and for ``DELETE`` the *response* is given with ``sharingout`` in the path. 
 
 
 
 .. code-block:: R
     
-    # for personal data
+    # for personal folder
     R> request("df.json", method="DELETE", cred=mycred)
     
     # In my case, this is in

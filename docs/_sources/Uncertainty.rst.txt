@@ -1,0 +1,509 @@
+
+.. _uncertainty:
+
+
+********************
+Temporal Uncertainty
+********************
+
+*Temporal* is related to time, which is a (quantitative) continuous variable, while 
+*uncertainty* refers to situations involving unknown information.
+
+.. Like with most continuous variables, however, we typically think in time as a discrete variable 
+.. because time is rounded when measured (a person is 20 years old and not between 20 and 21). 
+
+
+* (see also :ref:`Time and dating <time>`)
+
+
+|
+
+
+Monte-Carlo simulation tests the significance of the observed fluctuations in the context 
+of uncertainty in the calibration curve and [archaeological] sampling. 
+
+
+
+|
+
+Probability and uncertainty
+===========================
+
+We can apply a probabilistic approach when dealing with uncertainty. 
+In this case, uncertainty is considered a measure quantifying the likelihood that events will occur. 
+
+
+
+Different approaches for assigning probabilities include:
+
+* the proportion of a particular outcome to all possible outcomes (classical)
+* the long-run relative frequency of the probability for an outcome to occur
+* certain degree of belief (subjective)
+
+|
+
+Probability space
+-----------------
+
+A *probability space* defines an occurrence or event as a subset of that space. 
+
+
+For example, if the probability space is the interval :math:`[0,1]`, with the :ref:`uniform distribution <unif>` then the interval 
+:math:`[ \frac{1}{3}, 1 ]` is an event that represents a randomly chosen number between :math:`0` and :math:`1` 
+turning out to be at least :math:`\frac{1}{3}`. 
+
+
+
+
+Summed probability distribution
+-------------------------------
+
+A proxy for population levels is found in summed probability distributions (SPD) of dates. 
+
+
+|
+
+
+Probability distributions
+=========================
+
+A *probability distribution* describes the associated probability of possible outcomes for a random variable :math:`X`. 
+
+For a single variable, the data is allocated in univariate distributions, and we use multivariate distributions 
+to infer on multiple parameters. 
+
+
+..  Given a probability space, an *event* is defined to be a (sufficiently nice) 
+
+
+
+
+
+
+|
+
+
+Binomial distribution
+---------------------
+
+A binomial distribution is a continuous distribution that describes a binomial experiment where 
+there are two possible outcomes.
+
+The probability mass function (p.m.f.) corresponding to the binomial distribution 
+represents the probability of :math:`x` successes in a binomial experiment:
+
+..  '\binom' not working
+
+:math:`P(x) \;=\; {n\choose x}  ~p^x (1-p)^{n-x}`
+
+
+where :math:`P(x)` is the  distribution function for the probability of success for :math:`x = 0, 1, 2, \dots, n`. 
+
+
+|
+
+
+
++-------------------------------------+
+|  .. image:: ../images/binomial.png  |
+|     :width: 350                     |
++-------------------------------------+
+
+A plot of the binomial distribution for :math:`n=30` and with different :math:`p` values.
+
+
+|
+
+
+    .. note:: 
+    
+        The Bernoulli distribution is a special case of the binomial distribution 
+        when :math:`n = 1`. 
+
+
+|
+
+
+.. _trap:
+
+
+Trapezoidal distributions
+-------------------------
+
+
+Trapezoidal distributions seems appropriate for modeling the duration and the form of a phenomenon with a growth-stage, 
+relative stability, and decline. These three parameters are not necessarily similar and an occurrence can have, for example, 
+a long development and abrupt decay. 
+
+
+    .. todo:: 
+    
+       Probability density function of the generalized trapezoidal distribution. 
+
+
+
+
+
+|
+
+.. _unif:
+
+
+Uniform distribution
+++++++++++++++++++++
+
+The uniform distribution is a special case of a trapezoidal distribution with a constant probability. 
+
+The probability density function of the continuous uniform distribution for :math:`a \leqslant x \leqslant b`
+
+:math:`f(x) \;=\; \frac{1}{b-a}`
+
+and :math:`f(x) = 0` iff :math:`x<a` or :math:`x>b`
+
+|
+
+                                      
++---------------------------------------+
+|  .. image:: ../images/uniform45.png   |
+|     :width: 300                       |
++---------------------------------------+
+
+Uniform distribution plot for :math:`P(x_1 < X < x_2)`.
+
+
+..                                        
+..  +------------------------------------+
+..  |  .. image:: ../images/uniform.png  |
+..  |     :width: 300                    |
+..  +------------------------------------+
+..                                        
+
+|
+
+
+
+    .. note:: 
+    
+        There is also a discrete version of the uniform distribution with a
+        mass probability function.
+
+
+|
+
+
+Normal distribution
+-------------------
+
+The normal distribution --or "bell curve"-- is the probability distribution for a normal 
+random variable :math:`X \sim \mathcal{N} (\mu,\sigma^2)`. 
+The normal distribution is also called *Gaussian* distribution in honor to C.F. Gauss who described it. 
+
+
+The normal distribution is the most important distribution in statistics, and 
+play a crucial role in statistical inference. 
+This is partly because it approximates well the distributions of many types of variables. 
+
+The exact form of the distribution depends on the values of the mean :math:`\mu` and 
+the standard deviation :math:`\sigma` parameters. 
+
+The probability density function of a normal random variable :math:`-\infty < x < \infty` is:
+
+:math:`f(x) \;=\; \frac{1}{{\sigma \sqrt {2\pi } }}\;e^{{{ - \frac12 \left( \frac{x - \mu }{\sigma} \right)^2 }  }}`
+
+where :math:`e \approx 2.7183` (Euler's number), and :math:`\pi \approx 3.1416` (Pi number). 
+
+
+    .. note:: 
+    
+        A special case of the normal distribution with mean :math:`\mu = 0` and 
+        standard deviation :math:`\sigma = 1` is the *standard normal distribution* :math:`Z`. 
+        Any arbitrary normal distribution can be converted to :math:`Z`.
+
+
+|
+
+
++----------------------------------------+
+|  .. image:: ../images/gaussiansds.png  |
+|     :width: 320                        |
++----------------------------------------+
+
+Normal distributions with different variances :math:`\sigma^2` and same mean :math:`\mu`. 
+
+.. +-------------------------------------+
+.. |  .. image:: ../images/gaussian.png  |
+.. |     :width: 320                     |
+.. +-------------------------------------+
+
+
+
+|
+
+
+Notation
+========
+
+To study temporal uncertainty, the following notation is adopted: 
+
+
+|
+
+
+:math:`\varOmega =` range of time
+
+:math:`\tau =` time span of existence
+
+:math:`\Delta \tau =` duration of :math:`\tau`
+
+:math:`t_i =` a given portion of time
+
+:math:`\Delta t_i =` duration of :math:`t_i`
+
+:math:`\varphi =` temporal resolution
+
+:math:`e =` event or occurrence
+
+:math:`P, p =` probability
+
+|
+
+plus in Appendix A (from Crema)...
+
+
+:math:`d =` duration of :math:`e` 
+
+:math:`b =` numerical index of temporal blocks within :math:`\tau` 
+
+
+    .. note:: 
+    
+        :math:`d` is rounded to the value of the temporal resolution, and :math:`b` ranges 
+        from :math:`1` to :math:`\Delta t_i/\varphi`, which are the edges of the time span. 
+
+|
+
+
+Probabilities of existence for time blocks
+==========================================
+
+
+The probability of existence for each time block
+
+:math:`P_b \;=\; {\sum_{i=0}^{\pi-1} \sum_{j=1}^{d/\varphi} \theta (i+j,\;b)} / {\pi}`
+
+where :math:`\pi` is the number of all possible permutations; i.e. :math:`{(\Delta \tau - d)}/{\varphi + 1}`.
+
+
+
+Temporal resolution
+-------------------
+
+The duration of time blocks that is :math:`\varphi` in the denominator for computing 
+:math:`\pi` is known as the *temporal resolution*, while the numerator expression for 
+the probability of existence for each time block is defined as
+
+.. :math:`\theta (i+j,\;b)` is defined as
+
+:math:`\theta (i+j,\;b) = \begin{cases}1 \quad \text{if}\; i+j = b  \\ 0 \quad \text{if}\; i+j \neq b \end{cases}`
+
+
+
+
+.. :math:`P_b =` probability of existence for each time block 
+
+.. :math:`\pi =` number of all possible permutations; i.e. :math:`{(\Delta \tau - d)}/{\varphi + 1}`
+
+
+
+    .. note:: 
+    
+	The two extremes of :math:`P_b`are :math:`1/\pi` to :math:`1`.
+
+
+|
+
+
+Boundary of existence
+---------------------
+
+.. Archaeology boundaries of the time span of existence :math:`\tau`
+
+* *terminus ante quem*
+* *terminus post quem*
+
+
+
+|
+
+
+.. _aora:
+
+
+Aoristic analysis
+=================
+
+Aoristic analysis is based on the creation of a series of these artificial divisions of 
+the range of time with a fixed value, called time blocks, and the definition of their probability of existence. 
+
+
+
+Aoristic sum
+------------
+
+A proxy for evaluating change in the total counts of events across time is the *aoristic sum*, which is the sum of probabilities for each time block.
+
+The aoristic sum is computed accross events for a single portion of time :math:`t_i`.
+
+    .. code-block:: 
+    
+                                                                 
+                                                                 
+            t1  t2  t3                                        
+             ^   ^   ^                                        
+        a    |   |   |                                        
+        b    |   |   |                                        
+        c    |   |   |                                        
+             ^   ^   ^                                        
+             aoristic                                         
+               sums                                           
+                                                                 
+                                                                 
+
+
+
+    .. todo:: 
+    
+        Aoristic sum explained in R...
+
+
+
+..   :lineno-start: 85390
+
+
+
+|
+
+
+Probability of existence
+------------------------
+
+The probability of existence :math:`p[t_i]` of an event :math:`e` in a range of time :math:`\varOmega` is the probabilty distribution
+
+:math:`p[t_i] = \Delta t_i / \Delta \tau`
+
+where :math:`\tau` is the time span of existence, :math:`\Delta` is for the duration of a given portion of time :math:`t_i` or of :math:`\tau`. 
+
+
+
+
+To compute :math:`p[t_i]`, Crema (p. 447) takes the following example (years are BC):
+
+    .. code-block:: 
+    
+                                                                         
+                                                                         
+        350 ---- 300 ---- 250
+             t1       t2
+        
+             342 ---- 288
+                 tau
+                                                                 
+                                                                 
+
+
+Hence, :math:`\Delta \tau` in this case is :math:`54`.
+
+
+|
+
+
+Temporal resolution
+-------------------
+
+Temporal resolution :math:`\varphi` refers to the duration of time blocks. 
+When :math:`\varphi` is fixed then we have :ref:`aoristic analysis <aora>`.
+
+
+
+To retrieve the minimum probability :math:`P[\varphi_\alpha]` for the boundaries of the first and last time-blocks, 
+we define :math:`\varphi_\alpha = 1` where 
+
+:math:`\phi_\alpha / \Delta_\tau = 1/54 = P[\phi_\alpha] = .018` (approx)
+
+
+Hence, the probability of existence for :math:`t_1`
+
+:math:`P[t_1] = P[\phi_\alpha] \cdot 42`
+
+i.e. :math:`342 - 300`
+
+
+:math:`P[t_1] = .018 \cdot 42  =  .78`
+
+
+The probability of existence for for :math:`t_2`
+
+:math:`P[t_2] = P[\phi_\alpha] \cdot 12`
+
+i.e. :math:`300 - 288`
+
+:math:`P[t_2] = .018 \cdot 12  =  .22`
+
+
+Etc.
+
+|
+
+*Assumption*: Any equally long portion of time within the time span :math:`\tau` has the same probability of existence. 
+Plus others...
+
+
+|
+
+
+Rate of change
+--------------
+
+Rate of change refers to transition probabilities like increase/stability/decrease as with the :ref:`trapezoidal <trap>` distribution.
+
+Rate of chage =  :math:`\frac{(e~t_{i+1} - e~t_i)}{\varphi}`
+
+
+An example of a transition probabilities are increase :math:`=0.4`; stability :math:`=0.5` and decrease :math:`=0.1`
+
+
+
+
+
+|
+
+
+Imputation
+==========
+
+In statistics, *imputation* is the process of replacing missing data with plausible estimates. 
+
+
+
+|
+
+
+
+
+.. :math:`\theta =` (cf. eqs. [2] and [3])
+
+
+
+
+
+
+|
+
+
+
+
+
+.. meta::
+   :description: Probability and Uncertainty
+   :keywords: temporal uncertainty, Chronology
+

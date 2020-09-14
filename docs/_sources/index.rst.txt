@@ -17,7 +17,9 @@
    EpigraphicNetwork
    Sciencedata_dk
    sdam
-..   trapz
+   Time
+   Uncertainty
+   MCMC
    modules
 
 

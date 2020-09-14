@@ -38,12 +38,12 @@ The two mains outputs of this project are expected to be
 
 |
 
-Team
-----
-
-    .. todo:: 
-     
-        Team members.
+.. Team
+.. ----
+.. 
+..     .. todo:: 
+..      
+..         Team members.
 
 
 |
@@ -67,8 +67,9 @@ Package Description
 -------------------
 
 
-This package provides tools for performing analyses within Social Dynamics and complexity 
-in the Ancient Mediterranean (`SDAM <https://sdam-au.github.io/sdam-au/>`_) project. 
+The `R package "sdam" <https://sdam-au.github.io/sdam/>`_ provides tools for performing 
+analyses within Social Dynamics and complexity in the Ancient Mediterranean 
+(`SDAM <https://sdam-au.github.io/sdam-au/>`_) project. 
 
 ..  , which is a research group based 
 
@@ -174,6 +175,8 @@ News for ``sdam`` package
     * v.0.2.2 available  (2-7-2020)  Argument ``force`` is added to ``request()``
 
     * v.0.2.3 available  (4-8-2020)  Argument ``rm.file`` is added to ``request()``
+
+    * v.0.2.4 available  (31-8-2020)  Function ``edhw()`` can handle output from ``jsonlite`` package
 
     
 

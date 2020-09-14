@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta content="Monte Carlo methods and Markov chain" name="description" />
+<meta content="Bayesian, MCMC" name="keywords" />
+
+    <title>Monte Carlo Markov chain &#8212; cedhar 0.0.4 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modules" href="modules.html" />
+    <link rel="prev" title="Temporal Uncertainty" href="Uncertainty.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modules.html" title="Modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Uncertainty.html" title="Temporal Uncertainty"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CEDHAR_logo_black_large_800x100.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Monte Carlo Markov chain</a><ul>
+<li><a class="reference internal" href="#monte-carlo">Monte Carlo</a></li>
+<li><a class="reference internal" href="#markov-chain">Markov chain</a><ul>
+<li><a class="reference internal" href="#metropolis-hastings">Metropolis-Hastings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#diagnostics">Diagnostics</a><ul>
+<li><a class="reference internal" href="#burn-in">Burn-in</a></li>
+<li><a class="reference internal" href="#mcmc-simulation">MCMC Simulation</a></li>
+<li><a class="reference internal" href="#thinning">Thinning</a></li>
+<li><a class="reference internal" href="#convergence">Convergence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bayesian-statistics">Bayesian statistics</a><ul>
+<li><a class="reference internal" href="#bayes-theorem">Bayes theorem</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Uncertainty.html"
+                        title="previous chapter">Temporal Uncertainty</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="next chapter">Modules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/MCMC.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="monte-carlo-markov-chain">
+<span id="mcmc"></span><h1>Monte Carlo Markov chain<a class="headerlink" href="#monte-carlo-markov-chain" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="monte-carlo">
+<h2>Monte Carlo<a class="headerlink" href="#monte-carlo" title="Permalink to this headline">¶</a></h2>
+<p><em>Monte Carlo</em> refers to the method (created by Stanislaw Ulam) of generating random
+numbers from a certain distribution.</p>
+<p>For dealing with temporary uncertainty, for example, a Monte Carlo method consists on
+creating artificial “potential” time series within the boundary of existence, and then
+assessing the likelihood of the variable’s character state over time.</p>
+</div>
+<div class="section" id="markov-chain">
+<h2>Markov chain<a class="headerlink" href="#markov-chain" title="Permalink to this headline">¶</a></h2>
+<p>A <em>Markov chain</em> is a sequence of numbers where each number is dependent on the previous
+number in the sequence.</p>
+<p>To simulate a Markov chain whose equilibrium distribution is <span class="math notranslate nohighlight">\(p(x)\)</span>, we use Monte
+Carlo Markov chain (MCMC) methods.</p>
+<p>MCMC algorithms:</p>
+<ul class="simple">
+<li><p>Metropolis-Hastings</p></li>
+<li><p>Gibbs sampling</p></li>
+<li><p>Random walk Metropolis</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="metropolis-hastings">
+<h3>Metropolis-Hastings<a class="headerlink" href="#metropolis-hastings" title="Permalink to this headline">¶</a></h3>
+<p>The <em>Metropolis-Hastings</em> algorithm serves to generate a sample from the posterior distribution
+of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the parameter of the data point’s distribution.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="diagnostics">
+<h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h2>
+<p>Diagnostics is to assess the MCMC performance.</p>
+<p>The trace plot (or time-series plot) is to judge how quickly the MCMC procedure converges in distribution.</p>
+<p>When the variability is not the same over all iterations, the trace plot presents a “random walk” pattern.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="burn-in">
+<h3>Burn-in<a class="headerlink" href="#burn-in" title="Permalink to this headline">¶</a></h3>
+<p>First generate a series of random numbers from a normal distribution with a mean value and some arbitrary variance.</p>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Throwing away early samples is called burn-in…</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="mcmc-simulation">
+<h3>MCMC Simulation<a class="headerlink" href="#mcmc-simulation" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>After the burn-in, are the MCM iterations…</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="thinning">
+<h3>Thinning<a class="headerlink" href="#thinning" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>Thinning is to reduce degree of auto-correlation…</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="convergence">
+<h3>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">¶</a></h3>
+<p>Convergence in MCMC is obtained when these outcomes become minimal with the increase of <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<ul class="simple">
+<li><p>the change in the variance</p></li>
+<li><p>the standard error</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="bayesian-statistics">
+<h2>Bayesian statistics<a class="headerlink" href="#bayesian-statistics" title="Permalink to this headline">¶</a></h2>
+<p>MCMC is for sampling from distributions with high dimensionality, which is a need typically
+found in some Bayesian statistics contexts.</p>
+<p>Bayesian analysis implies Bayesian inference, model fitting, and performing inferential and
+predictive summaries with predictive checks.</p>
+<p>As mentioned in <a class="reference internal" href="Uncertainty.html#uncertainty"><span class="std std-ref">temporal uncertainty</span></a>, the subjective approach in
+assigning probabilities includes a certain degree of belief or knowledge to the probability,
+and this is to arrive at a posterior distribution to updated the state of knowledge about the
+parameters.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="bayes-theorem">
+<h3>Bayes theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this headline">¶</a></h3>
+<p>Key concepts in Bayesian statistics are related in Bayes theorem, which is a rule
+that provides the conditional probability of <span class="math notranslate nohighlight">\(A\)</span> (model or hypothesis)
+occurring given that <span class="math notranslate nohighlight">\(B\)</span> (data or observation) already happened.</p>
+<p><span class="math notranslate nohighlight">\(P(A \mid B) \;=\; \frac{ P(A)~P(B \mid A)  } { P(B)  }\)</span></p>
+<p>That is, the posterior probability of <span class="math notranslate nohighlight">\(A\)</span> given <span class="math notranslate nohighlight">\(B\)</span> where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P(A \mid B)\)</span> is the <strong>posterior</strong> probability of <span class="math notranslate nohighlight">\(A\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(A)\)</span> is the <strong>prior</strong> probability of <span class="math notranslate nohighlight">\(A\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(B \mid A)\)</span> is the <strong>likelihood</strong> of <span class="math notranslate nohighlight">\(A\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(B)\)</span> is the <strong>unconditional</strong> probability of <span class="math notranslate nohighlight">\(B\)</span></p></li>
+</ul>
+<p>Hence, the posterior is an updated degree of belief or knowledge based on the prior
+with known probabilities.</p>
+<p>On the other hand, the likelihood is the probability that the hypothesis confers upon
+the observation, and the probability of the observation irrespective of any hypothesis
+is the unconditional probability of the observation.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modules.html" title="Modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Uncertainty.html" title="Temporal Uncertainty"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, CEDHAR - Aarhus University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

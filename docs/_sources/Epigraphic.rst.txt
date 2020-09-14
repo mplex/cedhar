@@ -23,7 +23,7 @@ This post is about accessing the "Epigraphic Database Heidelberg" (EDH),
 which is one of the longest running database projects in digital Latin
 epigraphy. The [EDH] database started as early as year 1986, and in 1997 the Epigraphic
 Database Heidelberg website was launched at
-<https:/edh-www.adw.uni-heidelberg.de> where inscriptions, images,
+`https:/edh-www.adw.uni-heidelberg.de <https:/edh-www.adw.uni-heidelberg.de>`__ where inscriptions, images,
 bibliographic and geographic records can be searched and browsed online.
 
 
@@ -115,6 +115,14 @@ Functions Usage
 
 |
 
+    .. note:: 
+    
+        "``R>``" at the beginning of the line means that the following code is 
+        written in ``R``. Comments are preceded by "``#``". 
+
+|
+
+
 
 .. function:: get.edhw
 
@@ -125,13 +133,6 @@ Functions Usage
 
 Currently, function ``get.edhw()`` works only for inscriptions. 
 
-
-|
-
-    .. note:: 
-    
-        "``R>``" at the beginning of the line means that the following code is 
-        written in ``R``. Comments are preceded by "``#``". 
 
 |
 
@@ -285,7 +286,7 @@ Extra parameters
 
 
 The two functions we have seen so far, ``get.edh()`` and ``get.edhw()``, 
-are available in the ``sdam`` package.
+are available in the :ref:`R package "sdam" <sdam-pkg>`.
 
 |
 
@@ -417,8 +418,10 @@ The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelb
 
 which will produce a list object with the existing entries for each inscription, and where entries have different length. 
 
-Beware that retrieving such a large number of records will take a very long time. Hence, you can do it by parts and then 
-collate the lists into another object. 
+
+    .. note::
+       Beware that retrieving such a large number of records will take a very long time. 
+       Hence, you can do it by parts and then collate the lists into another object. 
 
 
 |
@@ -624,7 +627,7 @@ For a simple relative dating analysis of ``EDH`` inscriptions, it is enough to c
 
 
         where a pair of backquotes (aka "backticks") is a way to refer in ``R`` to names or combinations 
-        of symbols that are otherwise reserved or illegal, or *non-syntactic names*. 
+        of symbols that are otherwise reserved or illegal, or non-syntactic names. 
         Hence, e.g. ``apply(foo, `[`, c(...) )`` is the same as ``apply(foo, function (x) x[c(...)])``.
 
 |
@@ -767,10 +770,10 @@ Years are between 530 BC and 1998 AC.
 
 
 
-Plotting relative dating
-========================
+Plotting time spans of existence
+================================
 
-The plot is made with the [R] ``graphics`` core package (and the ``base`` package if you are using R version 4.0.0). 
+One plot of relative dating for Roman inscriptions is made with the [R] ``graphics`` core package (or ``base`` package with R version 4.0.0). 
 
 
 .. code-block:: R
@@ -885,7 +888,18 @@ That produces:
 .. image:: ../images/EDH-BeforeAfterTimes.png
    :width: 450
 
-Then we need to calculate the residuals to start a statistic analysis of dates.
+
+|
+
+    .. todo:: 
+    
+        Calculate the residuals and start a statistic analysis of dates.
+
+
+|
+
+
+
 
 
 

@@ -1,0 +1,81 @@
+
+.. _time:
+
+
+***************
+Time and dating
+***************
+
+Time is a (quantitative) continuous variable, but we often think *time* as a discrete variable 
+since is rounded when measured (e.g. a person is 40 years old and not between 40 and 41).
+
+
+
+
+|
+
+
+Chronological periods
+=====================
+
+We use chronological periods for dating purposes. 
+Sometimes chronological periods are divided by phases and occasionally they are referred as chronological phases. 
+
+|
+
+For example, *chronological phases* for dating ancient cultures of the Mediterranean Sea are
+
+| 
+
+.. table:: 
+   :widths: auto
+   :align: left
+
+   =============================================  ==========================
+    Chronological phase                            Absolute dates (approx.) 
+   =============================================  ==========================
+    Middle to Late Neolithic (MN-LN)               6000-4500 BC   
+    Final Neolithic to Early Bronze 1 (FN-EB1)     4500-2700 BC   
+    Early Bronze 2 (EB2)                           2700-2200 BC   
+    Late Prepalatial (LPrepal)                     2200-1900 BC   
+    First Palace (FPal)                            1900-1700 BC   
+    Second Palace (SPal)                           1700-1450 BC   
+    Third Palace (TPal)                            1450-1200 BC   
+    Post-Palatial to Protogeometric (PPalPg)       1200-900 BC    
+    Geometric (Geo)                                900-700 BC     
+    Archaic (Arch)                                 700-500 BC     
+    Classical (Class)                              500-325 BC     
+    Hellenistic (Hell)                             325 BC - AC 0  
+    Early Roman (ERom)                             AC 0-200       
+    Middle Roman (MRom)                            AC 200-350     
+    Late Roman (LRom)                              AC 350-650     
+    Early Byzantine (EByz)                         AC 650-900     
+    Middle Byzantine (MByz)                        AC 900-1200    
+    Early Venetian (EVen)                          AC 1200-1400   
+    Middle Venetian (MVen)                         AC 1400-1600   
+    Late Venetian (LVen)                           AC 1600-1800   
+    Recent (Recent)                                AC 1800-present
+   =============================================  ==========================
+
+
+From *Bevan et al*, 2013 (doi: 10.1111/j.1475-4754.2012.00674.x)
+
+
+
+|
+
+
+
+
+
+
+|
+
+
+
+
+
+.. meta::
+   :description: Time, dating, and chronology
+   :keywords: time, Chronology
+

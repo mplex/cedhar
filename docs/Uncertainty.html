@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta content="Probability and Uncertainty" name="description" />
+<meta content="temporal uncertainty, Chronology" name="keywords" />
+
+    <title>Temporal Uncertainty &#8212; cedhar 0.0.4 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Monte Carlo Markov chain" href="MCMC.html" />
+    <link rel="prev" title="Time and dating" href="Time.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="MCMC.html" title="Monte Carlo Markov chain"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Time.html" title="Time and dating"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CEDHAR_logo_black_large_800x100.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Temporal Uncertainty</a><ul>
+<li><a class="reference internal" href="#probability-and-uncertainty">Probability and uncertainty</a><ul>
+<li><a class="reference internal" href="#probability-space">Probability space</a></li>
+<li><a class="reference internal" href="#summed-probability-distribution">Summed probability distribution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#probability-distributions">Probability distributions</a><ul>
+<li><a class="reference internal" href="#binomial-distribution">Binomial distribution</a></li>
+<li><a class="reference internal" href="#trapezoidal-distributions">Trapezoidal distributions</a><ul>
+<li><a class="reference internal" href="#uniform-distribution">Uniform distribution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#normal-distribution">Normal distribution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notation">Notation</a></li>
+<li><a class="reference internal" href="#probabilities-of-existence-for-time-blocks">Probabilities of existence for time blocks</a><ul>
+<li><a class="reference internal" href="#temporal-resolution">Temporal resolution</a></li>
+<li><a class="reference internal" href="#boundary-of-existence">Boundary of existence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aoristic-analysis">Aoristic analysis</a><ul>
+<li><a class="reference internal" href="#aoristic-sum">Aoristic sum</a></li>
+<li><a class="reference internal" href="#probability-of-existence">Probability of existence</a></li>
+<li><a class="reference internal" href="#id3">Temporal resolution</a></li>
+<li><a class="reference internal" href="#rate-of-change">Rate of change</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#imputation">Imputation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Time.html"
+                        title="previous chapter">Time and dating</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="MCMC.html"
+                        title="next chapter">Monte Carlo Markov chain</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Uncertainty.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="temporal-uncertainty">
+<span id="uncertainty"></span><h1>Temporal Uncertainty<a class="headerlink" href="#temporal-uncertainty" title="Permalink to this headline">¶</a></h1>
+<p><em>Temporal</em> is related to time, which is a (quantitative) continuous variable, while
+<em>uncertainty</em> refers to situations involving unknown information.</p>
+<ul class="simple">
+<li><p>(see also <a class="reference internal" href="Time.html#time"><span class="std std-ref">Time and dating</span></a>)</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Monte-Carlo simulation tests the significance of the observed fluctuations in the context
+of uncertainty in the calibration curve and [archaeological] sampling.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="probability-and-uncertainty">
+<h2>Probability and uncertainty<a class="headerlink" href="#probability-and-uncertainty" title="Permalink to this headline">¶</a></h2>
+<p>We can apply a probabilistic approach when dealing with uncertainty.
+In this case, uncertainty is considered a measure quantifying the likelihood that events will occur.</p>
+<p>Different approaches for assigning probabilities include:</p>
+<ul class="simple">
+<li><p>the proportion of a particular outcome to all possible outcomes (classical)</p></li>
+<li><p>the long-run relative frequency of the probability for an outcome to occur</p></li>
+<li><p>certain degree of belief (subjective)</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="probability-space">
+<h3>Probability space<a class="headerlink" href="#probability-space" title="Permalink to this headline">¶</a></h3>
+<p>A <em>probability space</em> defines an occurrence or event as a subset of that space.</p>
+<p>For example, if the probability space is the interval <span class="math notranslate nohighlight">\([0,1]\)</span>, with the <a class="reference internal" href="#unif"><span class="std std-ref">uniform distribution</span></a> then the interval
+<span class="math notranslate nohighlight">\([ \frac{1}{3}, 1 ]\)</span> is an event that represents a randomly chosen number between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>
+turning out to be at least <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span>.</p>
+</div>
+<div class="section" id="summed-probability-distribution">
+<h3>Summed probability distribution<a class="headerlink" href="#summed-probability-distribution" title="Permalink to this headline">¶</a></h3>
+<p>A proxy for population levels is found in summed probability distributions (SPD) of dates.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="probability-distributions">
+<h2>Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this headline">¶</a></h2>
+<p>A <em>probability distribution</em> describes the associated probability of possible outcomes for a random variable <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>For a single variable, the data is allocated in univariate distributions, and we use multivariate distributions
+to infer on multiple parameters.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="binomial-distribution">
+<h3>Binomial distribution<a class="headerlink" href="#binomial-distribution" title="Permalink to this headline">¶</a></h3>
+<p>A binomial distribution is a continuous distribution that describes a binomial experiment where
+there are two possible outcomes.</p>
+<p>The probability mass function (p.m.f.) corresponding to the binomial distribution
+represents the probability of <span class="math notranslate nohighlight">\(x\)</span> successes in a binomial experiment:</p>
+<p><span class="math notranslate nohighlight">\(P(x) \;=\; {n\choose x}  ~p^x (1-p)^{n-x}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(P(x)\)</span> is the  distribution function for the probability of success for <span class="math notranslate nohighlight">\(x = 0, 1, 2, \dots, n\)</span>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="_images/binomial.png"><img alt="_images/binomial.png" src="_images/binomial.png" style="width: 350px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A plot of the binomial distribution for <span class="math notranslate nohighlight">\(n=30\)</span> and with different <span class="math notranslate nohighlight">\(p\)</span> values.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Bernoulli distribution is a special case of the binomial distribution
+when <span class="math notranslate nohighlight">\(n = 1\)</span>.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="trapezoidal-distributions">
+<span id="trap"></span><h3>Trapezoidal distributions<a class="headerlink" href="#trapezoidal-distributions" title="Permalink to this headline">¶</a></h3>
+<p>Trapezoidal distributions seems appropriate for modeling the duration and the form of a phenomenon with a growth-stage,
+relative stability, and decline. These three parameters are not necessarily similar and an occurrence can have, for example,
+a long development and abrupt decay.</p>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Probability density function of the generalized trapezoidal distribution.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="uniform-distribution">
+<span id="unif"></span><h4>Uniform distribution<a class="headerlink" href="#uniform-distribution" title="Permalink to this headline">¶</a></h4>
+<p>The uniform distribution is a special case of a trapezoidal distribution with a constant probability.</p>
+<p>The probability density function of the continuous uniform distribution for <span class="math notranslate nohighlight">\(a \leqslant x \leqslant b\)</span></p>
+<p><span class="math notranslate nohighlight">\(f(x) \;=\; \frac{1}{b-a}\)</span></p>
+<p>and <span class="math notranslate nohighlight">\(f(x) = 0\)</span> iff <span class="math notranslate nohighlight">\(x&lt;a\)</span> or <span class="math notranslate nohighlight">\(x&gt;b\)</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="_images/uniform45.png"><img alt="_images/uniform45.png" src="_images/uniform45.png" style="width: 300px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Uniform distribution plot for <span class="math notranslate nohighlight">\(P(x_1 &lt; X &lt; x_2)\)</span>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is also a discrete version of the uniform distribution with a
+mass probability function.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="normal-distribution">
+<h3>Normal distribution<a class="headerlink" href="#normal-distribution" title="Permalink to this headline">¶</a></h3>
+<p>The normal distribution –or “bell curve”– is the probability distribution for a normal
+random variable <span class="math notranslate nohighlight">\(X \sim \mathcal{N} (\mu,\sigma^2)\)</span>.
+The normal distribution is also called <em>Gaussian</em> distribution in honor to C.F. Gauss who described it.</p>
+<p>The normal distribution is the most important distribution in statistics, and
+play a crucial role in statistical inference.
+This is partly because it approximates well the distributions of many types of variables.</p>
+<p>The exact form of the distribution depends on the values of the mean <span class="math notranslate nohighlight">\(\mu\)</span> and
+the standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> parameters.</p>
+<p>The probability density function of a normal random variable <span class="math notranslate nohighlight">\(-\infty &lt; x &lt; \infty\)</span> is:</p>
+<p><span class="math notranslate nohighlight">\(f(x) \;=\; \frac{1}{{\sigma \sqrt {2\pi } }}\;e^{{{ - \frac12 \left( \frac{x - \mu }{\sigma} \right)^2 }  }}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(e \approx 2.7183\)</span> (Euler’s number), and <span class="math notranslate nohighlight">\(\pi \approx 3.1416\)</span> (Pi number).</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A special case of the normal distribution with mean <span class="math notranslate nohighlight">\(\mu = 0\)</span> and
+standard deviation <span class="math notranslate nohighlight">\(\sigma = 1\)</span> is the <em>standard normal distribution</em> <span class="math notranslate nohighlight">\(Z\)</span>.
+Any arbitrary normal distribution can be converted to <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="_images/gaussiansds.png"><img alt="_images/gaussiansds.png" src="_images/gaussiansds.png" style="width: 320px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Normal distributions with different variances <span class="math notranslate nohighlight">\(\sigma^2\)</span> and same mean <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="notation">
+<h2>Notation<a class="headerlink" href="#notation" title="Permalink to this headline">¶</a></h2>
+<p>To study temporal uncertainty, the following notation is adopted:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\varOmega =\)</span> range of time</p>
+<p><span class="math notranslate nohighlight">\(\tau =\)</span> time span of existence</p>
+<p><span class="math notranslate nohighlight">\(\Delta \tau =\)</span> duration of <span class="math notranslate nohighlight">\(\tau\)</span></p>
+<p><span class="math notranslate nohighlight">\(t_i =\)</span> a given portion of time</p>
+<p><span class="math notranslate nohighlight">\(\Delta t_i =\)</span> duration of <span class="math notranslate nohighlight">\(t_i\)</span></p>
+<p><span class="math notranslate nohighlight">\(\varphi =\)</span> temporal resolution</p>
+<p><span class="math notranslate nohighlight">\(e =\)</span> event or occurrence</p>
+<p><span class="math notranslate nohighlight">\(P, p =\)</span> probability</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>plus in Appendix A (from Crema)…</p>
+<p><span class="math notranslate nohighlight">\(d =\)</span> duration of <span class="math notranslate nohighlight">\(e\)</span></p>
+<p><span class="math notranslate nohighlight">\(b =\)</span> numerical index of temporal blocks within <span class="math notranslate nohighlight">\(\tau\)</span></p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\(d\)</span> is rounded to the value of the temporal resolution, and <span class="math notranslate nohighlight">\(b\)</span> ranges
+from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(\Delta t_i/\varphi\)</span>, which are the edges of the time span.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="probabilities-of-existence-for-time-blocks">
+<h2>Probabilities of existence for time blocks<a class="headerlink" href="#probabilities-of-existence-for-time-blocks" title="Permalink to this headline">¶</a></h2>
+<p>The probability of existence for each time block</p>
+<p><span class="math notranslate nohighlight">\(P_b \;=\; {\sum_{i=0}^{\pi-1} \sum_{j=1}^{d/\varphi} \theta (i+j,\;b)} / {\pi}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\pi\)</span> is the number of all possible permutations; i.e. <span class="math notranslate nohighlight">\({(\Delta \tau - d)}/{\varphi + 1}\)</span>.</p>
+<div class="section" id="temporal-resolution">
+<h3>Temporal resolution<a class="headerlink" href="#temporal-resolution" title="Permalink to this headline">¶</a></h3>
+<p>The duration of time blocks that is <span class="math notranslate nohighlight">\(\varphi\)</span> in the denominator for computing
+<span class="math notranslate nohighlight">\(\pi\)</span> is known as the <em>temporal resolution</em>, while the numerator expression for
+the probability of existence for each time block is defined as</p>
+<p><span class="math notranslate nohighlight">\(\theta (i+j,\;b) = \begin{cases}1 \quad \text{if}\; i+j = b  \\ 0 \quad \text{if}\; i+j \neq b \end{cases}\)</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="boundary-of-existence">
+<h3>Boundary of existence<a class="headerlink" href="#boundary-of-existence" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><em>terminus ante quem</em></p></li>
+<li><p><em>terminus post quem</em></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="aoristic-analysis">
+<span id="aora"></span><h2>Aoristic analysis<a class="headerlink" href="#aoristic-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Aoristic analysis is based on the creation of a series of these artificial divisions of
+the range of time with a fixed value, called time blocks, and the definition of their probability of existence.</p>
+<div class="section" id="aoristic-sum">
+<h3>Aoristic sum<a class="headerlink" href="#aoristic-sum" title="Permalink to this headline">¶</a></h3>
+<p>A proxy for evaluating change in the total counts of events across time is the <em>aoristic sum</em>, which is the sum of probabilities for each time block.</p>
+<p>The aoristic sum is computed accross events for a single portion of time <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">t1</span>  <span class="n">t2</span>  <span class="n">t3</span>
+     <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>
+<span class="n">a</span>    <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>
+<span class="n">b</span>    <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>
+<span class="n">c</span>    <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>
+     <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>
+     <span class="n">aoristic</span>
+       <span class="n">sums</span>
+</pre></div>
+</div>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>Aoristic sum explained in R…</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="probability-of-existence">
+<h3>Probability of existence<a class="headerlink" href="#probability-of-existence" title="Permalink to this headline">¶</a></h3>
+<p>The probability of existence <span class="math notranslate nohighlight">\(p[t_i]\)</span> of an event <span class="math notranslate nohighlight">\(e\)</span> in a range of time <span class="math notranslate nohighlight">\(\varOmega\)</span> is the probabilty distribution</p>
+<p><span class="math notranslate nohighlight">\(p[t_i] = \Delta t_i / \Delta \tau\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\tau\)</span> is the time span of existence, <span class="math notranslate nohighlight">\(\Delta\)</span> is for the duration of a given portion of time <span class="math notranslate nohighlight">\(t_i\)</span> or of <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
+<p>To compute <span class="math notranslate nohighlight">\(p[t_i]\)</span>, Crema (p. 447) takes the following example (years are BC):</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">350</span> <span class="o">----</span> <span class="mi">300</span> <span class="o">----</span> <span class="mi">250</span>
+     <span class="n">t1</span>       <span class="n">t2</span>
+
+     <span class="mi">342</span> <span class="o">----</span> <span class="mi">288</span>
+         <span class="n">tau</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Hence, <span class="math notranslate nohighlight">\(\Delta \tau\)</span> in this case is <span class="math notranslate nohighlight">\(54\)</span>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Temporal resolution<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>Temporal resolution <span class="math notranslate nohighlight">\(\varphi\)</span> refers to the duration of time blocks.
+When <span class="math notranslate nohighlight">\(\varphi\)</span> is fixed then we have <a class="reference internal" href="#aora"><span class="std std-ref">aoristic analysis</span></a>.</p>
+<p>To retrieve the minimum probability <span class="math notranslate nohighlight">\(P[\varphi_\alpha]\)</span> for the boundaries of the first and last time-blocks,
+we define <span class="math notranslate nohighlight">\(\varphi_\alpha = 1\)</span> where</p>
+<p><span class="math notranslate nohighlight">\(\phi_\alpha / \Delta_\tau = 1/54 = P[\phi_\alpha] = .018\)</span> (approx)</p>
+<p>Hence, the probability of existence for <span class="math notranslate nohighlight">\(t_1\)</span></p>
+<p><span class="math notranslate nohighlight">\(P[t_1] = P[\phi_\alpha] \cdot 42\)</span></p>
+<p>i.e. <span class="math notranslate nohighlight">\(342 - 300\)</span></p>
+<p><span class="math notranslate nohighlight">\(P[t_1] = .018 \cdot 42  =  .78\)</span></p>
+<p>The probability of existence for for <span class="math notranslate nohighlight">\(t_2\)</span></p>
+<p><span class="math notranslate nohighlight">\(P[t_2] = P[\phi_\alpha] \cdot 12\)</span></p>
+<p>i.e. <span class="math notranslate nohighlight">\(300 - 288\)</span></p>
+<p><span class="math notranslate nohighlight">\(P[t_2] = .018 \cdot 12  =  .22\)</span></p>
+<p>Etc.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><em>Assumption</em>: Any equally long portion of time within the time span <span class="math notranslate nohighlight">\(\tau\)</span> has the same probability of existence.
+Plus others…</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="rate-of-change">
+<h3>Rate of change<a class="headerlink" href="#rate-of-change" title="Permalink to this headline">¶</a></h3>
+<p>Rate of change refers to transition probabilities like increase/stability/decrease as with the <a class="reference internal" href="#trap"><span class="std std-ref">trapezoidal</span></a> distribution.</p>
+<p>Rate of chage =  <span class="math notranslate nohighlight">\(\frac{(e~t_{i+1} - e~t_i)}{\varphi}\)</span></p>
+<p>An example of a transition probabilities are increase <span class="math notranslate nohighlight">\(=0.4\)</span>; stability <span class="math notranslate nohighlight">\(=0.5\)</span> and decrease <span class="math notranslate nohighlight">\(=0.1\)</span></p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="imputation">
+<h2>Imputation<a class="headerlink" href="#imputation" title="Permalink to this headline">¶</a></h2>
+<p>In statistics, <em>imputation</em> is the process of replacing missing data with plausible estimates.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="MCMC.html" title="Monte Carlo Markov chain"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Time.html" title="Time and dating"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, CEDHAR - Aarhus University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

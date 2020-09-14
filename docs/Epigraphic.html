@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Accessing the Epigraphic Database Heidelberg" name="description" />
 <meta content="epigraphic, documentation, dataset, HTTP-request" name="keywords" />
 
-    <title>Epigraphic Database Heidelberg &#8212; cedhar 0.0.3 documentation</title>
+    <title>Epigraphic Database Heidelberg &#8212; cedhar 0.0.4 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="UAT.html" title="User Acceptance Testing"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -76,7 +76,7 @@
 <li><a class="reference internal" href="#data-frames">Data frames</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#plotting-relative-dating">Plotting relative dating</a><ul>
+<li><a class="reference internal" href="#plotting-time-spans-of-existence">Plotting time spans of existence</a><ul>
 <li><a class="reference internal" href="#treating-outliers">Treating Outliers</a></li>
 <li><a class="reference internal" href="#plotting-without-outliers">Plotting without outliers</a></li>
 <li><a class="reference internal" href="#other-plots">Other plots</a></li>
@@ -123,7 +123,7 @@
 which is one of the longest running database projects in digital Latin
 epigraphy. The [EDH] database started as early as year 1986, and in 1997 the Epigraphic
 Database Heidelberg website was launched at
-&lt;<a class="reference external" href="https:/edh-www.adw.uni-heidelberg.de">https:/edh-www.adw.uni-heidelberg.de</a>&gt; where inscriptions, images,
+<a class="reference external" href="https:/edh-www.adw.uni-heidelberg.de">https:/edh-www.adw.uni-heidelberg.de</a> where inscriptions, images,
 bibliographic and geographic records can be searched and browsed online.</p>
 <div class="section" id="open-data-repository">
 <h2>Open Data Repository<a class="headerlink" href="#open-data-repository" title="Permalink to this headline">¶</a></h2>
@@ -197,6 +197,16 @@ and <code class="docutils literal notranslate"><span class="pre">&quot;bibliogra
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>“<code class="docutils literal notranslate"><span class="pre">R&gt;</span></code>” at the beginning of the line means that the following code is
+written in <code class="docutils literal notranslate"><span class="pre">R</span></code>. Comments are preceded by “<code class="docutils literal notranslate"><span class="pre">#</span></code>”.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <dl class="function">
 <dt id="get.edhw">
 <code class="sig-prename descclassname">get.</code><code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get.edhw" title="Permalink to this definition">¶</a></dt>
@@ -207,16 +217,6 @@ and <code class="docutils literal notranslate"><span class="pre">&quot;bibliogra
 </pre></div>
 </div>
 <p>Currently, function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> works only for inscriptions.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<blockquote>
-<div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>“<code class="docutils literal notranslate"><span class="pre">R&gt;</span></code>” at the beginning of the line means that the following code is
-written in <code class="docutils literal notranslate"><span class="pre">R</span></code>. Comments are preceded by “<code class="docutils literal notranslate"><span class="pre">#</span></code>”.</p>
-</div>
-</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -373,7 +373,7 @@ insensitive</p>
 <div class="line"><br /></div>
 </div>
 <p>The two functions we have seen so far, <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> and <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code>,
-are available in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package.</p>
+are available in the <a class="reference internal" href="sdam.html#sdam-pkg"><span class="std std-ref">R package “sdam”</span></a>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -463,8 +463,13 @@ The wrapper function <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 <p>which will produce a list object with the existing entries for each inscription, and where entries have different length.</p>
-<p>Beware that retrieving such a large number of records will take a very long time. Hence, you can do it by parts and then
-collate the lists into another object.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Beware that retrieving such a large number of records will take a very long time.
+Hence, you can do it by parts and then collate the lists into another object.</p>
+</div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -638,7 +643,7 @@ dataset. For this, we choose <em>variables</em> from the EDH list that are <code
 </pre></div>
 </div>
 <p>where a pair of backquotes (aka “backticks”) is a way to refer in <code class="docutils literal notranslate"><span class="pre">R</span></code> to names or combinations
-of symbols that are otherwise reserved or illegal, or <em>non-syntactic names</em>.
+of symbols that are otherwise reserved or illegal, or non-syntactic names.
 Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(foo,</span> <span class="pre">`[`,</span> <span class="pre">c(...)</span> <span class="pre">)</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">apply(foo,</span> <span class="pre">function</span> <span class="pre">(x)</span> <span class="pre">x[c(...)])</span></code>.</p>
 </div>
 </div></blockquote>
@@ -741,9 +746,9 @@ the data frame first and treat the data as numeric format.</p>
 </div>
 </div>
 </div>
-<div class="section" id="plotting-relative-dating">
-<h2>Plotting relative dating<a class="headerlink" href="#plotting-relative-dating" title="Permalink to this headline">¶</a></h2>
-<p>The plot is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package (and the <code class="docutils literal notranslate"><span class="pre">base</span></code> package if you are using R version 4.0.0).</p>
+<div class="section" id="plotting-time-spans-of-existence">
+<h2>Plotting time spans of existence<a class="headerlink" href="#plotting-time-spans-of-existence" title="Permalink to this headline">¶</a></h2>
+<p>One plot of relative dating for Roman inscriptions is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package (or <code class="docutils literal notranslate"><span class="pre">base</span></code> package with R version 4.0.0).</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">EDHdtdf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
 <span class="o">+</span>    <span class="n">main</span><span class="o">=</span><span class="s">&quot;Epigraphic time intervals (ALL)&quot;</span><span class="p">)</span>
@@ -817,7 +822,18 @@ the data frame first and treat the data as numeric format.</p>
 </div>
 <p>That produces:</p>
 <a class="reference internal image-reference" href="_images/EDH-BeforeAfterTimes.png"><img alt="_images/EDH-BeforeAfterTimes.png" src="_images/EDH-BeforeAfterTimes.png" style="width: 450px;" /></a>
-<p>Then we need to calculate the residuals to start a statistic analysis of dates.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Calculate the residuals and start a statistic analysis of dates.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 </div>
 </div>
@@ -840,7 +856,7 @@ the data frame first and treat the data as numeric format.</p>
         <li class="right" >
           <a href="UAT.html" title="User Acceptance Testing"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.3 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -10,7 +10,7 @@ The use of digital technologies to pursue research questions in the humanities.
 
 
 
-| 
+.. | 
 
 
 
@@ -88,6 +88,18 @@ A JSON structure looks like:
 
 Where an ``Identifier`` is delimited by quotes, and a ``Value`` can be a ``string``, a ``number``, ``"true"``, ``"false"``, ``"null"``, 
 or an ``Array`` or another JSON ``Object`` as the above example.
+
+
+
+JSON in R
+^^^^^^^^^
+
+Some R packages for reading JSON files in CRAN are
+
+* ``rjson`` v0.1.0    released on Jul 30  2007
+* ``RJSONIO`` v0.3-1  released on Oct  4  2010
+* ``jsonlite`` v0.9.0 released on Dec  3  2013
+
 
 
 |
