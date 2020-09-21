@@ -90,7 +90,7 @@ A binomial distribution is a continuous distribution that describes a binomial e
 there are two possible outcomes.
 
 The probability mass function (p.m.f.) corresponding to the binomial distribution 
-represents the probability of :math:`x` successes in a binomial experiment:
+represents the probability of :math:`x` successes in a binomial experiment 
 
 ..  '\binom' not working
 
@@ -267,7 +267,7 @@ To study temporal uncertainty, the following notation is adopted:
 
 |
 
-plus in Appendix A (from Crema)...
+plus in Appendix A (from Crema, 2012)...
 
 
 :math:`d =` duration of :math:`e` 
@@ -287,7 +287,7 @@ Probabilities of existence for time blocks
 ==========================================
 
 
-The probability of existence for each time block
+The probability of existence for each time block (Crema, 2012)
 
 :math:`P_b \;=\; {\sum_{i=0}^{\pi-1} \sum_{j=1}^{d/\varphi} \theta (i+j,\;b)} / {\pi}`
 
@@ -396,7 +396,7 @@ where :math:`\tau` is the time span of existence, :math:`\Delta` is for the dura
 
 
 
-To compute :math:`p[t_i]`, Crema (p. 447) takes the following example (years are BC):
+To compute :math:`p[t_i]`, Crema (2012, p. 447) takes the following example (years are BC):
 
     .. code-block:: 
     
@@ -477,11 +477,35 @@ An example of a transition probabilities are increase :math:`=0.4`; stability :m
 
 |
 
+.. _missing:
 
-Imputation
-==========
+Imputation and Missing data
+===========================
 
 In statistics, *imputation* is the process of replacing missing data with plausible estimates. 
+
+
+|
+
+Missing data
+------------
+
+Rubin (1976) classified missing data problems into three categories: MCAR, MAR and MNAR.
+
+* MCAR: the probability of being missing depends only on some parameters :math:`\psi`, the overall probability of being missing 
+
+     :math:`Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi) = Pr(R = 0 \mid \psi)`
+
+* MAR: the missingness probability may depend on observed information, including any design factors 
+
+     :math:`Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi) = Pr(R = 0 \mid Y_{obs}, \psi)`
+
+* MNAR: the probability to be missing also depends on unobserved information, including :math:`Y_{mis}` itself 
+
+     :math:`Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi)`
+
+
+for some parameter :math:`\psi` where :math:`Y_{obs}` is the observed sample data and :math:`Y_{mis}` the unobserved sample data. 
 
 
 

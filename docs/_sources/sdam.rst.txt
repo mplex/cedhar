@@ -130,9 +130,19 @@ or RStudio if you wish.
 
 .. code-block:: R
 
+    # beta version
     R> devtools::install_github("mplex/cedhar", subdir="pkg/sdam")
 
+
+or 
+
+
+.. code-block:: R
+
     R> devtools::install_github("sdam-au/sdam")
+
+
+
 
 |
 
@@ -161,8 +171,8 @@ Making Documentation
 .. _news:
 
 
-News for ``sdam`` package
--------------------------
+News from ``sdam`` package
+--------------------------
 
 
 * **Version 0.2.0** released (19-5-2020).

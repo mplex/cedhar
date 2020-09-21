@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Monte Carlo Markov chain" href="MCMC.html" />
+    <link rel="next" title="Markov chain Monte Carlo" href="MCMC.html" />
     <link rel="prev" title="Time and dating" href="Time.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -27,7 +27,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="MCMC.html" title="Monte Carlo Markov chain"
+          <a href="MCMC.html" title="Markov chain Monte Carlo"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="Time.html" title="Time and dating"
@@ -70,7 +70,10 @@
 <li><a class="reference internal" href="#rate-of-change">Rate of change</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#imputation">Imputation</a></li>
+<li><a class="reference internal" href="#imputation-and-missing-data">Imputation and Missing data</a><ul>
+<li><a class="reference internal" href="#missing-data">Missing data</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -80,7 +83,7 @@
                         title="previous chapter">Time and dating</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="MCMC.html"
-                        title="next chapter">Monte Carlo Markov chain</a></p>
+                        title="next chapter">Markov chain Monte Carlo</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -162,7 +165,7 @@ to infer on multiple parameters.</p>
 <p>A binomial distribution is a continuous distribution that describes a binomial experiment where
 there are two possible outcomes.</p>
 <p>The probability mass function (p.m.f.) corresponding to the binomial distribution
-represents the probability of <span class="math notranslate nohighlight">\(x\)</span> successes in a binomial experiment:</p>
+represents the probability of <span class="math notranslate nohighlight">\(x\)</span> successes in a binomial experiment</p>
 <p><span class="math notranslate nohighlight">\(P(x) \;=\; {n\choose x}  ~p^x (1-p)^{n-x}\)</span></p>
 <p>where <span class="math notranslate nohighlight">\(P(x)\)</span> is the  distribution function for the probability of success for <span class="math notranslate nohighlight">\(x = 0, 1, 2, \dots, n\)</span>.</p>
 <div class="line-block">
@@ -299,7 +302,7 @@ Any arbitrary normal distribution can be converted to <span class="math notransl
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>plus in Appendix A (from Crema)…</p>
+<p>plus in Appendix A (from Crema, 2012)…</p>
 <p><span class="math notranslate nohighlight">\(d =\)</span> duration of <span class="math notranslate nohighlight">\(e\)</span></p>
 <p><span class="math notranslate nohighlight">\(b =\)</span> numerical index of temporal blocks within <span class="math notranslate nohighlight">\(\tau\)</span></p>
 <blockquote>
@@ -315,7 +318,7 @@ from <span class="math notranslate nohighlight">\(1\)</span> to <span class="mat
 </div>
 <div class="section" id="probabilities-of-existence-for-time-blocks">
 <h2>Probabilities of existence for time blocks<a class="headerlink" href="#probabilities-of-existence-for-time-blocks" title="Permalink to this headline">¶</a></h2>
-<p>The probability of existence for each time block</p>
+<p>The probability of existence for each time block (Crema, 2012)</p>
 <p><span class="math notranslate nohighlight">\(P_b \;=\; {\sum_{i=0}^{\pi-1} \sum_{j=1}^{d/\varphi} \theta (i+j,\;b)} / {\pi}\)</span></p>
 <p>where <span class="math notranslate nohighlight">\(\pi\)</span> is the number of all possible permutations; i.e. <span class="math notranslate nohighlight">\({(\Delta \tau - d)}/{\varphi + 1}\)</span>.</p>
 <div class="section" id="temporal-resolution">
@@ -372,7 +375,7 @@ the range of time with a fixed value, called time blocks, and the definition of 
 <p>The probability of existence <span class="math notranslate nohighlight">\(p[t_i]\)</span> of an event <span class="math notranslate nohighlight">\(e\)</span> in a range of time <span class="math notranslate nohighlight">\(\varOmega\)</span> is the probabilty distribution</p>
 <p><span class="math notranslate nohighlight">\(p[t_i] = \Delta t_i / \Delta \tau\)</span></p>
 <p>where <span class="math notranslate nohighlight">\(\tau\)</span> is the time span of existence, <span class="math notranslate nohighlight">\(\Delta\)</span> is for the duration of a given portion of time <span class="math notranslate nohighlight">\(t_i\)</span> or of <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
-<p>To compute <span class="math notranslate nohighlight">\(p[t_i]\)</span>, Crema (p. 447) takes the following example (years are BC):</p>
+<p>To compute <span class="math notranslate nohighlight">\(p[t_i]\)</span>, Crema (2012, p. 447) takes the following example (years are BC):</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">350</span> <span class="o">----</span> <span class="mi">300</span> <span class="o">----</span> <span class="mi">250</span>
      <span class="n">t1</span>       <span class="n">t2</span>
@@ -422,14 +425,39 @@ Plus others…</p>
 </div>
 </div>
 </div>
-<div class="section" id="imputation">
-<h2>Imputation<a class="headerlink" href="#imputation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="imputation-and-missing-data">
+<span id="missing"></span><h2>Imputation and Missing data<a class="headerlink" href="#imputation-and-missing-data" title="Permalink to this headline">¶</a></h2>
 <p>In statistics, <em>imputation</em> is the process of replacing missing data with plausible estimates.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="missing-data">
+<h3>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h3>
+<p>Rubin (1976) classified missing data problems into three categories: MCAR, MAR and MNAR.</p>
+<ul>
+<li><p>MCAR: the probability of being missing depends only on some parameters <span class="math notranslate nohighlight">\(\psi\)</span>, the overall probability of being missing</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi) = Pr(R = 0 \mid \psi)\)</span></p>
+</div></blockquote>
+</li>
+<li><p>MAR: the missingness probability may depend on observed information, including any design factors</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi) = Pr(R = 0 \mid Y_{obs}, \psi)\)</span></p>
+</div></blockquote>
+</li>
+<li><p>MNAR: the probability to be missing also depends on unobserved information, including <span class="math notranslate nohighlight">\(Y_{mis}\)</span> itself</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi)\)</span></p>
+</div></blockquote>
+</li>
+</ul>
+<p>for some parameter <span class="math notranslate nohighlight">\(\psi\)</span> where <span class="math notranslate nohighlight">\(Y_{obs}\)</span> is the observed sample data and <span class="math notranslate nohighlight">\(Y_{mis}\)</span> the unobserved sample data.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
+</div>
 </div>
 </div>
 </div>
@@ -447,7 +475,7 @@ Plus others…</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="MCMC.html" title="Monte Carlo Markov chain"
+          <a href="MCMC.html" title="Markov chain Monte Carlo"
              >next</a> |</li>
         <li class="right" >
           <a href="Time.html" title="Time and dating"

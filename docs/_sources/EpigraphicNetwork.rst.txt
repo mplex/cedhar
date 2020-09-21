@@ -418,13 +418,13 @@ depends on ``multiplex``.
 .. code-block:: R
 
     # define scope for the graph
-    R> scp <- list(directed=FALSE, ecol=8, pos=0, valued=TRUE)
+    R> scp <- list(directed=FALSE, valued=TRUE, ecol=8, pos=0)
 
     # load "multigraph" where "multiplex" gets invoked
     R> library(multigraph)
 
     # plot similarity graph of 'epEgs' for the chosen variables
-    R> multigraph(epEgs, layout="force", maxiter=70, scope=scp, main="Similarity among Egyptian epigraphs")
+    R> multigraph(epEgs, scope=scp, layout="force", maxiter=70, main="Similarity among Egyptian epigraphs")
 
 
 

@@ -3,7 +3,7 @@
 
 
 ************************
-Monte Carlo Markov chain
+Markov chain Monte Carlo
 ************************
 
 
@@ -11,12 +11,12 @@ Monte Carlo
 ===========
 
 
-*Monte Carlo* refers to the method (created by Stanislaw Ulam) of generating random 
-numbers from a certain distribution. 
+*Monte Carlo* (term coined by S. Ulam and N. Metropolis) refers to the method of 
+generating random numbers from a certain distribution. 
 
 .. For archaeological applications, 
 
-For dealing with temporary uncertainty, for example, a Monte Carlo method consists on 
+For dealing with :ref:`temporal uncertainty <uncertainty>`, for example, a Monte Carlo method consists on 
 creating artificial "potential" time series within the boundary of existence, and then 
 assessing the likelihood of the variable's character state over time. 
 
@@ -25,32 +25,67 @@ assessing the likelihood of the variable's character state over time.
 Markov chain
 ============
 
-A *Markov chain* is a sequence of numbers where each number is dependent on the previous 
+A *Markov chain* (after A. Markov) is a sequence of numbers where each number is dependent on the previous 
 number in the sequence.
 
 
-To simulate a Markov chain whose equilibrium distribution is :math:`p(x)`, we use Monte 
-Carlo Markov chain (MCMC) methods.
+To simulate a Markov chain whose equilibrium distribution is a posterior density :math:`p(x)` defined on
+the set of possible configurations of a system, we use Markov chain Monte Carlo (MCMC) methods.
 
 
-MCMC algorithms: 
+Some MCMC algorithms: 
 
 * Metropolis-Hastings
 * Gibbs sampling
 * Random walk Metropolis  
 
 
-.. * Importance/rejection sampling (related, not MCMC)
+Alternative to MCMC:
+
+* Importance/rejection sampling (used to evaluate the probability of rare events)
+
+
+|
+
+
+MCMC is used to fit a model and to draw samples from the joint posterior distribution of the model parameters.
+
+
+* (see :ref:`Bayesian statistics <bayes>`)
+
+
 
 |
 
 
 Metropolis-Hastings
--------------------
+===================
 
 The *Metropolis-Hastings* algorithm serves to generate a sample from the posterior distribution 
 of :math:`\theta`, which is the parameter of the data point's distribution. 
 
+
+|
+
+
+Algorithm
+---------
+
+1. Initialise :math:`x^{(0)}`
+
+2. For :math:`i=0` to :math:`N-1`
+
+     Sample :math:`u \sim \mathcal{U}(0, 1)`
+
+     Sample :math:`x^\star \sim q(x^\star \mid x^{(i)})`
+
+     If :math:`u < \mathcal{U}() = \min\{1, \frac{p^\star \; q(x^{(i)}) \mid x^\star}{x^{(i)}) \; q(x^\star \mid x^{(i)})}\}`
+            
+            :math:`x^{(i+1)} = x^\star`
+            
+     Else   
+            
+            :math:`x^{(i+1)} = x^{(i)}`
 
 
 
@@ -106,7 +141,7 @@ Thinning
 
     .. todo:: 
     
-        Thinning is to reduce degree of auto-correlation...
+        Thinning interval for reducing autocorrelation of random points in the sampling...
 
 
 |
@@ -124,11 +159,14 @@ Convergence in MCMC is obtained when these outcomes become minimal with the incr
 |
 
 
+.. _bayes:
+
+
 Bayesian statistics
 ===================
 
-MCMC is for sampling from distributions with high dimensionality, which is a need typically 
-found in some Bayesian statistics contexts. 
+Markov chain Monte Carlo is a tool for sampling from distributions with high dimensionality, 
+which is a need typically found in some Bayesian statistics contexts. 
 
 Bayesian analysis implies Bayesian inference, model fitting, and performing inferential and 
 predictive summaries with predictive checks. 
@@ -143,26 +181,29 @@ parameters.
 |
 
 
+.. _bayesT:
+
 
 Bayes theorem
 -------------
 
 Key concepts in Bayesian statistics are related in Bayes theorem, which is a rule 
-that provides the conditional probability of :math:`A` (model or hypothesis) 
-occurring given that :math:`B` (data or observation) already happened.  
+that provides the conditional probability of :math:`\theta` (model or hypothesis) 
+occurring given that :math:`x` (data or observation) already happened.  
 
-:math:`P(A \mid B) \;=\; \frac{ P(A)~P(B \mid A)  } { P(B)  }` 
+:math:`P(\theta \mid x) \;=\; \frac{ P(\theta)~P(x \mid \theta)  } { P(x)  }` 
 
-That is, the posterior probability of :math:`A` given :math:`B` where
+That is, the posterior probability of :math:`\theta` given :math:`x` where
 
-* :math:`P(A \mid B)` is the **posterior** probability of :math:`A`
-* :math:`P(A)` is the **prior** probability of :math:`A`
-* :math:`P(B \mid A)` is the **likelihood** of :math:`A`
-* :math:`P(B)` is the **unconditional** probability of :math:`B`
+* :math:`P(\theta \mid x)` is the **posterior** probability of :math:`\theta`
+* :math:`P(\theta)` is the **prior** probability of :math:`\theta`
+* :math:`P(x \mid \theta)` is the **likelihood** of :math:`\theta`
+* :math:`P(x)` is the **unconditional** probability of :math:`x`
 
 
 Hence, the posterior is an updated degree of belief or knowledge based on the prior 
-with known probabilities. 
+with known probabilities. This is our posterior *target* distribution sometimes written 
+as :math:`P_{target}(\theta)`.
 
 On the other hand, the likelihood is the probability that the hypothesis confers upon 
 the observation, and the probability of the observation irrespective of any hypothesis 

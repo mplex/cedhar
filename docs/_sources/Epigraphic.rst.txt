@@ -660,11 +660,13 @@ where the first entry is
         #[1] "0071"
 
 
+
 |
 
 
-Missing data
-------------
+
+Remove missing data
+-------------------
 
 It is also possible to remove missing data from ``EDH`` by activating the ``na.rm`` argument in function 
 ``edhw()``.
@@ -693,6 +695,14 @@ and now the object has a shorter length
 ..      +    ifelse(any(is.na(attr(EDHdates[[n]],"names")))==FALSE, 
 ..      +    EDHdt[[length(EDHdt)+1L]]<-EDHdates[[n]], NA)
 ..      +    }
+
+
+|
+
+
+    .. seealso:: 
+    
+        :ref:`Missing data <missing>` within uncertainty. 
 
 
 |

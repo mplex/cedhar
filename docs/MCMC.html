@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Monte Carlo methods and Markov chain" name="description" />
 <meta content="Bayesian, MCMC" name="keywords" />
 
-    <title>Monte Carlo Markov chain &#8212; cedhar 0.0.4 documentation</title>
+    <title>Markov chain Monte Carlo &#8212; cedhar 0.0.4 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -42,10 +42,11 @@
             </a></p>
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Monte Carlo Markov chain</a><ul>
+<li><a class="reference internal" href="#">Markov chain Monte Carlo</a><ul>
 <li><a class="reference internal" href="#monte-carlo">Monte Carlo</a></li>
-<li><a class="reference internal" href="#markov-chain">Markov chain</a><ul>
-<li><a class="reference internal" href="#metropolis-hastings">Metropolis-Hastings</a></li>
+<li><a class="reference internal" href="#markov-chain">Markov chain</a></li>
+<li><a class="reference internal" href="#metropolis-hastings">Metropolis-Hastings</a><ul>
+<li><a class="reference internal" href="#algorithm">Algorithm</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#diagnostics">Diagnostics</a><ul>
@@ -94,35 +95,69 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="monte-carlo-markov-chain">
-<span id="mcmc"></span><h1>Monte Carlo Markov chain<a class="headerlink" href="#monte-carlo-markov-chain" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="markov-chain-monte-carlo">
+<span id="mcmc"></span><h1>Markov chain Monte Carlo<a class="headerlink" href="#markov-chain-monte-carlo" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="monte-carlo">
 <h2>Monte Carlo<a class="headerlink" href="#monte-carlo" title="Permalink to this headline">¶</a></h2>
-<p><em>Monte Carlo</em> refers to the method (created by Stanislaw Ulam) of generating random
-numbers from a certain distribution.</p>
-<p>For dealing with temporary uncertainty, for example, a Monte Carlo method consists on
+<p><em>Monte Carlo</em> (term coined by S. Ulam and N. Metropolis) refers to the method of
+generating random numbers from a certain distribution.</p>
+<p>For dealing with <a class="reference internal" href="Uncertainty.html#uncertainty"><span class="std std-ref">temporal uncertainty</span></a>, for example, a Monte Carlo method consists on
 creating artificial “potential” time series within the boundary of existence, and then
 assessing the likelihood of the variable’s character state over time.</p>
 </div>
 <div class="section" id="markov-chain">
 <h2>Markov chain<a class="headerlink" href="#markov-chain" title="Permalink to this headline">¶</a></h2>
-<p>A <em>Markov chain</em> is a sequence of numbers where each number is dependent on the previous
+<p>A <em>Markov chain</em> (after A. Markov) is a sequence of numbers where each number is dependent on the previous
 number in the sequence.</p>
-<p>To simulate a Markov chain whose equilibrium distribution is <span class="math notranslate nohighlight">\(p(x)\)</span>, we use Monte
-Carlo Markov chain (MCMC) methods.</p>
-<p>MCMC algorithms:</p>
+<p>To simulate a Markov chain whose equilibrium distribution is a posterior density <span class="math notranslate nohighlight">\(p(x)\)</span> defined on
+the set of possible configurations of a system, we use Markov chain Monte Carlo (MCMC) methods.</p>
+<p>Some MCMC algorithms:</p>
 <ul class="simple">
 <li><p>Metropolis-Hastings</p></li>
 <li><p>Gibbs sampling</p></li>
 <li><p>Random walk Metropolis</p></li>
 </ul>
+<p>Alternative to MCMC:</p>
+<ul class="simple">
+<li><p>Importance/rejection sampling (used to evaluate the probability of rare events)</p></li>
+</ul>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<p>MCMC is used to fit a model and to draw samples from the joint posterior distribution of the model parameters.</p>
+<ul class="simple">
+<li><p>(see <a class="reference internal" href="#bayes"><span class="std std-ref">Bayesian statistics</span></a>)</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
 <div class="section" id="metropolis-hastings">
-<h3>Metropolis-Hastings<a class="headerlink" href="#metropolis-hastings" title="Permalink to this headline">¶</a></h3>
+<h2>Metropolis-Hastings<a class="headerlink" href="#metropolis-hastings" title="Permalink to this headline">¶</a></h2>
 <p>The <em>Metropolis-Hastings</em> algorithm serves to generate a sample from the posterior distribution
 of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the parameter of the data point’s distribution.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="algorithm">
+<h3>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Initialise <span class="math notranslate nohighlight">\(x^{(0)}\)</span></p></li>
+<li><p>For <span class="math notranslate nohighlight">\(i=0\)</span> to <span class="math notranslate nohighlight">\(N-1\)</span></p>
+<blockquote>
+<div><p>Sample <span class="math notranslate nohighlight">\(u \sim \mathcal{U}(0, 1)\)</span></p>
+<p>Sample <span class="math notranslate nohighlight">\(x^\star \sim q(x^\star \mid x^{(i)})\)</span></p>
+<p>If <span class="math notranslate nohighlight">\(u &lt; \mathcal{U}() = \min\{1, \frac{p^\star \; q(x^{(i)}) \mid x^\star}{x^{(i)}) \; q(x^\star \mid x^{(i)})}\}\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(x^{(i+1)} = x^\star\)</span></p>
+</div></blockquote>
+<p>Else</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(x^{(i+1)} = x^{(i)}\)</span></p>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ol>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -166,7 +201,7 @@ of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the pa
 <blockquote>
 <div><div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
-<p>Thinning is to reduce degree of auto-correlation…</p>
+<p>Thinning interval for reducing autocorrelation of random points in the sampling…</p>
 </div>
 </div></blockquote>
 <div class="line-block">
@@ -186,9 +221,9 @@ of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the pa
 </div>
 </div>
 <div class="section" id="bayesian-statistics">
-<h2>Bayesian statistics<a class="headerlink" href="#bayesian-statistics" title="Permalink to this headline">¶</a></h2>
-<p>MCMC is for sampling from distributions with high dimensionality, which is a need typically
-found in some Bayesian statistics contexts.</p>
+<span id="bayes"></span><h2>Bayesian statistics<a class="headerlink" href="#bayesian-statistics" title="Permalink to this headline">¶</a></h2>
+<p>Markov chain Monte Carlo is a tool for sampling from distributions with high dimensionality,
+which is a need typically found in some Bayesian statistics contexts.</p>
 <p>Bayesian analysis implies Bayesian inference, model fitting, and performing inferential and
 predictive summaries with predictive checks.</p>
 <p>As mentioned in <a class="reference internal" href="Uncertainty.html#uncertainty"><span class="std std-ref">temporal uncertainty</span></a>, the subjective approach in
@@ -199,20 +234,21 @@ parameters.</p>
 <div class="line"><br /></div>
 </div>
 <div class="section" id="bayes-theorem">
-<h3>Bayes theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this headline">¶</a></h3>
+<span id="bayest"></span><h3>Bayes theorem<a class="headerlink" href="#bayes-theorem" title="Permalink to this headline">¶</a></h3>
 <p>Key concepts in Bayesian statistics are related in Bayes theorem, which is a rule
-that provides the conditional probability of <span class="math notranslate nohighlight">\(A\)</span> (model or hypothesis)
-occurring given that <span class="math notranslate nohighlight">\(B\)</span> (data or observation) already happened.</p>
-<p><span class="math notranslate nohighlight">\(P(A \mid B) \;=\; \frac{ P(A)~P(B \mid A)  } { P(B)  }\)</span></p>
-<p>That is, the posterior probability of <span class="math notranslate nohighlight">\(A\)</span> given <span class="math notranslate nohighlight">\(B\)</span> where</p>
+that provides the conditional probability of <span class="math notranslate nohighlight">\(\theta\)</span> (model or hypothesis)
+occurring given that <span class="math notranslate nohighlight">\(x\)</span> (data or observation) already happened.</p>
+<p><span class="math notranslate nohighlight">\(P(\theta \mid x) \;=\; \frac{ P(\theta)~P(x \mid \theta)  } { P(x)  }\)</span></p>
+<p>That is, the posterior probability of <span class="math notranslate nohighlight">\(\theta\)</span> given <span class="math notranslate nohighlight">\(x\)</span> where</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(A \mid B)\)</span> is the <strong>posterior</strong> probability of <span class="math notranslate nohighlight">\(A\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(A)\)</span> is the <strong>prior</strong> probability of <span class="math notranslate nohighlight">\(A\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(B \mid A)\)</span> is the <strong>likelihood</strong> of <span class="math notranslate nohighlight">\(A\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(B)\)</span> is the <strong>unconditional</strong> probability of <span class="math notranslate nohighlight">\(B\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\theta \mid x)\)</span> is the <strong>posterior</strong> probability of <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(\theta)\)</span> is the <strong>prior</strong> probability of <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(x \mid \theta)\)</span> is the <strong>likelihood</strong> of <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(P(x)\)</span> is the <strong>unconditional</strong> probability of <span class="math notranslate nohighlight">\(x\)</span></p></li>
 </ul>
 <p>Hence, the posterior is an updated degree of belief or knowledge based on the prior
-with known probabilities.</p>
+with known probabilities. This is our posterior <em>target</em> distribution sometimes written
+as <span class="math notranslate nohighlight">\(P_{target}(\theta)\)</span>.</p>
 <p>On the other hand, the likelihood is the probability that the hypothesis confers upon
 the observation, and the probability of the observation irrespective of any hypothesis
 is the unconditional probability of the observation.</p>
