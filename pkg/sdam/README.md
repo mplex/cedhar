@@ -100,6 +100,16 @@ Hence, not available data is removed in `thrdf`.
 
 
 
+### People
+
+It is possible to extract the `people` component from the `EDH` API dataset.
+
+For instance, the following commands extract people named in Roman inscriptions in Thracia and Syria into a data frame object:
+```r
+edhw(x=get.edh(search="inscriptions", province="Thr"), vars="people", as="df")
+edhw(x=get.edh(search="inscriptions", province="Syr"), vars="people", as="df")
+```
+etc.
 
 
 
