@@ -1,8 +1,9 @@
+
 ## 
-## FUNCTION edhw() to manipulate data API from the Epigraphic Database Heidelber
+## FUNCTION edhw() to manipulate data API from Epigraphic Database Heidelberg EDH
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.0 (02-10-2020)
+## version 0.2.1 (06-10-2020)
 ##
 ## PARAMETERS
 ##
@@ -18,8 +19,6 @@
 ## na.rm (Remove data entries with NA?)
 ## ...   (optional parameters)
 ##
-
-
 
 
 edhw <-
@@ -187,11 +186,9 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
             }
             else {
                 edhlp <- list()
-                ids <- vector()
                 for (i in seq_len(length(edhl))) {
                   if (is.na(names(edhl[[i]])) == FALSE) {
                     edhlp[[length(edhlp) + 1L]] <- edhl[[i]]
-                    ids <- append(ids, edhlm[[i]]$id)
                   }
                   else {
                     NA
@@ -217,10 +214,16 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                     "names")))] <- as.vector(unlist(edhlp[[k]]$people[[i]]))
                 }
                 rm(i)
+                ids <- vector()
+                for (i in seq_len(length(edhl))) {
+                  ids <- append(ids, edhlm[[i]]$id)
+                }
+                rm(i)
                 ifelse(isTRUE(addID == TRUE) == TRUE, tmpdf[, 
                   1] <- ids[k], NA)
                 xdfp <- rbind(xdfp, tmpdf)
             }
+            rm(k)
             ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == 
                 TRUE) == TRUE, warning("Argument \"na.rm\" is deactivated for variable \"people\"."), 
                 NA)
