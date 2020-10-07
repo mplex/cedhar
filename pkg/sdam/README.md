@@ -1,10 +1,10 @@
-# sdam
+# sdam R package
 
 ## Digital tools for the SDAM project at Aarhus University
 
 This package provides digital tools for the [*Social Dynamics and complexity
 in the Ancient Mediterranean*](https://sdam-au.github.io/sdam-au/) (SDAM) project 
-at the School of Culture and Society at Aarhus University.
+at the School of Culture and Society, Aarhus University.
 
 
 
@@ -15,12 +15,13 @@ at the School of Culture and Society at Aarhus University.
 You can install the `sdam` package from these GitHub repositories using the R console or RStudio if you wish.
 
 ```r
-## Install package
+# install beta version
 devtools::install_github("mplex/cedhar", subdir="pkg/sdam")
 ```
 or 
 
 ```r
+# install release candidate
 devtools::install_github("sdam-au/sdam")
 ```
 
@@ -28,24 +29,24 @@ devtools::install_github("sdam-au/sdam")
 ### Usage
 
 ```r
-## Load package
+# load package
 library("sdam")
 ```
 
 ```r
-## Load epigraphic data
+# load epigraphic dataset
 data("EDH")
 ```
 
 ```r
-# Look at how many inscriptions?
+# look at how many inscriptions?
 length(EDH)
 # [1] 82465
 ```
 
 
 ```r
-# Also look at the object structure
+# also look at the object structure
 str(EDH)
 ```
 
@@ -115,5 +116,5 @@ etc.
 
 ### Documentation
 
-Look at the ['sdam' R package documentation](https://sdam-au.github.io/sdam/) to find more TBD.
+Look at the ['sdam' R package documentation](https://sdam-au.github.io/sdam/) to find more.
 
