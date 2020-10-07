@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from Epigraphic Database Heidelberg EDH
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.1 (06-10-2020)
+## version 0.2.2 (07-10-2020)
 ##
 ## PARAMETERS
 ##
@@ -28,14 +28,15 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
     flgx <- TRUE
     flgdf <- FALSE
     if (is.null(x) == TRUE) {
+        warning("\"x\" is NULL and dataset \"EDH\" is taken if available.")
         if (!(exists("EDH"))) {
             utils::data("EDH", package = "sdam", envir = environment())
             EDH <- get("EDH", envir = environment())
+            EDH$cite <- NULL
         }
         else {
             NA
         }
-        EDH$cite <- NULL
         flgx <- FALSE
         x <- EDH
     }
@@ -43,8 +44,6 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
         flgdf <- TRUE
         ifelse(isTRUE(is.list(x) == TRUE) == TRUE, x <- as.data.frame(x), 
             NA)
-        ifelse((match.arg(as) == "df")%%(class(x) %in% c("tbl_df", 
-            "tbl") == FALSE), x[x == "list()"] <- NA, NA)
     }
     else {
         ifelse(isTRUE(is.character(x) == TRUE) == TRUE, x <- eval(parse(text = x)), 
@@ -70,8 +69,15 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
     if (isTRUE(vars != "people") == TRUE && all(vars %in% xvars) == 
         FALSE) {
         warning(paste("Variable(s)", vars[which(!(vars %in% xvars))], 
-            "is/are not present and disregarded.", sep = " "))
+            "is/are not present in \"x\" and they are disregarded.", 
+            sep = " "))
         vars <- vars[which(vars %in% xvars)]
+    }
+    else if (isTRUE(vars %in% xvars) == FALSE && isTRUE(length(unlist(strsplit(xvars, 
+        split = "people."))) > length(xvars)) == FALSE) {
+        warning(paste("Variable(s)", vars[which(!(vars %in% xvars))], 
+            "is/are not present in input data.", sep = " "))
+        return(NULL)
     }
     else {
         NA
@@ -96,24 +102,7 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
     if (isTRUE(flgdf == TRUE) == TRUE) {
         warning("When \"x\" is a data frame, argument \"limit\" is not available.")
         if (match.arg(as) == "df") {
-            edhlm <- split(x, seq(nrow(x)))
-            edhlv <- lapply(edhlm, `[`, vars)
-            edhl <- vector("list", length(edhlv))
-            for (k in seq_len(length(edhlv))) {
-                edhlv[[k]] <- apply(edhlv[[k]], 2, function(x) suppressWarnings(levels(x) <- sub("NULL", 
-                  NA, x)))
-                edhlv[[k]][edhlv[[k]] == ""] <- NA
-                edhlv[[k]][edhlv[[k]] == "list()"] <- NA
-                edhll <- vector("list", length(vars))
-                attr(edhll, "names") <- vars
-                for (i in seq_len(length(vars))) {
-                  edhll[[i]] <- as.list(edhlv[[k]])
-                }
-                rm(i)
-                edhl[[k]] <- edhll
-            }
-            rm(k)
-            rm(edhll)
+            return(x)
         }
         else if (match.arg(as) == "list") {
             edhl <- list()
@@ -177,12 +166,17 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
         }
         else if (isTRUE(flgp == TRUE) == TRUE) {
             if (isTRUE(flgx == TRUE) == TRUE) {
-                pnames <- lapply(edhl, "names")
-                edhlp <- edhl[which(!(is.na(unlist(pnames))))]
-                plbs <- unique(attr(unlist(edhlp), "names"))
-                plbs <- sort(unique(unlist(strsplit(plbs, split = "people."))))
-                ifelse(isTRUE(addID == TRUE) == TRUE, plbs[1] <- "id", 
-                  NA)
+                if (all(is.na(edhl)) == FALSE) {
+                  pnames <- lapply(edhl, "names")
+                  edhlp <- edhl[which(!(is.na(unlist(pnames))))]
+                  plbs <- unique(attr(unlist(edhlp), "names"))
+                  plbs <- sort(unique(unlist(strsplit(plbs, split = "people."))))
+                  ifelse(isTRUE(addID == TRUE) == TRUE, plbs[1] <- "id", 
+                    NA)
+                }
+                else {
+                  return(as.data.frame(edhl))
+                }
             }
             else {
                 edhlp <- list()
