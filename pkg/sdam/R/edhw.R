@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from Epigraphic Database Heidelberg EDH
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.3.0 (08-10-2020)
+## version 0.3.1 (09-10-2020)
 ##
 ## PARAMETERS
 ##
@@ -16,7 +16,7 @@
 ## addID  (logical, add "HD id" to output?)
 ## limit  (integers, vector with HD nr records to limit output)
 ## id     (integer or character, select only the hd_nr id)
-## na.rm  (remove data entries with NA?)
+## na.rm  (Remove data entries with NA?)
 ## bycols (logical, return multiple people entries by data frame columns?)
 ## ...    (optional parameters)
 ##
@@ -202,6 +202,7 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                 ids <- append(ids, edhlm[[i]]$id)
             }
             rm(i)
+            ids <- ids[which(is.na(pnames) == FALSE)]
             if (isTRUE(bycols == TRUE) == FALSE) {
                 xdfp <- data.frame(matrix(ncol = length(plbs), 
                   nrow = 0))
@@ -239,6 +240,7 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                 rm(i)
                 ifelse(isTRUE(addID == TRUE) == TRUE, plbss <- append("id", 
                   plbss), NA)
+                options(stringsAsFactors = FALSE)
                 xdfpp <- data.frame(matrix(ncol = length(plbss), 
                   nrow = 0))
                 for (k in seq_len(length(edhlp))) {
@@ -255,27 +257,31 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                   rm(i)
                   if (isTRUE(nrow(tmpdf) > 1L) == TRUE) {
                     vecp <- unlist(tmpdf[, 2:ncol(tmpdf)], use.names = FALSE)
-                    if (isTRUE(dim(tmpdf)[1] == pp) == TRUE) {
-                      xdfpp <- rbind(xdfpp, c(ids[k], vecp[which(seq_len(length(vecp))%%2 == 
+                    ifelse(isTRUE(dim(tmpdf)[1] == pp) == TRUE, 
+                      vecpp <- (c(ids[k], vecp[which(seq_len(length(vecp))%%2 == 
                         1L)], vecp[which(seq_len(length(vecp))%%2 == 
-                        0L)]))
-                    }
-                    else {
-                      xdfpp <- rbind(xdfpp, c(ids[k], vecp[which(seq_len(length(vecp))%%2 == 
+                        0L)])), vecpp <- (c(ids[k], vecp[which(seq_len(length(vecp))%%2 == 
                         1L)], vecp[which(seq_len(length(vecp))%%2 == 
                         0L)], rep(NA, (length(plbss) - length(vecp) - 
-                        1L))))
-                    }
+                        1L)))))
+                    xdfpp <- (rbind(xdfpp, vecpp))
                   }
-                  else {
-                    xdfpp <- rbind(as.vector(unlist(xdfpp)), 
-                      c(ids[k], as.vector(unlist(tmpdf[2:ncol(tmpdf)])), 
-                        rep(NA, (length(plbss) - ncol(tmpdf)))))
+                  else if (isTRUE(nrow(tmpdf) == 1L) == TRUE) {
+                    if (isTRUE(dim(xdfpp)[1] == 0) == TRUE) {
+                      xdfpp <- rbind(as.vector(unlist(xdfpp)), 
+                        c(ids[k], as.vector(unlist(tmpdf[2:ncol(tmpdf)])), 
+                          rep(NA, (length(plbss) - ncol(tmpdf)))))
+                    }
+                    else {
+                      xdfpp <- (rbind(xdfpp, c(ids[k], as.vector(unlist(tmpdf[2:ncol(tmpdf)])), 
+                        rep(NA, (length(plbss) - ncol(tmpdf))))))
+                    }
                   }
                 }
                 rm(k)
                 xdfpp <- as.data.frame(xdfpp)
                 colnames(xdfpp) <- plbss
+                rownames(xdfpp) <- NULL
                 return(xdfpp)
             }
         }
