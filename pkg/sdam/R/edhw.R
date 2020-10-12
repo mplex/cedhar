@@ -195,7 +195,7 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                 plbs <- rev(sort(unique(names(unlist(edhl)))))
                 plbs <- sort(unique(unlist(strsplit(plbs, split = "people."))))
                 ifelse(isTRUE(addID == TRUE) == TRUE, plbs[1] <- "id", 
-                  , plbs <- plbs[2:length(plbs)])
+                  plbs <- plbs[2:length(plbs)])
             }
             ids <- vector()
             for (i in seq_len(length(edhl))) {
