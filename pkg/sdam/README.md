@@ -110,7 +110,38 @@ For instance, the following commands extract people named in Roman inscriptions 
 edhw(x=get.edh(search="inscriptions", province="Thr"), vars="people", as="df")
 edhw(x=get.edh(search="inscriptions", province="Syr"), vars="people", as="df")
 ```
-etc.
+
+The same can apply to the rest of Roman provinces.
+
+It is also possible to `limit` the amount of records to process, and with the following example we can extract the first four inscriptions by `hd_nr` id.
+
+```r
+edhw(vars="people", as="df", limit=4)
+#        id age: years             cognomen gender                                              name    nomen person_id praenomen           status   tribus
+#1 HD000001       <NA>               Optata female                               Noniae P.f. Optatae    Nonia         1      <NA>             <NA>     <NA>
+#2 HD000001       <NA>               Artemo   male                                 C. Iulio Artemoni   Iulius         2        C.             <NA>     <NA>
+#3 HD000001       <NA>              Optatus   male                            C. Iulius C.f. Optatus   Iulius         3        C.             <NA>     <NA>
+#4 HD000002         70                Paris   male                                  C. Sextius Paris  Sextius         1        C.             <NA>     <NA>
+#5 HD000003       <NA> Sisenna+ Rutilianus+   male      [P. M]ummio [P.f. Gal. S]isenna[e Rutiliano] Mummius+         1       P.+ senatorial order Galeria+
+#6 HD000004       <NA>                [---]   <NA> [---?]AV(?)S(?)[---]L(?)L(?)A M. Porci Nigri ser.     <NA>         1      <NA>           slaves     <NA>
+#7 HD000004       <NA>                Niger   <NA>                                    M. Porci Nigri  Porcius         2        M.             <NA>     <NA>
+```
+
+while a specific record is retrieved by using the `id` argument
+
+
+```r
+edhw(vars="people", as="df", id=c(4,44,4444))
+#        id     cognomen gender                                              name       nomen person_id praenomen           status
+#1 HD000004        [---]   <NA> [---?]AV(?)S(?)[---]L(?)L(?)A M. Porci Nigri ser.        <NA>         1      <NA>           slaves
+#2 HD000004        Niger   <NA>                                    M. Porci Nigri     Porcius         2        M.             <NA>
+#3 HD000044        [---]   male                              [- Corn?]elius [---] Cornelius+?         1       [-]             <NA>
+#4 HD000044        [---]   male                               [- Cor]nelius [---]  Cornelius+         2       [-]             <NA>
+#5 HD004444    Gordianus   male                                M. Antoni Gordiani    Antonius         1        M.             <NA>
+#6 HD004444 Tranquillina female                            Sabiniae Tranquillinae     Sabinia         2      <NA>             <NA>
+#7 HD004444  Mercurialis   male                                  Iul. Mercurialis     Iulius*         3      <NA> equestrian order
+```
+
 
 
 
