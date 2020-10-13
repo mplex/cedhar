@@ -1,27 +1,3 @@
-
-## 
-## FUNCTION edhw() to manipulate data API from Epigraphic Database Heidelberg EDH
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
-##
-## version 0.3.1 (09-10-2020)
-##
-## PARAMETERS
-##
-## vars (variables or attributes to be chosen)
-## x (fragments of the EDH dataset
-## as (type of output, lists or data frames)
-##
-## OPTIONAL PARAMETERS
-##
-## addID  (logical, add "HD id" to output?)
-## limit  (integers, vector with HD nr records to limit output)
-## id     (integer or character, select only the hd_nr id)
-## na.rm  (Remove data entries with NA?)
-## bycols (logical, return multiple people entries by data frame columns?)
-## ...    (optional parameters)
-##
-
-
 edhw <-
 function (vars, x = NULL, as = c("list", "df"), addID, limit, 
     id, na.rm, bycols, ...) 
@@ -168,14 +144,20 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
             rm(n)
         }
         else if (isTRUE(flgp == TRUE) == TRUE) {
+            pnames <- lapply(edhl, "names")
             if (isTRUE(flgx == TRUE) == TRUE) {
                 if (all(is.na(edhl)) == FALSE) {
-                  pnames <- lapply(edhl, "names")
                   edhlp <- edhl[which(!(is.na(unlist(pnames))))]
-                  plbs <- unique(attr(unlist(edhlp), "names"))
-                  plbs <- sort(unique(unlist(strsplit(plbs, split = "people."))))
-                  ifelse(isTRUE(addID == TRUE) == TRUE, plbs[1] <- "id", 
-                    plbs <- plbs[2:length(plbs)])
+                  if (isTRUE(length(edhlp) > 0) == TRUE) {
+                    plbs <- unique(attr(unlist(edhlp), "names"))
+                    plbs <- sort(unique(unlist(strsplit(plbs, 
+                      split = "people."))))
+                    ifelse(isTRUE(addID == TRUE) == TRUE, plbs[1] <- "id", 
+                      plbs <- plbs[2:length(plbs)])
+                  }
+                  else {
+                    return(NULL)
+                  }
                 }
                 else {
                   return(as.data.frame(edhl))
@@ -192,10 +174,15 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                   }
                 }
                 rm(i)
-                plbs <- rev(sort(unique(names(unlist(edhl)))))
-                plbs <- sort(unique(unlist(strsplit(plbs, split = "people."))))
-                ifelse(isTRUE(addID == TRUE) == TRUE, plbs[1] <- "id", 
-                  plbs <- plbs[2:length(plbs)])
+                if (isTRUE(length(edhlp) > 0) == TRUE) {
+                  plbs <- rev(sort(unique(names(unlist(edhl)))))
+                  plbs <- sort(unique(unlist(strsplit(plbs, split = "people."))))
+                  ifelse(isTRUE(addID == TRUE) == TRUE, plbs[1] <- "id", 
+                    plbs <- plbs[2:length(plbs)])
+                }
+                else {
+                  return(NULL)
+                }
             }
             ids <- vector()
             for (i in seq_len(length(edhl))) {

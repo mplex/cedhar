@@ -2,10 +2,10 @@
 \alias{get.edh}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Get data from the Epigraphic Database Heidelberg
+Get data from the Epigraphic Database Heidelberg API
 }
 \description{
-A function to obtain data from the Epigraphic Database Heidelberg repository.
+A function to obtain data from the Epigraphic Database Heidelberg API repository.
 }
 \usage{
 get.edh(search = c("inscriptions", "geography"), 
@@ -114,7 +114,7 @@ A list with the of valid values for countries from the EDH API are
 \code{"gi"}  \tab  Gibraltar               \tab  \code{"nl"}  \tab  Netherlands             \tab  \code{"ye"}  \tab  Yemen                 \cr 
 }
 
-And for the ancient Roman provices the valued values are
+And for the ancient Roman provices the valid values are
 
 \tabular{llllll}{
 \code{"Ach"}  \tab  Achaia                           \tab  \code{"Cor"}  \tab  Corsica                       \tab  \code{"Mes"}  \tab  Mesopotamia                   \cr 
@@ -210,8 +210,10 @@ and \code{"bibliography"} may be implemented in the future.
 \code{\link{get.edhw}}, \code{\link{simil}}
 }
 \examples{
-# TBD
-
+## get inscriptions from EDH API data
+## Not run:
+get.edh(findspot_modern="madrid")
+## End(**Not run**)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

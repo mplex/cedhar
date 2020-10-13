@@ -13,8 +13,8 @@
 \tabular{ll}{
 Package: \tab sdam \cr
 Type: \tab Package \cr
-Version: \tab 0.2.2 \cr
-Date: \tab 2 July 2020 \cr
+Version: \tab 0.2.6 \cr
+Date: \tab 13 October 2020 \cr
 License: \tab CC BY-SA 4.0 \cr
 }
 
@@ -25,7 +25,7 @@ License: \tab CC BY-SA 4.0 \cr
 %\packageIndices{sdam}
 Currently, it is possible with the \code{sdam} package to access data from the Epigraphic Database 
 Heidelberg API with \code{get.edh()}, and the wrapper functions \code{get.edhw()} \code{edhw()} as well. 
-Most of the data is available in the dataset attached to the package, which is called \code{EDH}, which 
+Most of the data is available in the dataset attached to the package, called \code{EDH}, and which 
 can be manipulated by using the \code{edhw()} convenient function. 
 
 Besides, the \code{request()} function allows performing different types of 
@@ -33,9 +33,9 @@ HTTP requests from a cloud repository like DEiC'S \url{https://sciencedata.dk} o
 customized URL address. 
 
 Similarity by simple matching among column vectors is achieved by the \code{simil()} function 
-in order to make analyses of assemblages or artifacts. 
+in order to make analyses of relations between assemblages and artifacts. 
 
-Note that this latter function still under early development. 
+Note that this latter function still under development. 
 }
 \author{
 Author: \packageAuthor{sdam} 
