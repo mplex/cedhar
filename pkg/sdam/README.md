@@ -127,7 +127,7 @@ edhw(vars="people", as="df", limit=4)
 #7 HD000004       <NA>                Niger   <NA>                                    M. Porci Nigri  Porcius         2        M.             <NA>     <NA>
 ```
 
-while a specific record is retrieved by using the `id` argument
+while specific records are retrieved by using the `id` argument
 
 
 ```r
