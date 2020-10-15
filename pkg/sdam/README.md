@@ -96,7 +96,7 @@ cbind(head(thrdf0), head(thrdf))
 #6 007047      <NA>       0068 007092      0136       0135
 ```
 
-Hence, not available data is removed in `thrdf`.
+Hence, not available data is removed in `thrdf` to work with complete cases.
 
 
 
