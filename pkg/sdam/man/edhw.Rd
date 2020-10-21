@@ -22,7 +22,7 @@ edhw(vars, x = NULL, as = c("list", "df"), addID, limit, id, na.rm, bycols, ...)
    Format to return the output. Currently either as a \code{list} or a data frame \code{df} object.
 }
   \item{addID}{
-   Add identification to the output? (optional and logical)
+   Add identification to the output? (optional and logical; default is \code{TRUE})
 }
   \item{limit}{
    Limit the returned output. Ignored if \code{id} is specified (optional, integer or vector)
@@ -34,10 +34,10 @@ edhw(vars, x = NULL, as = c("list", "df"), addID, limit, id, na.rm, bycols, ...)
    Remove entries with NA data? (logical and optional)
 }
   \item{bycols}{
-   People in data frame by colunms? (logical and optional)
+   Place people in data frame by colunms? (logical and optional)
 }
   \item{\dots}{
-   Optional arguments if needed.
+   Other optional arguments if needed.
 }
 }
 \details{
@@ -63,13 +63,13 @@ this case the offset can be specified as a sequence.
 While \code{"limit"} is a faster way to get to entries in the \code{EDH} dataset, argument \code{id} is for 
 refering to precisely one or more \code{hd_nr}s in the Epigraphic Database Heidelberg API.
 
-Component "\code{people}" is a separated list in the \code{EDH} dataset, and it should be considered as 
-a separate case from the rest of the variables. 
+Component "\code{people}" is a separated list in the \code{EDH} dataset, and it can be combined with the rest of the variables. 
 In the case that the output is a data frame, it is possible to place the different people from a single entry 
-"by columns" or column by column in the data frame when \code{bycols} is activated. 
+"by columns" or column by column in the data frame when \code{bycols} is activated. In this latter case, the \code{hd_nr} id(s) 
+are included in the output and argument \code{addID} will be ignored.
 }
 \value{
-A list or a data frame, depending on the input. 
+A list or a data frame, depending on the \code{as} input. 
 }
 \references{
 https://edh-www.adw.uni-heidelberg.de/data/api
@@ -77,9 +77,9 @@ https://edh-www.adw.uni-heidelberg.de/data/api
 \author{
 Antonio Rivero Ostoic
 }
-\note{
-In case that the output chosen is a dataframe, then component \code{"people"} should be chosen alone. 
-}
+%\note{
+%In case that the output chosen is a dataframe, then component \code{"people"} should be chosen alone. 
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
@@ -91,8 +91,8 @@ In case that the output chosen is a dataframe, then component \code{"people"} sh
 ## load data set
 data(EDH)
 
-## make a list for three variables in 'EDH' (default)
-edhw(vars=c("ID", "not_after", "not_before") )}
+## make a list for three variables in 'EDH' (default) for the first four records
+edhw(vars=c("people", "not_after", "not_before"), limit=4 )}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
