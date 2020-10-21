@@ -16,9 +16,9 @@
 ## addID  (logical, add "HD id" to output?)
 ## limit  (integers, vector with HD nr records to limit output)
 ## id     (integer or character, select only the hd_nr id)
-## na.rm  (logical, remove data entries with NA?)
+## na.rm  (remove data entries with NA?)
 ## bycols (logical, return multiple people entries by data frame columns?)
-## ...    (other optional parameters)
+## ...    (optional parameters)
 ##
 
 
@@ -48,7 +48,8 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
         ifelse(isTRUE(is.character(x) == TRUE) == TRUE, x <- eval(parse(text = x)), 
             NA)
     }
-    if (missing(addID) == FALSE && isTRUE(addID == TRUE) == FALSE) {
+    if (missing(addID) == FALSE && isTRUE(addID == FALSE) == 
+        TRUE) {
         ifelse(isTRUE("id" %in% vars) == TRUE, addID <- TRUE, 
             addID <- FALSE)
     }
@@ -358,9 +359,17 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
             }
         }
         if (isTRUE(flgp == FALSE) == TRUE) {
+            ids <- vector()
+            for (i in seq_len(length(edhl0))) {
+                ids <- append(ids, edhlm[[i]]$id)
+            }
+            rm(i)
+            ids <- ids[which(is.na(pnames) == FALSE)]
             ifelse(isTRUE(flgdf == TRUE) == TRUE, vlbs <- (unique(unlist(lapply(edhl0, 
                 "names")))), vlbs <- sort(unique(unlist(lapply(edhl0, 
                 "names")))))
+            ifelse(isTRUE(addID == TRUE) == TRUE, vlbs <- append("id", 
+                vlbs), NA)
             xdf <- data.frame(matrix(ncol = length(vlbs), nrow = length(edhl0)))
             colnames(xdf) <- vlbs
             for (i in seq_len(length(edhl0))) {
@@ -369,6 +378,8 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                 xdf[i, which((vlbs %in% attr(edhl0[[i]], "names")))] <- as.vector(unlist(edhl0[[i]]))
             }
             rm(i)
+            ifelse(isTRUE(addID == TRUE) == TRUE, xdf[, 1] <- ids, 
+                NA)
             ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == 
                 TRUE) == TRUE, return(stats::na.omit(xdf)), return(xdf))
         }
