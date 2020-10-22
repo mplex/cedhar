@@ -371,7 +371,7 @@ format. However, many times is convenient to have a numerical identifier in each
 and function ``get.edh()`` adds an ``ID`` with a numerical format at the beginning of the list.
 
 
-Having a numerical identifier is useful for plotting the results, and  an ``ID`` is added 
+Having a numerical identifier is useful for plotting the results, for example, and an ``ID`` is added 
 to the output by default. You can prevent such addition by disabling 
 argument ``addID`` with ``FALSE``.
 
@@ -589,6 +589,32 @@ Formal arguments of ``edhw()`` are:
 |
 
 
+EDH Variables
+=============
+
+The aim of the ``edhw()`` function is to extract variables or attributes of inscriptions, which are output values
+typically produced by the ``get.edh()`` function. 
+
+These variables are at least one the following items: ``"commentary"``, ``"fotos"``, ``"country"``, ``"depth"``, 
+``"diplomatic_text"``, ``"edh_geography_uri"``, ``"findspot"``, ``"findspot_ancient"``, ``"findspot_modern"``, 
+``"geography"``, ``"height"``, ``"id"``, ``"language"``, ``"last_update"``, ``"letter_size"``, ``"literature"``, 
+``"material"``, ``"military"``, ``"modern_region"``, ``"not_after"``, ``"not_before"``, ``"present_location"``, 
+``"religion"``, ``"province_label"``, ``"responsible_individual"``, ``"social_economic_legal_history"``, 
+``"transcription"``, ``"trismegistos_uri"``, ``"type_of_inscription"``, ``"type_of_monument"``, ``"uri"``, 
+``"width"``, ``"work_status"``, and ``"year_of_find"``. 
+
+Another output variable is ``"people"`` that is a list of persons named in the inscriptions with at least the following 
+items "person_id", "nomen", "cognomen", "praenomen", "name", "gender", "status", "tribus", "origo", "occupation", 
+"age: years", "age: months", "age: days".
+
+With ``edhw()`` it is possible to combine ``"people"`` with the other output variables.
+
+
+
+
+
+|
+
 
 Relative dating
 ===============
@@ -597,7 +623,7 @@ We are going to apply the ``edhw()`` function to check the relative dating of th
 dataset. For this, we choose *variables* from the EDH list that are ``"not_after"`` and 
 ``"not_before"`` with an identification number in ``"ID"``. 
 
-For a simple relative dating analysis of ``EDH`` inscriptions, it is enough to choose three variables: 
+For a simple relative dating analysis of ``EDH`` inscriptions, we choose chronological data variables: 
 
 
 ..  In order , for example, we need to transform the 
@@ -607,10 +633,13 @@ For a simple relative dating analysis of ``EDH`` inscriptions, it is enough to c
 
 .. code-block:: R
 
-    # make a list for three variables in 'EDH' (default)
+    # make a list for relative variables in 'EDH' (default)
     R> EDHdates <- edhw(vars=c("ID", "not_after", "not_before") )
     
 
+
+Since argument ``x`` is not specified in the function, the "EDH" dataset in the ``sdam`` package is taken if available 
+with a *Warning* message.
 
 |
 
@@ -622,7 +651,7 @@ For a simple relative dating analysis of ``EDH`` inscriptions, it is enough to c
 
         .. code-block:: R
 
-            # recursively apply a function over the list for three variables
+            # recursively apply a function over the list for  variables
             R> EDHdates <- lapply(EDH, `[`, c("ID", "not_after", "not_before") )
 
 
@@ -634,7 +663,7 @@ For a simple relative dating analysis of ``EDH`` inscriptions, it is enough to c
 
 
 
-As a result, ``EDHdates`` is a new list object with the three items and all entries in ``EDH``.
+As a result, ``EDHdates`` is a new list object with the chronological data items and an ``id`` for all entries in ``EDH``.
 
     .. code-block:: R
     
@@ -711,12 +740,13 @@ and now the object has a shorter length
 Data frames
 -----------
 
-To produce data frames, we need to make it explicit in the function.
+To produce data frames, we need to make explicit the chronological data in the function where ``id`` 
+is added by default.
 
 .. code-block:: R
 
-    # produce a data frame with three variables and remove missing data
-    R> EDHdtdf  <- edhw(vars=c("ID", "not_after", "not_before"), as="df", na.rm=TRUE )
+    # produce a data frame with chronological data variables and remove missing data
+    R> EDHdtdf  <- edhw(vars=c("not_after", "not_before"), as="df", na.rm=TRUE )
 
 
 ..  .. code-block:: R
@@ -735,13 +765,13 @@ The first entries are
     
         # look at the first ones
         R> head(EDHdtdf)
-        #      ID not_after not_before
-        #1 000001      0130       0071
-        #2 000002      0200       0051
-        #3 000003      0170       0131
-        #4 000004      0200       0151
-        #5 000005      0200       0001
-        #6 000006      0150       0071
+        #        id not_after not_before
+        #1 HD000001      0130       0071
+        #2 HD000002      0200       0051
+        #3 HD000003      0170       0131
+        #4 HD000004      0200       0151
+        #5 HD000005      0200       0001
+        #6 HD000006      0150       0071
     
 
 ..   :lineno-start: 85390
@@ -752,13 +782,13 @@ and the last entries
     
         # look at the last ones
         R> tail(EDHdtdf)
-        #          ID not_after not_before
-        #55202 080147      0400       0201
-        #55203 080148      0400       0201
-        #55204 080149      0400       0201
-        #55205 080150      0200       0001
-        #55206 080151      0100       0001
-        #55207 080152      0100       0001
+        #            id not_after not_before
+        #81580 HD080143      0500       0401
+        #81581 HD080144      0500       0401
+        #81582 HD080145      0500       0401
+        #81584 HD080147      0500       0401
+        #81586 HD080149      0500       0401
+        #81588 HD080151      0500       0401
 
 
 |

@@ -71,6 +71,7 @@
 <li><a class="reference internal" href="#parameters">Parameters</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#edh-variables">EDH Variables</a></li>
 <li><a class="reference internal" href="#relative-dating">Relative dating</a><ul>
 <li><a class="reference internal" href="#remove-missing-data">Remove missing data</a></li>
 <li><a class="reference internal" href="#data-frames">Data frames</a></li>
@@ -443,7 +444,7 @@ you need to have this package installed as well.</p>
 function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code>, the <code class="docutils literal notranslate"><span class="pre">id</span></code> “component” of the output list has not a numeric
 format. However, many times is convenient to have a numerical identifier in each record,
 and function <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> adds an <code class="docutils literal notranslate"><span class="pre">ID</span></code> with a numerical format at the beginning of the list.</p>
-<p>Having a numerical identifier is useful for plotting the results, and  an <code class="docutils literal notranslate"><span class="pre">ID</span></code> is added
+<p>Having a numerical identifier is useful for plotting the results, for example, and an <code class="docutils literal notranslate"><span class="pre">ID</span></code> is added
 to the output by default. You can prevent such addition by disabling
 argument <code class="docutils literal notranslate"><span class="pre">addID</span></code> with <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">findspot_modern</span><span class="o">=</span><span class="s">&quot;madrid&quot;</span><span class="p">,</span> <span class="n">addID</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
@@ -621,16 +622,37 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 </div>
 </div>
 </div>
+<div class="section" id="edh-variables">
+<h2>EDH Variables<a class="headerlink" href="#edh-variables" title="Permalink to this headline">¶</a></h2>
+<p>The aim of the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function is to extract variables or attributes of inscriptions, which are output values
+typically produced by the <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> function.</p>
+<p>These variables are at least one the following items: <code class="docutils literal notranslate"><span class="pre">&quot;commentary&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;fotos&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;country&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;depth&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;diplomatic_text&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;edh_geography_uri&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;findspot&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;findspot_ancient&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;findspot_modern&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;geography&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;height&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;language&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;last_update&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;letter_size&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;literature&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;material&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;military&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;modern_region&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;present_location&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;religion&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;province_label&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;responsible_individual&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;social_economic_legal_history&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;transcription&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;trismegistos_uri&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;type_of_inscription&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;type_of_monument&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;uri&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;width&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;work_status&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;year_of_find&quot;</span></code>.</p>
+<p>Another output variable is <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> that is a list of persons named in the inscriptions with at least the following
+items “person_id”, “nomen”, “cognomen”, “praenomen”, “name”, “gender”, “status”, “tribus”, “origo”, “occupation”,
+“age: years”, “age: months”, “age: days”.</p>
+<p>With <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> it is possible to combine <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> with the other output variables.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
 <div class="section" id="relative-dating">
 <h2>Relative dating<a class="headerlink" href="#relative-dating" title="Permalink to this headline">¶</a></h2>
 <p>We are going to apply the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function to check the relative dating of the inscriptions in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code>
 dataset. For this, we choose <em>variables</em> from the EDH list that are <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code> and
 <code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code> with an identification number in <code class="docutils literal notranslate"><span class="pre">&quot;ID&quot;</span></code>.</p>
-<p>For a simple relative dating analysis of <code class="docutils literal notranslate"><span class="pre">EDH</span></code> inscriptions, it is enough to choose three variables:</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list for three variables in &#39;EDH&#39; (default)</span>
+<p>For a simple relative dating analysis of <code class="docutils literal notranslate"><span class="pre">EDH</span></code> inscriptions, we choose chronological data variables:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list for relative variables in &#39;EDH&#39; (default)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
+<p>Since argument <code class="docutils literal notranslate"><span class="pre">x</span></code> is not specified in the function, the “EDH” dataset in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package is taken if available
+with a <em>Warning</em> message.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -638,7 +660,7 @@ dataset. For this, we choose <em>variables</em> from the EDH list that are <code
 <div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>The above use of function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> is wrapping the <code class="docutils literal notranslate"><span class="pre">base</span></code> <code class="docutils literal notranslate"><span class="pre">lapply</span></code> function as</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># recursively apply a function over the list for three variables</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># recursively apply a function over the list for  variables</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH</span><span class="p">,</span> <span class="n">`[`</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
@@ -650,7 +672,7 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>As a result, <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code> is a new list object with the three items and all entries in <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.</p>
+<p>As a result, <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code> is a new list object with the chronological data items and an <code class="docutils literal notranslate"><span class="pre">id</span></code> for all entries in <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.</p>
 <blockquote>
 <div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">length</span><span class="p">(</span><span class="n">EDHdates</span><span class="p">)</span>
 <span class="c1">#[1] 82465</span>
@@ -706,22 +728,23 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 </div>
 <div class="section" id="data-frames">
 <h3>Data frames<a class="headerlink" href="#data-frames" title="Permalink to this headline">¶</a></h3>
-<p>To produce data frames, we need to make it explicit in the function.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># produce a data frame with three variables and remove missing data</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdtdf</span>  <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span> <span class="p">)</span>
+<p>To produce data frames, we need to make explicit the chronological data in the function where <code class="docutils literal notranslate"><span class="pre">id</span></code>
+is added by default.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># produce a data frame with chronological data variables and remove missing data</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdtdf</span>  <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>The first entries are</p>
 <blockquote>
 <div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the first ones</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="p">)</span>
-<span class="c1">#      ID not_after not_before</span>
-<span class="c1">#1 000001      0130       0071</span>
-<span class="c1">#2 000002      0200       0051</span>
-<span class="c1">#3 000003      0170       0131</span>
-<span class="c1">#4 000004      0200       0151</span>
-<span class="c1">#5 000005      0200       0001</span>
-<span class="c1">#6 000006      0150       0071</span>
+<span class="c1">#        id not_after not_before</span>
+<span class="c1">#1 HD000001      0130       0071</span>
+<span class="c1">#2 HD000002      0200       0051</span>
+<span class="c1">#3 HD000003      0170       0131</span>
+<span class="c1">#4 HD000004      0200       0151</span>
+<span class="c1">#5 HD000005      0200       0001</span>
+<span class="c1">#6 HD000006      0150       0071</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -729,13 +752,13 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 <blockquote>
 <div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the last ones</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">tail</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="p">)</span>
-<span class="c1">#          ID not_after not_before</span>
-<span class="c1">#55202 080147      0400       0201</span>
-<span class="c1">#55203 080148      0400       0201</span>
-<span class="c1">#55204 080149      0400       0201</span>
-<span class="c1">#55205 080150      0200       0001</span>
-<span class="c1">#55206 080151      0100       0001</span>
-<span class="c1">#55207 080152      0100       0001</span>
+<span class="c1">#            id not_after not_before</span>
+<span class="c1">#81580 HD080143      0500       0401</span>
+<span class="c1">#81581 HD080144      0500       0401</span>
+<span class="c1">#81582 HD080145      0500       0401</span>
+<span class="c1">#81584 HD080147      0500       0401</span>
+<span class="c1">#81586 HD080149      0500       0401</span>
+<span class="c1">#81588 HD080151      0500       0401</span>
 </pre></div>
 </div>
 </div></blockquote>
