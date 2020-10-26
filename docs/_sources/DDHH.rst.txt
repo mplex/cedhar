@@ -193,7 +193,7 @@ Popular builders are  the ``Python`` package ``docutils`` with different options
         prompt> ./rst2latex.py text.rst > text.tex
 
 
-where RST sources are in a ``source`` folder and constructs go into a ``build`` folder.
+where RST sources are in a *source* folder and constructs go into a *build* folder.
 
 Another alternative is ``Sphinx`` that constructs the API documentation with the two folders and perform 
 the transformation afterwards.

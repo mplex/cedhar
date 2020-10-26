@@ -527,6 +527,8 @@ the ``sdam`` `manual <https://github.com/mplex/cedhar/blob/master/typesetting/re
 Function ``edhw()``
 ===================
 
+Wrapper function for the ``EDH`` dataset.
+
 A wrapper function for EDH manipulation is found in routine ``edhw()``.
 
 |
@@ -539,7 +541,7 @@ Function usage
 .. code-block:: R
 
     # list of accepted parameter arguments
-    R> edhw(vars, x=NULL, as=c("list", "df"), limit, id, na.rm, ...)
+    R> edhw(vars, x=NULL, as=c("list", "df"), limit, id, na.rm, wide,...)
 
 |
 
@@ -557,17 +559,17 @@ Formal arguments of ``edhw()`` are:
 
 - `x:`
 
-   An optional list object name with *fragments* of the ``EDH`` dataset
+   An optional list object name with fragments of the ``EDH`` dataset
 
 
 - `as:`
 
-   Format to return the output. Currently either as a ``list`` or a data frame ``df`` object.
+   Format to return the output. Currently either as a ``"list"`` or a data frame ``"df"`` object.
 
 
 - `limit:`
 
-   Limit the returned output. Ignored if ``id`` is specified (optional, integer or vector)
+   Limit the returned output. Ignored if `id` is specified (optional, integer or vector)
 
 
 - `id:`
@@ -579,6 +581,9 @@ Formal arguments of ``edhw()`` are:
 
    Remove entries with ``NA`` information? (logical and optional)
 
+
+- `wide:`
+   Place people in data frame in a wide format? (logical and optional)
 
 - `...`
 
@@ -607,8 +612,8 @@ Another output variable is ``"people"`` that is a list of persons named in the i
 items "person_id", "nomen", "cognomen", "praenomen", "name", "gender", "status", "tribus", "origo", "occupation", 
 "age: years", "age: months", "age: days".
 
-With ``edhw()`` it is possible to combine ``"people"`` with the other output variables.
-
+Since ``sdam`` v0.2.7, it is possible to combine variables with ``"people"`` in ``edhw()``.
+With ``edhw()``  the other output .
 
 
 
@@ -638,7 +643,7 @@ For a simple relative dating analysis of ``EDH`` inscriptions, we choose chronol
     
 
 
-Since argument ``x`` is not specified in the function, the "EDH" dataset in the ``sdam`` package is taken if available 
+Since argument *x* is not specified in the function, the "EDH" dataset in the ``sdam`` package is taken if available 
 with a *Warning* message.
 
 |
@@ -663,7 +668,7 @@ with a *Warning* message.
 
 
 
-As a result, ``EDHdates`` is a new list object with the chronological data items and an ``id`` for all entries in ``EDH``.
+As a result, ``EDHdates`` is a new list object with the chronological data items and an ``"ID"`` for all entries in ``EDH``.
 
     .. code-block:: R
     
@@ -697,7 +702,7 @@ where the first entry is
 Remove missing data
 -------------------
 
-It is also possible to remove missing data from ``EDH`` by activating the ``na.rm`` argument in function 
+It is also possible to remove missing data from ``EDH`` by activating the *na.rm* argument in function 
 ``edhw()``.
 
 .. code-block:: R
@@ -740,7 +745,7 @@ and now the object has a shorter length
 Data frames
 -----------
 
-To produce data frames, we need to make explicit the chronological data in the function where ``id`` 
+To produce data frames, we need to make explicit the chronological data in the function where ``"id"`` 
 is added by default.
 
 .. code-block:: R

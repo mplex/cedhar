@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Accessing the Epigraphic Database Heidelberg" name="description" />
 <meta content="epigraphic, documentation, dataset, HTTP-request" name="keywords" />
 
-    <title>Epigraphic Database Heidelberg &#8212; cedhar 0.0.4 documentation</title>
+    <title>Epigraphic Database Heidelberg &#8212; cedhar 0.0.5 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="UAT.html" title="User Acceptance Testing"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -563,6 +563,7 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 </div>
 <div class="section" id="function-edhw">
 <h2>Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code><a class="headerlink" href="#function-edhw" title="Permalink to this headline">¶</a></h2>
+<p>Wrapper function for the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset.</p>
 <p>A wrapper function for EDH manipulation is found in routine <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -570,7 +571,7 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <div class="section" id="function-usage">
 <h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of accepted parameter arguments</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="n">wide</span><span class="p">,</span><span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -588,17 +589,17 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 </li>
 <li><p><cite>x:</cite></p>
 <blockquote>
-<div><p>An optional list object name with <em>fragments</em> of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</p>
+<div><p>An optional list object name with fragments of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</p>
 </div></blockquote>
 </li>
 <li><p><cite>as:</cite></p>
 <blockquote>
-<div><p>Format to return the output. Currently either as a <code class="docutils literal notranslate"><span class="pre">list</span></code> or a data frame <code class="docutils literal notranslate"><span class="pre">df</span></code> object.</p>
+<div><p>Format to return the output. Currently either as a <code class="docutils literal notranslate"><span class="pre">&quot;list&quot;</span></code> or a data frame <code class="docutils literal notranslate"><span class="pre">&quot;df&quot;</span></code> object.</p>
 </div></blockquote>
 </li>
 <li><p><cite>limit:</cite></p>
 <blockquote>
-<div><p>Limit the returned output. Ignored if <code class="docutils literal notranslate"><span class="pre">id</span></code> is specified (optional, integer or vector)</p>
+<div><p>Limit the returned output. Ignored if <cite>id</cite> is specified (optional, integer or vector)</p>
 </div></blockquote>
 </li>
 <li><p><cite>id:</cite></p>
@@ -610,6 +611,11 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <blockquote>
 <div><p>Remove entries with <code class="docutils literal notranslate"><span class="pre">NA</span></code> information? (logical and optional)</p>
 </div></blockquote>
+</li>
+<li><dl class="simple">
+<dt><cite>wide:</cite></dt><dd><p>Place people in data frame in a wide format? (logical and optional)</p>
+</dd>
+</dl>
 </li>
 <li><p><cite>…</cite></p>
 <blockquote>
@@ -636,7 +642,8 @@ typically produced by the <code class="docutils literal notranslate"><span class
 <p>Another output variable is <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> that is a list of persons named in the inscriptions with at least the following
 items “person_id”, “nomen”, “cognomen”, “praenomen”, “name”, “gender”, “status”, “tribus”, “origo”, “occupation”,
 “age: years”, “age: months”, “age: days”.</p>
-<p>With <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> it is possible to combine <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> with the other output variables.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">sdam</span></code> v0.2.7, it is possible to combine variables with <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.
+With <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>  the other output .</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -651,7 +658,7 @@ dataset. For this, we choose <em>variables</em> from the EDH list that are <code
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
-<p>Since argument <code class="docutils literal notranslate"><span class="pre">x</span></code> is not specified in the function, the “EDH” dataset in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package is taken if available
+<p>Since argument <em>x</em> is not specified in the function, the “EDH” dataset in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package is taken if available
 with a <em>Warning</em> message.</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -672,7 +679,7 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>As a result, <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code> is a new list object with the chronological data items and an <code class="docutils literal notranslate"><span class="pre">id</span></code> for all entries in <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.</p>
+<p>As a result, <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code> is a new list object with the chronological data items and an <code class="docutils literal notranslate"><span class="pre">&quot;ID&quot;</span></code> for all entries in <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.</p>
 <blockquote>
 <div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">length</span><span class="p">(</span><span class="n">EDHdates</span><span class="p">)</span>
 <span class="c1">#[1] 82465</span>
@@ -700,7 +707,7 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 </div>
 <div class="section" id="remove-missing-data">
 <h3>Remove missing data<a class="headerlink" href="#remove-missing-data" title="Permalink to this headline">¶</a></h3>
-<p>It is also possible to remove missing data from <code class="docutils literal notranslate"><span class="pre">EDH</span></code> by activating the <code class="docutils literal notranslate"><span class="pre">na.rm</span></code> argument in function
+<p>It is also possible to remove missing data from <code class="docutils literal notranslate"><span class="pre">EDH</span></code> by activating the <em>na.rm</em> argument in function
 <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove missing data</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdt</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
@@ -728,7 +735,7 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 </div>
 <div class="section" id="data-frames">
 <h3>Data frames<a class="headerlink" href="#data-frames" title="Permalink to this headline">¶</a></h3>
-<p>To produce data frames, we need to make explicit the chronological data in the function where <code class="docutils literal notranslate"><span class="pre">id</span></code>
+<p>To produce data frames, we need to make explicit the chronological data in the function where <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>
 is added by default.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># produce a data frame with chronological data variables and remove missing data</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdtdf</span>  <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span> <span class="p">)</span>
@@ -888,7 +895,7 @@ the data frame first and treat the data as numeric format.</p>
         <li class="right" >
           <a href="UAT.html" title="User Acceptance Testing"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -73,7 +73,8 @@ analyses within Social Dynamics and complexity in the Ancient Mediterranean
 
 ..  , which is a research group based 
 
-* (See :ref:`"The SDAM project" <sdam-proj>`)
+* (See :ref:`"SDAM project" <sdam-proj>`)
+* (See `"sdam" manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_)
 
 
 |
@@ -130,7 +131,7 @@ or RStudio if you wish.
 
 .. code-block:: R
 
-    # beta version
+    # install beta version
     R> devtools::install_github("mplex/cedhar", subdir="pkg/sdam")
 
 
@@ -139,6 +140,7 @@ or
 
 .. code-block:: R
 
+    # install release candidate
     R> devtools::install_github("sdam-au/sdam")
 
 
@@ -176,17 +178,15 @@ News from ``sdam`` package
 
 
 * **Version 0.2.0** released (19-5-2020).
-    - *New function* ``edhw()`` for manipulation of the ``EDH`` dataset
+    - *New function* ``edhw()`` to extract fragments of the ``EDH`` dataset
 
-    * v.0.2.1 available (26-5-2020)  Function ``edhw()`` can extract variables from ``EDH`` *fragments*
+    - Documentation `website <https://sdam-au.github.io/sdam/>`_ launched
     
-    * Documentation `website <https://sdam-au.github.io/sdam/>`_ lunched
-    
-    * v.0.2.2 available  (2-7-2020)  Argument ``force`` is added to ``request()``
+    * v.0.2.2 available  (2-7-2020)  Argument `force` is added to ``request()``
 
-    * v.0.2.3 available  (4-8-2020)  Argument ``rm.file`` is added to ``request()``
+    * v.0.2.3 available  (4-8-2020)  Argument `rm.file` is added to ``request()``
 
-    * v.0.2.4 available  (31-8-2020)  Function ``edhw()`` can handle output from ``jsonlite`` package
+    * v.0.2.8 available  (26-10-2020)  Argument `wide` is added to ``edhw()``
 
     
 
@@ -195,7 +195,7 @@ News from ``sdam`` package
 
 
 * **Version 0.1.0** released (6-5-2020).
-    - *First functions* ``get.edh()``, ``get.edhw()``, ``request()``, ``simil()``, and the ``EDH`` dataset
+    - *First functions* ``get.edh()``, ``get.edhw()``, ``request()``, ``simil()``, and ``EDH`` *dataset*
 
 
 

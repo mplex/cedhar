@@ -5,7 +5,6 @@ Modules
    :maxdepth: 2
 
    DDHH
-   HASS
    UAT
    Epigraphic
    EpigraphicNetwork

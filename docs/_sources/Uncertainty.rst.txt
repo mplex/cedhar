@@ -490,7 +490,11 @@ In statistics, *imputation* is the process of replacing missing data with plausi
 Missing data
 ------------
 
-Rubin (1976) classified missing data problems into three categories: MCAR, MAR and MNAR.
+Every data point has some likelihood of being missing, and Rubin (1976) classified missing data problems 
+into three categories: missing completely at random (MCAR), missing at random (MAR) and missing not at random (MNAR).
+
+For some parameter :math:`\psi`, where :math:`Y_{obs}` is the observed sample data and :math:`Y_{mis}` the unobserved sample data,
+
 
 * MCAR: the probability of being missing depends only on some parameters :math:`\psi`, the overall probability of being missing 
 
@@ -505,7 +509,6 @@ Rubin (1976) classified missing data problems into three categories: MCAR, MAR a
      :math:`Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi)`
 
 
-for some parameter :math:`\psi` where :math:`Y_{obs}` is the observed sample data and :math:`Y_{mis}` the unobserved sample data. 
 
 
 

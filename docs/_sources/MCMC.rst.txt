@@ -75,11 +75,11 @@ Algorithm
 
 2. For :math:`i=0` to :math:`N-1`
 
-     Sample :math:`u \sim \mathcal{U}(0, 1)`
+     Sample :math:`u \sim U(0, 1)`
 
      Sample :math:`x^\star \sim q(x^\star \mid x^{(i)})`
 
-     If :math:`u < \mathcal{U}() = \min\{1, \frac{p^\star \; q(x^{(i)}) \mid x^\star}{x^{(i)}) \; q(x^\star \mid x^{(i)})}\}`
+     If :math:`u < U() = \min\{1, \frac{p^\star \; q(x^{(i)}) \mid x^\star}{x^{(i)}) \; q(x^\star \mid x^{(i)})}\}`
             
             :math:`x^{(i+1)} = x^\star`
             

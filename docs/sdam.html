@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="The &quot;sdam&quot; R Package description" name="description" />
 <meta content="software, documentation, R-packages" name="keywords" />
 
-    <title>The SDAM project &#8212; cedhar 0.0.4 documentation</title>
+    <title>The SDAM project &#8212; cedhar 0.0.5 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -146,7 +146,8 @@ Aarhus University (AU).</p>
 analyses within Social Dynamics and complexity in the Ancient Mediterranean
 (<a class="reference external" href="https://sdam-au.github.io/sdam-au/">SDAM</a>) project.</p>
 <ul class="simple">
-<li><p>(See <a class="reference internal" href="#sdam-proj"><span class="std std-ref">“The SDAM project”</span></a>)</p></li>
+<li><p>(See <a class="reference internal" href="#sdam-proj"><span class="std std-ref">“SDAM project”</span></a>)</p></li>
+<li><p>(See <a class="reference external" href="https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf">“sdam” manual</a>)</p></li>
 </ul>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -196,12 +197,13 @@ development.</p>
 <span id="sdam-inst"></span><h2>Package installation<a class="headerlink" href="#package-installation" title="Permalink to this headline">¶</a></h2>
 <p>You can install the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package from these GitHub repositories using  the <code class="docutils literal notranslate"><span class="pre">R</span></code> console
 or RStudio if you wish.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># beta version</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># install beta version</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;mplex/cedhar&quot;</span><span class="p">,</span> <span class="n">subdir</span><span class="o">=</span><span class="s">&quot;pkg/sdam&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>or</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;sdam-au/sdam&quot;</span><span class="p">)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># install release candidate</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">devtools</span><span class="o">::</span><span class="nf">install_github</span><span class="p">(</span><span class="s">&quot;sdam-au/sdam&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -237,14 +239,13 @@ or RStudio if you wish.</p>
 <ul>
 <li><dl>
 <dt><strong>Version 0.2.0</strong> released (19-5-2020).</dt><dd><ul class="simple">
-<li><p><em>New function</em> <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> for manipulation of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</p></li>
+<li><p><em>New function</em> <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> to extract fragments of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</p></li>
+<li><p>Documentation <a class="reference external" href="https://sdam-au.github.io/sdam/">website</a> launched</p></li>
 </ul>
 <ul class="simple">
-<li><p>v.0.2.1 available (26-5-2020)  Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> can extract variables from <code class="docutils literal notranslate"><span class="pre">EDH</span></code> <em>fragments</em></p></li>
-<li><p>Documentation <a class="reference external" href="https://sdam-au.github.io/sdam/">website</a> lunched</p></li>
-<li><p>v.0.2.2 available  (2-7-2020)  Argument <code class="docutils literal notranslate"><span class="pre">force</span></code> is added to <code class="docutils literal notranslate"><span class="pre">request()</span></code></p></li>
-<li><p>v.0.2.3 available  (4-8-2020)  Argument <code class="docutils literal notranslate"><span class="pre">rm.file</span></code> is added to <code class="docutils literal notranslate"><span class="pre">request()</span></code></p></li>
-<li><p>v.0.2.4 available  (31-8-2020)  Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> can handle output from <code class="docutils literal notranslate"><span class="pre">jsonlite</span></code> package</p></li>
+<li><p>v.0.2.2 available  (2-7-2020)  Argument <cite>force</cite> is added to <code class="docutils literal notranslate"><span class="pre">request()</span></code></p></li>
+<li><p>v.0.2.3 available  (4-8-2020)  Argument <cite>rm.file</cite> is added to <code class="docutils literal notranslate"><span class="pre">request()</span></code></p></li>
+<li><p>v.0.2.8 available  (26-10-2020)  Argument <cite>wide</cite> is added to <code class="docutils literal notranslate"><span class="pre">edhw()</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -256,7 +257,7 @@ or RStudio if you wish.</p>
 <ul class="simple">
 <li><dl class="simple">
 <dt><strong>Version 0.1.0</strong> released (6-5-2020).</dt><dd><ul>
-<li><p><em>First functions</em> <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code>, <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code>, <code class="docutils literal notranslate"><span class="pre">request()</span></code>, <code class="docutils literal notranslate"><span class="pre">simil()</span></code>, and the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</p></li>
+<li><p><em>First functions</em> <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code>, <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code>, <code class="docutils literal notranslate"><span class="pre">request()</span></code>, <code class="docutils literal notranslate"><span class="pre">simil()</span></code>, and <code class="docutils literal notranslate"><span class="pre">EDH</span></code> <em>dataset</em></p></li>
 </ul>
 </dd>
 </dl>
@@ -295,7 +296,7 @@ or RStudio if you wish.</p>
         <li class="right" >
           <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.4 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
