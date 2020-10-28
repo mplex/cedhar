@@ -146,6 +146,7 @@ And for the ancient Roman provices the valid values are
 A list object with at least one the following items:
 
 \item{"ID"}{(Optional), only if \code{addID} is set to \code{TRUE}.}
+\item{}{ }
 \item{"commentary"}{ }
 \item{"fotos"}{ }
 \item{"country"}{ }
@@ -168,9 +169,9 @@ A list object with at least one the following items:
 \item{"not_after"}{ }
 \item{"not_before"}{ }
 \item{}{ }
-\item{"people"}{This item is another list with at least one the following items: \cr  
+\item{"people"}{This item is another list with at least one the following items: \cr  \cr  
 \code{"person_id"} \cr  \code{"nomen"} \cr  \code{"cognomen"} \cr  \code{"praenomen"} \cr  \code{"name"} \cr  \code{"gender"} \cr  \code{"status"} \cr  \code{"tribus"} \cr  
-\code{"origo"} \cr  \code{"occupation"} \cr  \code{"age: years"} \cr  \code{"age: months"} }
+\code{"origo"} \cr  \code{"occupation"} \cr  \code{"age: years"} \cr  \code{"age: months"} \cr  \code{"age: days"} }
 \item{}{ }
 \item{"present_location"}{ }
 \item{"religion"}{ }
@@ -187,7 +188,7 @@ A list object with at least one the following items:
 \item{"year_of_find"}{ }
 \item{}{ }
 
-And also the query is printed if specified. 
+And also the query is printed if specified by \code{printQ}. 
 }
 \references{
 https://edh-www.adw.uni-heidelberg.de/data/api
@@ -204,7 +205,11 @@ The other two search options from the [EDH] database [API], which are \code{"pho
 and \code{"bibliography"} may be implemented in the future. 
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\section{Warning }{
+Queries with more than 4000 records can produce a timeout from the server, and a \emph{Warning} 
+message is produced.
+}
 
 \seealso{
 \code{\link{get.edhw}}, \code{\link{simil}}

@@ -3,28 +3,29 @@
 ## FUNCTION edhw() to manipulate data API from Epigraphic Database Heidelberg EDH
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.4.1 (27-10-2020)
+## version 0.5.0 (28-10-2020)
 ##
 ## PARAMETERS
 ##
 ## vars   (variables or attributes to be chosen)
-## as     (type of output, lists or data frames)
+## as     (output format, lists or data frames)
+## type   (type of data frame, long or wide or narrow)
 ##
 ## OPTIONAL PARAMETERS
 ##
-## x     (typically fragments of EDH dataset)
-## addID (logical, add "HD id" to output?)
-## limit (integers, vector with HD nr records to limit output)
-## id    (integer or character, select only the hd_nr id)
-## na.rm (remove data entries with <NA>?)
-## wide  (logical, use wide format in data frame?)
-## ...   (optional parameters)
+## x      (typically fragments of EDH dataset or database API)
+## addID  (logical, add "HD id" to output?)
+## limit  (integers, vector with HD nr records to limit output)
+## id     (integer or character, select only the hd_nr id)
+## na.rm  (remove data entries with <NA>?)
+## split  (logical, divide the data into groups by id?)
+## ...    (optional parameters)
 ##
 
 
 edhw <-
-function (vars, x = NULL, as = c("list", "df"), addID, limit, 
-    id, na.rm, wide, ...) 
+function (vars, x = NULL, as = c("list", "df"), type = c("long", 
+    "wide", "narrow"), addID, limit, id, na.rm, split, ...) 
 {
     flgdf <- FALSE
     if (is.null(x) == TRUE) {
@@ -56,8 +57,8 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
     else {
         addID <- TRUE
     }
-    ifelse(missing(wide) == FALSE && isTRUE(wide == TRUE) == 
-        TRUE, wide <- TRUE, wide <- FALSE)
+    ifelse(missing(split) == FALSE && isTRUE(split == TRUE) == 
+        TRUE, split <- TRUE, split <- FALSE)
     if (missing(vars) == TRUE) {
         if (match.arg(as) == "list") {
             ifelse(isTRUE(flgdf == TRUE) == TRUE, return(as.list(x)), 
@@ -237,7 +238,7 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
             }
             rm(i)
             ids <- ids[which(is.na(pnames) == FALSE)]
-            if (isTRUE(wide == TRUE) == FALSE) {
+            if (match.arg(type) == "long") {
                 xdfp <- data.frame(matrix(ncol = length(plbs), 
                   nrow = 0))
                 colnames(xdfp) <- plbs
@@ -264,7 +265,12 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                 }
                 rm(k)
                 if (isTRUE(vars == "people") == TRUE) {
-                  return(xdfp)
+                  if (isTRUE(split == TRUE) == TRUE) {
+                    return(split(xdfp[, -1], xdfp$id))
+                  }
+                  else {
+                    return(xdfp)
+                  }
                 }
                 else {
                   if (isTRUE(any(is.na(qlbs)) == TRUE)) {
@@ -293,10 +299,15 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                   ifelse(isTRUE(addID == TRUE) == TRUE, xdfq[, 
                     1] <- ids, NA)
                   xdfpq <- merge(xdfp, xdfq, all.x = TRUE)
-                  return(xdfpq)
+                  if (isTRUE(split == TRUE) == TRUE) {
+                    return(split(xdfpq[, -1], xdfpq$id))
+                  }
+                  else {
+                    return(xdfpq)
+                  }
                 }
             }
-            else if (isTRUE(wide == TRUE) == TRUE) {
+            else if (match.arg(type) == "wide") {
                 pp <- max(as.numeric(unlist(edhlm)[which(attr(unlist(edhlm), 
                   "names") == "people.person_id")]))
                 plbss <- vector()
@@ -352,7 +363,12 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                 colnames(xdfpp) <- plbss
                 rownames(xdfpp) <- NULL
                 if (isTRUE(vars == "people") == TRUE) {
-                  return(xdfpp)
+                  if (isTRUE(split == TRUE) == TRUE) {
+                    return(split(xdfpp[, -1], xdfpp$id))
+                  }
+                  else {
+                    return(xdfpp)
+                  }
                 }
                 else {
                   xdfq <- data.frame(matrix(ncol = length(as.vector(stats::na.omit(qlbs))), 
@@ -367,8 +383,16 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
                   ifelse(isTRUE(addID == TRUE) == TRUE, xdfq[, 
                     1] <- ids, NA)
                   xdfpq <- merge(xdfpp, xdfq, all.x = TRUE)
-                  return(xdfpq)
+                  if (isTRUE(split == TRUE) == TRUE) {
+                    return(split(xdfpq[, -1], xdfpq$id))
+                  }
+                  else {
+                    return(xdfpq)
+                  }
                 }
+            }
+            else if (match.arg(type) == "narrow") {
+                print("Argument 'type' *narrow* is not yet implemented.")
             }
         }
         if (isTRUE(flgp == FALSE) == TRUE) {
@@ -394,7 +418,14 @@ function (vars, x = NULL, as = c("list", "df"), addID, limit,
             ifelse(isTRUE(addID == TRUE) == TRUE, xdf[, 1] <- ids, 
                 NA)
             ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == 
-                TRUE) == TRUE, return(stats::na.omit(xdf)), return(xdf))
+                TRUE) == TRUE, return(xdf <- stats::na.omit(xdf)), 
+                NA)
+            if (isTRUE(split == TRUE) == TRUE) {
+                return(split(xdf[, -1], xdf$id))
+            }
+            else {
+                return(xdf)
+            }
         }
     }
     else if (match.arg(as) == "list") {

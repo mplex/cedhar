@@ -67,7 +67,9 @@ length(iud)
 
 ### Relative dating
 
-Since `sdam` v.0.2.1 there is the option in `edhw()` to extract variables from a `EDH` dataset *fragments*.
+Wrapper function for the extraction of variables or the manipulation of the `EDH` dataset fragments is found in `edhw()`, 
+which allows converting the list input into a data frame format with the HD identification number.
+
 
 ```r
 # extract variables of interes from object `iud` and convert it into a data frame
@@ -112,14 +114,35 @@ Hence, not available data is removed in `iud_df0`.
 It is possible to extract the `people` component from the `EDH` API dataset, which is an integrated list with their own items.
 
 For instance, the following commands extract people named in Roman inscriptions in Iudaea and Syria into a data frame object 
-with a *long* and a *wide* format:
+with the default *long*, and also wityh a *wide* `type` format of the data frame:
 
 ```r
 edhw(x=get.edh(search="inscriptions", province="Iud"), vars="people", as="df")
-edhw(x=get.edh(search="inscriptions", province="Syr"), vars="people", as="df", wide=TRUE)
+edhw(x=get.edh(search="inscriptions", province="Syr"), vars="people", as="df", type="wide")
 ```
 
 The same can apply to the rest of Roman provinces recorded in the `EDH` dataset.
+
+
+Option `split` in ``edhw()`` allows dividing the data by id HD numbers as we see below with the three first records from Iudaea
+
+```r
+head(edhw(x=get.edh(search="inscriptions", province="Iud"), vars="people", as="df", split=TRUE), 3)
+#$HD001958
+#  age: years cognomen gender  name nomen origo person_id praenomen           status tribus
+#1       <NA>    [---]   male [---] [---]  <NA>         1       [-] senatorial order   <NA>
+#
+#$HD001964
+#  age: years cognomen gender            name  nomen origo person_id praenomen             status tribus
+#2       <NA>  Magnus+   male Iulius Magnu[s] Iulius  <NA>         1      <NA> military personnel   <NA>
+#
+#$HD001973
+#  age: years cognomen gender                            name     nomen origo person_id praenomen                status tribus
+#3         42  Fatalis   male Ti. Cl. Ti.f. Pop. Fatalis Roma Claudius*  Roma         1       Ti.    military personnel    POP
+#4       <NA>   Ionice female                      Cl. Ionice  Claudia*  <NA>         2      <NA> freedmen / freedwomen   <NA>
+```
+
+
 
 
 #### Specifying output

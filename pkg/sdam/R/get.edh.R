@@ -1,6 +1,6 @@
 
 ## 
-## FUNCTION get.edh() to get data API from the Epigraphic Database Heidelber with R
+## FUNCTION get.edh() to get data API from the Epigraphic Database Heidelberg EDH
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
 ## version 0.2.6 (26-10-2020)
@@ -15,8 +15,8 @@
 ## findspot_modern (add leading and/or trailing truncation by asterisk *, e.g. findspot_modern=köln*, case insensitive)
 ## findspot_ancient (add leading and/or trailing truncation by asterisk *, e.g. findspot_ancient=aquae*, case insensitive)
 ## bbox (bounding box in the format bbox=minLong , minLat , maxLong , maxLat , example: https://edh-www.adw.uni-heidelberg.de/data/api/inscriptions/search?bbox=11,47,12,48)
-## offset (which row to start retrievening data)
-## limit (limit the number of results)
+## offset (which row to start from retrieving data, integer)
+## limit (limit the number of results, integer or vector)
 ##
 ## SEARCH PARAMETERS FOR INSCRIPTIONS:
 ## hd_nr (HD-No of inscription)

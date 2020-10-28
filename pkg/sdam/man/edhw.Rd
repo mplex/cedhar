@@ -2,13 +2,14 @@
 \alias{edhw}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Wrapper function for the \code{EDH} dataset
+Wrapper function for manipulation of \code{EDH} dataset
 }
 \description{
 A function to obtain variable data and perform transformations on the Epigraphic Database Heidelberg \code{EDH} dataset.
 }
 \usage{
-edhw(vars, x = NULL, as = c("list", "df"), addID, limit, id, na.rm, wide, ...)
+edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), addID, 
+     limit, id, na.rm, split, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,7 +20,10 @@ edhw(vars, x = NULL, as = c("list", "df"), addID, limit, id, na.rm, wide, ...)
    A list object name with fragments of the \code{EDH} dataset (optional)
 }
   \item{as}{
-   Format to return the output. Currently either as a \code{list} or a data frame \code{df} object.
+   Format to return the output. Currently either as a \code{"list"} or a data frame \code{"df"} object.
+}
+  \item{type}{
+   Type format of data frame. Currently either \code{"long"} or \code{"wide"} (\code{"narrow"} not yet implemented)
 }
   \item{addID}{
    Add identification to the output? (optional and logical)
@@ -33,8 +37,8 @@ edhw(vars, x = NULL, as = c("list", "df"), addID, limit, id, na.rm, wide, ...)
   \item{na.rm}{
    Remove entries with NA data? (logical and optional)
 }
-  \item{wide}{
-   Use a wide format in data frame? Only for \code{"people"}. (logical and optional)
+  \item{split}{
+   Divide the data into groups by id? (logical and optional)
 }
   \item{\dots}{
    Optional arguments if needed.
@@ -65,10 +69,11 @@ refering to precisely one or more \code{hd_nr}s in the Epigraphic Database Heide
 
 Component "\code{people}" is a separated list in the \code{EDH} dataset, and it should be considered as 
 a separate case from the rest of the variables. 
-In the case that the output is a data frame, the default output is a \emph{long} table; that is records can 
-appear in different rows and each variable is assigned into a single column. By setting \code{wide} to \code{TRUE}, 
+In the case that the output is a data frame, the default output is a `long' \code{type} table; that is records can 
+appear in different rows and each variable is assigned into a single column. By setting \code{"wide"} in \code{type}, 
 it is possible to place the different people from a single entry column by column in the data frame and each 
-record has a single row. 
+record has a single row. Finally, argument \code{split} allows dividing the data in the data frame  into groups by `id', 
+which corresponds to the HD number of inscription in the \code{EDH} dataset. 
 }
 \value{
 A list or a data frame, depending on the input. 
