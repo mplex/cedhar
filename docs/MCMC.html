@@ -142,18 +142,18 @@ of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the pa
 <div class="section" id="algorithm">
 <h3>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
-<li><p>Initialise <span class="math notranslate nohighlight">\(x^{(0)}\)</span></p></li>
+<li><p>Initialise <span class="math notranslate nohighlight">\(x_0\)</span></p></li>
 <li><p>For <span class="math notranslate nohighlight">\(i=0\)</span> to <span class="math notranslate nohighlight">\(N-1\)</span></p>
 <blockquote>
-<div><p>Sample <span class="math notranslate nohighlight">\(u \sim U(0, 1)\)</span></p>
-<p>Sample <span class="math notranslate nohighlight">\(x^\star \sim q(x^\star \mid x^{(i)})\)</span></p>
-<p>If <span class="math notranslate nohighlight">\(u &lt; U() = \min\{1, \frac{p^\star \; q(x^{(i)}) \mid x^\star}{x^{(i)}) \; q(x^\star \mid x^{(i)})}\}\)</span></p>
+<div><p>Sample <span class="math notranslate nohighlight">\(u \sim U(0, 1)\)</span>  uniform distribution</p>
+<p>Sample <span class="math notranslate nohighlight">\(x^\star \sim q(x^\star \mid x_t)\)</span>  candidate point on a proposal distribution</p>
+<p>If <span class="math notranslate nohighlight">\(u &lt; U() = \min\{1, \frac{p(x^\star) \; q(x_t \mid x^\star)}{p(x_t) \; q(x^\star \mid x_t)}\}\)</span></p>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(x^{(i+1)} = x^\star\)</span></p>
+<div><p><span class="math notranslate nohighlight">\(x_{(t+1)} = x^\star\)</span>  accept candidate</p>
 </div></blockquote>
 <p>Else</p>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(x^{(i+1)} = x^{(i)}\)</span></p>
+<div><p><span class="math notranslate nohighlight">\(x_{(t+1)} = x_t\)</span>  increment time and sample <span class="math notranslate nohighlight">\(x^\star\)</span> until <span class="math notranslate nohighlight">\(t_{\max}\)</span> is reached.</p>
 </div></blockquote>
 </div></blockquote>
 </li>

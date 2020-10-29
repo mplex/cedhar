@@ -104,13 +104,13 @@ Functions Usage
 
 .. code-block:: R
 
-    # arguments supported (currently)
+    # arguments supported
     R> get.edh(search = c("inscriptions", "geography")
               , url = "https://edh-www.adw.uni-heidelberg.de/data/api"
               , hd_nr, province, country, findspot_modern
               , findspot_ancient, year_not_before, year_not_after
               , tm_nr, transcription, type, bbox, findspot, pleiades_id
-              , geonames_id, offset, limit, addID, printQ)
+              , geonames_id, offset, limit, maxlimit=4000, addID, printQ)
 
 
 |
@@ -128,10 +128,17 @@ Functions Usage
 
 .. code-block:: R
 
-    # a wrapper function to perform several queries
+    # to perform several queries
     R> get.edhw(hd_nr, ...)
 
-Currently, function ``get.edhw()`` works only for inscriptions. 
+
+``get.edhw()`` is a wrapper function to perform several queries from the EDH database API using 
+identification numbers. 
+
+
+    .. note:: 
+    
+        Currently, function ``get.edhw()`` works only for inscriptions. 
 
 
 |
@@ -140,8 +147,8 @@ Currently, function ``get.edhw()`` works only for inscriptions.
 Search parameters
 -----------------
 
-The following parameter description is from the [EDH] database [API] 
-<https://edh-www.adw.uni-heidelberg.de/data/api>:
+The following parameter description is from the `[EDH] database [API] 
+<https://edh-www.adw.uni-heidelberg.de/data/api>`_
 
 
 
@@ -264,6 +271,10 @@ Geography only
 
 Extra parameters
 ^^^^^^^^^^^^^^^^
+
+- `maxlimit:`
+
+   Maximum limit of the query; integer, default 4000
 
 - `addID:`
 
@@ -400,7 +411,6 @@ The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelb
 
     # get data API from EDH with a wrapper function
     R> EDH <- get.edhw(hd_nr=1:82464)  # (20-11-2019)
-..     R> source("https://github.com/mplex/cedhar/blob/master/code/get.edh.r")   
 
     R> length(EDH)
     #[1] 82464
@@ -510,8 +520,9 @@ Attribute ``people`` is another list with other `attribute` names
 |
 
 
-You can find a complete list of attribute names in the ``EDH`` dataset in 
-the ``sdam`` `manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_.
+A complete list of attribute names in the ``EDH`` dataset is given the the :ref:`EDH Variables <edh-vars>` section.
+
+.. You can find a complete list of attribute names in the ``EDH`` dataset in the ``sdam`` `manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_.
 
 
 
@@ -527,9 +538,8 @@ the ``sdam`` `manual <https://github.com/mplex/cedhar/blob/master/typesetting/re
 Function ``edhw()``
 ===================
 
-Wrapper function for the ``EDH`` dataset.
+Wrapper function for the extraction of variables or the manipulation of the ``EDH`` dataset is found in ``edhw()``. 
 
-A wrapper function for EDH manipulation is found in routine ``edhw()``.
 
 |
 
@@ -541,7 +551,9 @@ Function usage
 .. code-block:: R
 
     # list of accepted parameter arguments
-    R> edhw(vars, x=NULL, as=c("list", "df"), limit, id, na.rm, wide,...)
+    R> edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), split,
+            select, addID, limit, id, na.rm, ...)
+    
 
 |
 
@@ -567,6 +579,23 @@ Formal arguments of ``edhw()`` are:
    Format to return the output. Currently either as a ``"list"`` or a data frame ``"df"`` object.
 
 
+- `type:`
+
+   Format of the data frame output. Currently  either a ``"long"`` or a ``"wide"`` table (option ``"narrow"`` not yet implemented).
+
+
+- `split:`
+   Divide the data into groups by `id`? (logical and optional)
+
+
+- `select:`
+   select ``"people"`` variables? (logical and optional, for data frame ``"long"`` only)
+
+
+- `addID:`
+
+   Add identification to the output? (optional and logical)
+
 - `limit:`
 
    Limit the returned output. Ignored if `id` is specified (optional, integer or vector)
@@ -579,11 +608,8 @@ Formal arguments of ``edhw()`` are:
 
 - `na.rm:`
 
-   Remove entries with ``NA`` information? (logical and optional)
+   Remove entries with ``<NA>`` information? (logical and optional)
 
-
-- `wide:`
-   Place people in data frame in a wide format? (logical and optional)
 
 - `...`
 
@@ -592,6 +618,16 @@ Formal arguments of ``edhw()`` are:
 
 
 |
+
+    .. todo:: 
+    
+         Implement the ``"narrow"`` `type` option to ``edhw()``.
+
+
+|
+
+
+.. _edh-vars:
 
 
 EDH Variables
@@ -608,12 +644,13 @@ These variables are at least one the following items: ``"commentary"``, ``"fotos
 ``"transcription"``, ``"trismegistos_uri"``, ``"type_of_inscription"``, ``"type_of_monument"``, ``"uri"``, 
 ``"width"``, ``"work_status"``, and ``"year_of_find"``. 
 
-Another output variable is ``"people"`` that is a list of persons named in the inscriptions with at least the following 
-items "person_id", "nomen", "cognomen", "praenomen", "name", "gender", "status", "tribus", "origo", "occupation", 
-"age: years", "age: months", "age: days".
 
-Since ``sdam`` v0.2.7, it is possible to combine variables with ``"people"`` in ``edhw()``.
-With ``edhw()``  the other output .
+Another output variable is ``"people"`` that is a list of persons named in the inscriptions with at least the following 
+items ``"person_id"``, ``"nomen"``, ``"cognomen"``, ``"praenomen"``, ``"name"``, ``"gender"``, ``"status"``, ``"tribus"``, 
+``"origo"``, ``"occupation"``, ``"age: years"``, ``"age: months"``, ``"age: days"``.
+
+Even though it is possible to combine variables with ``"people"`` in ``edhw()``, selecting peoples' items constitutes a 
+remaining task for ``edhw()``.
 
 
 

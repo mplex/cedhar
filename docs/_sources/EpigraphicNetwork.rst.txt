@@ -143,7 +143,7 @@ See :ref:`"Relative Dating" in Epigraphic Database Heidelberg <recursively-apply
 .. code-block:: R
 
     # choose variables of interest and record it as a data frame
-    R> epinet <- edhw(c("ID", "type_of_monument", "language", "material", "country", "findspot_ancient", 
+    R> epinet <- edhw(c("type_of_monument", "language", "material", "country", "findspot_ancient", 
                         "not_after", "not_before"), as="df")
 
 ..  .. code-block:: R
@@ -177,15 +177,15 @@ Take a look at this data:
 
     # first eight entries in the data frame
     R> head(epinet, 8)
-    #      ID type_of_monument language                                material country findspot_ancient not_after not_before
-    #1 000001           tabula    Latin                Marmor, geädert / farbig   Italy       Cumae, bei      0130       0071
-    #2 000002           tabula    Latin       marble: rocks - metamorphic rocks   Italy             Roma      0200       0051
-    #3 000003      statue base    Latin       marble: rocks - metamorphic rocks   Spain             NULL      0170       0131
-    #4 000004            altar    Latin    limestone: rocks - clastic sediments   Spain    Ipolcobulcula      0200       0151
-    #5 000005            stele    Latin                                    NULL   Italy             Roma      0200       0001
-    #6 000006            stele    Latin    limestone: rocks - clastic sediments   Spain      Sabora, bei      0150       0071
-    #7 000007           tabula    Latin travertine: rocks - chemische Sedimente   Italy             Roma     -0051      -0100
-    #8 000008           tabula    Latin       marble: rocks - metamorphic rocks   Italy            Roma?      0200       0101
+    #        id country findspot_ancient language                                material not_after not_before   type_of_inscription
+    #1 HD000001   Italy       Cumae, bei    Latin                Marmor, geädert / farbig      0130       0071               epitaph
+    #2 HD000002   Italy             Roma    Latin       marble: rocks - metamorphic rocks      0200       0051               epitaph
+    #3 HD000003   Spain             <NA>    Latin       marble: rocks - metamorphic rocks      0170       0131 honorific inscription
+    #4 HD000004   Spain    Ipolcobulcula    Latin    limestone: rocks - clastic sediments      0200       0151    votive inscription
+    #5 HD000005   Italy             Roma    Latin                                    <NA>      0200       0001               epitaph
+    #6 HD000006   Spain      Sabora, bei    Latin    limestone: rocks - clastic sediments      0150       0071               epitaph
+    #7 HD000007   Italy             Roma    Latin travertine: rocks - chemische Sedimente     -0051      -0100               epitaph
+    #8 HD000008   Italy            Roma?    Latin       marble: rocks - metamorphic rocks      0200       0101               epitaph
 
 
 For instance, entry ``8`` indicates that this ancient findspot is uncertain. 
@@ -223,15 +223,15 @@ And then we take a look at ``epinet2`` again, and we assume the questioned entri
 
     # first eight entries in the new data frame
     R> head(epinet2, 8)
-    #      ID type_of_monument language                                material country findspot_ancient not_after not_before
-    #1 000001           tabula    Latin                Marmor, geädert / farbig   Italy       Cumae, bei      0130       0071
-    #2 000002           tabula    Latin       marble: rocks - metamorphic rocks   Italy             Roma      0200       0051
-    #3 000003      statue base    Latin       marble: rocks - metamorphic rocks   Spain             NULL      0170       0131
-    #4 000004            altar    Latin    limestone: rocks - clastic sediments   Spain    Ipolcobulcula      0200       0151
-    #5 000005            stele    Latin                                    NULL   Italy             Roma      0200       0001
-    #6 000006            stele    Latin    limestone: rocks - clastic sediments   Spain      Sabora, bei      0150       0071
-    #7 000007           tabula    Latin travertine: rocks - chemische Sedimente   Italy             Roma     -0051      -0100
-    #8 000008           tabula    Latin       marble: rocks - metamorphic rocks   Italy             Roma      0200       0101
+    #        id country findspot_ancient language                                material not_after not_before   type_of_inscription
+    #1 HD000001   Italy       Cumae, bei    Latin                Marmor, geädert / farbig      0130       0071               epitaph
+    #2 HD000002   Italy             Roma    Latin       marble: rocks - metamorphic rocks      0200       0051               epitaph
+    #3 HD000003   Spain               NA    Latin       marble: rocks - metamorphic rocks      0170       0131 honorific inscription
+    #4 HD000004   Spain    Ipolcobulcula    Latin    limestone: rocks - clastic sediments      0200       0151    votive inscription
+    #5 HD000005   Italy             Roma    Latin                                      NA      0200       0001               epitaph
+    #6 HD000006   Spain      Sabora, bei    Latin    limestone: rocks - clastic sediments      0150       0071               epitaph
+    #7 HD000007   Italy             Roma    Latin travertine: rocks - chemische Sedimente     -0051      -0100               epitaph
+    #8 HD000008   Italy             Roma    Latin       marble: rocks - metamorphic rocks      0200       0101               epitaph
 
 
 |
@@ -273,18 +273,18 @@ For example, we use the ``base`` [R] function ``subset()`` to substract epigraph
 
     # a subset of a subset
     R> subset(subset(epinet2, country=="Egypt"), language=="Greek-Latin")
-    #          ID     type_of_monument    language    material country findspot_ancient not_after not_before
-    #2003  002003 architectural member Greek-Latin        NULL   Egypt           Philae      NULL      -0116
-    #23091 023091              diptych Greek-Latin Holz, Wachs   Egypt             NULL      NULL       0145
-    #23138 023138                 NULL Greek-Latin        NULL   Egypt            Syene      NULL      -0029
-    #29256 023091              diptych Greek-Latin Holz, Wachs   Egypt             NULL      NULL       0145
-    #29302 023138                 NULL Greek-Latin        NULL   Egypt            Syene      NULL      -0029
-    #36306 030147                 NULL Greek-Latin        NULL   Egypt       Alexandria      0011       0010
-    #38242 032079                 NULL Greek-Latin        NULL   Egypt          Schedia      NULL       NULL
-    #55004 048625                cliff Greek-Latin        NULL   Egypt         Berenice      NULL       0006
-    #58000 051485                stele Greek-Latin        NULL   Egypt       Alexandria      0225       0155
-    #62124 055974                stele Greek-Latin        NULL   Egypt         Berenice      0200       0001
-    #73916 067781                 NULL Greek-Latin        NULL   Egypt      Leontopolis     -0030      -0037
+    #            id country findspot_ancient    language    material not_after not_before     type_of_monument
+    #2003  HD002009   Egypt           Philae Greek-Latin          NA        NA      -0116 architectural member
+    #23091 HD023319   Egypt               NA Greek-Latin Holz, Wachs        NA       0145              diptych
+    #23138 HD023368   Egypt            Syene Greek-Latin          NA        NA      -0029                   NA
+    #27345 HD024001   Egypt               NA Greek-Latin Holz, Wachs        NA       0145              diptych
+    #27351 HD024009   Egypt            Syene Greek-Latin          NA        NA      -0029                   NA
+    #32500 HD030457   Egypt       Alexandria Greek-Latin          NA      0011       0010                   NA
+    #34436 HD032412   Egypt          Schedia Greek-Latin          NA        NA         NA                   NA
+    #51198 HD049264   Egypt         Berenice Greek-Latin          NA        NA       0006                cliff
+    #54194 HD052276   Egypt       Alexandria Greek-Latin          NA      0225       0155                stele
+    #58318 HD056791   Egypt         Berenice Greek-Latin          NA      0200       0001                stele
+    #70110 HD068637   Egypt      Leontopolis Greek-Latin          NA     -0030      -0037                   NA
 
 
 
@@ -294,30 +294,30 @@ For example, we use the ``base`` [R] function ``subset()`` to substract epigraph
 Ranked frequency
 ^^^^^^^^^^^^^^^^
 
-A ranked frequency of different *kinds of inscriptions* is computed as follows: 
+A ranked frequency of different *kinds of inscriptions* including missing information is computed as follows: 
 
 
 .. code-block:: R
 
-    R> data.frame(sort(table(unlist(epinet2$type_of_inscription)), decreasing=TRUE))
+    R> as.data.frame(sort(table(unlist(epinet2$type_of_inscription), useNA="ifany"), decreasing=TRUE))
     #                              Var1  Freq
-    #1                          epitaph 27960
-    #2                             NULL 25172
-    #3               votive inscription 14373
-    #4         owner/artist inscription  4980
-    #5            honorific inscription  4362
-    #6  building/dedicatory inscription  3423
-    #7                mile-/leaguestone  1723
-    #8       identification inscription  1368
-    #9                 military diploma   536
-    #10                     acclamation   506
-    #11                            list   358
-    #12                         defixio   312
-    #13                           label   274
-    #14        public legal inscription   263
-    #15            boundary inscription   261
-    #16                         elogium   155
-    #17                seat inscription    87
+    #1                          epitaph 27898
+    #2                             <NA> 21883
+    #3               votive inscription 14213
+    #4         owner/artist inscription  4876
+    #5            honorific inscription  4314
+    #6  building/dedicatory inscription  3378
+    #7                mile-/leaguestone  1713
+    #8       identification inscription  1353
+    #9                 military diploma   507
+    #10                     acclamation   495
+    #11                            list   356
+    #12                         defixio   309
+    #13                           label   266
+    #14        public legal inscription   254
+    #15            boundary inscription   252
+    #16                         elogium   154
+    #17                seat inscription    86
     #18                          prayer    56
     #19                          letter    39
     #20       private legal inscription    34
@@ -327,8 +327,8 @@ A ranked frequency of different *kinds of inscriptions* is computed as follows:
 
 
 That is, a decreasing sorted table given as data frame of the ``type_of_inscription`` 
-component of ``epinet2``. Since this is a list object, it is required to *unlist* the 
-data object to produce a table. 
+component of ``epinet2``. Since ``epinet2`` is a list object, it is required to *unlist* the 
+data object to produce a table with the frequencies. 
 
 
 
@@ -347,25 +347,22 @@ For this, we look at the attribute types stored in different columns.
 .. code-block:: R
 
     R> as.data.frame(colnames(epinet2))
-    #     colnames(epinet2)
-    #1                   ID
-    #2     type_of_monument
-    #3             language
-    #4             material
-    #5              country
-    #6     findspot_ancient
-    #7  type_of_inscription
-    #8            not_after
-    #9           not_before
-    #10      province_label
-
+    #    colnames(epinet2)
+    #1                  id
+    #2             country
+    #3    findspot_ancient
+    #4            language
+    #5            material
+    #6           not_after
+    #7          not_before
+    #8 type_of_inscription
 
 
 |
 
 
-For instance, in case we want to choose ``'type_of_monument'``, ``'material'``, and ``'findspot_ancient'``, 
-these correspond to columns 2, 4, and 6. 
+For instance, in case we want to choose ``"type_of_inscription"``, ``"material"``, and ``"findspot_ancient"``, 
+these correspond to columns 8, 5, and 3. 
 
 Similarities among Egyptian epigraphs `by simple matching` with the above attribute variables are recorded in 
 a matrix object named ``epEgs`` where the ``ID`` in ``epinet2`` corresponds to the dimensions labels.
@@ -374,11 +371,11 @@ a matrix object named ``epEgs`` where the ``ID`` in ``epinet2`` corresponds to t
 .. code-block:: R
 
     # similarity function on the subset for the three variables
-    R> epEgs <- simil(subset(epinet2, country=="Egypt"), c(2,4,6))
+    R> epEgs <- simil(subset(epinet2, country=="Egypt"), c(8,5,6))
 
     # number of rows in this square matrix
     R> nrow(epEgs)
-    #[1] 170
+    #[1] 175
 
 
 |
@@ -390,14 +387,13 @@ And then we look at some cell entries
 
     # similarity between the first six inscriptions in 'epEgs'
     R> epEgs[1:6, 1:6]
-    #       000741 002003 003126 006782 006785 008142
-    #000741      0      0      0      0      0      0
-    #002003      0      0      0      0      0      0
-    #003126      0      0      0      0      0      0
-    #006782      0      0      0      0      1      1
-    #006785      0      0      0      1      0      1
-    #008142      0      0      0      1      1      0
-
+    #         HD000744 HD002009 HD003137 HD006817 HD006820 HD008184
+    #HD000744        0        1        1        0        0        0
+    #HD002009        1        0        0        0        0        0
+    #HD003137        1        0        0        0        0        0
+    #HD006817        0        0        0        0        1        0
+    #HD006820        0        0        0        1        0        0
+    #HD008184        0        0        0        0        0        0
 
 where we observe six records of a single similarity. 
 

@@ -29,3 +29,9 @@ Indices and tables
 * :ref:`genindex`
 .. * :ref:`modindex`
 * :ref:`search`
+
+
+
+Print
+=====
+* :download:`Download this document <https://github.com/mplex/cedhar/blob/master/typesetting/reports/cedhar.pdf>`.

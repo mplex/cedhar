@@ -66,7 +66,7 @@
 <li><a class="reference internal" href="#aoristic-analysis">Aoristic analysis</a><ul>
 <li><a class="reference internal" href="#aoristic-sum">Aoristic sum</a></li>
 <li><a class="reference internal" href="#probability-of-existence">Probability of existence</a></li>
-<li><a class="reference internal" href="#id3">Temporal resolution</a></li>
+<li><a class="reference internal" href="#id4">Temporal resolution</a></li>
 <li><a class="reference internal" href="#rate-of-change">Rate of change</a></li>
 </ul>
 </li>
@@ -143,10 +143,18 @@ In this case, uncertainty is considered a measure quantifying the likelihood tha
 <p>For example, if the probability space is the interval <span class="math notranslate nohighlight">\([0,1]\)</span>, with the <a class="reference internal" href="#unif"><span class="std std-ref">uniform distribution</span></a> then the interval
 <span class="math notranslate nohighlight">\([ \frac{1}{3}, 1 ]\)</span> is an event that represents a randomly chosen number between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>
 turning out to be at least <span class="math notranslate nohighlight">\(\frac{1}{3}\)</span>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="summed-probability-distribution">
 <h3>Summed probability distribution<a class="headerlink" href="#summed-probability-distribution" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
 <p>A proxy for population levels is found in summed probability distributions (SPD) of dates.</p>
+</div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -202,7 +210,7 @@ when <span class="math notranslate nohighlight">\(n = 1\)</span>.</p>
 relative stability, and decline. These three parameters are not necessarily similar and an occurrence can have, for example,
 a long development and abrupt decay.</p>
 <blockquote>
-<div><div class="admonition-todo admonition" id="id1">
+<div><div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>Probability density function of the generalized trapezoidal distribution.</p>
 </div>
@@ -248,8 +256,9 @@ mass probability function.</p>
 <div class="section" id="normal-distribution">
 <h3>Normal distribution<a class="headerlink" href="#normal-distribution" title="Permalink to this headline">¶</a></h3>
 <p>The normal distribution –or “bell curve”– is the probability distribution for a normal
-random variable <span class="math notranslate nohighlight">\(X \sim \mathcal{N} (\mu,\sigma^2)\)</span>.
-The normal distribution is also called <em>Gaussian</em> distribution in honor to C.F. Gauss who described it.</p>
+random variable <span class="math notranslate nohighlight">\(X \sim N (\mu,\sigma^2)\)</span>.
+The normal distribution is also called <em>Gaussian</em> distribution in honor to C.F. Gauss who described it
+in mathematical terms.</p>
 <p>The normal distribution is the most important distribution in statistics, and
 play a crucial role in statistical inference.
 This is partly because it approximates well the distributions of many types of variables.</p>
@@ -361,7 +370,7 @@ the range of time with a fixed value, called time blocks, and the definition of 
        <span class="n">sums</span>
 </pre></div>
 </div>
-<div class="admonition-todo admonition" id="id2">
+<div class="admonition-todo admonition" id="id3">
 <p class="admonition-title">Todo</p>
 <p>Aoristic sum explained in R…</p>
 </div>
@@ -390,8 +399,8 @@ the range of time with a fixed value, called time blocks, and the definition of 
 <div class="line"><br /></div>
 </div>
 </div>
-<div class="section" id="id3">
-<h3>Temporal resolution<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id4">
+<h3>Temporal resolution<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>Temporal resolution <span class="math notranslate nohighlight">\(\varphi\)</span> refers to the duration of time blocks.
 When <span class="math notranslate nohighlight">\(\varphi\)</span> is fixed then we have <a class="reference internal" href="#aora"><span class="std std-ref">aoristic analysis</span></a>.</p>
 <p>To retrieve the minimum probability <span class="math notranslate nohighlight">\(P[\varphi_\alpha]\)</span> for the boundaries of the first and last time-blocks,
@@ -435,21 +444,22 @@ Plus others…</p>
 <h3>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h3>
 <p>Every data point has some likelihood of being missing, and Rubin (1976) classified missing data problems
 into three categories: missing completely at random (MCAR), missing at random (MAR) and missing not at random (MNAR).</p>
-<p>For some parameter <span class="math notranslate nohighlight">\(\psi\)</span>, where <span class="math notranslate nohighlight">\(Y_{obs}\)</span> is the observed sample data and <span class="math notranslate nohighlight">\(Y_{mis}\)</span> the unobserved sample data,</p>
+<p>For some parameter <span class="math notranslate nohighlight">\(\psi\)</span>, where <span class="math notranslate nohighlight">\(Y_{obs}\)</span> is the observed sample data and <span class="math notranslate nohighlight">\(Y_{mis}\)</span> the unobserved sample data,
+the overall probability of being missing <span class="math notranslate nohighlight">\(x\)</span> depends,</p>
 <ul>
-<li><p>MCAR: the probability of being missing depends only on some parameters <span class="math notranslate nohighlight">\(\psi\)</span>, the overall probability of being missing</p>
+<li><p>MCAR: only on some parameters <span class="math notranslate nohighlight">\(\psi\)</span></p>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi) = Pr(R = 0 \mid \psi)\)</span></p>
+<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid \psi)\)</span></p>
 </div></blockquote>
 </li>
-<li><p>MAR: the missingness probability may depend on observed information, including any design factors</p>
+<li><p>MAR: on observed information, including any design factors</p>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi) = Pr(R = 0 \mid Y_{obs}, \psi)\)</span></p>
+<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid Y_{obs}, \psi)\)</span></p>
 </div></blockquote>
 </li>
-<li><p>MNAR: the probability to be missing also depends on unobserved information, including <span class="math notranslate nohighlight">\(Y_{mis}\)</span> itself</p>
+<li><p>MNAR: also depends on unobserved information, including <span class="math notranslate nohighlight">\(Y_{mis}\)</span> itself</p>
 <blockquote>
-<div><p><span class="math notranslate nohighlight">\(Pr(R = 0 \mid Y_{obs}, Y_{mis}, \psi)\)</span></p>
+<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi)\)</span></p>
 </div></blockquote>
 </li>
 </ul>

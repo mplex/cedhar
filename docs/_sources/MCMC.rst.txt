@@ -71,22 +71,24 @@ of :math:`\theta`, which is the parameter of the data point's distribution.
 Algorithm
 ---------
 
-1. Initialise :math:`x^{(0)}`
+1. Initialise :math:`x_0`
 
 2. For :math:`i=0` to :math:`N-1`
 
-     Sample :math:`u \sim U(0, 1)`
+     Sample :math:`u \sim U(0, 1)`  uniform distribution
 
-     Sample :math:`x^\star \sim q(x^\star \mid x^{(i)})`
+     Sample :math:`x^\star \sim q(x^\star \mid x_t)`  candidate point on a proposal distribution
 
-     If :math:`u < U() = \min\{1, \frac{p^\star \; q(x^{(i)}) \mid x^\star}{x^{(i)}) \; q(x^\star \mid x^{(i)})}\}`
+     If :math:`u < U() = \min\{1, \frac{p(x^\star) \; q(x_t \mid x^\star)}{p(x_t) \; q(x^\star \mid x_t)}\}`
             
-            :math:`x^{(i+1)} = x^\star`
+            :math:`x_{(t+1)} = x^\star`  accept candidate
             
      Else   
             
-            :math:`x^{(i+1)} = x^{(i)}`
+            :math:`x_{(t+1)} = x_t`  increment time and sample :math:`x^\star` until :math:`t_{\max}` is reached. 
 
+
+.. where :math:`x_0` 
 
 
 |

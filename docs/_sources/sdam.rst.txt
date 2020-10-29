@@ -73,8 +73,8 @@ analyses within Social Dynamics and complexity in the Ancient Mediterranean
 
 ..  , which is a research group based 
 
-* (See :ref:`"SDAM project" <sdam-proj>`)
 * (See `"sdam" manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_)
+* (See :ref:`"SDAM project" <sdam-proj>`)
 
 
 |
@@ -83,7 +83,10 @@ Currently, it is possible with ``sdam`` to access data from the Epigraphic Datab
 with ``get.edh()``, and the wrapper function ``get.edhw()`` as well. Most of the data is available 
 in the dataset attached to the package, which is called ``EDH``.
 
-* (See :ref:`Epigraphic Database Heidelberg <EDH>` and :ref:`Epigraphic Networks using R <EDH-net>` for applications of these functions and use of this dataset.)
+For applications of these functions and use of this dataset:
+
+* (See :ref:`Epigraphic Database Heidelberg <EDH>`)
+* (See :ref:`Epigraphic Networks using R <EDH-net>`)
 
 
 |
@@ -176,17 +179,24 @@ Making Documentation
 News from ``sdam`` package
 --------------------------
 
+* **Version 0.3.0** (beta) released (28-10-2020).
+    * Function ``edhw()`` combines ``"people"`` with other variables 
+    * Different data frame formats in ``edhw()``
+
+    - Argument `maxlimit` is added to ``get.edh()``
+
+
+|
+
 
 * **Version 0.2.0** released (19-5-2020).
     - *New function* ``edhw()`` to extract fragments of the ``EDH`` dataset
 
-    - Documentation `website <https://sdam-au.github.io/sdam/>`_ launched
+    * Documentation `website <https://sdam-au.github.io/sdam/>`_ launched
     
-    * v.0.2.2 available  (2-7-2020)  Argument `force` is added to ``request()``
+    - v.0.2.2 available  (2-7-2020)  Argument `force` is added to ``request()``
 
-    * v.0.2.3 available  (4-8-2020)  Argument `rm.file` is added to ``request()``
-
-    * v.0.2.8 available  (26-10-2020)  Argument `wide` is added to ``edhw()``
+    - v.0.2.3 available  (4-8-2020)  Argument `rm.file` is added to ``request()``
 
     
 

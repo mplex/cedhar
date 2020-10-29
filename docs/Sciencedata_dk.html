@@ -127,22 +127,22 @@ to one of DEiC’s <strong>server</strong>.</p>
 </div>
 <div class="section" id="accessing-deic-s-sciencedata-dk-using-r">
 <h2>Accessing DEiC’s sciencedata.dk using R<a class="headerlink" href="#accessing-deic-s-sciencedata-dk-using-r" title="Permalink to this headline">¶</a></h2>
-<p>Function <a class="reference external" href="https://github.com/mplex/cedhar/blob/master/code/request.r">request()</a>
+<p>Function <code class="docutils literal notranslate"><span class="pre">request()</span></code>
 from the <a class="reference external" href="https://sdam-au.github.io/sdam/">R package “sdam”</a> is aimed to interact
 with DEiC’s <a class="reference external" href="https://sciencedata.dk">sciencedata.dk</a></p>
 <p>Note that at this moment this function requires the [R] package <code class="docutils literal notranslate"><span class="pre">&quot;httr&quot;</span></code>.</p>
 <div class="section" id="functions-usage">
 <h3>Functions Usage<a class="headerlink" href="#functions-usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt>
-<code class="sig-name descname">request</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dt id="request">
+<code class="sig-name descname">request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#request" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># arguments supported (currently)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">request</span><span class="p">(</span><span class="n">file</span>
           <span class="p">,</span><span class="n">URL</span><span class="o">=</span><span class="s">&quot;https://sciencedata.dk&quot;</span>
           <span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;GET&quot;</span><span class="p">,</span><span class="s">&quot;POST&quot;</span><span class="p">,</span><span class="s">&quot;PUT&quot;</span><span class="p">,</span><span class="s">&quot;DELETE&quot;</span><span class="p">)</span>
-          <span class="p">,</span><span class="n">authenticate</span><span class="o">=</span><span class="kc">TRUE</span>
+          <span class="p">,</span><span class="n">anonymous</span><span class="o">=</span><span class="kc">FALSE</span>
           <span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;/files&quot;</span>
           <span class="p">,</span><span class="n">cred</span><span class="o">=</span><span class="kc">NULL</span>
           <span class="p">,</span><span class="n">subdomain</span><span class="o">=</span><span class="kc">NULL</span>
@@ -166,7 +166,7 @@ with DEiC’s <a class="reference external" href="https://sciencedata.dk">scienc
 <p><code class="docutils literal notranslate"><span class="pre">&quot;DELETE&quot;</span></code> (cancel)</p>
 </div></blockquote>
 </li>
-<li><p><cite>authenticate</cite> (logical, use basic authentication?)</p></li>
+<li><p><cite>anonymous</cite> (logical, unauthenticated user?)</p></li>
 <li><p><cite>path</cite> (optional path or subdirectory to add to the url)</p></li>
 </ul>
 <div class="line-block">
@@ -176,7 +176,7 @@ with DEiC’s <a class="reference external" href="https://sciencedata.dk">scienc
 <div class="section" id="additional-parameters">
 <h3>Additional parameters<a class="headerlink" href="#additional-parameters" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><p><cite>cred</cite> (vector for username and password credentials)</p></li>
+<li><p><cite>cred</cite> (authentication credentials, vector with username and password)</p></li>
 <li><p><cite>subdomain</cite> (optional, add subdomain to the url)</p></li>
 <li><p><cite>…</cite> (extra parameters if required)</p></li>
 </ul>
@@ -197,8 +197,8 @@ with DEiC’s <a class="reference external" href="https://sciencedata.dk">scienc
 <span class="c1">#$method</span>
 <span class="c1">#c(&quot;GET&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;)</span>
 <span class="c1">#</span>
-<span class="c1">#$authenticate</span>
-<span class="c1">#[1] TRUE</span>
+<span class="c1">#$anonymous</span>
+<span class="c1">#[1] FALSE</span>
 <span class="c1">#</span>
 <span class="c1">#$cred</span>
 <span class="c1">#NULL</span>
@@ -260,16 +260,21 @@ then package <code class="docutils literal notranslate"><span class="pre">&quot;
 <code class="docutils literal notranslate"><span class="pre">request()</span></code> has the <code class="docutils literal notranslate"><span class="pre">cred</span></code> argument for performing a basic authentification.</p>
 <p>In DEiC’s <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a>, both personal and shared folders
 need some sort of authentication. With the basic authentication, the credentials are given
-<strong>with the username and password used under your personal</strong> ‘sciencedata.dk’ <strong>settings</strong>.</p>
+<em>with the username and password used under your personal</em> ‘sciencedata.dk’ <strong>settings</strong>.</p>
 <blockquote>
 <div><div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>It is possible to prevent the widget by recording this information in a vector object.
+<blockquote>
+<div><p>It is possible to prevent the widget by recording this information in a vector object.
 If you want to avoid a dialog box then save your credentials.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># user credentials</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># save authentication credentials</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">mycred</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;YOUR-AUID@au.dk&quot;</span><span class="p">,</span> <span class="s">&quot;YOURPASSWORD&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div></blockquote>
+<p>However, in many cases such as with public folders in <a class="reference external" href="https:\sciencedata.dk">sciencedata.dk</a>
+authentification        is not needed and you can disable it by setting <cite>anonymous</cite> to
+<code class="docutils literal notranslate"><span class="pre">TRUE</span></code>.</p>
 </div>
 </div></blockquote>
 <div class="line-block">
@@ -282,7 +287,7 @@ If you want to avoid a dialog box then save your credentials.</p>
 and <code class="docutils literal notranslate"><span class="pre">4xx</span></code> means <strong>client error</strong>. There is also a status code like <code class="docutils literal notranslate"><span class="pre">5xx</span></code> for server
 error, and <code class="docutils literal notranslate"><span class="pre">3xx</span></code> for redirection (and where codes <code class="docutils literal notranslate"><span class="pre">1xx</span></code> are just informative).</p>
 <blockquote>
-<div><div class="admonition-todo admonition" id="id4">
+<div><div class="admonition-todo admonition" id="id5">
 <p class="admonition-title">Todo</p>
 <p>Typical staus codes in the response are <code class="docutils literal notranslate"><span class="pre">404</span></code>, <code class="docutils literal notranslate"><span class="pre">201</span></code>, <code class="docutils literal notranslate"><span class="pre">307</span></code>…</p>
 </div>

@@ -186,13 +186,13 @@ and <code class="docutils literal notranslate"><span class="pre">&quot;bibliogra
 <code class="sig-prename descclassname">get.</code><code class="sig-name descname">edh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get.edh" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># arguments supported (currently)</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># arguments supported</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="s">&quot;geography&quot;</span><span class="p">)</span>
           <span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://edh-www.adw.uni-heidelberg.de/data/api&quot;</span>
           <span class="p">,</span> <span class="n">hd_nr</span><span class="p">,</span> <span class="n">province</span><span class="p">,</span> <span class="n">country</span><span class="p">,</span> <span class="n">findspot_modern</span>
           <span class="p">,</span> <span class="n">findspot_ancient</span><span class="p">,</span> <span class="n">year_not_before</span><span class="p">,</span> <span class="n">year_not_after</span>
           <span class="p">,</span> <span class="n">tm_nr</span><span class="p">,</span> <span class="n">transcription</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">bbox</span><span class="p">,</span> <span class="n">findspot</span><span class="p">,</span> <span class="n">pleiades_id</span>
-          <span class="p">,</span> <span class="n">geonames_id</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">printQ</span><span class="p">)</span>
+          <span class="p">,</span> <span class="n">geonames_id</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">maxlimit</span><span class="o">=</span><span class="m">4000</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">printQ</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -213,19 +213,25 @@ written in <code class="docutils literal notranslate"><span class="pre">R</span>
 <code class="sig-prename descclassname">get.</code><code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get.edhw" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a wrapper function to perform several queries</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># to perform several queries</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edhw</span><span class="p">(</span><span class="n">hd_nr</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> is a wrapper function to perform several queries from the EDH database API using
+identification numbers.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Currently, function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> works only for inscriptions.</p>
+</div>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </div>
 <div class="section" id="search-parameters">
 <h3>Search parameters<a class="headerlink" href="#search-parameters" title="Permalink to this headline">¶</a></h3>
-<p>The following parameter description is from the [EDH] database [API]
-&lt;<a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api">https://edh-www.adw.uni-heidelberg.de/data/api</a>&gt;:</p>
+<p>The following parameter description is from the <a class="reference external" href="https://edh-www.adw.uni-heidelberg.de/data/api">[EDH] database [API]</a></p>
 <div class="section" id="inscriptions-and-geography">
 <h4>Inscriptions and Geography<a class="headerlink" href="#inscriptions-and-geography" title="Permalink to this headline">¶</a></h4>
 <ul>
@@ -359,6 +365,11 @@ insensitive</p>
 <div class="section" id="extra-parameters">
 <h4>Extra parameters<a class="headerlink" href="#extra-parameters" title="Permalink to this headline">¶</a></h4>
 <ul>
+<li><p><cite>maxlimit:</cite></p>
+<blockquote>
+<div><p>Maximum limit of the query; integer, default 4000</p>
+</div></blockquote>
+</li>
 <li><p><cite>addID:</cite></p>
 <blockquote>
 <div><p>Add identification to the output?</p>
@@ -461,6 +472,9 @@ handled with similar arguments in the <code class="docutils literal notranslate"
 The wrapper function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> allows multiple queries by using the Heidelberg number <code class="docutils literal notranslate"><span class="pre">hd_nr</span></code>.</p>
 <div class="highlight-R notranslate" id="index-0"><div class="highlight"><pre><span></span><span class="c1"># get data API from EDH with a wrapper function</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">EDH</span> <span class="o">&lt;-</span> <span class="nf">get.edhw</span><span class="p">(</span><span class="n">hd_nr</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">82464</span><span class="p">)</span>  <span class="c1"># (20-11-2019)</span>
+
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">length</span><span class="p">(</span><span class="n">EDH</span><span class="p">)</span>
+<span class="c1">#[1] 82464</span>
 </pre></div>
 </div>
 <p>which will produce a list object with the existing entries for each inscription, and where entries have different length.</p>
@@ -544,8 +558,7 @@ Hence, you can do it by parts and then collate the lists into another object.</p
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>You can find a complete list of attribute names in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset in
-the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> <a class="reference external" href="https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf">manual</a>.</p>
+<p>A complete list of attribute names in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is given the the <a class="reference internal" href="#edh-vars"><span class="std std-ref">EDH Variables</span></a> section.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -563,15 +576,15 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 </div>
 <div class="section" id="function-edhw">
 <h2>Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code><a class="headerlink" href="#function-edhw" title="Permalink to this headline">¶</a></h2>
-<p>Wrapper function for the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset.</p>
-<p>A wrapper function for EDH manipulation is found in routine <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
+<p>Wrapper function for the extraction of variables or the manipulation of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is found in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <div class="section" id="function-usage">
 <h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of accepted parameter arguments</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">as</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="n">wide</span><span class="p">,</span><span class="kc">...</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">as</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">type</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;long&quot;</span><span class="p">,</span> <span class="s">&quot;wide&quot;</span><span class="p">,</span> <span class="s">&quot;narrow&quot;</span><span class="p">),</span> <span class="n">split</span><span class="p">,</span>
+        <span class="n">select</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -597,6 +610,26 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <div><p>Format to return the output. Currently either as a <code class="docutils literal notranslate"><span class="pre">&quot;list&quot;</span></code> or a data frame <code class="docutils literal notranslate"><span class="pre">&quot;df&quot;</span></code> object.</p>
 </div></blockquote>
 </li>
+<li><p><cite>type:</cite></p>
+<blockquote>
+<div><p>Format of the data frame output. Currently  either a <code class="docutils literal notranslate"><span class="pre">&quot;long&quot;</span></code> or a <code class="docutils literal notranslate"><span class="pre">&quot;wide&quot;</span></code> table (option <code class="docutils literal notranslate"><span class="pre">&quot;narrow&quot;</span></code> not yet implemented).</p>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt><cite>split:</cite></dt><dd><p>Divide the data into groups by <cite>id</cite>? (logical and optional)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>select:</cite></dt><dd><p>select <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> variables? (logical and optional, for data frame <code class="docutils literal notranslate"><span class="pre">&quot;long&quot;</span></code> only)</p>
+</dd>
+</dl>
+</li>
+<li><p><cite>addID:</cite></p>
+<blockquote>
+<div><p>Add identification to the output? (optional and logical)</p>
+</div></blockquote>
+</li>
 <li><p><cite>limit:</cite></p>
 <blockquote>
 <div><p>Limit the returned output. Ignored if <cite>id</cite> is specified (optional, integer or vector)</p>
@@ -609,13 +642,8 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 </li>
 <li><p><cite>na.rm:</cite></p>
 <blockquote>
-<div><p>Remove entries with <code class="docutils literal notranslate"><span class="pre">NA</span></code> information? (logical and optional)</p>
+<div><p>Remove entries with <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code> information? (logical and optional)</p>
 </div></blockquote>
-</li>
-<li><dl class="simple">
-<dt><cite>wide:</cite></dt><dd><p>Place people in data frame in a wide format? (logical and optional)</p>
-</dd>
-</dl>
 </li>
 <li><p><cite>…</cite></p>
 <blockquote>
@@ -626,10 +654,19 @@ the <code class="docutils literal notranslate"><span class="pre">sdam</span></co
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">&quot;narrow&quot;</span></code> <cite>type</cite> option to <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 </div>
 <div class="section" id="edh-variables">
-<h2>EDH Variables<a class="headerlink" href="#edh-variables" title="Permalink to this headline">¶</a></h2>
+<span id="edh-vars"></span><h2>EDH Variables<a class="headerlink" href="#edh-variables" title="Permalink to this headline">¶</a></h2>
 <p>The aim of the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function is to extract variables or attributes of inscriptions, which are output values
 typically produced by the <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> function.</p>
 <p>These variables are at least one the following items: <code class="docutils literal notranslate"><span class="pre">&quot;commentary&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;fotos&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;country&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;depth&quot;</span></code>,
@@ -640,10 +677,10 @@ typically produced by the <code class="docutils literal notranslate"><span class
 <code class="docutils literal notranslate"><span class="pre">&quot;transcription&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;trismegistos_uri&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;type_of_inscription&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;type_of_monument&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;uri&quot;</span></code>,
 <code class="docutils literal notranslate"><span class="pre">&quot;width&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;work_status&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;year_of_find&quot;</span></code>.</p>
 <p>Another output variable is <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> that is a list of persons named in the inscriptions with at least the following
-items “person_id”, “nomen”, “cognomen”, “praenomen”, “name”, “gender”, “status”, “tribus”, “origo”, “occupation”,
-“age: years”, “age: months”, “age: days”.</p>
-<p>Since <code class="docutils literal notranslate"><span class="pre">sdam</span></code> v0.2.7, it is possible to combine variables with <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.
-With <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>  the other output .</p>
+items <code class="docutils literal notranslate"><span class="pre">&quot;person_id&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;nomen&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cognomen&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;praenomen&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;gender&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;status&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tribus&quot;</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&quot;origo&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;occupation&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">years&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">months&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">days&quot;</span></code>.</p>
+<p>Even though it is possible to combine variables with <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>, selecting peoples’ items constitutes a
+remaining task for <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -865,7 +902,7 @@ the data frame first and treat the data as numeric format.</p>
 <div class="line"><br /></div>
 </div>
 <blockquote>
-<div><div class="admonition-todo admonition" id="id1">
+<div><div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>Calculate the residuals and start a statistic analysis of dates.</p>
 </div>
