@@ -13,7 +13,7 @@ get.edh(search = c("inscriptions", "geography"),
         hd_nr, province, country, findspot_modern, findspot_ancient, 
         year_not_before, year_not_after, tm_nr, transcription, type, 
         bbox, findspot, pleiades_id, geonames_id, offset, limit, 
-        addID, printQ)
+        maxlimit = 4000, addID, printQ)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -70,6 +70,9 @@ get.edh(search = c("inscriptions", "geography"),
 }
   \item{limit}{
 	Clause to limit the number of results (optional and integer)
+}
+  \item{maxlimit}{
+	Maximum limit of the query (integer, default 4000)
 }
   \item{addID}{
 	Add identification to the output? (optional and logical)

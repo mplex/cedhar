@@ -8,10 +8,10 @@ Wrapper function for manipulation of \code{EDH} dataset
 A function to obtain variable data and perform transformations on the Epigraphic Database Heidelberg \code{EDH} dataset.
 }
 \usage{
-edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), addID, 
-     limit, id, na.rm, split, ...)
+edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), split, 
+     select, addID, limit, id, na.rm, ...)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{vars}{
    Choose variables of interest from \code{x}. If \code{x=NULL}, the entire \code{EDH} dataset is taken. (optional, vector)
@@ -25,6 +25,12 @@ edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), a
   \item{type}{
    Type format of data frame. Currently either \code{"long"} or \code{"wide"} (\code{"narrow"} not yet implemented)
 }
+  \item{split}{
+   Divide the data into groups by id? (logical and optional)
+}
+  \item{select}{
+   select 'people' variables? (logical and optional, for data frame \code{"long"} only)
+}
   \item{addID}{
    Add identification to the output? (optional and logical)
 }
@@ -36,9 +42,6 @@ edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), a
 }
   \item{na.rm}{
    Remove entries with NA data? (logical and optional)
-}
-  \item{split}{
-   Divide the data into groups by id? (logical and optional)
 }
   \item{\dots}{
    Optional arguments if needed.
@@ -67,13 +70,16 @@ this case the offset can be specified as a sequence.
 While \code{"limit"} is a faster way to get to entries in the \code{EDH} dataset, argument \code{id} is for 
 refering to precisely one or more \code{hd_nr}s in the Epigraphic Database Heidelberg API.
 
-Component "\code{people}" is a separated list in the \code{EDH} dataset, and it should be considered as 
+Component \code{"people"} is a separated list in the \code{EDH} dataset, and it should be considered as 
 a separate case from the rest of the variables. 
 In the case that the output is a data frame, the default output is a `long' \code{type} table; that is records can 
-appear in different rows and each variable is assigned into a single column. By setting \code{"wide"} in \code{type}, 
-it is possible to place the different people from a single entry column by column in the data frame and each 
-record has a single row. Finally, argument \code{split} allows dividing the data in the data frame  into groups by `id', 
-which corresponds to the HD number of inscription in the \code{EDH} dataset. 
+appear in different rows and each variable is assigned into a single column, and with this option is possible to 
+\code{select} \code{"people"} variables.
+
+By setting \code{"wide"} in \code{type}, it is possible to place the different people from a single entry 
+column by column in the data frame and each record has a single row. Finally, argument \code{split} allows 
+dividing the data in the data frame into groups by `id', which corresponds to the HD number of inscription 
+in the \code{EDH} dataset. 
 }
 \value{
 A list or a data frame, depending on the input. 
@@ -99,7 +105,11 @@ In case that the output chosen is a dataframe, then component \code{"people"} sh
 data(EDH)
 
 ## make a list for three variables in 'EDH' (default)
-edhw(vars=c("ID", "not_after", "not_before") )}
+edhw(vars=c("type_of_inscription", "not_after", "not_before") )
+
+## select 'gender' from 'people' in 'EDH' (default)
+edhw(vars=c("people", "not_after", "not_before"), select="gender" )}
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

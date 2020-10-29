@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from Epigraphic Database Heidelberg EDH
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.5.0 (28-10-2020)
+## version 0.5.1 (29-10-2020)
 ##
 ## PARAMETERS
 ##
@@ -14,18 +14,20 @@
 ## OPTIONAL PARAMETERS
 ##
 ## x      (typically fragments of EDH dataset or database API)
+## split  (logical, divide the data into groups by id?)
+## select (logical, select 'people' variables, data frame 'long' only)
 ## addID  (logical, add "HD id" to output?)
 ## limit  (integers, vector with HD nr records to limit output)
-## id     (integer or character, select only the hd_nr id)
+## id     (integer or character, choose only the hd_nr id)
 ## na.rm  (remove data entries with <NA>?)
-## split  (logical, divide the data into groups by id?)
 ## ...    (optional parameters)
 ##
 
 
 edhw <-
 function (vars, x = NULL, as = c("list", "df"), type = c("long", 
-    "wide", "narrow"), addID, limit, id, na.rm, split, ...) 
+    "wide", "narrow"), split, select, addID, limit, id, na.rm, 
+    ...) 
 {
     flgdf <- FALSE
     if (is.null(x) == TRUE) {
@@ -124,7 +126,8 @@ function (vars, x = NULL, as = c("list", "df"), type = c("long",
         }
     }
     if (isTRUE(flgdf == TRUE) == TRUE) {
-        warning("When \"x\" is a data frame, argument \"limit\" is not available.")
+        ifelse(missing(limit) == FALSE, warning("When \"x\" is a data frame, argument \"limit\" is not available."), 
+            NA)
         if (match.arg(as) == "df") {
             return(x)
         }
@@ -154,7 +157,8 @@ function (vars, x = NULL, as = c("list", "df"), type = c("long",
             TRUE) == TRUE) {
             edhl <- lapply(edhlm, `[`, vars)
             if (isTRUE(length(unique(names(unlist(edhl)))) != 
-                length(vars)) == FALSE) {
+                length(vars)) == FALSE || any(is.na(unique(unlist(lapply(edhl, 
+                "names"))))) == TRUE) {
                 for (k in seq_len(length(edhl))) {
                   ifelse(any(is.na(names(edhl[[k]]))) == FALSE, 
                     NA, names(edhl[[k]])[which(is.na(names(edhl[[k]])))] <- vars[which(!(vars %in% 
@@ -206,8 +210,8 @@ function (vars, x = NULL, as = c("list", "df"), type = c("long",
                 }
                 else {
                   edhlp <- lapply(edhlm, `[`, "people")
-                  edhlq <- lapply(edhlm, `[`, vars[which(vars != 
-                    "people")])
+                  edhlq <- lapply(edhlm, `[`, sort(vars[which(vars != 
+                    "people")]))
                   if (isTRUE(length(edhlp) > 0) == TRUE) {
                     plbs <- unique(attr(unlist(edhlp), "names"))
                     plbs <- sort(unique(unlist(strsplit(plbs, 
@@ -264,6 +268,13 @@ function (vars, x = NULL, as = c("list", "df"), type = c("long",
                   }
                 }
                 rm(k)
+                if (missing(select) == FALSE) {
+                  xdfp <- subset(xdfp, select = c("id", select[which(select %in% 
+                    plbs)]))
+                }
+                else {
+                  NA
+                }
                 if (isTRUE(vars == "people") == TRUE) {
                   if (isTRUE(split == TRUE) == TRUE) {
                     return(split(xdfp[, -1], xdfp$id))
@@ -278,7 +289,6 @@ function (vars, x = NULL, as = c("list", "df"), type = c("long",
                       nrow = length(edhlq)))
                     colnames(xdfq) <- as.vector(stats::na.omit(qlbs))
                     for (i in seq_len(length(edhlq))) {
-                      edhlq[[i]] <- edhlq[[i]][order(names(edhlq[[i]]))]
                       edhlq[[i]][lengths(edhlq[[i]]) == 0L] <- NA
                       xdfq[i, 2:ncol(xdfq)] <- as.vector(unlist(edhlq[[i]]))
                     }
