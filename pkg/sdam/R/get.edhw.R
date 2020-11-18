@@ -1,20 +1,30 @@
 
 ## 
-## WRAPPER FUNCTION get.edhw() to perform several queries from the EDH database API
+## WRAPPER FUNCTION get.edhw() to retrieve records from EDH database API
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.0 (27-04-2020)
+## version 0.2.1 (12-11-2020)
 ##
-## PARAMETER
+## PARAMETERS
+## file  (optional file with a JSON format)
 ## hd_nr (HD-No of inscription)
+## ...   (optional parameters)
+##
 
 
 get.edhw <-
-function (hd_nr, ...) 
+function (file = NULL, hd_nr, ...) 
 {
-    smpl <- list()
-    for (i in hd_nr) {
-        smpl[[length(smpl) + 1L]] <- try(get.edh(hd_nr = i, ...))
+    if (is.null(file) == FALSE) {
+        smpl <- rjson::fromJSON(file = file)
+    }
+    else if (is.null(file) == TRUE) {
+        smpl <- list()
+        for (i in hd_nr) {
+            smpl[[length(smpl) + 1L]] <- try(get.edh(hd_nr = i, 
+                ...))
+        }
+        rm(i)
     }
     return(smpl)
 }

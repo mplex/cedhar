@@ -14,7 +14,7 @@ edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), s
 
 \arguments{
   \item{vars}{
-   Choose variables of interest from \code{x}. If \code{x=NULL}, the entire \code{EDH} dataset is taken. (optional, vector)
+   Variables of interest from \code{x}; if \code{x=NULL}, the entire \code{EDH} dataset is taken. (optional, vector)
 }
   \item{x}{
    A list object name with fragments of the \code{EDH} dataset (optional)
@@ -26,10 +26,10 @@ edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), s
    Type format of data frame. Currently either \code{"long"} or \code{"wide"} (\code{"narrow"} not yet implemented)
 }
   \item{split}{
-   Divide the data into groups by id? (logical and optional)
+   Divide the data into groups by id? (optional and logical)
 }
   \item{select}{
-   select 'people' variables? (logical and optional, for data frame \code{"long"} only)
+   Choose \code{"people"} variables (optional, vector)
 }
   \item{addID}{
    Add identification to the output? (optional and logical)
@@ -38,10 +38,10 @@ edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), s
    Limit the returned output. Ignored if \code{id} is specified (optional, integer or vector)
 }
   \item{id}{
-   Select only the \code{hd_nr} id(s) (optional, integer or character)
+   Select only \code{hd_nr} records (optional, integer or character)
 }
   \item{na.rm}{
-   Remove entries with NA data? (logical and optional)
+   Remove entries with NA data? (optional and logical)
 }
   \item{\dots}{
    Optional arguments if needed.
@@ -82,7 +82,7 @@ dividing the data in the data frame into groups by `id', which corresponds to th
 in the \code{EDH} dataset. 
 }
 \value{
-A list or a data frame, depending on the input. 
+A list or a data frame with a long or wide format, depending on the arguments inputs. 
 }
 \references{
 https://edh-www.adw.uni-heidelberg.de/data/api
@@ -91,7 +91,8 @@ https://edh-www.adw.uni-heidelberg.de/data/api
 Antonio Rivero Ostoic
 }
 \note{
-In case that the output chosen is a dataframe, then component \code{"people"} should be chosen alone. 
+When choosing \code{"people"} variables with \code{select} with a data frame output, then this attribute should be chosen 
+in \code{vars}. 
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

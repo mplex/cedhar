@@ -209,10 +209,10 @@ and \code{"bibliography"} may be implemented in the future.
 }
 
 
-\section{Warning }{
-Queries with more than 4000 records can produce a timeout from the server, and a \emph{Warning} 
-message is produced.
-}
+%\section{Warning }{
+%Queries with more than 4000 records can produce a timeout from the server, and a \emph{Warning} 
+%message is produced.
+%}
 
 \seealso{
 \code{\link{get.edhw}}, \code{\link{simil}}

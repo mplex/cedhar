@@ -11,7 +11,7 @@ This is a data set retrieved from the Epigraphic Database Heidelberg API reposit
 data("EDH")
 }
 \format{
-A list object of 82464 items (until 20-11-2019) with at least one of the following 46 
+A list object of 83822 records (until 03-11-2020) with at least one of the following 47 
 (or more) names in the EDH list: 
 
 \code{"ID"}, \code{"commentary"}, \code{"fotos"}, \code{"country"}, 

@@ -14,7 +14,7 @@
 Package: \tab sdam \cr
 Type: \tab Package \cr
 Version: \tab 0.3.0 \cr
-Date: \tab 29 October 2020 \cr
+Date: \tab 18 November 2020 \cr
 License: \tab CC BY-SA 4.0 \cr
 }
 
