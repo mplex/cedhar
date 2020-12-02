@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Probability and Uncertainty" name="description" />
 <meta content="temporal uncertainty, Chronology" name="keywords" />
 
-    <title>Temporal Uncertainty &#8212; cedhar 0.0.5 documentation</title>
+    <title>Temporal Uncertainty &#8212; cedhar 0.0.6 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="Time.html" title="Time and dating"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -45,33 +45,40 @@
 <li><a class="reference internal" href="#">Temporal Uncertainty</a><ul>
 <li><a class="reference internal" href="#probability-and-uncertainty">Probability and uncertainty</a><ul>
 <li><a class="reference internal" href="#probability-space">Probability space</a></li>
-<li><a class="reference internal" href="#summed-probability-distribution">Summed probability distribution</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#probability-distributions">Probability distributions</a><ul>
 <li><a class="reference internal" href="#binomial-distribution">Binomial distribution</a></li>
-<li><a class="reference internal" href="#trapezoidal-distributions">Trapezoidal distributions</a><ul>
+<li><a class="reference internal" href="#trapezoidal-distribution">Trapezoidal distribution</a><ul>
 <li><a class="reference internal" href="#uniform-distribution">Uniform distribution</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#normal-distribution">Normal distribution</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#notation">Notation</a></li>
-<li><a class="reference internal" href="#probabilities-of-existence-for-time-blocks">Probabilities of existence for time blocks</a><ul>
-<li><a class="reference internal" href="#temporal-resolution">Temporal resolution</a></li>
-<li><a class="reference internal" href="#boundary-of-existence">Boundary of existence</a></li>
+<li><a class="reference internal" href="#notation">Notation</a><ul>
+<li><a class="reference internal" href="#boundaries-of-existence">Boundaries of existence</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#aoristic-analysis">Aoristic analysis</a><ul>
+<li><a class="reference internal" href="#temporal-resolution">Temporal resolution</a></li>
 <li><a class="reference internal" href="#aoristic-sum">Aoristic sum</a></li>
-<li><a class="reference internal" href="#probability-of-existence">Probability of existence</a></li>
-<li><a class="reference internal" href="#id4">Temporal resolution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#probability-of-existence-t-i">Probability of existence <span class="math notranslate nohighlight">\(t_i\)</span></a></li>
+<li><a class="reference internal" href="#probabilities-of-existence-for-time-blocks">Probabilities of existence for time blocks</a><ul>
+<li><a class="reference internal" href="#temporal-resolution-for-time-blocks">Temporal resolution for time blocks</a></li>
 <li><a class="reference internal" href="#rate-of-change">Rate of change</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#imputation-and-missing-data">Imputation and Missing data</a><ul>
 <li><a class="reference internal" href="#missing-data">Missing data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#computing-the-probability-of-existence">Computing the probability of existence</a><ul>
+<li><a class="reference internal" href="#function-usage">Function usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#plotting-aoristic-sum">Plotting aoristic sum</a></li>
 </ul>
 </li>
 </ul>
@@ -147,18 +154,6 @@ turning out to be at least <span class="math notranslate nohighlight">\(\frac{1}
 <div class="line"><br /></div>
 </div>
 </div>
-<div class="section" id="summed-probability-distribution">
-<h3>Summed probability distribution<a class="headerlink" href="#summed-probability-distribution" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>A proxy for population levels is found in summed probability distributions (SPD) of dates.</p>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
 </div>
 <div class="section" id="probability-distributions">
 <h2>Probability distributions<a class="headerlink" href="#probability-distributions" title="Permalink to this headline">¶</a></h2>
@@ -204,17 +199,28 @@ when <span class="math notranslate nohighlight">\(n = 1\)</span>.</p>
 <div class="line"><br /></div>
 </div>
 </div>
-<div class="section" id="trapezoidal-distributions">
-<span id="trap"></span><h3>Trapezoidal distributions<a class="headerlink" href="#trapezoidal-distributions" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="trapezoidal-distribution">
+<span id="trap"></span><h3>Trapezoidal distribution<a class="headerlink" href="#trapezoidal-distribution" title="Permalink to this headline">¶</a></h3>
 <p>Trapezoidal distributions seems appropriate for modeling the duration and the form of a phenomenon with a growth-stage,
 relative stability, and decline. These three parameters are not necessarily similar and an occurrence can have, for example,
 a long development and abrupt decay.</p>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>Probability density function of the generalized trapezoidal distribution.</p>
+<p>The probability density function of the trapezoidal distribution for <span class="math notranslate nohighlight">\(a \leqslant b \leqslant c \leqslant d\)</span> is</p>
+<p><span class="math notranslate nohighlight">\(f(x \mid a,b,c,d) = \begin{cases}U \bigl(\frac{x-a}{b-a}\bigr) \quad a \leqslant x &lt; b\\U \qquad b \leqslant x &lt; c\\U \bigl(\frac{d-x}{d-c}\bigr) \quad c \leqslant x &lt; d\\ 0 \quad \text{elsewhere}\end{cases}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(U = 2(d + c - b - a)^{-1}\)</span> corresponds to the uniform distribution.</p>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
-</div></blockquote>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 100%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="_images/trapezoidal1.png"><img alt="_images/trapezoidal1.png" src="_images/trapezoidal1.png" style="width: 400px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>A trapezoidal distribution where decline is longer than growth.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -257,8 +263,8 @@ mass probability function.</p>
 <h3>Normal distribution<a class="headerlink" href="#normal-distribution" title="Permalink to this headline">¶</a></h3>
 <p>The normal distribution –or “bell curve”– is the probability distribution for a normal
 random variable <span class="math notranslate nohighlight">\(X \sim N (\mu,\sigma^2)\)</span>.
-The normal distribution is also called <em>Gaussian</em> distribution in honor to C.F. Gauss who described it
-in mathematical terms.</p>
+The normal distribution is also called <em>Gaussian</em> distribution due to C.F. Gauss who described
+this distribution in mathematical terms.</p>
 <p>The normal distribution is the most important distribution in statistics, and
 play a crucial role in statistical inference.
 This is partly because it approximates well the distributions of many types of variables.</p>
@@ -311,40 +317,19 @@ Any arbitrary normal distribution can be converted to <span class="math notransl
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>plus in Appendix A (from Crema, 2012)…</p>
-<p><span class="math notranslate nohighlight">\(d =\)</span> duration of <span class="math notranslate nohighlight">\(e\)</span></p>
-<p><span class="math notranslate nohighlight">\(b =\)</span> numerical index of temporal blocks within <span class="math notranslate nohighlight">\(\tau\)</span></p>
-<blockquote>
-<div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p><span class="math notranslate nohighlight">\(d\)</span> is rounded to the value of the temporal resolution, and <span class="math notranslate nohighlight">\(b\)</span> ranges
-from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(\Delta t_i/\varphi\)</span>, which are the edges of the time span.</p>
-</div>
-</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
-<div class="section" id="probabilities-of-existence-for-time-blocks">
-<h2>Probabilities of existence for time blocks<a class="headerlink" href="#probabilities-of-existence-for-time-blocks" title="Permalink to this headline">¶</a></h2>
-<p>The probability of existence for each time block (Crema, 2012)</p>
-<p><span class="math notranslate nohighlight">\(P_b \;=\; {\sum_{i=0}^{\pi-1} \sum_{j=1}^{d/\varphi} \theta (i+j,\;b)} / {\pi}\)</span></p>
-<p>where <span class="math notranslate nohighlight">\(\pi\)</span> is the number of all possible permutations; i.e. <span class="math notranslate nohighlight">\({(\Delta \tau - d)}/{\varphi + 1}\)</span>.</p>
-<div class="section" id="temporal-resolution">
-<h3>Temporal resolution<a class="headerlink" href="#temporal-resolution" title="Permalink to this headline">¶</a></h3>
-<p>The duration of time blocks that is <span class="math notranslate nohighlight">\(\varphi\)</span> in the denominator for computing
-<span class="math notranslate nohighlight">\(\pi\)</span> is known as the <em>temporal resolution</em>, while the numerator expression for
-the probability of existence for each time block is defined as</p>
-<p><span class="math notranslate nohighlight">\(\theta (i+j,\;b) = \begin{cases}1 \quad \text{if}\; i+j = b  \\ 0 \quad \text{if}\; i+j \neq b \end{cases}\)</span></p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
-<div class="section" id="boundary-of-existence">
-<h3>Boundary of existence<a class="headerlink" href="#boundary-of-existence" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="boundaries-of-existence">
+<span id="tapq"></span><h3>Boundaries of existence<a class="headerlink" href="#boundaries-of-existence" title="Permalink to this headline">¶</a></h3>
+<p>Limits of dating for events are the earliest and the latest time the event may have happened.
+These upper and lower bounds are termed</p>
 <ul class="simple">
-<li><p><em>terminus ante quem</em></p></li>
-<li><p><em>terminus post quem</em></p></li>
+<li><p><em>terminus ante quem</em> (TAQ) or “limit before which”</p></li>
+<li><p><em>terminus post quem</em> (TPQ) or “limit after which”</p></li>
 </ul>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -355,10 +340,15 @@ the probability of existence for each time block is defined as</p>
 <span id="aora"></span><h2>Aoristic analysis<a class="headerlink" href="#aoristic-analysis" title="Permalink to this headline">¶</a></h2>
 <p>Aoristic analysis is based on the creation of a series of these artificial divisions of
 the range of time with a fixed value, called time blocks, and the definition of their probability of existence.</p>
+<div class="section" id="temporal-resolution">
+<h3>Temporal resolution<a class="headerlink" href="#temporal-resolution" title="Permalink to this headline">¶</a></h3>
+<p>Temporal resolution <span class="math notranslate nohighlight">\(\varphi\)</span> refers to the duration of time blocks, and
+with aoristic analysis <span class="math notranslate nohighlight">\(\varphi\)</span> is fixed.</p>
+</div>
 <div class="section" id="aoristic-sum">
 <h3>Aoristic sum<a class="headerlink" href="#aoristic-sum" title="Permalink to this headline">¶</a></h3>
 <p>A proxy for evaluating change in the total counts of events across time is the <em>aoristic sum</em>, which is the sum of probabilities for each time block.</p>
-<p>The aoristic sum is computed accross events for a single portion of time <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
+<p>The aoristic sum is computed accross the sum of probabilities for events in a single portion of time <span class="math notranslate nohighlight">\(t_i\)</span>.</p>
 <blockquote>
 <div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">t1</span>  <span class="n">t2</span>  <span class="n">t3</span>
      <span class="o">^</span>   <span class="o">^</span>   <span class="o">^</span>
@@ -370,7 +360,7 @@ the range of time with a fixed value, called time blocks, and the definition of 
        <span class="n">sums</span>
 </pre></div>
 </div>
-<div class="admonition-todo admonition" id="id3">
+<div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>Aoristic sum explained in R…</p>
 </div>
@@ -379,8 +369,9 @@ the range of time with a fixed value, called time blocks, and the definition of 
 <div class="line"><br /></div>
 </div>
 </div>
-<div class="section" id="probability-of-existence">
-<h3>Probability of existence<a class="headerlink" href="#probability-of-existence" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="probability-of-existence-t-i">
+<h2>Probability of existence <span class="math notranslate nohighlight">\(t_i\)</span><a class="headerlink" href="#probability-of-existence-t-i" title="Permalink to this headline">¶</a></h2>
 <p>The probability of existence <span class="math notranslate nohighlight">\(p[t_i]\)</span> of an event <span class="math notranslate nohighlight">\(e\)</span> in a range of time <span class="math notranslate nohighlight">\(\varOmega\)</span> is the probabilty distribution</p>
 <p><span class="math notranslate nohighlight">\(p[t_i] = \Delta t_i / \Delta \tau\)</span></p>
 <p>where <span class="math notranslate nohighlight">\(\tau\)</span> is the time span of existence, <span class="math notranslate nohighlight">\(\Delta\)</span> is for the duration of a given portion of time <span class="math notranslate nohighlight">\(t_i\)</span> or of <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
@@ -398,28 +389,50 @@ the range of time with a fixed value, called time blocks, and the definition of 
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
-<div class="section" id="id4">
-<h3>Temporal resolution<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<p>Temporal resolution <span class="math notranslate nohighlight">\(\varphi\)</span> refers to the duration of time blocks.
-When <span class="math notranslate nohighlight">\(\varphi\)</span> is fixed then we have <a class="reference internal" href="#aora"><span class="std std-ref">aoristic analysis</span></a>.</p>
 <p>To retrieve the minimum probability <span class="math notranslate nohighlight">\(P[\varphi_\alpha]\)</span> for the boundaries of the first and last time-blocks,
 we define <span class="math notranslate nohighlight">\(\varphi_\alpha = 1\)</span> where</p>
 <p><span class="math notranslate nohighlight">\(\phi_\alpha / \Delta_\tau = 1/54 = P[\phi_\alpha] = .018\)</span> (approx)</p>
 <p>Hence, the probability of existence for <span class="math notranslate nohighlight">\(t_1\)</span></p>
 <p><span class="math notranslate nohighlight">\(P[t_1] = P[\phi_\alpha] \cdot 42\)</span></p>
-<p>i.e. <span class="math notranslate nohighlight">\(342 - 300\)</span></p>
+<p>(i.e. <span class="math notranslate nohighlight">\(342 - 300\)</span>)</p>
 <p><span class="math notranslate nohighlight">\(P[t_1] = .018 \cdot 42  =  .78\)</span></p>
 <p>The probability of existence for for <span class="math notranslate nohighlight">\(t_2\)</span></p>
 <p><span class="math notranslate nohighlight">\(P[t_2] = P[\phi_\alpha] \cdot 12\)</span></p>
-<p>i.e. <span class="math notranslate nohighlight">\(300 - 288\)</span></p>
+<p>(i.e. <span class="math notranslate nohighlight">\(300 - 288\)</span>)</p>
 <p><span class="math notranslate nohighlight">\(P[t_2] = .018 \cdot 12  =  .22\)</span></p>
 <p>Etc.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p><em>Assumption</em>: Any equally long portion of time within the time span <span class="math notranslate nohighlight">\(\tau\)</span> has the same probability of existence.
-Plus others…</p>
+<p><em>Assumption</em> (among others): Any equally long portion of time within the time span <span class="math notranslate nohighlight">\(\tau\)</span> has the same probability of existence.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="probabilities-of-existence-for-time-blocks">
+<h2>Probabilities of existence for time blocks<a class="headerlink" href="#probabilities-of-existence-for-time-blocks" title="Permalink to this headline">¶</a></h2>
+<p>The probability of existence for each time block (Appendix A, Crema, 2012)</p>
+<p><span class="math notranslate nohighlight">\(P_b \;=\; {\sum_{i=0}^{\pi-1} \sum_{j=1}^{d/\varphi} \theta (i+j,\;b)} / {\pi}\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(\pi\)</span> is the number of all possible permutations,
+and <span class="math notranslate nohighlight">\(b\)</span> is a numerical index of temporal blocks within <span class="math notranslate nohighlight">\(\tau\)</span>.</p>
+<p>On the other hand, the number of all possible permutations <span class="math notranslate nohighlight">\(\pi\)</span> equals <span class="math notranslate nohighlight">\({(\Delta \tau - d)}/{\varphi + 1}\)</span>
+where <span class="math notranslate nohighlight">\(d\)</span> is the duration of <span class="math notranslate nohighlight">\(e\)</span>.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\(d\)</span> is rounded to the value of the temporal resolution, and <span class="math notranslate nohighlight">\(b\)</span> ranges
+from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(\Delta t_i/\varphi\)</span>, which are the edges of the time span.</p>
+</div>
+</div></blockquote>
+<div class="section" id="temporal-resolution-for-time-blocks">
+<h3>Temporal resolution for time blocks<a class="headerlink" href="#temporal-resolution-for-time-blocks" title="Permalink to this headline">¶</a></h3>
+<p>The duration of time blocks that is <span class="math notranslate nohighlight">\(\varphi\)</span> in the denominator for computing
+<span class="math notranslate nohighlight">\(\pi\)</span> is known as the <em>temporal resolution</em>, while the numerator expression for
+the probability of existence for each time block is defined as</p>
+<p><span class="math notranslate nohighlight">\(\theta (i+j,\;b) = \begin{cases}1 \quad \text{if}\; i+j = b  \\ 0 \quad \text{if}\; i+j \neq b \end{cases}\)</span></p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -466,6 +479,161 @@ the overall probability of being missing <span class="math notranslate nohighlig
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<blockquote>
+<div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="EDHVariables.html#ccases"><span class="std std-ref">Complete cases</span></a></p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="computing-the-probability-of-existence">
+<span id="cprex"></span><h2>Computing the probability of existence<a class="headerlink" href="#computing-the-probability-of-existence" title="Permalink to this headline">¶</a></h2>
+<p>We use function <code class="docutils literal notranslate"><span class="pre">prex()</span></code> to compute the probability of existence.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="function">
+<dt id="prex">
+<code class="sig-name descname">prex</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#prex" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="function-usage">
+<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># probability of existence</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vars</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;bin5&quot;</span><span class="p">,</span><span class="s">&quot;bin8&quot;</span><span class="p">),</span> <span class="n">aoristic</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">DF</span><span class="p">,</span>
+        <span class="n">plot</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="kc">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><cite>x:</cite></p>
+<blockquote>
+<div><p>list or data frame object of variables and observations.</p>
+</div></blockquote>
+</li>
+<li><p><cite>vars:</cite></p>
+<blockquote>
+<div><p>boundaries of existence in <code class="docutils literal notranslate"><span class="pre">x</span></code> (vector for TAQ and TPQ)</p>
+</div></blockquote>
+</li>
+<li><p><cite>bins:</cite></p>
+<blockquote>
+<div><p>length of the break (integer)</p>
+</div></blockquote>
+</li>
+<li><p><cite>cp:</cite></p>
+<blockquote>
+<div><p>chronological phase. <code class="docutils literal notranslate"><span class="pre">&quot;bin5&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;bin8&quot;</span></code> for five- or eight-periods</p>
+</div></blockquote>
+</li>
+<li><p><cite>aoristic:</cite></p>
+<blockquote>
+<div><p>return aoristic sum? (logical)</p>
+</div></blockquote>
+</li>
+<li><p><cite>weight:</cite></p>
+<blockquote>
+<div><p>weight to observations</p>
+</div></blockquote>
+</li>
+<li><p><cite>DF:</cite></p>
+<blockquote>
+<div><p>return also data frame with observations? Ignored for plot (logical and optional)</p>
+</div></blockquote>
+</li>
+<li><p><cite>plot:</cite></p>
+<blockquote>
+<div><p>plot the results? (logical and optional)</p>
+</div></blockquote>
+</li>
+<li><p><cite>main:</cite></p>
+<blockquote>
+<div><p>plot’s main title (optional)</p>
+</div></blockquote>
+</li>
+<li><p><cite>…:</cite></p>
+<blockquote>
+<div><p>additional optional parameters</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>For example, the (default) aoristic sum of <code class="docutils literal notranslate"><span class="pre">EDH</span></code> inscriptions in the Roman province
+of <code class="docutils literal notranslate"><span class="pre">Iudaea</span></code> computed with <code class="docutils literal notranslate"><span class="pre">prex()</span></code></p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># get inscriptions from Iudaea in EDH data base</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">iud</span> <span class="o">&lt;-</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="n">province</span><span class="o">=</span><span class="s">&quot;Iud&quot;</span><span class="p">)</span>
+
+<span class="c1"># 5-chronological periods</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">),</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">)</span>
+<span class="c1">#  Arch     Class      Hell       Rom       Byz</span>
+<span class="c1"># 0.000     0.000  1337.904 13405.017     0.000</span>
+
+<span class="c1"># 8-chronological periods</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">),</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">)</span>
+<span class="c1">#  Arch     Class      Hell      ERom      MRom      LRom      EByz      LByz</span>
+<span class="c1">#0.0000    0.0000 1337.9040 2396.4529 1200.5623  320.5379    0.0000    0.0000</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="plotting-aoristic-sum">
+<h3>Plotting aoristic sum<a class="headerlink" href="#plotting-aoristic-sum" title="Permalink to this headline">¶</a></h3>
+<p>To visualize the aoristic sum from <code class="docutils literal notranslate"><span class="pre">Iudaea</span></code> as bar plots and function <code class="docutils literal notranslate"><span class="pre">prex()</span></code></p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#  five chronological phases</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">),</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">),</span>
+<span class="o">+</span>          <span class="n">main</span><span class="o">=</span><span class="s">&quot;Aoristic sum Iudaea (5-periods)&quot;</span> <span class="p">)</span>
+
+<span class="c1"># eight chronological phases</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">),</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">),</span>
+<span class="o">+</span>          <span class="n">horiz</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">las</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;Aoristic sum Iudaea (8-periods)&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>that produce</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="_images/AoristicSumIUDBins5.png"><img alt="_images/AoristicSumIUDBins5.png" src="_images/AoristicSumIUDBins5.png" style="width: 250px;" /></a>
+</td>
+<td><a class="reference internal image-reference" href="_images/AoristicSumIUDBins8.png"><img alt="_images/AoristicSumIUDBins8.png" src="_images/AoristicSumIUDBins8.png" style="width: 275px;" /></a>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="Time.html#edhrd"><span class="std std-ref">Relative dating of Roman inscriptions</span></a></p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -491,7 +659,7 @@ the overall probability of being missing <span class="math notranslate nohighlig
         <li class="right" >
           <a href="Time.html" title="Time and dating"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -53,16 +53,6 @@ For example, if the probability space is the interval :math:`[0,1]`, with the :r
 turning out to be at least :math:`\frac{1}{3}`. 
 
 
-|
-
-
-Summed probability distribution
--------------------------------
-
-    .. todo:: 
-    
-        A proxy for population levels is found in summed probability distributions (SPD) of dates. 
-
 
 |
 
@@ -130,18 +120,53 @@ A plot of the binomial distribution for :math:`n=30` and with different :math:`p
 .. _trap:
 
 
-Trapezoidal distributions
--------------------------
+Trapezoidal distribution
+------------------------
 
 
 Trapezoidal distributions seems appropriate for modeling the duration and the form of a phenomenon with a growth-stage, 
 relative stability, and decline. These three parameters are not necessarily similar and an occurrence can have, for example, 
 a long development and abrupt decay. 
 
+The probability density function of the trapezoidal distribution for :math:`a \leqslant b \leqslant c \leqslant d` is
 
-    .. todo:: 
-    
-       Probability density function of the generalized trapezoidal distribution. 
+
+:math:`f(x \mid a,b,c,d) = \begin{cases}U \bigl(\frac{x-a}{b-a}\bigr) \quad a \leqslant x < b\\U \qquad b \leqslant x < c\\U \bigl(\frac{d-x}{d-c}\bigr) \quad c \leqslant x < d\\ 0 \quad \text{elsewhere}\end{cases}` 
+
+
+where :math:`U = 2(d + c - b - a)^{-1}` corresponds to the uniform distribution. 
+
+
+..  :math:`U \bigl(\frac{x-a}{b-a}\bigr)` 
+..  :math:`U  \quad   b \leqslant x < c` 
+
+
+
+..  \begin{cases}
+..  	U \bigl(\frac{x-a}{b-a}\bigr) \\
+..  	U  \quad   b \leqslant x < c \\
+..  \end{cases}
+
+
+
+
+
+
+|
+
+                                      
++------------------------------------------+
+|  .. image:: ../images/trapezoidal1.png   |
+|     :width: 400                          |
++------------------------------------------+
+
+
+A trapezoidal distribution where decline is longer than growth. 
+
+
+..      .. todo:: 
+..      
+..         Probability density function of the generalized trapezoidal distribution. 
 
 
 
@@ -199,8 +224,8 @@ Normal distribution
 
 The normal distribution --or "bell curve"-- is the probability distribution for a normal 
 random variable :math:`X \sim N (\mu,\sigma^2)`. 
-The normal distribution is also called *Gaussian* distribution in honor to C.F. Gauss who described it 
-in mathematical terms. 
+The normal distribution is also called *Gaussian* distribution due to C.F. Gauss who described 
+this distribution in mathematical terms. 
 
 
 The normal distribution is the most important distribution in statistics, and 
@@ -271,69 +296,38 @@ To study temporal uncertainty, the following notation is adopted:
 
 |
 
-plus in Appendix A (from Crema, 2012)...
+..  plus in Appendix A (from Crema, 2012)...
 
 
-:math:`d =` duration of :math:`e` 
-
-:math:`b =` numerical index of temporal blocks within :math:`\tau` 
-
-
-    .. note:: 
-    
-        :math:`d` is rounded to the value of the temporal resolution, and :math:`b` ranges 
-        from :math:`1` to :math:`\Delta t_i/\varphi`, which are the edges of the time span. 
+..  :math:`d =` duration of :math:`e` 
+..  
+..  :math:`b =` numerical index of temporal blocks within :math:`\tau` 
+..  
+..  
+..      .. note:: 
+..      
+..          :math:`d` is rounded to the value of the temporal resolution, and :math:`b` ranges 
+..          from :math:`1` to :math:`\Delta t_i/\varphi`, which are the edges of the time span. 
 
 |
 
-
-Probabilities of existence for time blocks
-==========================================
-
-
-The probability of existence for each time block (Crema, 2012)
-
-:math:`P_b \;=\; {\sum_{i=0}^{\pi-1} \sum_{j=1}^{d/\varphi} \theta (i+j,\;b)} / {\pi}`
-
-where :math:`\pi` is the number of all possible permutations; i.e. :math:`{(\Delta \tau - d)}/{\varphi + 1}`.
-
-
-
-Temporal resolution
--------------------
-
-The duration of time blocks that is :math:`\varphi` in the denominator for computing 
-:math:`\pi` is known as the *temporal resolution*, while the numerator expression for 
-the probability of existence for each time block is defined as
-
-.. :math:`\theta (i+j,\;b)` is defined as
-
-:math:`\theta (i+j,\;b) = \begin{cases}1 \quad \text{if}\; i+j = b  \\ 0 \quad \text{if}\; i+j \neq b \end{cases}`
-
-
-
-
-.. :math:`P_b =` probability of existence for each time block 
-
-.. :math:`\pi =` number of all possible permutations; i.e. :math:`{(\Delta \tau - d)}/{\varphi + 1}`
-
-
-
-    .. note:: 
-    
-	The two extremes of :math:`P_b`are :math:`1/\pi` to :math:`1`.
 
 
 |
 
 
-Boundary of existence
----------------------
+.. _tapq:
 
-.. Archaeology boundaries of the time span of existence :math:`\tau`
 
-* *terminus ante quem*
-* *terminus post quem*
+Boundaries of existence
+-----------------------
+
+
+Limits of dating for events are the earliest and the latest time the event may have happened. 
+These upper and lower bounds are termed
+
+* *terminus ante quem* (TAQ) or "limit before which"
+* *terminus post quem* (TPQ) or "limit after which"
 
 
 
@@ -350,13 +344,21 @@ Aoristic analysis is based on the creation of a series of these artificial divis
 the range of time with a fixed value, called time blocks, and the definition of their probability of existence. 
 
 
+Temporal resolution
+-------------------
+
+Temporal resolution :math:`\varphi` refers to the duration of time blocks, and  
+with aoristic analysis :math:`\varphi` is fixed.
+
+
+
 
 Aoristic sum
 ------------
 
 A proxy for evaluating change in the total counts of events across time is the *aoristic sum*, which is the sum of probabilities for each time block.
 
-The aoristic sum is computed accross events for a single portion of time :math:`t_i`.
+The aoristic sum is computed accross the sum of probabilities for events in a single portion of time :math:`t_i`.
 
     .. code-block:: 
     
@@ -388,8 +390,9 @@ The aoristic sum is computed accross events for a single portion of time :math:`
 |
 
 
-Probability of existence
-------------------------
+Probability of existence :math:`t_i`
+====================================
+
 
 The probability of existence :math:`p[t_i]` of an event :math:`e` in a range of time :math:`\varOmega` is the probabilty distribution
 
@@ -417,16 +420,15 @@ To compute :math:`p[t_i]`, Crema (2012, p. 447) takes the following example (yea
 
 Hence, :math:`\Delta \tau` in this case is :math:`54`.
 
-
 |
 
+..  The probabilities of existence of inscriptions 8 and 5 chronological periods are 
 
-Temporal resolution
--------------------
 
-Temporal resolution :math:`\varphi` refers to the duration of time blocks. 
-When :math:`\varphi` is fixed then we have :ref:`aoristic analysis <aora>`.
 
+
+
+|
 
 
 To retrieve the minimum probability :math:`P[\varphi_\alpha]` for the boundaries of the first and last time-blocks, 
@@ -437,9 +439,9 @@ we define :math:`\varphi_\alpha = 1` where
 
 Hence, the probability of existence for :math:`t_1`
 
-:math:`P[t_1] = P[\phi_\alpha] \cdot 42`
+:math:`P[t_1] = P[\phi_\alpha] \cdot 42`  
 
-i.e. :math:`342 - 300`
+(i.e. :math:`342 - 300`)
 
 
 :math:`P[t_1] = .018 \cdot 42  =  .78`
@@ -447,19 +449,73 @@ i.e. :math:`342 - 300`
 
 The probability of existence for for :math:`t_2`
 
-:math:`P[t_2] = P[\phi_\alpha] \cdot 12`
+:math:`P[t_2] = P[\phi_\alpha] \cdot 12`  
 
-i.e. :math:`300 - 288`
+(i.e. :math:`300 - 288`)
 
 :math:`P[t_2] = .018 \cdot 12  =  .22`
 
 
 Etc.
 
+
+
 |
 
-*Assumption*: Any equally long portion of time within the time span :math:`\tau` has the same probability of existence. 
-Plus others...
+*Assumption* (among others): Any equally long portion of time within the time span :math:`\tau` has the same probability of existence. 
+
+
+
+|
+
+
+Probabilities of existence for time blocks
+==========================================
+
+
+The probability of existence for each time block (Appendix A, Crema, 2012)
+
+:math:`P_b \;=\; {\sum_{i=0}^{\pi-1} \sum_{j=1}^{d/\varphi} \theta (i+j,\;b)} / {\pi}`
+
+where :math:`\pi` is the number of all possible permutations, 
+and :math:`b` is a numerical index of temporal blocks within :math:`\tau`.
+
+On the other hand, the number of all possible permutations :math:`\pi` equals :math:`{(\Delta \tau - d)}/{\varphi + 1}` 
+where :math:`d` is the duration of :math:`e`.
+
+    .. note:: 
+    
+        :math:`d` is rounded to the value of the temporal resolution, and :math:`b` ranges 
+        from :math:`1` to :math:`\Delta t_i/\varphi`, which are the edges of the time span. 
+
+
+
+
+
+
+Temporal resolution for time blocks
+-----------------------------------
+
+The duration of time blocks that is :math:`\varphi` in the denominator for computing 
+:math:`\pi` is known as the *temporal resolution*, while the numerator expression for 
+the probability of existence for each time block is defined as
+
+.. :math:`\theta (i+j,\;b)` is defined as
+
+:math:`\theta (i+j,\;b) = \begin{cases}1 \quad \text{if}\; i+j = b  \\ 0 \quad \text{if}\; i+j \neq b \end{cases}`
+
+
+
+
+.. :math:`P_b =` probability of existence for each time block 
+
+.. :math:`\pi =` number of all possible permutations; i.e. :math:`{(\Delta \tau - d)}/{\varphi + 1}`
+
+
+
+    .. note:: 
+    
+	The two extremes of :math:`P_b`are :math:`1/\pi` to :math:`1`.
 
 
 |
@@ -513,6 +569,166 @@ the overall probability of being missing :math:`x` depends,
 
      :math:`P(x=0 \mid Y_{obs}, Y_{mis}, \psi)`
 
+
+
+|
+
+
+
+    .. seealso:: 
+     
+        :ref:`Complete cases <ccases>`
+
+|
+
+
+
+
+.. _cprex:
+
+
+Computing the probability of existence
+======================================
+
+We use function ``prex()`` to compute the probability of existence. 
+
+
+
+
+|
+
+
+.. function:: prex
+
+Function usage
+--------------
+
+.. code-block:: R
+
+    # probability of existence
+    R> prex(x, vars, bins=NULL, cp=c("bin5","bin8"), aoristic=TRUE, weight=1, DF, 
+            plot=FALSE, main=NULL,...)
+    
+
+|
+
+
+Parameters
+----------
+ 
+
+- `x:`
+
+   list or data frame object of variables and observations. 
+
+
+- `vars:`
+
+   boundaries of existence in ``x`` (vector for TAQ and TPQ) 
+
+
+- `bins:`
+
+   length of the break (integer) 
+
+
+- `cp:`
+
+   chronological phase. ``"bin5"`` or ``"bin8"`` for five- or eight-periods
+
+
+- `aoristic:`
+
+   return aoristic sum? (logical)
+
+
+- `weight:`
+
+   weight to observations
+
+
+- `DF:`
+
+   return also data frame with observations? Ignored for plot (logical and optional)
+
+
+- `plot:`
+
+   plot the results? (logical and optional)
+
+
+- `main:`
+
+   plot's main title (optional)
+
+
+
+- `...:`
+
+   additional optional parameters
+
+
+
+
+|
+
+
+For example, the (default) aoristic sum of ``EDH`` inscriptions in the Roman province 
+of ``Iudaea`` computed with ``prex()`` 
+
+    .. code-block:: R
+    
+       
+       # get inscriptions from Iudaea in EDH data base
+       R> iud <- get.edh(search="inscriptions", province="Iud")
+       
+       # 5-chronological periods
+       R> prex(x=iud, vars=c("not_before", "not_after"), cp="bin5")
+       #  Arch     Class      Hell       Rom       Byz 
+       # 0.000     0.000  1337.904 13405.017     0.000 
+       
+       # 8-chronological periods
+       R> prex(x=iud, vars=c("not_before", "not_after"), cp="bin8")
+       #  Arch     Class      Hell      ERom      MRom      LRom      EByz      LByz 
+       #0.0000    0.0000 1337.9040 2396.4529 1200.5623  320.5379    0.0000    0.0000 
+
+|
+
+Plotting aoristic sum
+---------------------
+
+To visualize the aoristic sum from ``Iudaea`` as bar plots and function ``prex()``
+
+    .. code-block:: R
+    
+       
+       #  five chronological phases
+       R> barplot(prex(x=iud, vars=c("not_before", "not_after"), cp="bin5"), 
+       +          main="Aoristic sum Iudaea (5-periods)" )
+       
+       # eight chronological phases
+       R> barplot(prex(x=iud, vars=c("not_before", "not_after"), cp="bin8"), 
+       +          horiz=TRUE, las=1, main="Aoristic sum Iudaea (8-periods)" )
+
+
+that produce 
+
+
+|
+
++------------------------------------------------+------------------------------------------------+
+|  .. image:: ../images/AoristicSumIUDBins5.png  |  .. image:: ../images/AoristicSumIUDBins8.png  |
+|     :width: 250                                |     :width: 275                                |
++------------------------------------------------+------------------------------------------------+
+
+
+
+
+|
+
+    .. seealso:: 
+    
+        :ref:`Relative dating of Roman inscriptions <EDHrd>`
 
 
 

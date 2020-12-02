@@ -4,9 +4,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" /><meta content="Time, dating, and chronology" name="description" />
-<meta content="time, Chronology" name="keywords" />
+<meta content="time, chronology, epigraphic, dataset" name="keywords" />
 
-    <title>Time and dating &#8212; cedhar 0.0.5 documentation</title>
+    <title>Time and dating &#8212; cedhar 0.0.6 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Temporal Uncertainty" href="Uncertainty.html" />
-    <link rel="prev" title="The SDAM project" href="sdam.html" /> 
+    <link rel="prev" title="Extracting EDH Variables" href="EDHVariables.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,9 +30,9 @@
           <a href="Uncertainty.html" title="Temporal Uncertainty"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="sdam.html" title="The SDAM project"
+          <a href="EDHVariables.html" title="Extracting EDH Variables"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -43,14 +43,29 @@
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Time and dating</a><ul>
-<li><a class="reference internal" href="#chronological-periods">Chronological periods</a></li>
+<li><a class="reference internal" href="#chronological-periods-of-the-mediterranean-sea">Chronological periods of the Mediterranean Sea</a></li>
+<li><a class="reference internal" href="#relative-dating-of-roman-inscriptions">Relative dating of Roman inscriptions</a><ul>
+<li><a class="reference internal" href="#dates-in-data-frames">Dates in data frames</a></li>
+<li><a class="reference internal" href="#time-spans-of-existence">Time spans of existence</a></li>
+<li><a class="reference internal" href="#plotting-time-intervals">Plotting time intervals</a></li>
+<li><a class="reference internal" href="#treating-outliers">Treating Outliers</a><ul>
+<li><a class="reference internal" href="#plotting-without-outliers">Plotting without outliers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Plotting time intervals</a><ul>
+<li><a class="reference internal" href="#function-usage">Function usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="sdam.html"
-                        title="previous chapter">The SDAM project</a></p>
+  <p class="topless"><a href="EDHVariables.html"
+                        title="previous chapter">Extracting <code class="docutils literal notranslate"><span class="pre">EDH</span></code> Variables</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="Uncertainty.html"
                         title="next chapter">Temporal Uncertainty</a></p>
@@ -86,8 +101,8 @@ since is rounded when measured (e.g. a person is 40 years old and not between 40
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="section" id="chronological-periods">
-<h2>Chronological periods<a class="headerlink" href="#chronological-periods" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="chronological-periods-of-the-mediterranean-sea">
+<h2>Chronological periods of the Mediterranean Sea<a class="headerlink" href="#chronological-periods-of-the-mediterranean-sea" title="Permalink to this headline">¶</a></h2>
 <p>We use chronological periods for dating purposes.
 Sometimes chronological periods are divided by phases and occasionally they are referred as chronological phases.</p>
 <div class="line-block">
@@ -169,12 +184,439 @@ Sometimes chronological periods are divided by phases and occasionally they are 
 </tr>
 </tbody>
 </table>
-<p>From <em>Bevan et al</em>, 2013 (doi: 10.1111/j.1475-4754.2012.00674.x)</p>
+<p>(adapted from <em>Bevan et al</em>, 2013 (doi: 10.1111/j.1475-4754.2012.00674.x))</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>AC is sometimes ommited, and a negative number represents BC.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="relative-dating-of-roman-inscriptions">
+<span id="edhrd"></span><h2>Relative dating of Roman inscriptions<a class="headerlink" href="#relative-dating-of-roman-inscriptions" title="Permalink to this headline">¶</a></h2>
+<p>Since the range of time in the relative dating of Roman inscriptions without outliers is between 530 BC and 950 AC,
+the chronological periods involving epigraphic Roman material are</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Period</p></th>
+<th class="head"><p>Dates years</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>Archaic</em>  (Arch)</p></td>
+<td><p>-700 to -500</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Classical</em> (Class)</p></td>
+<td><p>-500 to -325</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Hellenistic</em>  (Hell)</p></td>
+<td><p>-325 to 0</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Early Roman</em>  (ERom)</p></td>
+<td><p>0 to 200</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Middle Roman</em>  (MRom)</p></td>
+<td><p>200 to 350</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Late Roman</em>  (LRom)</p></td>
+<td><p>350 to 650</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Early Byzantine</em> (EByz)</p></td>
+<td><p>650 to 900</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Middle Byzantine</em> (MByz)</p></td>
+<td><p>900 to 1200</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The eight chronological phases are reduced to five categories with their respective years:</p>
+<table class="colwidths-auto docutils align-left">
+<thead>
+<tr class="row-odd"><th class="head"><p>Period</p></th>
+<th class="head"><p>Dates years</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><em>Archaic</em>  (Arch)</p></td>
+<td><p>-700 to -500</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Classical</em>  (Class)</p></td>
+<td><p>-500 to -325</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Hellenistic</em>  (Hell)</p></td>
+<td><p>-325 to 0</p></td>
+</tr>
+<tr class="row-odd"><td><p><em>Roman</em>  (Rom)</p></td>
+<td><p>0 to 650</p></td>
+</tr>
+<tr class="row-even"><td><p><em>Byzantine</em>  (Byz)</p></td>
+<td><p>650 to 1200</p></td>
+</tr>
+</tbody>
+</table>
+<p>Eight- and five chronological phases are for the analysis of temporal uncertainty of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="dates-in-data-frames">
+<h3>Dates in data frames<a class="headerlink" href="#dates-in-data-frames" title="Permalink to this headline">¶</a></h3>
+<p>To produce data frames, we need to make explicit with the <cite>as</cite> argument; in the
+example below with chronological data in the function where <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code> is added by default.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># produce a data frame with chronological data variables and remove missing data</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The first entries are</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the first ones</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">EDHdates</span><span class="p">)</span>
+<span class="c1">#        id not_before not_after</span>
+<span class="c1">#1 HD000001       0071      0130</span>
+<span class="c1">#2 HD000002       0051      0200</span>
+<span class="c1">#3 HD000003       0131      0170</span>
+<span class="c1">#4 HD000004       0151      0200</span>
+<span class="c1">#5 HD000005       0001      0200</span>
+<span class="c1">#6 HD000006       0071      0150</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>and the last entries</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the last ones</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">tail</span><span class="p">(</span><span class="n">EDHdates</span><span class="p">)</span>
+<span class="c1">#            id not_before not_after</span>
+<span class="c1">#83816 HD081504       0071      0130</span>
+<span class="c1">#83817 HD081505       0071      0130</span>
+<span class="c1">#83818 HD081506       0071      0130</span>
+<span class="c1">#83819 HD081507       0101      0200</span>
+<span class="c1">#83820 HD081508       0151      0230</span>
+<span class="c1">#83821 HD081509       0151      0250</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="time-spans-of-existence">
+<span id="tmsp"></span><h3>Time spans of existence<a class="headerlink" href="#time-spans-of-existence" title="Permalink to this headline">¶</a></h3>
+<p>Object <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code> has information about relative dating with boundaries of existence
+in variables <code class="docutils literal notranslate"><span class="pre">not_before</span></code> and <code class="docutils literal notranslate"><span class="pre">not_after</span></code>.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code>, however, these variables are factors and they need to be converted into vectors
+with a numeric format in order to represent the boundaries of existence.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># time columns in EDHdates are factors</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">is.factor</span><span class="p">(</span><span class="n">EDHdates</span><span class="o">$</span><span class="n">not_after</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">is.factor</span><span class="p">(</span><span class="n">EDHdates</span><span class="o">$</span><span class="n">not_before</span><span class="p">)</span>
+<span class="c1">#[1] TRUE</span>
+
+<span class="c1"># boundaries of existence not_before and not_after</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">nb</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">as.vector</span><span class="p">(</span><span class="n">EDHdates</span><span class="o">$</span><span class="n">not_before</span><span class="p">))</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">na</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">as.vector</span><span class="p">(</span><span class="n">EDHdates</span><span class="o">$</span><span class="n">not_after</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>To compute oldest and latest years with <code class="docutils literal notranslate"><span class="pre">min</span></code> and <code class="docutils literal notranslate"><span class="pre">max</span></code> functions, we also need to remove <code class="docutils literal notranslate"><span class="pre">NA</span></code>
+data from these vectors.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># oldest and latest dates</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">years</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">na</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+<span class="c1">#[1] -530 1998</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Dates in years are between 530 BC and 1998 AC.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="plotting-time-intervals">
+<span id="index-0"></span><h3>Plotting time intervals<a class="headerlink" href="#plotting-time-intervals" title="Permalink to this headline">¶</a></h3>
+<p>To be able to plot efficiently time spans of existence of records in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset, we
+need to count with a numerical identifier.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># get IDs by removing alphabetic characters in id</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">ID</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">sub</span><span class="p">(</span><span class="s">&quot;[[:alpha:]]+&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">EDHdates</span><span class="o">$</span><span class="n">id</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>A plot of relative dating for Roman inscriptions with <code class="docutils literal notranslate"><span class="pre">ID</span></code> is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code>
+core package (or <code class="docutils literal notranslate"><span class="pre">base</span></code> package with R version 4.0.0).</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span>
+<span class="o">+</span>       <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;EDH dataset time intervals&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">points</span><span class="p">(</span><span class="n">na</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#808080&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">segments</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">na</span><span class="p">,</span> <span class="n">ID</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">grDevices</span><span class="o">::</span><span class="nf">adjustcolor</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="m">.25</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>or using the <code class="docutils literal notranslate"><span class="pre">plot.dates()</span></code> function from <code class="docutils literal notranslate"><span class="pre">sdam</span></code></p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot.dates</span><span class="p">(</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;EDH dataset time intervals&quot;</span><span class="p">,</span>
+<span class="o">+</span>             <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>That produces:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/EDHdates.png"><img alt="_images/EDHdates.png" src="_images/EDHdates.png" style="width: 450px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="treating-outliers">
+<h3>Treating Outliers<a class="headerlink" href="#treating-outliers" title="Permalink to this headline">¶</a></h3>
+<p>By looking at the box-and-whisker plots below, we can clearly see a couple of outliers
+at least in each category.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># par(mfrow =  c(2, 1))</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">boxplot</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="n">horizontal</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;EDH &#39;not_before&#39;&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">boxplot</span><span class="p">(</span><span class="n">na</span><span class="p">,</span> <span class="n">horizontal</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;EDH &#39;not_after&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>That produces:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/Box-and-whisker_EDHdates.png"><img alt="_images/Box-and-whisker_EDHdates.png" src="_images/Box-and-whisker_EDHdates.png" style="width: 250px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The two most extreme outliers in each category are given in <code class="docutils literal notranslate"><span class="pre">$out</span></code> produced by the  <code class="docutils literal notranslate"><span class="pre">boxplot()</span></code> function.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># first outlier is the maximum value of the dates</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">outliers</span><span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">tail</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nf">boxplot</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="o">$</span><span class="n">out</span><span class="p">),</span><span class="m">2</span><span class="p">),</span>
+<span class="o">+</span>               <span class="nf">tail</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nf">boxplot</span><span class="p">(</span><span class="n">na</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span><span class="o">$</span><span class="n">out</span><span class="p">),</span><span class="m">2</span><span class="p">))</span>
+<span class="c1">#[1] 1894 1997 1500 1998</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>We remove these outliers in <cite>not_before</cite> and <cite>not_after</cite>, and we update the <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code> object.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">c</span><span class="p">(</span><span class="n">nb</span><span class="nf">[which</span><span class="p">(</span><span class="n">nb</span> <span class="o">%in%</span> <span class="n">outliers</span><span class="p">)</span><span class="n">]</span><span class="p">,</span> <span class="n">na</span><span class="nf">[which</span><span class="p">(</span><span class="n">na</span> <span class="o">%in%</span> <span class="n">outliers</span><span class="p">)</span><span class="n">]</span><span class="p">)</span>
+<span class="c1">#[1] 1997 1894 1998 1500</span>
+
+<span class="c1"># update by removing outliers in both categories</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="n">EDHdates[</span><span class="o">-</span><span class="nf">c</span><span class="p">(</span><span class="nf">which</span><span class="p">(</span><span class="n">nb</span> <span class="o">%in%</span> <span class="n">outliers</span><span class="p">),</span><span class="nf">which</span><span class="p">(</span><span class="n">na</span> <span class="o">%in%</span> <span class="n">outliers</span><span class="p">)),</span> <span class="n">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Since rows are removed from <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code>, we need to update object identifiers to compute the
+new the range of time.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># update values</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">ID</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">sub</span><span class="p">(</span><span class="s">&quot;[[:alpha:]]+&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">EDHdates</span><span class="o">$</span><span class="n">id</span><span class="p">))</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">nb</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">as.vector</span><span class="p">(</span><span class="n">EDHdates</span><span class="o">$</span><span class="n">not_before</span><span class="p">))</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">na</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="nf">as.vector</span><span class="p">(</span><span class="n">EDHdates</span><span class="o">$</span><span class="n">not_after</span><span class="p">))</span>
+
+<span class="c1"># new dates</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">years</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">),</span> <span class="nf">max</span><span class="p">(</span><span class="n">na</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+<span class="c1">#[1] -530  950</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Years are now between 530 BC and 950 AC. That is, from <em>Archaic</em> to <em>Middle Byzantine</em>
+chronological periods.</p>
+<ul class="simple">
+<li><p>(See: <a class="reference internal" href="#time"><span class="std std-ref">Time and dating</span></a>)</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="plotting-without-outliers">
+<h4>Plotting without outliers<a class="headerlink" href="#plotting-without-outliers" title="Permalink to this headline">¶</a></h4>
+<p>Now we take a look at the box-and-whisker plots without outliers</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># par(mfrow =  c(2, 1))</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">boxplot</span><span class="p">(</span><span class="n">nb</span><span class="p">,</span> <span class="n">horizontal</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;EDH &#39;not_before&#39; (no outliers)&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">boxplot</span><span class="p">(</span><span class="n">na</span><span class="p">,</span> <span class="n">horizontal</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;EDH &#39;not_after&#39; (no outliers)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>that produces:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/Box-and-whisker_EDHdates_no-outliers.png"><img alt="_images/Box-and-whisker_EDHdates_no-outliers.png" src="_images/Box-and-whisker_EDHdates_no-outliers.png" style="width: 250px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The next step is to plot relative dating without outliers and with updated range of time
+and with <code class="docutils literal notranslate"><span class="pre">plot.dates()</span></code> function.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot.dates</span><span class="p">(</span><span class="n">main</span><span class="o">=</span><span class="s">&quot;EDH dataset time intervals (no outliers)&quot;</span><span class="p">,</span>
+<span class="o">+</span>       <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="m">2</span><span class="p">,</span> <span class="n">cex</span><span class="o">=</span><span class="m">.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>that produces a plot with no outliers:</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="_images/EDHdatesNoOutliers.png"><img alt="_images/EDHdatesNoOutliers.png" src="_images/EDHdatesNoOutliers.png" style="width: 450px;" /></a>
+<p>where we can see that most of the inscriptions in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset are from
+Early to Middle Roman.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Plotting time intervals<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>To plot time intervals, we use function <code class="docutils literal notranslate"><span class="pre">plot.dates()</span></code>.</p>
+<dl class="function">
+<dt id="plot.dates">
+<code class="sig-prename descclassname">plot.</code><code class="sig-name descname">dates</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#plot.dates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="function-usage">
+<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># use generic function</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot.dates</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">taq</span><span class="p">,</span> <span class="n">tpq</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span>
+              <span class="n">main</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span>
+              <span class="n">pch</span><span class="p">,</span> <span class="n">cex</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">lwd</span><span class="p">,</span> <span class="n">lty</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="kc">...</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p>Formal arguments of <code class="docutils literal notranslate"><span class="pre">plot.dates()</span></code> are:</p>
+<ul>
+<li><p><cite>file:</cite></p>
+<blockquote>
+<div><p>path to file for a PDF format (optional)</p>
+</div></blockquote>
+</li>
+<li><p><cite>x:</cite></p>
+<blockquote>
+<div><p>data frame object of variables and observations. If <code class="docutils literal notranslate"><span class="pre">NULL</span></code> then <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is taken.</p>
+</div></blockquote>
+</li>
+<li><p><cite>taq:</cite></p>
+<blockquote>
+<div><p><em>terminus ante quem</em></p>
+</div></blockquote>
+</li>
+<li><p><cite>tpq:</cite></p>
+<blockquote>
+<div><p><em>terminus post quem</em></p>
+</div></blockquote>
+</li>
+<li><p><cite>out:</cite></p>
+<blockquote>
+<div><p>number of outliers to omit (integer or vector where first entry id for latest date)</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Optional arguments from the <code class="docutils literal notranslate"><span class="pre">graphics</span></code> package for the plot are</p>
+<ul>
+<li><p><cite>main:</cite></p>
+<blockquote>
+<div><p>main tile</p>
+</div></blockquote>
+</li>
+<li><p><cite>xlab:</cite></p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">x</span></code> label</p>
+</div></blockquote>
+</li>
+<li><p><cite>ylab:</cite></p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">y</span></code> label</p>
+</div></blockquote>
+</li>
+<li><p><cite>xlim:</cite></p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">x</span></code> limit</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>And for the representation of time interval and boundaries of existence in the plot</p>
+<ul>
+<li><p><cite>pch:</cite></p>
+<blockquote>
+<div><p>symbol for <em>taq</em> and <em>tpq</em></p>
+</div></blockquote>
+</li>
+<li><p><cite>cex:</cite></p>
+<blockquote>
+<div><p>size of <cite>pch</cite></p>
+</div></blockquote>
+</li>
+<li><p><cite>col:</cite></p>
+<blockquote>
+<div><p>colors of <cite>pch</cite> and time interval segment.</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>for time interval segments:</p>
+<ul>
+<li><p><cite>lwd:</cite></p>
+<blockquote>
+<div><p>width.</p>
+</div></blockquote>
+</li>
+<li><p><cite>lty:</cite></p>
+<blockquote>
+<div><p>shape.</p>
+</div></blockquote>
+</li>
+<li><p><cite>alpha:</cite></p>
+<blockquote>
+<div><p>alpha color transparency.</p>
+</div></blockquote>
+</li>
+<li><p><cite>…</cite></p>
+<blockquote>
+<div><p>additional parameters if needed</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="Uncertainty.html#cprex"><span class="std std-ref">Computing the probability of existence</span></a></p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 </div>
 </div>
@@ -195,9 +637,9 @@ Sometimes chronological periods are divided by phases and occasionally they are 
           <a href="Uncertainty.html" title="Temporal Uncertainty"
              >next</a> |</li>
         <li class="right" >
-          <a href="sdam.html" title="The SDAM project"
+          <a href="EDHVariables.html" title="Extracting EDH Variables"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -74,7 +74,7 @@ analyses within Social Dynamics and complexity in the Ancient Mediterranean
 ..  , which is a research group based 
 
 * (See `"sdam" manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_)
-* (See :ref:`"SDAM project" <sdam-proj>`)
+..  * (See :ref:`"SDAM project" <sdam-proj>`)
 
 
 |
@@ -179,11 +179,16 @@ Making Documentation
 News from ``sdam`` package
 --------------------------
 
-* **Version 0.3.0** (beta) released (28-10-2020).
-    * Function ``edhw()`` combines ``"people"`` with other variables 
-    * Different data frame formats in ``edhw()``
+* **Version 0.3.0** (beta) released (21-11-2020).
+    - *New functions* ``plot.dates()`` and ``prex()`` (cf. )
 
-    - Argument `maxlimit` is added to ``get.edh()``
+    - ``EDH`` dataset is updated 
+
+    * Function ``edhw()`` combines ``"people"`` with other EDH variables 
+
+    - Argument `select`  added to ``edhw()``
+    - Argument `maxlimit`  added to ``get.edh()``
+    - Argument `authenticate` in  ``request()``  renamed to `anonymous`
 
 
 |
@@ -194,9 +199,7 @@ News from ``sdam`` package
 
     * Documentation `website <https://sdam-au.github.io/sdam/>`_ launched
     
-    - v.0.2.2 available  (2-7-2020)  Argument `force` is added to ``request()``
-
-    - v.0.2.3 available  (4-8-2020)  Argument `rm.file` is added to ``request()``
+    - Arguments `force`  and `rm.file` added to ``request()``
 
     
 

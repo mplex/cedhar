@@ -97,8 +97,8 @@ and ``"bibliography"``, may be implemented in the future in this function.
 |
 
 
-Functions Usage
----------------
+Function usage
+--------------
 
 .. function:: get.edh
 
@@ -123,25 +123,6 @@ Functions Usage
 |
 
 
-
-.. function:: get.edhw
-
-.. code-block:: R
-
-    # to perform several queries
-    R> get.edhw(hd_nr, ...)
-
-
-``get.edhw()`` is a wrapper function to perform several queries from the EDH database API using 
-identification numbers. 
-
-
-    .. note:: 
-    
-        Currently, function ``get.edhw()`` works only for inscriptions. 
-
-
-|
 
 
 Search parameters
@@ -398,11 +379,34 @@ handled with similar arguments in the ``get.edh()`` function ...
 |
 
 
-Accessing epigraphic database Heidelberg: Inscriptions
-------------------------------------------------------
+Accessing Epigraphic Database Heidelberg: Inscriptions
+======================================================
+
+.. function:: get.edhw
+
+.. code-block:: R
+
+    # to perform several queries
+    R> get.edhw(hd_nr, ...)
+
+
 
 To study temporary uncertainty, for example, we need to access to an epigraphic database like the Heidelberg. 
 The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelberg number ``hd_nr``.
+
+
+
+``get.edhw()`` is a wrapper function to perform several queries from the Epigraphic Database Heidelberg API using 
+identification numbers. 
+
+
+    .. note:: 
+    
+        Currently, function ``get.edhw()`` works only for inscriptions. 
+
+
+|
+
 
 
 .. index:: EDH-dataset 
@@ -410,35 +414,42 @@ The wrapper function ``get.edhw()`` allows multiple queries by using the Heidelb
 .. code-block:: R
 
     # get data API from EDH with a wrapper function
-    R> EDH <- get.edhw(hd_nr=1:82464)  # (20-11-2019)
+    R> EDH <- get.edhw(hd_nr=1:83821)  # (03-11-2020)
 
     R> length(EDH)
-    #[1] 82464
-
-..     # grab the data from EDH API and record it in 'epall'
-..     R> epall <- list()
-..     # 80152 INSCRIPTIONS (20-11-2019)
-..     R> for(i in seq_len(80152)) { 
-..     +    epall[[length(epall)+1L]] <- try(get.edh(hd_nr=i))
-..     +    }
+    #[1] 83821
     
     # or load it from the package
     R> data("EDH")
 
 
-which will produce a list object with the existing entries for each inscription, and where entries have different length. 
+This wrapper function basically perform the following loop that 
+will produce a list object with the existing entries for each inscription, 
+and where entries have different length. 
+
+.. code-block:: R
+
+     # grab the data from EDH API and record it in 'EDH'
+     R> EDH <- list()
+     # 82464 INSCRIPTIONS (20-11-2019)
+     R> for(i in seq_len(82464)) { 
+     +    EDH[[length(EDH)+1L]] <- try(get.edh(hd_nr=i))
+     +    }
+
+Beware that retrieving such a large number of records will take a very long time, 
+and this can be done by parts and then collate the lists into the ``EDH`` object. 
 
 
     .. note::
-       Beware that retrieving such a large number of records will take a very long time. 
-       Hence, you can do it by parts and then collate the lists into another object. 
+       Character ``+`` in the code shows the scope of the loop. 
+       
 
 
 |
 
 
 Output
-^^^^^^
+------
 
 The output depends on each particular case. 
 
@@ -496,8 +507,6 @@ While record 21 has 34 items.
 
 |
 
-people
-""""""
 
 Attribute ``people`` is another list with other `attribute` names
 
@@ -516,473 +525,14 @@ Attribute ``people`` is another list with other `attribute` names
     [1] "cognomen"  "praenomen" "person_id" "gender"    "name"      "nomen"
     
 
-
 |
 
-
-A complete list of attribute names in the ``EDH`` dataset is given the the :ref:`EDH Variables <edh-vars>` section.
-
-.. You can find a complete list of attribute names in the ``EDH`` dataset in the ``sdam`` `manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_.
-
-
-
-|
-
-|
-
-.. _edhw-fun:
-
-.. function:: edhw
-
-
-Function ``edhw()``
-===================
-
-Wrapper function for the extraction of variables or the manipulation of the ``EDH`` dataset is found in ``edhw()``. 
-
-
-|
-
-Function usage
---------------
-
-
-
-.. code-block:: R
-
-    # list of accepted parameter arguments
-    R> edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), split,
-            select, addID, limit, id, na.rm, ...)
-    
-
-|
-
-Parameters
-----------
-
-
-Formal arguments of ``edhw()`` are:
-
-
-- `vars:`
-
-   Chosen variables from the ``EDH`` dataset (vector)
- 
-
-- `x:`
-
-   An optional list object name with fragments of the ``EDH`` dataset
-
-
-- `as:`
-
-   Format to return the output. Currently either as a ``"list"`` or a data frame ``"df"`` object.
-
-
-- `type:`
-
-   Format of the data frame output. Currently  either a ``"long"`` or a ``"wide"`` table (option ``"narrow"`` not yet implemented).
-
-
-- `split:`
-   Divide the data into groups by `id`? (logical and optional)
-
-
-- `select:`
-   select ``"people"`` variables? (logical and optional, for data frame ``"long"`` only)
-
-
-- `addID:`
-
-   Add identification to the output? (optional and logical)
-
-- `limit:`
-
-   Limit the returned output. Ignored if `id` is specified (optional, integer or vector)
-
-
-- `id:`
-
-   Select only the ``hd_nr`` `id(s)`  (optional, integer or character)
-
-
-- `na.rm:`
-
-   Remove entries with ``<NA>`` information? (logical and optional)
-
-
-- `...`
-
-   Optional arguments if needed.
-
-
-
-|
-
-    .. todo:: 
-    
-         Implement the ``"narrow"`` `type` option to ``edhw()``.
-
-
-|
-
-
-.. _edh-vars:
-
-
-EDH Variables
-=============
-
-The aim of the ``edhw()`` function is to extract variables or attributes of inscriptions, which are output values
-typically produced by the ``get.edh()`` function. 
-
-These variables are at least one the following items: ``"commentary"``, ``"fotos"``, ``"country"``, ``"depth"``, 
-``"diplomatic_text"``, ``"edh_geography_uri"``, ``"findspot"``, ``"findspot_ancient"``, ``"findspot_modern"``, 
-``"geography"``, ``"height"``, ``"id"``, ``"language"``, ``"last_update"``, ``"letter_size"``, ``"literature"``, 
-``"material"``, ``"military"``, ``"modern_region"``, ``"not_after"``, ``"not_before"``, ``"present_location"``, 
-``"religion"``, ``"province_label"``, ``"responsible_individual"``, ``"social_economic_legal_history"``, 
-``"transcription"``, ``"trismegistos_uri"``, ``"type_of_inscription"``, ``"type_of_monument"``, ``"uri"``, 
-``"width"``, ``"work_status"``, and ``"year_of_find"``. 
-
-
-Another output variable is ``"people"`` that is a list of persons named in the inscriptions with at least the following 
-items ``"person_id"``, ``"nomen"``, ``"cognomen"``, ``"praenomen"``, ``"name"``, ``"gender"``, ``"status"``, ``"tribus"``, 
-``"origo"``, ``"occupation"``, ``"age: years"``, ``"age: months"``, ``"age: days"``.
-
-Even though it is possible to combine variables with ``"people"`` in ``edhw()``, selecting peoples' items constitutes a 
-remaining task for ``edhw()``.
+* (see :ref:`attributes in EDH dataset <edh-attr>`)
 
 
 
 
 |
-
-
-Relative dating
-===============
-
-We are going to apply the ``edhw()`` function to check the relative dating of the inscriptions in the ``EDH`` 
-dataset. For this, we choose *variables* from the EDH list that are ``"not_after"`` and 
-``"not_before"`` with an identification number in ``"ID"``. 
-
-For a simple relative dating analysis of ``EDH`` inscriptions, we choose chronological data variables: 
-
-
-..  In order , for example, we need to transform the 
-..  "attribute-components" of  into a data frame. Such transformation is possible 
-..  with , which is implemented in the ``edhw()`` wrapper function.
-
-
-.. code-block:: R
-
-    # make a list for relative variables in 'EDH' (default)
-    R> EDHdates <- edhw(vars=c("ID", "not_after", "not_before") )
-    
-
-
-Since argument *x* is not specified in the function, the "EDH" dataset in the ``sdam`` package is taken if available 
-with a *Warning* message.
-
-|
-
-.. _recursively-apply:
-
-    .. hint::    
-    
-        The above use of function ``edhw()`` is wrapping the ``base`` ``lapply`` function as
-
-        .. code-block:: R
-
-            # recursively apply a function over the list for  variables
-            R> EDHdates <- lapply(EDH, `[`, c("ID", "not_after", "not_before") )
-
-
-        where a pair of backquotes (aka "backticks") is a way to refer in ``R`` to names or combinations 
-        of symbols that are otherwise reserved or illegal, or non-syntactic names. 
-        Hence, e.g. ``apply(foo, `[`, c(...) )`` is the same as ``apply(foo, function (x) x[c(...)])``.
-
-|
-
-
-
-As a result, ``EDHdates`` is a new list object with the chronological data items and an ``"ID"`` for all entries in ``EDH``.
-
-    .. code-block:: R
-    
-        R> length(EDHdates)
-        #[1] 82465
-
-
-where the first entry is
-
-
-    .. code-block:: R
-    
-        # look at the new object 'EDHdates'
-        R> head(EDHdates, 1)
-        #[[1]]
-        #[[1]]$ID
-        #[1] "000001"
-        #
-        #[[1]]$not_after
-        #[1] "0130"
-        #
-        #[[1]]$not_before
-        #[1] "0071"
-
-
-
-|
-
-
-
-Remove missing data
--------------------
-
-It is also possible to remove missing data from ``EDH`` by activating the *na.rm* argument in function 
-``edhw()``.
-
-.. code-block:: R
-
-    # remove missing data
-    R> EDHdt <- edhw(vars=c("ID", "not_after", "not_before"), na.rm=TRUE)
-
-
-and now the object has a shorter length
-
-    .. code-block:: R
-    
-        R> length(EDHdt)
-        #[1] 55207
-
-
-
-
-..  .. code-block:: R
-..  
-..      # remove missing data
-..      R> EDHdt <- list()
-..      R> for(n in seq_len(length(EDHdates))) {
-..      +    ifelse(any(is.na(attr(EDHdates[[n]],"names")))==FALSE, 
-..      +    EDHdt[[length(EDHdt)+1L]]<-EDHdates[[n]], NA)
-..      +    }
-
-
-|
-
-
-    .. seealso:: 
-    
-        :ref:`Missing data <missing>` within uncertainty. 
-
-
-|
-
-
-Data frames
------------
-
-To produce data frames, we need to make explicit the chronological data in the function where ``"id"`` 
-is added by default.
-
-.. code-block:: R
-
-    # produce a data frame with chronological data variables and remove missing data
-    R> EDHdtdf  <- edhw(vars=c("not_after", "not_before"), as="df", na.rm=TRUE )
-
-
-..  .. code-block:: R
-..  
-..      # convert list of data into a data frame with a function call
-..      R> EDHdtdf <- as.data.frame(do.call(rbind, EDHdt))
-
-..     # execute a function call on the list to convert list of data into a data frame
-
-
-..   :linenos:
-
-The first entries are
-
-    .. code-block:: R
-    
-        # look at the first ones
-        R> head(EDHdtdf)
-        #        id not_after not_before
-        #1 HD000001      0130       0071
-        #2 HD000002      0200       0051
-        #3 HD000003      0170       0131
-        #4 HD000004      0200       0151
-        #5 HD000005      0200       0001
-        #6 HD000006      0150       0071
-    
-
-..   :lineno-start: 85390
-
-and the last entries
-
-    .. code-block:: R
-    
-        # look at the last ones
-        R> tail(EDHdtdf)
-        #            id not_after not_before
-        #81580 HD080143      0500       0401
-        #81581 HD080144      0500       0401
-        #81582 HD080145      0500       0401
-        #81584 HD080147      0500       0401
-        #81586 HD080149      0500       0401
-        #81588 HD080151      0500       0401
-
-
-|
-
-To compute the years, which are in the second and third column of ``EDHdtdf`` we need to *unlist* 
-the data frame first and treat the data as numeric format. 
-
-::
-
-    # years: oldest and latest
-    R> years <- c(min(as.numeric(unlist(EDHdtdf[,2:3]))), max(as.numeric(unlist(EDHdtdf[,2:3]))))
-    #[1] -530 1998
-
-
-Years are between 530 BC and 1998 AC. 
-
-
-|
-
-
-
-Plotting time spans of existence
-================================
-
-One plot of relative dating for Roman inscriptions is made with the [R] ``graphics`` core package (or ``base`` package with R version 4.0.0). 
-
-
-.. code-block:: R
-
-    # plot with graphics
-    R> plot(EDHdtdf$not_before, EDHdtdf$ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", xlim=years, 
-    +    main="Epigraphic time intervals (ALL)")
-    R> points(EDHdtdf$not_after, EDHdtdf$ID, pch=20, col="#808080")
-    R> segments(as.numeric(EDHdtdf$not_before), as.numeric(EDHdtdf$ID), as.numeric(EDHdtdf$not_after), 
-    +    as.numeric(EDHdtdf$ID), col=grDevices::adjustcolor(8, alpha=.25))
-
-
-That produces:
-
-.. image:: ../images/EDH-times.png
-   :width: 450
-
-
-|
-
-Treating Outliers
------------------
-
-By looking at the above plot, we can clearly see a couple of outliers. 
-
-
-.. code-block:: R
-
-    # first outlier is the maximum value of the dates
-    R> max(as.numeric(unlist(EDHdtdf[,2:3])))
-    #[1] 1998
-
-
-
-We would like now to remove the two most extreme outliers.
-
-.. code-block:: R
-
-    # remove last date
-    R> EDHdtdfx <- EDHdtdf[-which(EDHdtdf[,2]==1998), ]
-
-
-.. code-block:: R
-
-    # second outlier is now the maximum value
-    R> max(as.numeric(unlist(EDHdtdfx[,2:3])))
-    #[1] 1500
-
-    # remove the (second) last date
-    R> EDHdtdfx <- EDHdtdfx[-which(EDHdtdfx[,2]==1500), ]
-
-
-Now we need to update the years. 
-
-
-.. code-block:: R
-
-    # update years 
-    R> years <- c(min(as.numeric(unlist(EDHdtdfx[,2:3]))),max(as.numeric(unlist(EDHdtdfx[,2:3]))))
-    #[1] -530  95
-
-
-Years are now between 530 BC and 95 AC. 
-
-
-
-|
-
-
-Plotting without outliers
--------------------------
-
-
-The plot is now constructed without the two outliers and with updated years. 
-
-
-.. code-block:: R
-
-    # plot with graphics
-    R> plot(EDHdtdfx$not_before, EDHdtdfx$ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", xlim=years, 
-    +    main="Epigraphic time intervals (no outliers)")
-    R> points(EDHdtdfx$not_after, EDHdtdfx$ID, pch=20, col="#808080")
-    R> segments(as.numeric(EDHdtdfx$not_before), as.numeric(EDHdtdfx$ID), as.numeric(EDHdtdfx$not_after), 
-    +    as.numeric(EDHdtdfx$ID), col=grDevices::adjustcolor(8, alpha=.25))
-
-
-
-That produces a plot with no outliers:
-
-.. image:: ../images/EDH-timesNO.png
-   :width: 450
-
-
-
-|
-
-Other plots
------------
-
-Visualization helps to perform different kinds of analyses.
-
-
-.. code-block:: R
-
-    # plot not_after against not_before
-    R> plot(EDHdtdfx$not_after, EDHdtdfx$not_before, xlab="not_after", ylab="not_before", 
-    +    xlim=c(min(as.numeric(unlist(EDHdtdfx$not_after))),max(as.numeric(unlist(EDHdtdfx$not_after)))), 
-    +    ylim=c(min(as.numeric(unlist(EDHdtdfx$not_before))),max(as.numeric(unlist(EDHdtdfx$not_before)))))
-
-That produces:
-
-.. image:: ../images/EDH-BeforeAfterTimes.png
-   :width: 450
-
-
-|
-
-    .. todo:: 
-    
-        Calculate the residuals and start a statistic analysis of dates.
-
-
-|
-
-
-
-
 
 
 .. meta::

@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Compute similarity in Epigraphic Networks" name="description" />
 <meta content="epigraphic, documentation, dataset, networks" name="keywords" />
 
-    <title>Epigraphic Networks using R &#8212; cedhar 0.0.5 documentation</title>
+    <title>Epigraphic Networks using R &#8212; cedhar 0.0.6 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,8 +17,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="DEiC’s sciencedata.dk" href="Sciencedata_dk.html" />
-    <link rel="prev" title="Epigraphic Database Heidelberg" href="Epigraphic.html" /> 
+    <link rel="next" title="Modules" href="modules.html" />
+    <link rel="prev" title="Markov chain Monte Carlo" href="MCMC.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,12 +27,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
+          <a href="modules.html" title="Modules"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
+          <a href="MCMC.html" title="Markov chain Monte Carlo"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -44,11 +44,12 @@
   <ul>
 <li><a class="reference internal" href="#">Epigraphic Networks using R</a><ul>
 <li><a class="reference internal" href="#measuring-similarity-of-artefact-assemblages-and-geographic-proximity">Measuring similarity of artefact assemblages and geographic proximity</a><ul>
-<li><a class="reference internal" href="#functions-usage">Functions Usage</a></li>
+<li><a class="reference internal" href="#function-usage">Function usage</a></li>
 <li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#optional-parameters">Optional parameters</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#epigraphic-data">Epigraphic data</a><ul>
+<li><a class="reference internal" href="#edh-dataset">EDH dataset</a><ul>
 <li><a class="reference internal" href="#epigraphic-network-data">Epigraphic network data</a><ul>
 <li><a class="reference internal" href="#regular-expressions">Regular expressions</a></li>
 <li><a class="reference internal" href="#subsetting-the-data">Subsetting the data</a></li>
@@ -57,18 +58,20 @@
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#example-similarity-among-egyptian-epigraphs">Example: Similarity among Egyptian epigraphs</a></li>
+<li><a class="reference internal" href="#example-similarity-among-egyptian-epigraphs">Example: Similarity among Egyptian epigraphs</a><ul>
 <li><a class="reference internal" href="#plot-similarities">Plot similarities</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="Epigraphic.html"
-                        title="previous chapter">Epigraphic Database Heidelberg</a></p>
+  <p class="topless"><a href="MCMC.html"
+                        title="previous chapter">Markov chain Monte Carlo</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="Sciencedata_dk.html"
-                        title="next chapter">DEiC’s sciencedata.dk</a></p>
+  <p class="topless"><a href="modules.html"
+                        title="next chapter">Modules</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -108,8 +111,8 @@ columns representing –in this case– different attributes for epigraphic insc
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="section" id="functions-usage">
-<h3>Functions Usage<a class="headerlink" href="#functions-usage" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="function-usage">
+<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="simil">
 <code class="sig-name descname">simil</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#simil" title="Permalink to this definition">¶</a></dt>
@@ -130,7 +133,7 @@ columns representing –in this case– different attributes for epigraphic insc
 <ul>
 <li><p><cite>x:</cite></p>
 <blockquote>
-<div><p>a data frame with an ID column</p>
+<div><p>a data frame with an <cite>id</cite> column</p>
 </div></blockquote>
 </li>
 <li><p><cite>att:</cite></p>
@@ -138,19 +141,27 @@ columns representing –in this case– different attributes for epigraphic insc
 <div><p>(vector) column(s) in <code class="docutils literal notranslate"><span class="pre">x</span></code> representing attributes</p>
 </div></blockquote>
 </li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="optional-parameters">
+<h3>Optional parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
+<ul>
 <li><p><cite>null:</cite></p>
 <blockquote>
-<div><p>(optional) include in computation <code class="docutils literal notranslate"><span class="pre">NA</span></code> or <code class="docutils literal notranslate"><span class="pre">NULLs</span></code>?</p>
+<div><p>include in computation <code class="docutils literal notranslate"><span class="pre">NA</span></code> or <code class="docutils literal notranslate"><span class="pre">NULLs</span></code>?</p>
 </div></blockquote>
 </li>
 <li><p><cite>uniq:</cite></p>
 <blockquote>
-<div><p>(optional) remove duplicates from <code class="docutils literal notranslate"><span class="pre">x</span></code>?</p>
+<div><p>remove duplicates from <code class="docutils literal notranslate"><span class="pre">x</span></code>?</p>
 </div></blockquote>
 </li>
 <li><p><cite>diag.incl:</cite></p>
 <blockquote>
-<div><p>(optional) include entries in the matrix diagonal?</p>
+<div><p>include entries in the matrix diagonal?</p>
 </div></blockquote>
 </li>
 </ul>
@@ -165,11 +176,11 @@ as <em>id</em> provided that there are not duplicated entry names in <code class
 </div>
 </div>
 </div>
-<div class="section" id="epigraphic-data">
-<h2>Epigraphic data<a class="headerlink" href="#epigraphic-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="edh-dataset">
+<h2>EDH dataset<a class="headerlink" href="#edh-dataset" title="Permalink to this headline">¶</a></h2>
 <p>We illustrate the use of the <code class="docutils literal notranslate"><span class="pre">simil()</span></code> function with ancient inscriptions from
 the Epigraphic Database Heidelberg, and we first follow the entry <a class="reference internal" href="Epigraphic.html#edh"><span class="std std-ref">Epigraphic Database Heidelberg</span></a>
-to see how accessing the EDH database using <code class="docutils literal notranslate"><span class="pre">sdam</span></code> in [R].</p>
+to see how accessing the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset using <code class="docutils literal notranslate"><span class="pre">sdam</span></code> [R] package.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -187,9 +198,8 @@ to see how accessing the EDH database using <code class="docutils literal notran
 <div class="section" id="epigraphic-network-data">
 <h3>Epigraphic network data<a class="headerlink" href="#epigraphic-network-data" title="Permalink to this headline">¶</a></h3>
 <p>Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity.
-For example, we create a list object <code class="docutils literal notranslate"><span class="pre">epinetl</span></code> with the <code class="docutils literal notranslate"><span class="pre">ID</span></code> of the inscription plus seven other characteristics from
-the EDH dataset <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.
-See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span class="std std-ref">“Relative Dating” in Epigraphic Database Heidelberg</span></a> for another use of functional programming with <code class="docutils literal notranslate"><span class="pre">lapply</span></code>.</p>
+For example, a list object named <code class="docutils literal notranslate"><span class="pre">epinet</span></code> with the <code class="docutils literal notranslate"><span class="pre">ID</span></code> of the inscription plus seven other characteristics from
+the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is produced by <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose variables of interest and record it as a data frame</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;type_of_monument&quot;</span><span class="p">,</span> <span class="s">&quot;language&quot;</span><span class="p">,</span> <span class="s">&quot;material&quot;</span><span class="p">,</span> <span class="s">&quot;country&quot;</span><span class="p">,</span> <span class="s">&quot;findspot_ancient&quot;</span><span class="p">,</span>
                     <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">)</span>
@@ -228,7 +238,7 @@ See <a class="reference internal" href="Epigraphic.html#recursively-apply"><span
 <blockquote>
 <div><div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
-<p>Make another function for cleaning?</p>
+<p>Make another function for cleaning? After all, <code class="docutils literal notranslate"><span class="pre">sapply()</span></code> converts <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code> into <code class="docutils literal notranslate"><span class="pre">NA</span></code>.</p>
 </div>
 </div></blockquote>
 <div class="line-block">
@@ -386,9 +396,8 @@ a matrix object named <code class="docutils literal notranslate"><span class="pr
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
 <div class="section" id="plot-similarities">
-<h2>Plot similarities<a class="headerlink" href="#plot-similarities" title="Permalink to this headline">¶</a></h2>
+<h3>Plot similarities<a class="headerlink" href="#plot-similarities" title="Permalink to this headline">¶</a></h3>
 <p>To produce a graph for the similarity among Egyptian epigraphs, we employ the [R] package <code class="docutils literal notranslate"><span class="pre">multigraph</span></code> that
 depends on <code class="docutils literal notranslate"><span class="pre">multiplex</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># define scope for the graph</span>
@@ -404,8 +413,9 @@ depends on <code class="docutils literal notranslate"><span class="pre">multiple
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<a class="reference internal image-reference" href="_images/epEgs.png"><img alt="_images/epEgs.png" src="_images/epEgs.png" style="width: 450px;" /></a>
-<span class="target" id="index-0"></span></div>
+<a class="reference internal image-reference" href="_images/epEgs.png" id="index-0"><img alt="_images/epEgs.png" id="index-0" src="_images/epEgs.png" style="width: 450px;" /></a>
+</div>
+</div>
 </div>
 
 
@@ -421,12 +431,12 @@ depends on <code class="docutils literal notranslate"><span class="pre">multiple
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
+          <a href="modules.html" title="Modules"
              >next</a> |</li>
         <li class="right" >
-          <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
+          <a href="MCMC.html" title="Markov chain Monte Carlo"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

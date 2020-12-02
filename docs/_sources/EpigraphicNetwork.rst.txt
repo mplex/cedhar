@@ -41,8 +41,8 @@ columns representing --in this case-- different attributes for epigraphic inscri
 |
 
 
-Functions Usage
----------------
+Function usage
+--------------
 
 .. function:: simil
 
@@ -65,23 +65,30 @@ Formal arguments of ``simil()`` are:
 
 - `x:`
 
-   a data frame with an ID column
+   a data frame with an `id` column
 
 - `att:`
 
    (vector) column(s) in ``x`` representing attributes 
 
+
+|
+
+Optional parameters
+-------------------
+
+
 - `null:`
 
-   (optional) include in computation ``NA`` or ``NULLs``?
+   include in computation ``NA`` or ``NULLs``?
 
 - `uniq:`
 
-   (optional) remove duplicates from ``x``?
+   remove duplicates from ``x``?
 
 - `diag.incl:`
 
-   (optional) include entries in the matrix diagonal?
+   include entries in the matrix diagonal?
 
 
 ..     # FUNCTION simil() to compute similarity of entries in a given data frame
@@ -108,13 +115,13 @@ as *id* provided that there are not duplicated entry names in ``x``.
 |
 
 
-Epigraphic data
-===============
+EDH dataset
+===========
 
 
 We illustrate the use of the ``simil()`` function with ancient inscriptions from 
 the Epigraphic Database Heidelberg, and we first follow the entry :ref:`Epigraphic Database Heidelberg <EDH>` 
-to see how accessing the EDH database using ``sdam`` in [R].
+to see how accessing the ``EDH`` dataset using ``sdam`` [R] package.
 
 |
 
@@ -135,9 +142,11 @@ Epigraphic network data
 -----------------------
 
 Creating epigraphic network data list with variables measures of similarity of artefact assemblages and geographic proximity. 
-For example, we create a list object ``epinetl`` with the ``ID`` of the inscription plus seven other characteristics from
-the EDH dataset ``EDH``. 
-See :ref:`"Relative Dating" in Epigraphic Database Heidelberg <recursively-apply>` for another use of functional programming with ``lapply``. 
+For example, a list object named ``epinet`` with the ``ID`` of the inscription plus seven other characteristics from
+the ``EDH`` dataset is produced by ``edhw()``. 
+
+
+..  See :ref:`"Relative Dating" in Epigraphic Database Heidelberg <recursively-apply>` for another use of functional programming with ``lapply()``. 
 
 
 .. code-block:: R
@@ -194,7 +203,7 @@ For instance, entry ``8`` indicates that this ancient findspot is uncertain.
 |
 
 Regular expressions
-^^^^^^^^^^^^^^^^^^^
++++++++++++++++++++
 
 To remove question marks, for example, we use a regular expression
 
@@ -212,7 +221,7 @@ To remove question marks, for example, we use a regular expression
 |
 
     ..  todo::
-        Make another function for cleaning?
+        Make another function for cleaning? After all, ``sapply()`` converts ``<NA>`` into ``NA``.
 
 
 |
@@ -264,7 +273,7 @@ The countries in ``epinet2`` are:
 
 
 Subsetting the data
-^^^^^^^^^^^^^^^^^^^
++++++++++++++++++++
 
 For example, we use the ``base`` [R] function ``subset()`` to substract epigraphic material in "Greek-Latin" from Egypt.
 
@@ -292,7 +301,7 @@ For example, we use the ``base`` [R] function ``subset()`` to substract epigraph
 
 
 Ranked frequency
-^^^^^^^^^^^^^^^^
+++++++++++++++++
 
 A ranked frequency of different *kinds of inscriptions* including missing information is computed as follows: 
 
@@ -403,7 +412,7 @@ where we observe six records of a single similarity.
 
 
 Plot similarities
-=================
+-----------------
 
 
 To produce a graph for the similarity among Egyptian epigraphs, we employ the [R] package ``multigraph`` that 
@@ -427,13 +436,16 @@ depends on ``multiplex``.
 
 |
 
+.. index:: graph 
+
+
+
 .. image:: ../images/epEgs.png
    :width: 450
 
 
 
 
-.. index:: graph 
 
 
 

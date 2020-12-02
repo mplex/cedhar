@@ -12,13 +12,14 @@
    
    DDHH
    UAT
-   Epigraphic
-   EpigraphicNetwork
-   Sciencedata_dk
    sdam
+   Sciencedata_dk
+   Epigraphic
+   EDHVariables
    Time
    Uncertainty
    MCMC
+   EpigraphicNetwork
    modules
 
 
@@ -33,5 +34,5 @@ Indices and tables
 
 
 Print
-=====
+-----
 * :download:`Download this document <https://github.com/mplex/cedhar/blob/master/typesetting/reports/cedhar.pdf>`.

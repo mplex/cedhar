@@ -15,8 +15,8 @@ since is rounded when measured (e.g. a person is 40 years old and not between 40
 |
 
 
-Chronological periods
-=====================
+Chronological periods of the Mediterranean Sea
+==============================================
 
 We use chronological periods for dating purposes. 
 Sometimes chronological periods are divided by phases and occasionally they are referred as chronological phases. 
@@ -57,8 +57,534 @@ For example, *chronological phases* for dating ancient cultures of the Mediterra
     Recent (Recent)                                AC 1800-present
    =============================================  ==========================
 
+(adapted from *Bevan et al*, 2013 (doi: 10.1111/j.1475-4754.2012.00674.x))
 
-From *Bevan et al*, 2013 (doi: 10.1111/j.1475-4754.2012.00674.x)
+
+
+|
+
+AC is sometimes ommited, and a negative number represents BC. 
+
+
+
+|
+
+
+.. _EDHrd:
+
+
+Relative dating of Roman inscriptions
+=====================================
+
+Since the range of time in the relative dating of Roman inscriptions without outliers is between 530 BC and 950 AC, 
+the chronological periods involving epigraphic Roman material are 
+
+.. table:: 
+   :widths: auto
+   :align: left
+
+   ===========================  ===============
+   Period                         Dates years  
+   ===========================  ===============
+     *Archaic*  (Arch)          -700 to -500 
+     *Classical* (Class)        -500 to -325 
+     *Hellenistic*  (Hell)      -325 to 0 
+     *Early Roman*  (ERom)      0 to 200 
+     *Middle Roman*  (MRom)     200 to 350 
+     *Late Roman*  (LRom)       350 to 650 
+     *Early Byzantine* (EByz)   650 to 900 
+     *Middle Byzantine* (MByz)  900 to 1200 
+   ===========================  ===============
+
+..  1. *Archaic*  
+..  2. *Classical*
+..  3. *Hellenistic*  
+..  4. *Early Roman*  
+..  5. *Middle Roman*  
+..  6. *Late Roman*  
+..  7. *Early Byzantine* 
+..  8. *Middle Byzantine* 
+
+
+|
+
+The eight chronological phases are reduced to five categories with their respective years: 
+
+.. table:: 
+   :widths: auto
+   :align: left
+
+   ========================  ===============
+   Period                      Dates years  
+   ========================  ===============
+     *Archaic*  (Arch)       -700 to -500 
+     *Classical*  (Class)    -500 to -325 
+     *Hellenistic*  (Hell)   -325 to 0 
+     *Roman*  (Rom)             0 to 650 
+     *Byzantine*  (Byz)       650 to 1200 
+   ========================  ===============
+
+
+
+Eight- and five chronological phases are for the analysis of temporal uncertainty of the ``EDH`` dataset. 
+
+
+|
+
+
+
+Dates in data frames
+--------------------
+
+To produce data frames, we need to make explicit with the `as` argument; in the 
+example below with chronological data in the function where ``"id"`` is added by default.
+
+.. code-block:: R
+
+    # produce a data frame with chronological data variables and remove missing data
+    R> EDHdates <- edhw(vars=c("not_after", "not_before"), as="df")
+
+
+
+|
+
+..  .. code-block:: R
+..  
+..      # convert list of data into a data frame with a function call
+..      R> EDHdtdf <- as.data.frame(do.call(rbind, EDHdt))
+
+..     # execute a function call on the list to convert list of data into a data frame
+
+
+..   :linenos:
+
+The first entries are
+
+    .. code-block:: R
+    
+        # look at the first ones
+        R> head(EDHdates)
+        #        id not_before not_after
+        #1 HD000001       0071      0130
+        #2 HD000002       0051      0200
+        #3 HD000003       0131      0170
+        #4 HD000004       0151      0200
+        #5 HD000005       0001      0200
+        #6 HD000006       0071      0150
+    
+
+..   :lineno-start: 85390
+
+and the last entries
+
+    .. code-block:: R
+    
+        # look at the last ones
+        R> tail(EDHdates)
+        #            id not_before not_after
+        #83816 HD081504       0071      0130
+        #83817 HD081505       0071      0130
+        #83818 HD081506       0071      0130
+        #83819 HD081507       0101      0200
+        #83820 HD081508       0151      0230
+        #83821 HD081509       0151      0250
+
+
+
+|
+
+.. _tmsp:
+
+
+Time spans of existence
+-----------------------
+
+..  Recall from the  :ref:`relative dating <rel-dat>` example, 
+
+Object ``EDHdates`` has information about relative dating with boundaries of existence 
+in variables ``not_before`` and ``not_after``. 
+
+
+In ``EDHdates``, however, these variables are factors and they need to be converted into vectors 
+with a numeric format in order to represent the boundaries of existence. 
+
+
+    .. code-block:: R
+    
+        # time columns in EDHdates are factors
+        R> is.factor(EDHdates$not_after)
+        R> is.factor(EDHdates$not_before)
+        #[1] TRUE
+
+        # boundaries of existence not_before and not_after
+        R> nb <- as.numeric(as.vector(EDHdates$not_before))
+        R> na <- as.numeric(as.vector(EDHdates$not_after))
+
+
+|
+
+To compute oldest and latest years with ``min`` and ``max`` functions, we also need to remove ``NA`` 
+data from these vectors. 
+
+
+    .. code-block:: R
+
+        # oldest and latest dates
+        R> years <- c(min(nb, na.rm=TRUE), max(na, na.rm=TRUE))
+        #[1] -530 1998
+
+
+Dates in years are between 530 BC and 1998 AC. 
+
+
+|
+
+
+
+.. index:: time intervals
+
+
+Plotting time intervals
+-----------------------
+
+To be able to plot efficiently time spans of existence of records in the ``EDH`` dataset, we 
+need to count with a numerical identifier. 
+
+
+    .. code-block:: R
+       
+        # get IDs by removing alphabetic characters in id
+        R> ID <- as.numeric(sub("[[:alpha:]]+","",EDHdates$id))
+
+
+A plot of relative dating for Roman inscriptions with ``ID`` is made with the [R] ``graphics`` 
+core package (or ``base`` package with R version 4.0.0). 
+
+
+    .. code-block:: R
+
+        # plot with graphics
+        R> plot(nb, ID, pch=20, col="#C0C0C0", xlab="Year", ylab="ID", 
+        +       xlim=years, main="EDH dataset time intervals")
+        R> points(na, ID, pch=20, col="#808080")
+        R> segments(nb, ID, na, ID, col=grDevices::adjustcolor(8,alpha=.25))
+
+
+
+or using the ``plot.dates()`` function from ``sdam`` 
+
+
+    .. code-block:: R
+    
+        R> plot.dates(main="EDH dataset time intervals", 
+        +             taq="not_before", tpq="not_after", cex=.5)
+
+
+
+That produces:
+
+|
+
+.. image:: ../images/EDHdates.png
+   :width: 450
+
+..  .. image:: ../images/Times_EDHdates.png
+..     :width: 450
+
+
+
+|
+
+Treating Outliers
+-----------------
+
+By looking at the box-and-whisker plots below, we can clearly see a couple of outliers 
+at least in each category. 
+
+
+    .. code-block:: R
+
+        # par(mfrow =  c(2, 1))
+        R> boxplot(nb, horizontal=TRUE, main="EDH 'not_before'")
+        R> boxplot(na, horizontal=TRUE, main="EDH 'not_after'")
+
+
+That produces:
+
+|
+
+.. image:: ../images/Box-and-whisker_EDHdates.png
+   :width: 250
+
+
+
+|
+
+
+The two most extreme outliers in each category are given in ``$out`` produced by the  ``boxplot()`` function. 
+
+    .. code-block:: R
+
+        # first outlier is the maximum value of the dates
+        R> outliers<- c(tail(sort(boxplot(nb, plot=FALSE)$out),2),
+        +               tail(sort(boxplot(na, plot=FALSE)$out),2))
+        #[1] 1894 1997 1500 1998
+
+
+We remove these outliers in `not_before` and `not_after`, and we update the ``EDHdates`` object. 
+
+    .. code-block:: R
+    
+        R> c(nb[which(nb %in% outliers)], na[which(na %in% outliers)])
+        #[1] 1997 1894 1998 1500
+
+        # update by removing outliers in both categories
+        R> EDHdates <- EDHdates[-c(which(nb %in% outliers),which(na %in% outliers)), ]
+
+
+|
+
+
+Since rows are removed from ``EDHdates``, we need to update object identifiers to compute the 
+new the range of time. 
+
+
+    .. code-block:: R
+    
+        # update values
+        R> ID <- as.numeric(sub("[[:alpha:]]+","",EDHdates$id))
+        R> nb <- as.numeric(as.vector(EDHdates$not_before))
+        R> na <- as.numeric(as.vector(EDHdates$not_after))
+    
+        # new dates
+        R> years <- c(min(nb, na.rm=TRUE), max(na, na.rm=TRUE))
+        #[1] -530  950
+
+
+Years are now between 530 BC and 950 AC. That is, from *Archaic* to *Middle Byzantine* 
+chronological periods.
+
+* (See: :ref:`Time and dating <time>`)
+
+
+|
+
+Plotting without outliers
++++++++++++++++++++++++++
+
+
+Now we take a look at the box-and-whisker plots without outliers
+
+    .. code-block:: R
+    
+        # par(mfrow =  c(2, 1))
+        R> boxplot(nb, horizontal=TRUE, main="EDH 'not_before' (no outliers)")
+        R> boxplot(na, horizontal=TRUE, main="EDH 'not_after' (no outliers)")
+
+
+that produces:
+
+|
+
+.. image:: ../images/Box-and-whisker_EDHdates_no-outliers.png
+   :width: 250
+
+
+|
+
+
+The next step is to plot relative dating without outliers and with updated range of time 
+and with ``plot.dates()`` function. 
+
+
+    .. code-block:: R
+    
+        R> plot.dates(main="EDH dataset time intervals (no outliers)", 
+        +       taq="not_before", tpq="not_after", out=2, cex=.5)
+
+
+
+that produces a plot with no outliers:
+
+|
+
+.. image:: ../images/EDHdatesNoOutliers.png
+   :width: 450
+
+
+..  .. image:: ../images/Times_EDHdates_no-outliers.png
+..     :width: 450
+
+
+where we can see that most of the inscriptions in the ``EDH`` dataset are from 
+Early to Middle Roman. 
+
+
+|
+
+..  Other plots
+..  -----------
+..  
+..  Visualization helps to perform different kinds of analyses.
+..  
+..  
+..  .. code-block:: R
+..  
+..      # plot not_after against not_before
+..      R> plot(EDHdatesx$not_after, EDHdatesx$not_before, xlab="not_after", ylab="not_before", 
+..      +    xlim=c(min(as.numeric(unlist(EDHdatesx$not_after))),max(as.numeric(unlist(EDHdatesx$not_after)))), 
+..      +    ylim=c(min(as.numeric(unlist(EDHdatesx$not_before))),max(as.numeric(unlist(EDHdatesx$not_before)))))
+..  
+..  That produces:
+..  
+..  .. image:: ../images/EDH-BeforeAfterTimes.png
+..     :width: 450
+..  
+..  
+..  |
+..  
+..      .. todo:: 
+..      
+..          Calculate the residuals and start a statistic analysis of dates.
+..  
+..  
+..  |
+
+
+..      .. seealso:: 
+
+..  * (see also :ref:`Temporal uncertainty <uncertainty>`)
+
+
+|
+
+
+Plotting time intervals
+=======================
+
+
+To plot time intervals, we use function ``plot.dates()``.
+
+
+.. function:: plot.dates
+
+Function usage
+--------------
+
+.. code-block:: R
+
+    # use generic function
+    R> plot.dates(file=NULL, x=NULL, taq, tpq, out,
+                  main=NULL, xlab=NULL, ylab=NULL, xlim=NULL, 
+                  pch, cex, col, lwd, lty, alpha, ... )
+    
+
+|
+
+
+Parameters
+----------
+
+
+Formal arguments of ``plot.dates()`` are:
+
+
+- `file:`
+
+   path to file for a PDF format (optional)
+ 
+
+- `x:`
+
+   data frame object of variables and observations. If ``NULL`` then ``EDH`` dataset is taken.
+ 
+
+- `taq:`
+
+   *terminus ante quem*
+ 
+
+- `tpq:`
+
+   *terminus post quem*
+ 
+
+- `out:`
+
+   number of outliers to omit (integer or vector where first entry id for latest date)
+
+
+
+|
+
+
+Optional arguments from the ``graphics`` package for the plot are 
+
+
+- `main:`
+
+   main tile
+ 
+
+- `xlab:`
+
+   ``x`` label
+
+
+- `ylab:`
+
+   ``y`` label
+ 
+
+- `xlim:`
+
+   ``x`` limit
+ 
+
+| 
+
+
+And for the representation of time interval and boundaries of existence in the plot 
+
+
+- `pch:`
+
+   symbol for *taq* and *tpq*
+ 
+
+- `cex:`
+
+   size of `pch`
+ 
+
+- `col:`
+
+   colors of `pch` and time interval segment.
+
+|
+
+for time interval segments:
+
+
+
+- `lwd:`
+
+   width.
+ 
+
+- `lty:`
+
+   shape.
+ 
+
+- `alpha:`
+
+   alpha color transparency.
+
+
+- `...`
+
+   additional parameters if needed
 
 
 
@@ -66,16 +592,17 @@ From *Bevan et al*, 2013 (doi: 10.1111/j.1475-4754.2012.00674.x)
 
 
 
+    .. seealso:: 
+     
+        :ref:`Computing the probability of existence <cprex>`
 
 
 
 |
-
-
 
 
 
 .. meta::
    :description: Time, dating, and chronology
-   :keywords: time, Chronology
+   :keywords: time, chronology, epigraphic, dataset 
 

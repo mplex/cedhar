@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Accessing the Epigraphic Database Heidelberg" name="description" />
 <meta content="epigraphic, documentation, dataset, HTTP-request" name="keywords" />
 
-    <title>Epigraphic Database Heidelberg &#8212; cedhar 0.0.5 documentation</title>
+    <title>Epigraphic Database Heidelberg &#8212; cedhar 0.0.6 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,8 +17,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Epigraphic Networks using R" href="EpigraphicNetwork.html" />
-    <link rel="prev" title="User Acceptance Testing" href="UAT.html" /> 
+    <link rel="next" title="Extracting EDH Variables" href="EDHVariables.html" />
+    <link rel="prev" title="DEiC’s sciencedata.dk" href="Sciencedata_dk.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,12 +27,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
+          <a href="EDHVariables.html" title="Extracting EDH Variables"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="UAT.html" title="User Acceptance Testing"
+          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -46,7 +46,7 @@
 <li><a class="reference internal" href="#open-data-repository">Open Data Repository</a></li>
 <li><a class="reference internal" href="#response">Response</a></li>
 <li><a class="reference internal" href="#accessing-the-edh-database-using-r">Accessing the EDH database using R</a><ul>
-<li><a class="reference internal" href="#functions-usage">Functions Usage</a></li>
+<li><a class="reference internal" href="#function-usage">Function usage</a></li>
 <li><a class="reference internal" href="#search-parameters">Search parameters</a><ul>
 <li><a class="reference internal" href="#inscriptions-and-geography">Inscriptions and Geography</a></li>
 <li><a class="reference internal" href="#inscriptions-only">Inscriptions only</a></li>
@@ -56,31 +56,9 @@
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#examples">Examples</a><ul>
-<li><a class="reference internal" href="#accessing-epigraphic-database-heidelberg-inscriptions">Accessing epigraphic database Heidelberg: Inscriptions</a><ul>
-<li><a class="reference internal" href="#output">Output</a><ul>
-<li><a class="reference internal" href="#people">people</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#function-edhw">Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code></a><ul>
-<li><a class="reference internal" href="#function-usage">Function usage</a></li>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#edh-variables">EDH Variables</a></li>
-<li><a class="reference internal" href="#relative-dating">Relative dating</a><ul>
-<li><a class="reference internal" href="#remove-missing-data">Remove missing data</a></li>
-<li><a class="reference internal" href="#data-frames">Data frames</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#plotting-time-spans-of-existence">Plotting time spans of existence</a><ul>
-<li><a class="reference internal" href="#treating-outliers">Treating Outliers</a></li>
-<li><a class="reference internal" href="#plotting-without-outliers">Plotting without outliers</a></li>
-<li><a class="reference internal" href="#other-plots">Other plots</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+<li><a class="reference internal" href="#accessing-epigraphic-database-heidelberg-inscriptions">Accessing Epigraphic Database Heidelberg: Inscriptions</a><ul>
+<li><a class="reference internal" href="#output">Output</a></li>
 </ul>
 </li>
 </ul>
@@ -88,11 +66,11 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="UAT.html"
-                        title="previous chapter">User Acceptance Testing</a></p>
+  <p class="topless"><a href="Sciencedata_dk.html"
+                        title="previous chapter">DEiC’s sciencedata.dk</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="EpigraphicNetwork.html"
-                        title="next chapter">Epigraphic Networks using R</a></p>
+  <p class="topless"><a href="EDHVariables.html"
+                        title="next chapter">Extracting <code class="docutils literal notranslate"><span class="pre">EDH</span></code> Variables</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -179,8 +157,8 @@ and <code class="docutils literal notranslate"><span class="pre">&quot;bibliogra
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="section" id="functions-usage">
-<h3>Functions Usage<a class="headerlink" href="#functions-usage" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="function-usage">
+<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="get.edh">
 <code class="sig-prename descclassname">get.</code><code class="sig-name descname">edh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get.edh" title="Permalink to this definition">¶</a></dt>
@@ -203,26 +181,6 @@ and <code class="docutils literal notranslate"><span class="pre">&quot;bibliogra
 <p class="admonition-title">Note</p>
 <p>“<code class="docutils literal notranslate"><span class="pre">R&gt;</span></code>” at the beginning of the line means that the following code is
 written in <code class="docutils literal notranslate"><span class="pre">R</span></code>. Comments are preceded by “<code class="docutils literal notranslate"><span class="pre">#</span></code>”.</p>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<dl class="function">
-<dt id="get.edhw">
-<code class="sig-prename descclassname">get.</code><code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get.edhw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># to perform several queries</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edhw</span><span class="p">(</span><span class="n">hd_nr</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> is a wrapper function to perform several queries from the EDH database API using
-identification numbers.</p>
-<blockquote>
-<div><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Currently, function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> works only for inscriptions.</p>
 </div>
 </div></blockquote>
 <div class="line-block">
@@ -466,30 +424,65 @@ handled with similar arguments in the <code class="docutils literal notranslate"
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+</div>
 <div class="section" id="accessing-epigraphic-database-heidelberg-inscriptions">
-<h3>Accessing epigraphic database Heidelberg: Inscriptions<a class="headerlink" href="#accessing-epigraphic-database-heidelberg-inscriptions" title="Permalink to this headline">¶</a></h3>
-<p>To study temporary uncertainty, for example, we need to access to an epigraphic database like the Heidelberg.
-The wrapper function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> allows multiple queries by using the Heidelberg number <code class="docutils literal notranslate"><span class="pre">hd_nr</span></code>.</p>
-<div class="highlight-R notranslate" id="index-0"><div class="highlight"><pre><span></span><span class="c1"># get data API from EDH with a wrapper function</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDH</span> <span class="o">&lt;-</span> <span class="nf">get.edhw</span><span class="p">(</span><span class="n">hd_nr</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">82464</span><span class="p">)</span>  <span class="c1"># (20-11-2019)</span>
+<h2>Accessing Epigraphic Database Heidelberg: Inscriptions<a class="headerlink" href="#accessing-epigraphic-database-heidelberg-inscriptions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="get.edhw">
+<code class="sig-prename descclassname">get.</code><code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#get.edhw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">length</span><span class="p">(</span><span class="n">EDH</span><span class="p">)</span>
-<span class="c1">#[1] 82464</span>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># to perform several queries</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">get.edhw</span><span class="p">(</span><span class="n">hd_nr</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>which will produce a list object with the existing entries for each inscription, and where entries have different length.</p>
+<p>To study temporary uncertainty, for example, we need to access to an epigraphic database like the Heidelberg.
+The wrapper function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> allows multiple queries by using the Heidelberg number <code class="docutils literal notranslate"><span class="pre">hd_nr</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> is a wrapper function to perform several queries from the Epigraphic Database Heidelberg API using
+identification numbers.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Beware that retrieving such a large number of records will take a very long time.
-Hence, you can do it by parts and then collate the lists into another object.</p>
+<p>Currently, function <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> works only for inscriptions.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-R notranslate" id="index-0"><div class="highlight"><pre><span></span><span class="c1"># get data API from EDH with a wrapper function</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDH</span> <span class="o">&lt;-</span> <span class="nf">get.edhw</span><span class="p">(</span><span class="n">hd_nr</span><span class="o">=</span><span class="m">1</span><span class="o">:</span><span class="m">83821</span><span class="p">)</span>  <span class="c1"># (03-11-2020)</span>
+
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">length</span><span class="p">(</span><span class="n">EDH</span><span class="p">)</span>
+<span class="c1">#[1] 83821</span>
+
+<span class="c1"># or load it from the package</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">data</span><span class="p">(</span><span class="s">&quot;EDH&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This wrapper function basically perform the following loop that
+will produce a list object with the existing entries for each inscription,
+and where entries have different length.</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># grab the data from EDH API and record it in &#39;EDH&#39;</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDH</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span>
+<span class="c1"># 82464 INSCRIPTIONS (20-11-2019)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">for</span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="nf">seq_len</span><span class="p">(</span><span class="m">82464</span><span class="p">))</span> <span class="p">{</span>
+<span class="o">+</span>    <span class="n">EDH[</span><span class="nf">[length</span><span class="p">(</span><span class="n">EDH</span><span class="p">)</span><span class="m">+1L</span><span class="n">]]</span> <span class="o">&lt;-</span> <span class="nf">try</span><span class="p">(</span><span class="nf">get.edh</span><span class="p">(</span><span class="n">hd_nr</span><span class="o">=</span><span class="n">i</span><span class="p">))</span>
+<span class="o">+</span>    <span class="p">}</span>
+</pre></div>
+</div>
+<p>Beware that retrieving such a large number of records will take a very long time,
+and this can be done by parts and then collate the lists into the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> object.</p>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Character <code class="docutils literal notranslate"><span class="pre">+</span></code> in the code shows the scope of the loop.</p>
 </div>
 </div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <div class="section" id="output">
-<h4>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h4>
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
 <p>The output depends on each particular case.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">is</span><span class="p">(</span><span class="n">EDH</span><span class="p">)</span>
 <span class="c1">#[1] &quot;list&quot;   &quot;vector&quot;</span>
@@ -540,8 +533,6 @@ Hence, you can do it by parts and then collate the lists into another object.</p
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="section" id="people">
-<h5>people<a class="headerlink" href="#people" title="Permalink to this headline">¶</a></h5>
 <p>Attribute <code class="docutils literal notranslate"><span class="pre">people</span></code> is another list with other <cite>attribute</cite> names</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">length</span><span class="p">(</span><span class="n">EDH[[1]]</span><span class="o">$</span><span class="n">people</span><span class="p">)</span>
 <span class="c1">#[1] 3</span>
@@ -558,355 +549,9 @@ Hence, you can do it by parts and then collate the lists into another object.</p
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>A complete list of attribute names in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is given the the <a class="reference internal" href="#edh-vars"><span class="std std-ref">EDH Variables</span></a> section.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<span class="target" id="edhw-fun"></span><dl class="function">
-<dt id="edhw">
-<code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#edhw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="function-edhw">
-<h2>Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code><a class="headerlink" href="#function-edhw" title="Permalink to this headline">¶</a></h2>
-<p>Wrapper function for the extraction of variables or the manipulation of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is found in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="section" id="function-usage">
-<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of accepted parameter arguments</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">as</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">type</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;long&quot;</span><span class="p">,</span> <span class="s">&quot;wide&quot;</span><span class="p">,</span> <span class="s">&quot;narrow&quot;</span><span class="p">),</span> <span class="n">split</span><span class="p">,</span>
-        <span class="n">select</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-<div class="section" id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
-<p>Formal arguments of <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> are:</p>
-<ul>
-<li><p><cite>vars:</cite></p>
-<blockquote>
-<div><p>Chosen variables from the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset (vector)</p>
-</div></blockquote>
-</li>
-<li><p><cite>x:</cite></p>
-<blockquote>
-<div><p>An optional list object name with fragments of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</p>
-</div></blockquote>
-</li>
-<li><p><cite>as:</cite></p>
-<blockquote>
-<div><p>Format to return the output. Currently either as a <code class="docutils literal notranslate"><span class="pre">&quot;list&quot;</span></code> or a data frame <code class="docutils literal notranslate"><span class="pre">&quot;df&quot;</span></code> object.</p>
-</div></blockquote>
-</li>
-<li><p><cite>type:</cite></p>
-<blockquote>
-<div><p>Format of the data frame output. Currently  either a <code class="docutils literal notranslate"><span class="pre">&quot;long&quot;</span></code> or a <code class="docutils literal notranslate"><span class="pre">&quot;wide&quot;</span></code> table (option <code class="docutils literal notranslate"><span class="pre">&quot;narrow&quot;</span></code> not yet implemented).</p>
-</div></blockquote>
-</li>
-<li><dl class="simple">
-<dt><cite>split:</cite></dt><dd><p>Divide the data into groups by <cite>id</cite>? (logical and optional)</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><cite>select:</cite></dt><dd><p>select <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> variables? (logical and optional, for data frame <code class="docutils literal notranslate"><span class="pre">&quot;long&quot;</span></code> only)</p>
-</dd>
-</dl>
-</li>
-<li><p><cite>addID:</cite></p>
-<blockquote>
-<div><p>Add identification to the output? (optional and logical)</p>
-</div></blockquote>
-</li>
-<li><p><cite>limit:</cite></p>
-<blockquote>
-<div><p>Limit the returned output. Ignored if <cite>id</cite> is specified (optional, integer or vector)</p>
-</div></blockquote>
-</li>
-<li><p><cite>id:</cite></p>
-<blockquote>
-<div><p>Select only the <code class="docutils literal notranslate"><span class="pre">hd_nr</span></code> <cite>id(s)</cite>  (optional, integer or character)</p>
-</div></blockquote>
-</li>
-<li><p><cite>na.rm:</cite></p>
-<blockquote>
-<div><p>Remove entries with <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code> information? (logical and optional)</p>
-</div></blockquote>
-</li>
-<li><p><cite>…</cite></p>
-<blockquote>
-<div><p>Optional arguments if needed.</p>
-</div></blockquote>
-</li>
+<ul class="simple">
+<li><p>(see <a class="reference internal" href="EDHVariables.html#edh-attr"><span class="std std-ref">attributes in EDH dataset</span></a>)</p></li>
 </ul>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Implement the <code class="docutils literal notranslate"><span class="pre">&quot;narrow&quot;</span></code> <cite>type</cite> option to <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-</div>
-<div class="section" id="edh-variables">
-<span id="edh-vars"></span><h2>EDH Variables<a class="headerlink" href="#edh-variables" title="Permalink to this headline">¶</a></h2>
-<p>The aim of the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function is to extract variables or attributes of inscriptions, which are output values
-typically produced by the <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> function.</p>
-<p>These variables are at least one the following items: <code class="docutils literal notranslate"><span class="pre">&quot;commentary&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;fotos&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;country&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;depth&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;diplomatic_text&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;edh_geography_uri&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;findspot&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;findspot_ancient&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;findspot_modern&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;geography&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;height&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;language&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;last_update&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;letter_size&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;literature&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;material&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;military&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;modern_region&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;present_location&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;religion&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;province_label&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;responsible_individual&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;social_economic_legal_history&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;transcription&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;trismegistos_uri&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;type_of_inscription&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;type_of_monument&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;uri&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;width&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;work_status&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;year_of_find&quot;</span></code>.</p>
-<p>Another output variable is <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> that is a list of persons named in the inscriptions with at least the following
-items <code class="docutils literal notranslate"><span class="pre">&quot;person_id&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;nomen&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;cognomen&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;praenomen&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;gender&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;status&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;tribus&quot;</span></code>,
-<code class="docutils literal notranslate"><span class="pre">&quot;origo&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;occupation&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">years&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">months&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">days&quot;</span></code>.</p>
-<p>Even though it is possible to combine variables with <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>, selecting peoples’ items constitutes a
-remaining task for <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-<div class="section" id="relative-dating">
-<h2>Relative dating<a class="headerlink" href="#relative-dating" title="Permalink to this headline">¶</a></h2>
-<p>We are going to apply the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function to check the relative dating of the inscriptions in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code>
-dataset. For this, we choose <em>variables</em> from the EDH list that are <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code> and
-<code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code> with an identification number in <code class="docutils literal notranslate"><span class="pre">&quot;ID&quot;</span></code>.</p>
-<p>For a simple relative dating analysis of <code class="docutils literal notranslate"><span class="pre">EDH</span></code> inscriptions, we choose chronological data variables:</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list for relative variables in &#39;EDH&#39; (default)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
-</pre></div>
-</div>
-<p>Since argument <em>x</em> is not specified in the function, the “EDH” dataset in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package is taken if available
-with a <em>Warning</em> message.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<blockquote id="recursively-apply">
-<div><div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>The above use of function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> is wrapping the <code class="docutils literal notranslate"><span class="pre">base</span></code> <code class="docutils literal notranslate"><span class="pre">lapply</span></code> function as</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># recursively apply a function over the list for  variables</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdates</span> <span class="o">&lt;-</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH</span><span class="p">,</span> <span class="n">`[`</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
-</pre></div>
-</div>
-<p>where a pair of backquotes (aka “backticks”) is a way to refer in <code class="docutils literal notranslate"><span class="pre">R</span></code> to names or combinations
-of symbols that are otherwise reserved or illegal, or non-syntactic names.
-Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(foo,</span> <span class="pre">`[`,</span> <span class="pre">c(...)</span> <span class="pre">)</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">apply(foo,</span> <span class="pre">function</span> <span class="pre">(x)</span> <span class="pre">x[c(...)])</span></code>.</p>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>As a result, <code class="docutils literal notranslate"><span class="pre">EDHdates</span></code> is a new list object with the chronological data items and an <code class="docutils literal notranslate"><span class="pre">&quot;ID&quot;</span></code> for all entries in <code class="docutils literal notranslate"><span class="pre">EDH</span></code>.</p>
-<blockquote>
-<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">length</span><span class="p">(</span><span class="n">EDHdates</span><span class="p">)</span>
-<span class="c1">#[1] 82465</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>where the first entry is</p>
-<blockquote>
-<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the new object &#39;EDHdates&#39;</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">EDHdates</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
-<span class="c1">#[[1]]</span>
-<span class="c1">#[[1]]$ID</span>
-<span class="c1">#[1] &quot;000001&quot;</span>
-<span class="c1">#</span>
-<span class="c1">#[[1]]$not_after</span>
-<span class="c1">#[1] &quot;0130&quot;</span>
-<span class="c1">#</span>
-<span class="c1">#[[1]]$not_before</span>
-<span class="c1">#[1] &quot;0071&quot;</span>
-</pre></div>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="section" id="remove-missing-data">
-<h3>Remove missing data<a class="headerlink" href="#remove-missing-data" title="Permalink to this headline">¶</a></h3>
-<p>It is also possible to remove missing data from <code class="docutils literal notranslate"><span class="pre">EDH</span></code> by activating the <em>na.rm</em> argument in function
-<code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove missing data</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdt</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>and now the object has a shorter length</p>
-<blockquote>
-<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">length</span><span class="p">(</span><span class="n">EDHdt</span><span class="p">)</span>
-<span class="c1">#[1] 55207</span>
-</pre></div>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<blockquote>
-<div><div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="Uncertainty.html#missing"><span class="std std-ref">Missing data</span></a> within uncertainty.</p>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-<div class="section" id="data-frames">
-<h3>Data frames<a class="headerlink" href="#data-frames" title="Permalink to this headline">¶</a></h3>
-<p>To produce data frames, we need to make explicit the chronological data in the function where <code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>
-is added by default.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># produce a data frame with chronological data variables and remove missing data</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdtdf</span>  <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">,</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span> <span class="p">)</span>
-</pre></div>
-</div>
-<p>The first entries are</p>
-<blockquote>
-<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the first ones</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="p">)</span>
-<span class="c1">#        id not_after not_before</span>
-<span class="c1">#1 HD000001      0130       0071</span>
-<span class="c1">#2 HD000002      0200       0051</span>
-<span class="c1">#3 HD000003      0170       0131</span>
-<span class="c1">#4 HD000004      0200       0151</span>
-<span class="c1">#5 HD000005      0200       0001</span>
-<span class="c1">#6 HD000006      0150       0071</span>
-</pre></div>
-</div>
-</div></blockquote>
-<p>and the last entries</p>
-<blockquote>
-<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># look at the last ones</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">tail</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="p">)</span>
-<span class="c1">#            id not_after not_before</span>
-<span class="c1">#81580 HD080143      0500       0401</span>
-<span class="c1">#81581 HD080144      0500       0401</span>
-<span class="c1">#81582 HD080145      0500       0401</span>
-<span class="c1">#81584 HD080147      0500       0401</span>
-<span class="c1">#81586 HD080149      0500       0401</span>
-<span class="c1">#81588 HD080151      0500       0401</span>
-</pre></div>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>To compute the years, which are in the second and third column of <code class="docutils literal notranslate"><span class="pre">EDHdtdf</span></code> we need to <em>unlist</em>
-the data frame first and treat the data as numeric format.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># years: oldest and latest</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">years</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="p">[,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]))),</span> <span class="nb">max</span><span class="p">(</span><span class="k">as</span><span class="o">.</span><span class="n">numeric</span><span class="p">(</span><span class="n">unlist</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="p">[,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]))))</span>
-<span class="c1">#[1] -530 1998</span>
-</pre></div>
-</div>
-<p>Years are between 530 BC and 1998 AC.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-</div>
-<div class="section" id="plotting-time-spans-of-existence">
-<h2>Plotting time spans of existence<a class="headerlink" href="#plotting-time-spans-of-existence" title="Permalink to this headline">¶</a></h2>
-<p>One plot of relative dating for Roman inscriptions is made with the [R] <code class="docutils literal notranslate"><span class="pre">graphics</span></code> core package (or <code class="docutils literal notranslate"><span class="pre">base</span></code> package with R version 4.0.0).</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">EDHdtdf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
-<span class="o">+</span>    <span class="n">main</span><span class="o">=</span><span class="s">&quot;Epigraphic time intervals (ALL)&quot;</span><span class="p">)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">points</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">not_after</span><span class="p">,</span> <span class="n">EDHdtdf</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#808080&quot;</span><span class="p">)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">segments</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">not_before</span><span class="p">),</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">ID</span><span class="p">),</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">not_after</span><span class="p">),</span>
-<span class="o">+</span>    <span class="nf">as.numeric</span><span class="p">(</span><span class="n">EDHdtdf</span><span class="o">$</span><span class="n">ID</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="n">grDevices</span><span class="o">::</span><span class="nf">adjustcolor</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="m">.25</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>That produces:</p>
-<a class="reference internal image-reference" href="_images/EDH-times.png"><img alt="_images/EDH-times.png" src="_images/EDH-times.png" style="width: 450px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="section" id="treating-outliers">
-<h3>Treating Outliers<a class="headerlink" href="#treating-outliers" title="Permalink to this headline">¶</a></h3>
-<p>By looking at the above plot, we can clearly see a couple of outliers.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># first outlier is the maximum value of the dates</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdf[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">)))</span>
-<span class="c1">#[1] 1998</span>
-</pre></div>
-</div>
-<p>We would like now to remove the two most extreme outliers.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove last date</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdtdfx</span> <span class="o">&lt;-</span> <span class="n">EDHdtdf[</span><span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="n">EDHdtdf[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="o">==</span><span class="m">1998</span><span class="p">),</span> <span class="n">]</span>
-</pre></div>
-</div>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># second outlier is now the maximum value</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdfx[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">)))</span>
-<span class="c1">#[1] 1500</span>
-
-<span class="c1"># remove the (second) last date</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">EDHdtdfx</span> <span class="o">&lt;-</span> <span class="n">EDHdtdfx[</span><span class="o">-</span><span class="nf">which</span><span class="p">(</span><span class="n">EDHdtdfx[</span><span class="p">,</span><span class="m">2</span><span class="n">]</span><span class="o">==</span><span class="m">1500</span><span class="p">),</span> <span class="n">]</span>
-</pre></div>
-</div>
-<p>Now we need to update the years.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># update years</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">years</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdfx[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">))),</span><span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdfx[</span><span class="p">,</span><span class="m">2</span><span class="o">:</span><span class="m">3</span><span class="n">]</span><span class="p">))))</span>
-<span class="c1">#[1] -530  95</span>
-</pre></div>
-</div>
-<p>Years are now between 530 BC and 95 AC.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-<div class="section" id="plotting-without-outliers">
-<h3>Plotting without outliers<a class="headerlink" href="#plotting-without-outliers" title="Permalink to this headline">¶</a></h3>
-<p>The plot is now constructed without the two outliers and with updated years.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot with graphics</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#C0C0C0&quot;</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;Year&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;ID&quot;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">years</span><span class="p">,</span>
-<span class="o">+</span>    <span class="n">main</span><span class="o">=</span><span class="s">&quot;Epigraphic time intervals (no outliers)&quot;</span><span class="p">)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">points</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">,</span> <span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">ID</span><span class="p">,</span> <span class="n">pch</span><span class="o">=</span><span class="m">20</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="s">&quot;#808080&quot;</span><span class="p">)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">segments</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">),</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">ID</span><span class="p">),</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">),</span>
-<span class="o">+</span>    <span class="nf">as.numeric</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">ID</span><span class="p">),</span> <span class="n">col</span><span class="o">=</span><span class="n">grDevices</span><span class="o">::</span><span class="nf">adjustcolor</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="m">.25</span><span class="p">))</span>
-</pre></div>
-</div>
-<p>That produces a plot with no outliers:</p>
-<a class="reference internal image-reference" href="_images/EDH-timesNO.png"><img alt="_images/EDH-timesNO.png" src="_images/EDH-timesNO.png" style="width: 450px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-<div class="section" id="other-plots">
-<h3>Other plots<a class="headerlink" href="#other-plots" title="Permalink to this headline">¶</a></h3>
-<p>Visualization helps to perform different kinds of analyses.</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot not_after against not_before</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">plot</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">,</span> <span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span>
-<span class="o">+</span>    <span class="n">xlim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">))),</span><span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_after</span><span class="p">)))),</span>
-<span class="o">+</span>    <span class="n">ylim</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="nf">min</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">))),</span><span class="nf">max</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">EDHdtdfx</span><span class="o">$</span><span class="n">not_before</span><span class="p">)))))</span>
-</pre></div>
-</div>
-<p>That produces:</p>
-<a class="reference internal image-reference" href="_images/EDH-BeforeAfterTimes.png"><img alt="_images/EDH-BeforeAfterTimes.png" src="_images/EDH-BeforeAfterTimes.png" style="width: 450px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>Calculate the residuals and start a statistic analysis of dates.</p>
-</div>
-</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -927,12 +572,12 @@ the data frame first and treat the data as numeric format.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
+          <a href="EDHVariables.html" title="Extracting EDH Variables"
              >next</a> |</li>
         <li class="right" >
-          <a href="UAT.html" title="User Acceptance Testing"
+          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

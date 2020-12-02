@@ -47,7 +47,7 @@ with DEiC's `sciencedata.dk <https://sciencedata.dk>`__
 
                            
 
-Note that at this moment this function requires the [R] package ``"httr"``. 
+Note that this function requires the [R] package ``"httr"``. 
 
 
 

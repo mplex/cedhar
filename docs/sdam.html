@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="The &quot;sdam&quot; R Package description" name="description" />
 <meta content="software, documentation, R-packages" name="keywords" />
 
-    <title>The SDAM project &#8212; cedhar 0.0.5 documentation</title>
+    <title>The SDAM project &#8212; cedhar 0.0.6 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,8 +17,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Time and dating" href="Time.html" />
-    <link rel="prev" title="DEiC’s sciencedata.dk" href="Sciencedata_dk.html" /> 
+    <link rel="next" title="DEiC’s sciencedata.dk" href="Sciencedata_dk.html" />
+    <link rel="prev" title="User Acceptance Testing" href="UAT.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,12 +27,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="Time.html" title="Time and dating"
+          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
+          <a href="UAT.html" title="User Acceptance Testing"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -57,11 +57,11 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="Sciencedata_dk.html"
-                        title="previous chapter">DEiC’s sciencedata.dk</a></p>
+  <p class="topless"><a href="UAT.html"
+                        title="previous chapter">User Acceptance Testing</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="Time.html"
-                        title="next chapter">Time and dating</a></p>
+  <p class="topless"><a href="Sciencedata_dk.html"
+                        title="next chapter">DEiC’s sciencedata.dk</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -147,7 +147,6 @@ analyses within Social Dynamics and complexity in the Ancient Mediterranean
 (<a class="reference external" href="https://sdam-au.github.io/sdam-au/">SDAM</a>) project.</p>
 <ul class="simple">
 <li><p>(See <a class="reference external" href="https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf">“sdam” manual</a>)</p></li>
-<li><p>(See <a class="reference internal" href="#sdam-proj"><span class="std std-ref">“SDAM project”</span></a>)</p></li>
 </ul>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -240,12 +239,17 @@ or RStudio if you wish.</p>
 <span id="news"></span><h2>News from <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package<a class="headerlink" href="#news-from-sdam-package" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><dl>
-<dt><strong>Version 0.3.0</strong> (beta) released (28-10-2020).</dt><dd><ul class="simple">
-<li><p>Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> combines <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> with other variables</p></li>
-<li><p>Different data frame formats in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code></p></li>
+<dt><strong>Version 0.3.0</strong> (beta) released (21-11-2020).</dt><dd><ul class="simple">
+<li><p><em>New functions</em> <code class="docutils literal notranslate"><span class="pre">plot.dates()</span></code> and <code class="docutils literal notranslate"><span class="pre">prex()</span></code> (cf. )</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is updated</p></li>
 </ul>
 <ul class="simple">
-<li><p>Argument <cite>maxlimit</cite> is added to <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code></p></li>
+<li><p>Function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> combines <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> with other EDH variables</p></li>
+</ul>
+<ul class="simple">
+<li><p>Argument <cite>select</cite>  added to <code class="docutils literal notranslate"><span class="pre">edhw()</span></code></p></li>
+<li><p>Argument <cite>maxlimit</cite>  added to <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code></p></li>
+<li><p>Argument <cite>authenticate</cite> in  <code class="docutils literal notranslate"><span class="pre">request()</span></code>  renamed to <cite>anonymous</cite></p></li>
 </ul>
 </dd>
 </dl>
@@ -263,8 +267,7 @@ or RStudio if you wish.</p>
 <li><p>Documentation <a class="reference external" href="https://sdam-au.github.io/sdam/">website</a> launched</p></li>
 </ul>
 <ul class="simple">
-<li><p>v.0.2.2 available  (2-7-2020)  Argument <cite>force</cite> is added to <code class="docutils literal notranslate"><span class="pre">request()</span></code></p></li>
-<li><p>v.0.2.3 available  (4-8-2020)  Argument <cite>rm.file</cite> is added to <code class="docutils literal notranslate"><span class="pre">request()</span></code></p></li>
+<li><p>Arguments <cite>force</cite>  and <cite>rm.file</cite> added to <code class="docutils literal notranslate"><span class="pre">request()</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -310,12 +313,12 @@ or RStudio if you wish.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="Time.html" title="Time and dating"
+          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
              >next</a> |</li>
         <li class="right" >
-          <a href="Sciencedata_dk.html" title="DEiC’s sciencedata.dk"
+          <a href="UAT.html" title="User Acceptance Testing"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.5 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

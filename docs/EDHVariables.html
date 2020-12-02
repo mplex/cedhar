@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta content="Extracting variables from the EDH dataset" name="description" />
+<meta content="extraction, manipulation, epigraphic, dataset" name="keywords" />
+
+    <title>Extracting EDH Variables &#8212; cedhar 0.0.6 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Time and dating" href="Time.html" />
+    <link rel="prev" title="Epigraphic Database Heidelberg" href="Epigraphic.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="Time.html" title="Time and dating"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CEDHAR_logo_black_large_800x100.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Extracting <code class="docutils literal notranslate"><span class="pre">EDH</span></code> Variables</a><ul>
+<li><a class="reference internal" href="#edh-variables">EDH variables</a><ul>
+<li><a class="reference internal" href="#function-usage">Function usage</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#attributes-in-edh-dataset">Attributes in <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</a></li>
+<li><a class="reference internal" href="#example-relative-dating-in-edh">Example: Relative dating in EDH</a><ul>
+<li><a class="reference internal" href="#complete-cases">Complete cases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Epigraphic.html"
+                        title="previous chapter">Epigraphic Database Heidelberg</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Time.html"
+                        title="next chapter">Time and dating</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/EDHVariables.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="extracting-edh-variables">
+<span id="edh-vars"></span><h1>Extracting <code class="docutils literal notranslate"><span class="pre">EDH</span></code> Variables<a class="headerlink" href="#extracting-edh-variables" title="Permalink to this headline">¶</a></h1>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="edh-variables">
+<span id="edhw-fun"></span><h2>EDH variables<a class="headerlink" href="#edh-variables" title="Permalink to this headline">¶</a></h2>
+<p>Another wrapper function, this time for the extraction of variables from the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is found in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<dl class="function">
+<dt id="edhw">
+<code class="sig-name descname">edhw</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#edhw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="function-usage">
+<h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># accepted parameter arguments</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">as</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">type</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;long&quot;</span><span class="p">,</span> <span class="s">&quot;wide&quot;</span><span class="p">,</span> <span class="s">&quot;narrow&quot;</span><span class="p">),</span>
+        <span class="n">split</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<p>Formal arguments of <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> are:</p>
+<ul>
+<li><p><cite>vars:</cite></p>
+<blockquote>
+<div><p>Chosen variables from the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset (vector)</p>
+</div></blockquote>
+</li>
+<li><p><cite>x:</cite></p>
+<blockquote>
+<div><p>An optional list object name with fragments of the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</p>
+</div></blockquote>
+</li>
+<li><p><cite>as:</cite></p>
+<blockquote>
+<div><p>Format to return the output. Currently either as a <code class="docutils literal notranslate"><span class="pre">&quot;list&quot;</span></code> or a data frame <code class="docutils literal notranslate"><span class="pre">&quot;df&quot;</span></code> object.</p>
+</div></blockquote>
+</li>
+<li><p><cite>type:</cite></p>
+<blockquote>
+<div><p>Format of the data frame output. Currently  either a <code class="docutils literal notranslate"><span class="pre">&quot;long&quot;</span></code> or a <code class="docutils literal notranslate"><span class="pre">&quot;wide&quot;</span></code> table (option <code class="docutils literal notranslate"><span class="pre">&quot;narrow&quot;</span></code> not yet implemented).</p>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt><cite>split:</cite></dt><dd><p>Divide the data into groups by <cite>id</cite>? (logical and optional)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><cite>select:</cite></dt><dd><p><code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> variables to select (vector and optional, data frame <cite>type</cite> <code class="docutils literal notranslate"><span class="pre">&quot;long&quot;</span></code> only)</p>
+</dd>
+</dl>
+</li>
+<li><p><cite>addID:</cite></p>
+<blockquote>
+<div><p>Add identification to the output? (optional and logical)</p>
+</div></blockquote>
+</li>
+<li><p><cite>limit:</cite></p>
+<blockquote>
+<div><p>Limit the returned output. Ignored if <cite>id</cite> is specified (optional, integer or vector)</p>
+</div></blockquote>
+</li>
+<li><p><cite>id:</cite></p>
+<blockquote>
+<div><p>Select only the <code class="docutils literal notranslate"><span class="pre">hd_nr</span></code> <cite>id(s)</cite>  (optional, integer or character)</p>
+</div></blockquote>
+</li>
+<li><p><cite>na.rm:</cite></p>
+<blockquote>
+<div><p>Remove entries with <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code> information? (logical and optional)</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">&quot;narrow&quot;</span></code> <cite>type</cite> option to <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="attributes-in-edh-dataset">
+<span id="edh-attr"></span><h2>Attributes in <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset<a class="headerlink" href="#attributes-in-edh-dataset" title="Permalink to this headline">¶</a></h2>
+<p>The aim of the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function is to extract attributes or variables of inscriptions. These inscriptions are output values
+typically produced by the <code class="docutils literal notranslate"><span class="pre">get.edh()</span></code> or <code class="docutils literal notranslate"><span class="pre">get.edhw()</span></code> functions.</p>
+<p>The records in the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset have at least one the following items:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 30%" />
+<col style="width: 42%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;commentary&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;fotos&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;country&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;depth&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;diplomatic_text&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;edh_geography_uri&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;findspot&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;findspot_ancient&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;findspot_modern&quot;</span></code></p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;geography&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;height&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;id&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;language&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;last_update&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;letter_size&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;literature&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;material&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;military&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;modern_region&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;present_location&quot;</span></code></p>
+</td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;religion&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;province_label&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;responsible_individual&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;social_economic_legal_history&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;transcription&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;trismegistos_uri&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;type_of_inscription&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;type_of_monument&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;uri&quot;</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;width&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;work_status&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;year_of_find&quot;</span></code></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Another output variable is <code class="docutils literal notranslate"><span class="pre">&quot;people&quot;</span></code> that is a list of persons named in the inscriptions with at least the following
+items</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 54%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&quot;person_id&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;nomen&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;cognomen&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;praenomen&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;name&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;gender&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;status&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;tribus&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;origo&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;occupation&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">years&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">months&quot;</span></code>
+<code class="docutils literal notranslate"><span class="pre">&quot;age:</span> <span class="pre">days&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="example-relative-dating-in-edh">
+<span id="rel-dat"></span><h2>Example: Relative dating in EDH<a class="headerlink" href="#example-relative-dating-in-edh" title="Permalink to this headline">¶</a></h2>
+<p>We are going to apply the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function to check the relative dating of Roman inscriptions, and
+for a simple relative dating analysis, we choose chronological data variables in <code class="docutils literal notranslate"><span class="pre">vars</span></code>:</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list for relative variables in &#39;EDH&#39; (default)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>In this case, the boundaries of the time span of existence TPQ and TAQ are variables <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code>,
+respectively.</p>
+<ul class="simple">
+<li><p>(see <a class="reference internal" href="Uncertainty.html#tapq"><span class="std std-ref">Boundaries of existence</span></a> for the meaning of TAQ and TPQ.)</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Since argument <em>x</em> is not specified in the function, the “EDH” dataset in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package is taken if available
+with a <em>Warning</em> message.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote id="recursively-apply">
+<div><div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The above use of function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> is wrapping the <code class="docutils literal notranslate"><span class="pre">base</span></code> <code class="docutils literal notranslate"><span class="pre">lapply</span></code> function as</p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># recursively apply a function over the list for  variables</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">lapply</span><span class="p">(</span><span class="n">EDH</span><span class="p">,</span> <span class="n">`[`</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>where a pair of backquotes (aka “backticks”) is a way to refer in <code class="docutils literal notranslate"><span class="pre">R</span></code> to names or combinations
+of symbols that are otherwise reserved or illegal, or non-syntactic names.
+Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(foo,</span> <span class="pre">`[`,</span> <span class="pre">c(...)</span> <span class="pre">)</span></code> is the same as <code class="docutils literal notranslate"><span class="pre">apply(foo,</span> <span class="pre">function</span> <span class="pre">(x)</span> <span class="pre">x[c(...)])</span></code>.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>The structure of such chronological data items is a list object with an <code class="docutils literal notranslate"><span class="pre">id</span></code> for all entries that is the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> <code class="docutils literal notranslate"><span class="pre">hd_nr</span></code>.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">str</span><span class="p">(</span><span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">)))</span>
+<span class="c1">#List of 83821</span>
+<span class="c1"># $ :List of 3</span>
+<span class="c1">#  ..$ id        : chr &quot;HD000001&quot;</span>
+<span class="c1">#  ..$ not_after : chr &quot;0130&quot;</span>
+<span class="c1">#  ..$ not_before: chr &quot;0071&quot;</span>
+<span class="c1"># $ :List of 3</span>
+<span class="c1">#  ..$ id        : chr &quot;HD000002&quot;</span>
+<span class="c1">#  ..$ not_after : chr &quot;0200&quot;</span>
+<span class="c1">#  ..$ not_before: chr &quot;0051&quot;</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="complete-cases">
+<span id="ccases"></span><h3>Complete cases<a class="headerlink" href="#complete-cases" title="Permalink to this headline">¶</a></h3>
+<p>By default, function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> do not remove missing data when present in all variables, but is possible to
+remove missing information by activating the <em>na.rm</em> argument.</p>
+<blockquote>
+<div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove missing data</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">str</span><span class="p">(</span><span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
+<span class="c1">#List of 60224</span>
+<span class="c1"># $ :List of 3</span>
+<span class="c1">#  ..$ id        : chr &quot;HD000001&quot;</span>
+<span class="c1">#  ..$ not_after : chr &quot;0130&quot;</span>
+<span class="c1">#  ..$ not_before: chr &quot;0071&quot;</span>
+<span class="c1"># $ :List of 3</span>
+<span class="c1">#  ..$ id        : chr &quot;HD000002&quot;</span>
+<span class="c1">#  ..$ not_after : chr &quot;0200&quot;</span>
+<span class="c1">#  ..$ not_before: chr &quot;0051&quot;</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>And work with complete cases.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="Uncertainty.html#missing"><span class="std std-ref">Missing data</span></a> within uncertainty.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="Time.html" title="Time and dating"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, CEDHAR - Aarhus University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

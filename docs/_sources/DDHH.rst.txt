@@ -92,7 +92,7 @@ or an ``Array`` or another JSON ``Object`` as the above example.
 
 
 JSON in R
-^^^^^^^^^
++++++++++
 
 Some R packages for reading JSON files in CRAN are
 
@@ -127,7 +127,7 @@ Lightweight markup languages are for producing documentation on the Web.
 |
 
 Markdown
-^^^^^^^^
+++++++++
 
 **Markdown** (MD), with suffixes ``.md``, ``.Rmd``, etc., is currently the markup language for GitHub, 
 and hence very popular among developers using this platform. The popularity of this format for writing 
@@ -148,7 +148,7 @@ for the web is however challenging its consistency and robustness, and today the
 |
 
 reStructuredText
-^^^^^^^^^^^^^^^^
+++++++++++++++++
 
 **reStructuredText** (RST) is written with the suffix ``.rst`` or ``.txt`` since is plaintext, which use simple and intuitive 
 constructs to structure complex technical documentation. Here "complex" means things like indexing, glossaries, etc. 
@@ -234,9 +234,9 @@ Another data format
 
 |
 
-    .. seealso:: 
-    
-        :ref:`"Digital tools" in Tools for Humanities and Social Sciences <HASS-dgtls>`
+..    .. seealso:: 
+..    
+..        :ref:`"Digital tools" in Tools for Humanities and Social Sciences <HASS-dgtls>`
 
 .. * See :ref:`"Digital tools" in Tools for Humanities and Social Sciences <HASS-dgtls>`
 

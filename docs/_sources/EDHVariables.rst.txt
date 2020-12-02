@@ -1,0 +1,307 @@
+
+.. _EDH-vars:
+
+
+****************************
+Extracting ``EDH`` Variables
+****************************
+
+.. ---
+.. layout: post
+.. title:  "Extracting Variables fron the EDH dataset"
+.. date:   30-10-2020 
+.. author: jaro
+.. categories: Short-reports
+.. ---
+
+.. <!--- # Short report: Extracting Variables fron the EDH dataset
+.. <span class="smallcaps">Antonio Rivero Ostoic  
+.. 30-10-2020</span>
+.. Short report:  [R]{.sans-serif}  --->
+
+.. This post is about Epigraphic Networks based on measures of similarity of artefact assemblages and geographic proximity. 
+
+
+|
+
+
+.. _edhw-fun:
+
+
+EDH variables
+==============
+
+Another wrapper function, this time for the extraction of variables from the ``EDH`` dataset is found in ``edhw()``. 
+
+
+|
+
+
+.. function:: edhw
+
+Function usage
+--------------
+
+.. code-block:: R
+
+    # accepted parameter arguments
+    R> edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), 
+            split, select, addID, limit, id, na.rm)
+    
+
+|
+
+Parameters
+----------
+
+
+Formal arguments of ``edhw()`` are:
+
+
+- `vars:`
+
+   Chosen variables from the ``EDH`` dataset (vector)
+ 
+
+- `x:`
+
+   An optional list object name with fragments of the ``EDH`` dataset
+
+
+- `as:`
+
+   Format to return the output. Currently either as a ``"list"`` or a data frame ``"df"`` object.
+
+
+- `type:`
+
+   Format of the data frame output. Currently  either a ``"long"`` or a ``"wide"`` table (option ``"narrow"`` not yet implemented).
+
+
+- `split:`
+   Divide the data into groups by `id`? (logical and optional)
+
+
+- `select:`
+   ``"people"`` variables to select (vector and optional, data frame `type` ``"long"`` only)
+
+
+- `addID:`
+
+   Add identification to the output? (optional and logical)
+
+- `limit:`
+
+   Limit the returned output. Ignored if `id` is specified (optional, integer or vector)
+
+
+- `id:`
+
+   Select only the ``hd_nr`` `id(s)`  (optional, integer or character)
+
+
+- `na.rm:`
+
+   Remove entries with ``<NA>`` information? (logical and optional)
+
+
+..  - `...`
+..  
+..     Optional arguments if needed.
+
+
+
+|
+
+    .. todo:: 
+    
+         Implement the ``"narrow"`` `type` option to ``edhw()``.
+
+
+|
+
+
+.. _edh-attr:
+
+
+Attributes in ``EDH`` dataset
+=============================
+
+The aim of the ``edhw()`` function is to extract attributes or variables of inscriptions. These inscriptions are output values
+typically produced by the ``get.edh()`` or ``get.edhw()`` functions. 
+
+The records in the ``EDH`` dataset have at least one the following items: 
+
+
++----------------------------+-----------------------------+-----------------------------------------+ 
+|  ``"commentary"``          |     ``"geography"``         |     ``"religion"``                      | 
+|  ``"fotos"``               |     ``"height"``            |     ``"province_label"``                | 
+|  ``"country"``             |     ``"id"``                |     ``"responsible_individual"``        | 
+|  ``"depth"``               |     ``"language"``          |     ``"social_economic_legal_history"`` | 
+|                            |     ``"last_update"``       |                                         | 
+|  ``"diplomatic_text"``     |     ``"letter_size"``       |     ``"transcription"``                 | 
+|  ``"edh_geography_uri"``   |     ``"literature"``        |     ``"trismegistos_uri"``              | 
+|  ``"findspot"``            |                             |     ``"type_of_inscription"``           | 
+|  ``"findspot_ancient"``    |     ``"material"``          |     ``"type_of_monument"``              | 
+|  ``"findspot_modern"``     |     ``"military"``          |     ``"uri"``                           | 
+|                            |     ``"modern_region"``     |                                         | 
+|                            |     ``"not_after"``         |     ``"width"``                         | 
+|                            |     ``"not_before"``        |     ``"work_status"``                   | 
+|                            |     ``"present_location"``  |     ``"year_of_find"``                  | 
++----------------------------+-----------------------------+-----------------------------------------+ 
+
+
+|
+
+
+Another output variable is ``"people"`` that is a list of persons named in the inscriptions with at least the following 
+items 
+
++------------------+---------------------+
+| ``"person_id"``  |   ``"origo"``       |
+| ``"nomen"``      |   ``"occupation"``  |
+| ``"cognomen"``   |   ``"age: years"``  |
+| ``"praenomen"``  |   ``"age: months"`` |
+| ``"name"``       |   ``"age: days"``   |
+| ``"gender"``     |                     |
+| ``"status"``     |                     |
+| ``"tribus"``     |                     |
++------------------+---------------------+
+
+
+
+
+|
+
+.. _rel-dat:
+
+
+Example: Relative dating in EDH
+===============================
+
+We are going to apply the ``edhw()`` function to check the relative dating of Roman inscriptions, and 
+for a simple relative dating analysis, we choose chronological data variables in ``vars``: 
+
+..  of ``EDH`` inscriptions
+..  in the ``EDH`` dataset. For this, we choose *variables* from the EDH list that are ``"not_after"`` and 
+..  ``"not_before"`` with an identification number in ``"ID"``. 
+
+
+
+..  In order , for example, we need to transform the 
+..  "attribute-components" of  into a data frame. Such transformation is possible 
+..  with , which is implemented in the ``edhw()`` wrapper function.
+
+
+.. code-block:: R
+
+    # make a list for relative variables in 'EDH' (default)
+    R> edhw(vars=c("not_after", "not_before"))
+    
+
+In this case, the boundaries of the time span of existence TPQ and TAQ are variables ``"not_after"`` and ``"not_before"``, 
+respectively. 
+
+
+* (see :ref:`Boundaries of existence <tapq>` for the meaning of TAQ and TPQ.)
+..  * (see :ref:`Time spans of existence <tmsp>` for an application of ``EDHdates``.)
+
+
+|
+
+
+Since argument *x* is not specified in the function, the "EDH" dataset in the ``sdam`` package is taken if available 
+with a *Warning* message.
+
+|
+
+.. _recursively-apply:
+
+    .. hint::    
+    
+        The above use of function ``edhw()`` is wrapping the ``base`` ``lapply`` function as
+
+        .. code-block:: R
+
+            # recursively apply a function over the list for  variables
+            R> lapply(EDH, `[`, c("not_after", "not_before") )
+
+
+        where a pair of backquotes (aka "backticks") is a way to refer in ``R`` to names or combinations 
+        of symbols that are otherwise reserved or illegal, or non-syntactic names. 
+        Hence, e.g. ``apply(foo, `[`, c(...) )`` is the same as ``apply(foo, function (x) x[c(...)])``.
+
+|
+
+
+
+The structure of such chronological data items is a list object with an ``id`` for all entries that is the ``EDH`` ``hd_nr``.
+
+    .. code-block:: R
+    
+        R> str(edhw(vars=c("not_after", "not_before")))
+        #List of 83821
+        # $ :List of 3
+        #  ..$ id        : chr "HD000001"
+        #  ..$ not_after : chr "0130"
+        #  ..$ not_before: chr "0071"
+        # $ :List of 3
+        #  ..$ id        : chr "HD000002"
+        #  ..$ not_after : chr "0200"
+        #  ..$ not_before: chr "0051"
+        # ...
+
+
+
+
+
+|
+
+
+.. _ccases:
+
+
+Complete cases
+--------------
+
+By default, function ``edhw()`` do not remove missing data when present in all variables, but is possible to 
+remove missing information by activating the *na.rm* argument.
+
+
+    .. code-block:: R
+    
+        # remove missing data
+        R> str(edhw(vars=c("not_after", "not_before"), na.rm=TRUE))
+        #List of 60224
+        # $ :List of 3
+        #  ..$ id        : chr "HD000001"
+        #  ..$ not_after : chr "0130"
+        #  ..$ not_before: chr "0071"
+        # $ :List of 3
+        #  ..$ id        : chr "HD000002"
+        #  ..$ not_after : chr "0200"
+        #  ..$ not_before: chr "0051"
+        # ...
+
+
+And work with complete cases. 
+
+
+|
+
+
+    .. seealso:: 
+    
+        :ref:`Missing data <missing>` within uncertainty. 
+
+
+| 
+
+
+
+
+
+.. meta::
+   :description: Extracting variables from the EDH dataset
+   :keywords: extraction, manipulation, epigraphic, dataset
+
