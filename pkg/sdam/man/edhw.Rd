@@ -9,7 +9,7 @@ A function to obtain variable data and perform transformations on the Epigraphic
 }
 \usage{
 edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), split, 
-     select, addID, limit, id, na.rm, ...)
+     select, addID, limit, id, na.rm)
 }
 
 \arguments{
@@ -98,7 +98,7 @@ in \code{vars}.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{get.edh}}, \code{\link{get.edhw}}
+\code{\link{get.edh}}, \code{\link{get.edhw}}, \code{\link{prex}}, \code{\link{plot.dates}}
 }
 \examples{
 \dontrun{

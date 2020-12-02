@@ -117,7 +117,7 @@ A list with the of valid values for countries from the EDH API are
 \code{"gi"}  \tab  Gibraltar               \tab  \code{"nl"}  \tab  Netherlands             \tab  \code{"ye"}  \tab  Yemen                 \cr 
 }
 
-And for the ancient Roman provices the valid values are
+And for the ancient Roman provinces the valid values are
 
 \tabular{llllll}{
 \code{"Ach"}  \tab  Achaia                           \tab  \code{"Cor"}  \tab  Corsica                       \tab  \code{"Mes"}  \tab  Mesopotamia                   \cr 
