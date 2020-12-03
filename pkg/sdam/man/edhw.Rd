@@ -8,16 +8,16 @@ Wrapper function for manipulation of \code{EDH} dataset
 A function to obtain variable data and perform transformations on the Epigraphic Database Heidelberg \code{EDH} dataset.
 }
 \usage{
-edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), split, 
+edhw(x = NULL, vars, as = c("list", "df"), type = c("long", "wide", "narrow"), split, 
      select, addID, limit, id, na.rm)
 }
 
 \arguments{
-  \item{vars}{
-   Variables of interest from \code{x}; if \code{x=NULL}, the entire \code{EDH} dataset is taken. (optional, vector)
-}
   \item{x}{
    A list object name with fragments of the \code{EDH} dataset (optional)
+}
+  \item{vars}{
+   Variables of interest from \code{x}; if \code{x=NULL}, the entire \code{EDH} dataset is taken. (optional, vector)
 }
   \item{as}{
    Format to return the output. Currently either as a \code{"list"} or a data frame \code{"df"} object.

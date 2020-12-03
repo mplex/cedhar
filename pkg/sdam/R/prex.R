@@ -3,7 +3,7 @@
 ## FUNCTION prex() to compute probability of existence ot time events
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.4 (02-12-2020)
+## version 0.0.5 (03-12-2020)
 ##
 ## PARAMETERS
 ## x        (list or data frame object from EDH database)
@@ -35,7 +35,7 @@ function (x, vars, bins = NULL, cp = c("bin5", "bin8"), aoristic = TRUE,
     }
     ifelse(is.data.frame(x) == TRUE, xdf <- as.data.frame(x), 
         xdf <- suppressWarnings(edhw(x = x, vars = vars, as = "df", 
-            na.rm = TRUE, ...)))
+            ...)))
     flgb <- TRUE
     if (is.null(bins) == TRUE) {
         flgb <- FALSE
@@ -132,9 +132,6 @@ function (x, vars, bins = NULL, cp = c("bin5", "bin8"), aoristic = TRUE,
             if (is.na(taq[i]) == TRUE) {
                 tmpmq <- NULL
             }
-            else if (isTRUE(taq[i] == tpq[i]) == TRUE) {
-                tmpmq <- NULL
-            }
             else {
                 tmpmq <- which(breaks %in% seq(taq[i], taq[i] + 
                   (unlist(dur)[i] - 1L)))
@@ -149,6 +146,7 @@ function (x, vars, bins = NULL, cp = c("bin5", "bin8"), aoristic = TRUE,
         pertq <- lapply(mapply(c, pertaq, pertmq, pertpq, SIMPLIFY = FALSE), 
             unique)
         wpu <- weight/unlist(dur)
+        wpu[which(wpu == Inf)] <- 0
         xaor <- data.frame(matrix(nrow = nrow(xdf), ncol = length(bins)))
         ifelse(isTRUE(flgb == TRUE) == TRUE, colnames(xaor) <- lbs, 
             colnames(xaor) <- names(bins))

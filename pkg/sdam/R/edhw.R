@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.7.0 (02-12-2020)
+## version 0.7.1 (03-12-2020)
 ##
 ## PARAMETERS
 ##
@@ -25,7 +25,7 @@
 
 
 edhw <-
-function (vars, x = NULL, as = c("list", "df"), type = c("long", 
+function (x = NULL, vars, as = c("list", "df"), type = c("long", 
     "wide", "narrow"), split, select, addID, limit, id, na.rm) 
 {
     flgdf <- FALSE
@@ -47,6 +47,9 @@ function (vars, x = NULL, as = c("list", "df"), type = c("long",
         ifelse(isTRUE(is.list(x) == TRUE) == TRUE, x <- as.data.frame(x), 
             NA)
     }
+    else if (isTRUE(is.list(x) == TRUE) == TRUE) {
+        NA
+    }
     else {
         ifelse(isTRUE(is.character(x) == TRUE) == TRUE, x <- eval(parse(text = x)), 
             NA)
@@ -63,6 +66,11 @@ function (vars, x = NULL, as = c("list", "df"), type = c("long",
         }
     }
     else {
+        if (is.character(vars) == FALSE) {
+            if (isTRUE(isTRUE(is.list(vars) == TRUE) == TRUE) || 
+                isTRUE(is.vector(vars) == FALSE) == TRUE) 
+                stop("'vars' should be a vector or character.")
+        }
         flgv <- TRUE
         ifelse(isTRUE("id" %in% vars) == TRUE, vars <- vars[which(!(vars == 
             "id"))], NA)
@@ -186,8 +194,14 @@ function (vars, x = NULL, as = c("list", "df"), type = c("long",
                 TRUE) {
                 edhrm <- lapply(lapply(lapply(edhl, names), is.na), 
                   all)
-                edhlm <- edhlm[-which(edhrm == TRUE)]
-                edhl <- edhl[-which(edhrm == TRUE)]
+                if (isTRUE(length(which(unlist(edhrm) == TRUE)) > 
+                  0) == TRUE) {
+                  edhlm <- edhlm[-which(unlist(edhrm) == TRUE)]
+                  edhl <- edhl[-which(unlist(edhrm) == TRUE)]
+                }
+                else {
+                  NA
+                }
                 valids <- which(as.vector(unlist(lapply(edhl, 
                   function(x) {
                     all(is.na(as.vector(unlist(x))))
