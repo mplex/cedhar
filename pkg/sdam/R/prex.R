@@ -3,22 +3,23 @@
 ## FUNCTION prex() to compute probability of existence ot time events
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.5 (03-12-2020)
+## version 0.0.6 (08-12-2020)
 ##
 ## PARAMETERS
 ## x        (list or data frame object from EDH database)
-## bins     (bin periods)
+## bins     (bin periods, integer)
 ## cp       (chronological periods)
 ## aoristic (aoristic sum)
 ## weight   (weight to observations)
 ## DF       (data frame in output?)
 ## plot     (plot results?)
 ## main     (plot's main title)
+## ...      (additional parameters)
 
 
 prex <-
-function (x, vars, bins = NULL, cp = c("bin5", "bin8"), aoristic = TRUE, 
-    weight = 1, DF, plot = FALSE, main = NULL, ...) 
+function (x, vars, bins = NULL, cp, aoristic = TRUE, weight = 1, 
+    DF, plot = FALSE, main = NULL, ...) 
 {
     if (missing(vars) == TRUE) {
         if (all(c("not_before", "not_after") %in% colnames(x)) == 
@@ -39,7 +40,7 @@ function (x, vars, bins = NULL, cp = c("bin5", "bin8"), aoristic = TRUE,
     flgb <- TRUE
     if (is.null(bins) == TRUE) {
         flgb <- FALSE
-        if (match.arg(cp) == "bin8") {
+        if (isTRUE(cp == "bin8") == TRUE) {
             bins <- list(Arch = rev(seq(from = -500, to = -700)), 
                 Class = rev(seq(from = -325, to = -500)), Hell = rev(seq(from = -325, 
                   to = 0)), ERom = rev(seq(from = 0, to = 200)), 
@@ -47,14 +48,14 @@ function (x, vars, bins = NULL, cp = c("bin5", "bin8"), aoristic = TRUE,
                   to = 650)), EByz = rev(seq(from = 650, to = 900)), 
                 LByz = rev(seq(from = 900, to = 1200)))
         }
-        else if (match.arg(cp) == "bin5") {
+        else if (isTRUE(cp == "bin5") == TRUE) {
             bins <- list(Arch = rev(seq(from = -500, to = -700)), 
                 Class = rev(seq(from = -325, to = -500)), Hell = rev(seq(from = -325, 
                   to = 0)), Rom = rev(seq(from = 0, to = 650)), 
                 Byz = rev(seq(from = 650, to = 1200)))
         }
         else {
-            stop("only chronological periods 'bin5' and 'bin8' supported.")
+            bins <- cp
         }
     }
     else if (is.numeric(bins) == TRUE && isTRUE(length(bins) == 
@@ -124,7 +125,6 @@ function (x, vars, bins = NULL, cp = c("bin5", "bin8"), aoristic = TRUE,
             0) == TRUE, pertpq[[k]] <- which(tpq %in% (bins[[k]] + 
             1L)), NA)
     }
-    rm(k)
     if (isTRUE(aoristic == TRUE) == TRUE) {
         pertmq <- vector("list", length = length(bins))
         names(pertmq) <- names(bins)

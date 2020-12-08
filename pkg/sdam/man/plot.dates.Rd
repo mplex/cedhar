@@ -8,16 +8,19 @@ Plot interval dates
 A function to plot interval dates.
 }
 \usage{
-plot.dates(file = NULL, x = NULL, taq, tpq, out, main = NULL, xlab = NULL, ylab = NULL, 
+plot.dates(x, y, file = NULL, taq, tpq, out, main = NULL, xlab = NULL, ylab = NULL, 
            xlim = NULL, cex, pch, col, lwd, lty, alpha, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{file}{
-  path to file for a PDF format (optional)
-}
   \item{x}{
   data frame object of variables and observations. If \code{NULL} then \code{EDH} dataset is taken.
+}
+  \item{y}{
+  optional identifiers (vector).
+}
+  \item{file}{
+  path to file for a PDF format (optional)
 }
   \item{taq}{
   \emph{terminus ante quem}
@@ -68,9 +71,8 @@ This plot function is for time interval segments
 \value{
 A graphical plot.
 }
-\references{
-For chronological periods see \emph{Bevan et al}, 2013 (\code{doi: 10.1111/j.1475-4754.2012.00674.x})
-}
+%\references{
+%}
 \author{
 Antonio Rivero Ostoic
 }

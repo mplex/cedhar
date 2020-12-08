@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.7.1 (03-12-2020)
+## version 0.7.2 (08-12-2020)
 ##
 ## PARAMETERS
 ##
@@ -20,7 +20,6 @@
 ## limit  (integers, vector with # records to limit output, offset supported)
 ## id     (integer or character, select only hd_nr records)
 ## na.rm  (logical, remove data entries with <NA>?)
-## ...    (optional parameters)
 ##
 
 
@@ -190,6 +189,12 @@ function (x = NULL, vars, as = c("list", "df"), type = c("long",
         if (isTRUE(flgv == TRUE) == TRUE && isTRUE(is.vector(vars) == 
             TRUE) == TRUE) {
             edhl <- lapply(edhlm, `[`, vars)
+            ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == 
+                FALSE) == TRUE, valids <- seq_len(length(edhl)), 
+                valids <- which(as.vector(unlist(lapply(edhl, 
+                  function(x) {
+                    all(is.na(as.vector(unlist(x))))
+                  }))) == FALSE))
             if (missing(na.rm) == FALSE && isTRUE(na.rm == TRUE) == 
                 TRUE) {
                 edhrm <- lapply(lapply(lapply(edhl, names), is.na), 
@@ -226,7 +231,6 @@ function (x = NULL, vars, as = c("list", "df"), type = c("long",
                     x[sapply(x, is.null)] <- NA
                     return(x)
                   })
-                  valids <- seq_len(length(edhl))
                 }
                 else {
                   return(NULL)
