@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.7.2 (08-12-2020)
+## version 0.7.3 (09-12-2020)
 ##
 ## PARAMETERS
 ##
@@ -20,12 +20,14 @@
 ## limit  (integers, vector with # records to limit output, offset supported)
 ## id     (integer or character, select only hd_nr records)
 ## na.rm  (logical, remove data entries with <NA>?)
+## clean  (optional only lists, clean x?)
 ##
 
 
 edhw <-
 function (x = NULL, vars, as = c("list", "df"), type = c("long", 
-    "wide", "narrow"), split, select, addID, limit, id, na.rm) 
+    "wide", "narrow"), split, select, addID, limit, id, na.rm, 
+    clean) 
 {
     flgdf <- FALSE
     if (is.null(x) == TRUE) {
@@ -47,7 +49,20 @@ function (x = NULL, vars, as = c("list", "df"), type = c("long",
             NA)
     }
     else if (isTRUE(is.list(x) == TRUE) == TRUE) {
-        NA
+        if (missing(clean) == FALSE && isTRUE(clean == TRUE) == 
+            TRUE) {
+            tmp <- x
+            x <- lapply(tmp, function(x) {
+                x[sapply(x, is.null)] <- NA
+                x[x == "NULL"] <- NA
+                x[x == "list()"] <- NA
+                return(x)
+            })
+            rm(tmp)
+        }
+        else {
+            NA
+        }
     }
     else {
         ifelse(isTRUE(is.character(x) == TRUE) == TRUE, x <- eval(parse(text = x)), 

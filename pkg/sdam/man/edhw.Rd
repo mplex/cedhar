@@ -9,7 +9,7 @@ A function to obtain variable data and perform transformations on the Epigraphic
 }
 \usage{
 edhw(x = NULL, vars, as = c("list", "df"), type = c("long", "wide", "narrow"), split, 
-     select, addID, limit, id, na.rm)
+     select, addID, limit, id, na.rm, clean)
 }
 
 \arguments{
@@ -42,6 +42,9 @@ edhw(x = NULL, vars, as = c("list", "df"), type = c("long", "wide", "narrow"), s
 }
   \item{na.rm}{
    Remove entries with NA data? (optional and logical)
+}
+  \item{clean}{
+   clean list object \code{x}? (optional and logical)
 }
   \item{\dots}{
    Optional arguments if needed.
@@ -80,6 +83,8 @@ By setting \code{"wide"} in \code{type}, it is possible to place the different p
 column by column in the data frame and each record has a single row. Finally, argument \code{split} allows 
 dividing the data in the data frame into groups by `id', which corresponds to the HD number of inscription 
 in the \code{EDH} dataset. 
+
+Argument \code{clean} is an ad hoc function to force \code{NA}s in ``NULL''s and list vectors of length 0.
 }
 \value{
 A list or a data frame with a long or wide format, depending on the arguments inputs. 
