@@ -489,24 +489,30 @@ Parameters
 Formal arguments of ``plot.dates()`` are:
 
 
+- `x:`
+
+   data frame object of variables and observations. If ``NULL`` then ``EDH`` dataset is taken
+
+
+- `y:`
+
+   vector identifier (optional)
+
+
 - `file:`
 
    path to file for a PDF format (optional)
  
-
-- `x:`
-
-   data frame object of variables and observations. If ``NULL`` then ``EDH`` dataset is taken.
  
 
 - `taq:`
 
-   *terminus ante quem*
+   TAQ or *terminus ante quem*
  
 
 - `tpq:`
 
-   *terminus post quem*
+   TPQ or *terminus post quem*
  
 
 - `out:`
@@ -559,7 +565,7 @@ And for the representation of time interval and boundaries of existence in the p
 
 - `col:`
 
-   colors of `pch` and time interval segment.
+   colors of `pch` and time interval segment
 
 |
 
@@ -569,17 +575,17 @@ for time interval segments:
 
 - `lwd:`
 
-   width.
+   width
  
 
 - `lty:`
 
-   shape.
+   shape
  
 
 - `alpha:`
 
-   alpha color transparency.
+   alpha color transparency
 
 
 - `...`

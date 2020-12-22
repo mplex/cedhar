@@ -606,11 +606,13 @@ Function usage
 .. code-block:: R
 
     # probability of existence
-    R> prex(x, vars, bins=NULL, cp=c("bin5","bin8"), aoristic=TRUE, weight=1, DF, 
-            plot=FALSE, main=NULL,...)
+    R> prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,, 
+            DF, out, plot = FALSE, main = NULL, ...)
     
 
 |
+
+
 
 
 Parameters
@@ -621,6 +623,16 @@ Parameters
 
    list or data frame object of variables and observations. 
 
+
+- `taq:`
+
+   TAQ or *terminus ante quem*
+ 
+
+- `tpq:`
+
+   TPQ or *terminus post quem*
+ 
 
 - `vars:`
 
@@ -634,7 +646,7 @@ Parameters
 
 - `cp:`
 
-   chronological phase. ``"bin5"`` or ``"bin8"`` for five- or eight-periods
+   chronological phase (optional)
 
 
 - `aoristic:`
@@ -650,6 +662,11 @@ Parameters
 - `DF:`
 
    return also data frame with observations? Ignored for plot (logical and optional)
+
+
+- `out:`
+
+   number of outliers to omit (integer or vector where first entry id for latest date)
 
 
 - `plot:`
@@ -668,6 +685,14 @@ Parameters
    additional optional parameters
 
 
+|
+
+Details
++++++++
+
+In case that `bins` is ``NULL``, then the time breaks take the chronological period specified in `cp`, which by
+default is ``"bin5"`` or five-periods for the ``EDH`` dataset. Another built-in option is ``"bin8"`` for eight
+chronological periods, and `cp` is open for other chronological phases as long as they are recorded as a list object.
 
 
 |
@@ -683,16 +708,17 @@ of ``Iudaea`` computed with ``prex()``
        R> iud <- get.edh(search="inscriptions", province="Iud")
        
        # 5-chronological periods
-       R> prex(x=iud, vars=c("not_before", "not_after"), cp="bin5")
+       R> prex(x=iud, taq="not_before", tpq"not_after", cp="bin5")
        #  Arch     Class      Hell       Rom       Byz 
        # 0.000     0.000  1337.904 13405.017     0.000 
        
        # 8-chronological periods
-       R> prex(x=iud, vars=c("not_before", "not_after"), cp="bin8")
+       R> prex(x=iud, taq="not_before", tpq"not_after", cp="bin8")
        #  Arch     Class      Hell      ERom      MRom      LRom      EByz      LByz 
        #0.0000    0.0000 1337.9040 2396.4529 1200.5623  320.5379    0.0000    0.0000 
 
 |
+
 
 Plotting aoristic sum
 ---------------------
@@ -703,11 +729,11 @@ To visualize the aoristic sum from ``Iudaea`` as bar plots and function ``prex()
     
        
        #  five chronological phases
-       R> barplot(prex(x=iud, vars=c("not_before", "not_after"), cp="bin5"), 
+       R> barplot(prex(x=iud, taq="not_before", tpq"not_after", cp="bin5"), 
        +          main="Aoristic sum Iudaea (5-periods)" )
        
        # eight chronological phases
-       R> barplot(prex(x=iud, vars=c("not_before", "not_after"), cp="bin8"), 
+       R> barplot(prex(x=iud, taq="not_before", tpq"not_after", cp="bin8"), 
        +          horiz=TRUE, las=1, main="Aoristic sum Iudaea (8-periods)" )
 
 

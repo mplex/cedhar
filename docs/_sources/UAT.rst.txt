@@ -81,6 +81,9 @@ things like whether the package can be loaded and unloaded, and
 consistencies both in the code and the documentation including meta
 data.
 
+Another machine testing engine is ``Travis CI`` that runs online with a browser. 
+
+
 |
 
 UAT for users in GitHub

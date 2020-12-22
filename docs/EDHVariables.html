@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Extracting variables from the EDH dataset" name="description" />
 <meta content="extraction, manipulation, epigraphic, dataset" name="keywords" />
 
-    <title>Extracting EDH Variables &#8212; cedhar 0.0.6 documentation</title>
+    <title>Extracting EDH Variables &#8212; cedhar 0.0.7 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -95,7 +95,8 @@
 </div>
 <div class="section" id="edh-variables">
 <span id="edhw-fun"></span><h2>EDH variables<a class="headerlink" href="#edh-variables" title="Permalink to this headline">¶</a></h2>
-<p>Another wrapper function, this time for the extraction of variables from the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is found in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
+<p>Another wrapper function, this time for the extraction of variables from the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is found in <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.
+Use <code class="docutils literal notranslate"><span class="pre">data(&quot;rp&quot;)</span></code> for Roman provinces in <cite>province</cite>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -108,7 +109,7 @@
 <h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># accepted parameter arguments</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">as</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;list&quot;</span><span class="p">,</span> <span class="s">&quot;df&quot;</span><span class="p">),</span> <span class="n">type</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;long&quot;</span><span class="p">,</span> <span class="s">&quot;wide&quot;</span><span class="p">,</span> <span class="s">&quot;narrow&quot;</span><span class="p">),</span>
-        <span class="n">split</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">)</span>
+        <span class="n">split</span><span class="p">,</span> <span class="n">select</span><span class="p">,</span> <span class="n">addID</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">id</span><span class="p">,</span> <span class="n">na.rm</span><span class="p">,</span> <span class="n">clean</span><span class="p">,</span> <span class="n">province</span><span class="p">,</span> <span class="n">gender</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -166,7 +167,22 @@
 </li>
 <li><p><cite>na.rm:</cite></p>
 <blockquote>
-<div><p>Remove entries with <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code> information? (logical and optional)</p>
+<div><p>Remove entries with <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code>? (logical and optional)</p>
+</div></blockquote>
+</li>
+<li><p><cite>clean:</cite></p>
+<blockquote>
+<div><p>Replace entries with <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code>? (logical and optional)</p>
+</div></blockquote>
+</li>
+<li><p><cite>province:</cite></p>
+<blockquote>
+<div><p>Roman province (character, optional) as in <code class="docutils literal notranslate"><span class="pre">&quot;rp&quot;</span></code> dataset.</p>
+</div></blockquote>
+</li>
+<li><p><cite>gender:</cite></p>
+<blockquote>
+<div><p>People gender in <code class="docutils literal notranslate"><span class="pre">EDH</span></code> (character, optional)</p>
 </div></blockquote>
 </li>
 </ul>
@@ -378,7 +394,7 @@ remove missing information by activating the <em>na.rm</em> argument.</p>
         <li class="right" >
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

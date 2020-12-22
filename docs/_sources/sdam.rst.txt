@@ -147,6 +147,13 @@ or
     R> devtools::install_github("sdam-au/sdam")
 
 
+|
+
+
+    .. note:: 
+    
+        Don't forget to uninstall the package before installing it with another version. 
+
 
 
 |
@@ -182,11 +189,11 @@ News from ``sdam`` package
 * **Version 0.3.0** (beta) released (21-11-2020).
     - *New functions* ``plot.dates()`` and ``prex()`` (cf. )
 
-    - ``EDH`` dataset is updated 
+    - ``rp`` dataset is added (**v0.3.7**)
 
     * Function ``edhw()`` combines ``"people"`` with other EDH variables 
 
-    - Argument `select`  added to ``edhw()``
+    - Arguments `select`, `clean`, `province`, `gender`  added to ``edhw()``
     - Argument `maxlimit`  added to ``get.edh()``
     - Argument `authenticate` in  ``request()``  renamed to `anonymous`
 

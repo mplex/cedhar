@@ -32,6 +32,7 @@ EDH variables
 ==============
 
 Another wrapper function, this time for the extraction of variables from the ``EDH`` dataset is found in ``edhw()``. 
+Use ``data("rp")`` for Roman provinces in `province`.
 
 
 |
@@ -46,7 +47,7 @@ Function usage
 
     # accepted parameter arguments
     R> edhw(vars, x = NULL, as = c("list", "df"), type = c("long", "wide", "narrow"), 
-            split, select, addID, limit, id, na.rm)
+            split, select, addID, limit, id, na.rm, clean, province, gender, ...)
     
 
 |
@@ -102,7 +103,22 @@ Formal arguments of ``edhw()`` are:
 
 - `na.rm:`
 
-   Remove entries with ``<NA>`` information? (logical and optional)
+   Remove entries with ``<NA>``? (logical and optional)
+
+
+- `clean:`
+
+   Replace entries with ``<NA>``? (logical and optional)
+
+
+- `province:`
+
+   Roman province (character, optional) as in ``"rp"`` dataset. 
+
+
+- `gender:`
+
+   People gender in ``EDH`` (character, optional)
 
 
 ..  - `...`

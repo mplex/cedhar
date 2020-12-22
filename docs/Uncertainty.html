@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Probability and Uncertainty" name="description" />
 <meta content="temporal uncertainty, Chronology" name="keywords" />
 
-    <title>Temporal Uncertainty &#8212; cedhar 0.0.6 documentation</title>
+    <title>Temporal Uncertainty &#8212; cedhar 0.0.7 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="Time.html" title="Time and dating"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -77,7 +77,10 @@
 </li>
 <li><a class="reference internal" href="#computing-the-probability-of-existence">Computing the probability of existence</a><ul>
 <li><a class="reference internal" href="#function-usage">Function usage</a></li>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#details">Details</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#plotting-aoristic-sum">Plotting aoristic sum</a></li>
 </ul>
 </li>
@@ -504,8 +507,8 @@ the overall probability of being missing <span class="math notranslate nohighlig
 <div class="section" id="function-usage">
 <h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># probability of existence</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vars</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;bin5&quot;</span><span class="p">,</span><span class="s">&quot;bin8&quot;</span><span class="p">),</span> <span class="n">aoristic</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">DF</span><span class="p">,</span>
-        <span class="n">plot</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="kc">NULL</span><span class="p">,</span><span class="kc">...</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">taq</span><span class="p">,</span> <span class="n">tpq</span><span class="p">,</span> <span class="n">vars</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">aoristic</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="m">1</span><span class="p">,,</span>
+        <span class="n">DF</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -520,6 +523,16 @@ the overall probability of being missing <span class="math notranslate nohighlig
 <div><p>list or data frame object of variables and observations.</p>
 </div></blockquote>
 </li>
+<li><p><cite>taq:</cite></p>
+<blockquote>
+<div><p>TAQ or <em>terminus ante quem</em></p>
+</div></blockquote>
+</li>
+<li><p><cite>tpq:</cite></p>
+<blockquote>
+<div><p>TPQ or <em>terminus post quem</em></p>
+</div></blockquote>
+</li>
 <li><p><cite>vars:</cite></p>
 <blockquote>
 <div><p>boundaries of existence in <code class="docutils literal notranslate"><span class="pre">x</span></code> (vector for TAQ and TPQ)</p>
@@ -532,7 +545,7 @@ the overall probability of being missing <span class="math notranslate nohighlig
 </li>
 <li><p><cite>cp:</cite></p>
 <blockquote>
-<div><p>chronological phase. <code class="docutils literal notranslate"><span class="pre">&quot;bin5&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;bin8&quot;</span></code> for five- or eight-periods</p>
+<div><p>chronological phase (optional)</p>
 </div></blockquote>
 </li>
 <li><p><cite>aoristic:</cite></p>
@@ -548,6 +561,11 @@ the overall probability of being missing <span class="math notranslate nohighlig
 <li><p><cite>DF:</cite></p>
 <blockquote>
 <div><p>return also data frame with observations? Ignored for plot (logical and optional)</p>
+</div></blockquote>
+</li>
+<li><p><cite>out:</cite></p>
+<blockquote>
+<div><p>number of outliers to omit (integer or vector where first entry id for latest date)</p>
 </div></blockquote>
 </li>
 <li><p><cite>plot:</cite></p>
@@ -569,6 +587,14 @@ the overall probability of being missing <span class="math notranslate nohighlig
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<div class="section" id="details">
+<h4>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h4>
+<p>In case that <cite>bins</cite> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, then the time breaks take the chronological period specified in <cite>cp</cite>, which by
+default is <code class="docutils literal notranslate"><span class="pre">&quot;bin5&quot;</span></code> or five-periods for the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset. Another built-in option is <code class="docutils literal notranslate"><span class="pre">&quot;bin8&quot;</span></code> for eight
+chronological periods, and <cite>cp</cite> is open for other chronological phases as long as they are recorded as a list object.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>For example, the (default) aoristic sum of <code class="docutils literal notranslate"><span class="pre">EDH</span></code> inscriptions in the Roman province
 of <code class="docutils literal notranslate"><span class="pre">Iudaea</span></code> computed with <code class="docutils literal notranslate"><span class="pre">prex()</span></code></p>
 <blockquote>
@@ -576,12 +602,12 @@ of <code class="docutils literal notranslate"><span class="pre">Iudaea</span></c
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">iud</span> <span class="o">&lt;-</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="n">province</span><span class="o">=</span><span class="s">&quot;Iud&quot;</span><span class="p">)</span>
 
 <span class="c1"># 5-chronological periods</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">),</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">)</span>
 <span class="c1">#  Arch     Class      Hell       Rom       Byz</span>
 <span class="c1"># 0.000     0.000  1337.904 13405.017     0.000</span>
 
 <span class="c1"># 8-chronological periods</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">),</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">)</span>
 <span class="c1">#  Arch     Class      Hell      ERom      MRom      LRom      EByz      LByz</span>
 <span class="c1">#0.0000    0.0000 1337.9040 2396.4529 1200.5623  320.5379    0.0000    0.0000</span>
 </pre></div>
@@ -591,16 +617,17 @@ of <code class="docutils literal notranslate"><span class="pre">Iudaea</span></c
 <div class="line"><br /></div>
 </div>
 </div>
+</div>
 <div class="section" id="plotting-aoristic-sum">
 <h3>Plotting aoristic sum<a class="headerlink" href="#plotting-aoristic-sum" title="Permalink to this headline">¶</a></h3>
 <p>To visualize the aoristic sum from <code class="docutils literal notranslate"><span class="pre">Iudaea</span></code> as bar plots and function <code class="docutils literal notranslate"><span class="pre">prex()</span></code></p>
 <blockquote>
 <div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#  five chronological phases</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">),</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">),</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">),</span>
 <span class="o">+</span>          <span class="n">main</span><span class="o">=</span><span class="s">&quot;Aoristic sum Iudaea (5-periods)&quot;</span> <span class="p">)</span>
 
 <span class="c1"># eight chronological phases</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">),</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">),</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">),</span>
 <span class="o">+</span>          <span class="n">horiz</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">las</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;Aoristic sum Iudaea (8-periods)&quot;</span> <span class="p">)</span>
 </pre></div>
 </div>
@@ -659,7 +686,7 @@ of <code class="docutils literal notranslate"><span class="pre">Iudaea</span></c
         <li class="right" >
           <a href="Time.html" title="Time and dating"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.6 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.7 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
