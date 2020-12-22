@@ -13,8 +13,8 @@
 \tabular{ll}{
 Package: \tab sdam \cr
 Type: \tab Package \cr
-Version: \tab 0.3.4 \cr
-Date: \tab 8 December 2020 \cr
+Version: \tab 0.3.7 \cr
+Date: \tab 22 December 2020 \cr
 License: \tab CC BY-SA 4.0 \cr
 }
 
@@ -36,8 +36,8 @@ Similarity by simple matching among column vectors is achieved by the \code{simi
 in order to make analyses of relations between assemblages and artifacts. 
 
 There is also the possibility to compute probabilities of existence with \code{prex()} with either 
-the aoristic sum or count matching for observations. Function \code{plot.dates()} allows visualizing 
-interval time events. 
+the aoristic sum or count matching for observations for different periodization options. 
+Function \code{plot.dates()} allows visualizing interval time events. 
 }
 \author{
 Author: \packageAuthor{sdam} 

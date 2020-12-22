@@ -8,8 +8,8 @@ Wrapper function for manipulation of \code{EDH} dataset
 A function to obtain variable data and perform transformations on the Epigraphic Database Heidelberg \code{EDH} dataset.
 }
 \usage{
-edhw(x = NULL, vars, as = c("list", "df"), type = c("long", "wide", "narrow"), split, 
-     select, addID, limit, id, na.rm, clean)
+edhw(x = NULL, vars, as = c("df", "list"), type = c("long", "wide", "narrow"), split, 
+     select, addID, limit, id, na.rm, clean, province, gender, ...)
 }
 
 \arguments{
@@ -45,6 +45,12 @@ edhw(x = NULL, vars, as = c("list", "df"), type = c("long", "wide", "narrow"), s
 }
   \item{clean}{
    clean list object \code{x}? (optional and logical)
+}
+  \item{province}{
+   Roman province (character, optional)
+}
+  \item{gender}{
+   people gender in \code{EDH} (character, optional)
 }
   \item{\dots}{
    Optional arguments if needed.
@@ -84,7 +90,8 @@ column by column in the data frame and each record has a single row. Finally, ar
 dividing the data in the data frame into groups by `id', which corresponds to the HD number of inscription 
 in the \code{EDH} dataset. 
 
-Argument \code{clean} is an ad hoc function to force \code{NA}s in ``NULL''s and list vectors of length 0.
+Ad hoc arguments are \code{clean} to force \code{NA}s, and the \code{EDH} entries \code{province} and code{gender} 
+for entering a Roman province and people's gender in \code{x}.
 }
 \value{
 A list or a data frame with a long or wide format, depending on the arguments inputs. 

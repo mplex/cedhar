@@ -3,41 +3,66 @@
 ## FUNCTION prex() to compute probability of existence ot time events
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.6 (08-12-2020)
+## version 0.0.8 (22-12-2020)
 ##
 ## PARAMETERS
 ## x        (list or data frame object from EDH database)
+## taq      (terminus ante quem)
+## tpq      (terminus post quem)
+## vars     (vector, variables or attributes to be chosen from x)
 ## bins     (bin periods, integer)
 ## cp       (chronological periods)
 ## aoristic (aoristic sum)
 ## weight   (weight to observations)
 ## DF       (data frame in output?)
+## out      (number of outliers to omit)
 ## plot     (plot results?)
 ## main     (plot's main title)
 ## ...      (additional parameters)
 
 
 prex <-
-function (x, vars, bins = NULL, cp, aoristic = TRUE, weight = 1, 
-    DF, plot = FALSE, main = NULL, ...) 
+function (x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, 
+    weight = 1, DF, out, plot = FALSE, main = NULL, ...) 
 {
     if (missing(vars) == TRUE) {
-        if (all(c("not_before", "not_after") %in% colnames(x)) == 
-            TRUE) {
-            vars <- c("not_before", "not_after")
-        }
-        else {
-            stop("'vars' needs to be specified.")
-        }
+        ifelse(missing(taq) == TRUE, taq <- "not_before", NA)
+        ifelse(missing(tpq) == TRUE, tpq <- "not_after", NA)
+        vars <- c(taq, tpq)
     }
     else {
         ifelse(isTRUE(length(vars) == 1L) == TRUE, stop("'vars' needs two values."), 
             vars <- vars[1:2])
     }
+    if (isTRUE(nrow(x) == 0) == TRUE) 
+        return(NULL)
     ifelse(is.data.frame(x) == TRUE, xdf <- as.data.frame(x), 
-        xdf <- suppressWarnings(edhw(x = x, vars = vars, as = "df", 
-            ...)))
-    flgb <- TRUE
+        xdf <- suppressWarnings(edhw(x = x, vars = c(taq, tpq), 
+            as = "df", ...)))
+    if (missing(out) == FALSE) {
+        nb <- as.numeric(as.vector(xdf[, which(colnames(xdf) %in% 
+            vars[1])]))
+        na <- as.numeric(as.vector(xdf[, which(colnames(xdf) %in% 
+            vars[2])]))
+        outliert <- c(tail(sort(boxplot(nb, plot = FALSE)$out), 
+            out[1]), tail(sort(boxplot(na, plot = FALSE)$out), 
+            out[1]))
+        if (isTRUE(length(out) > 1) == TRUE) {
+            outlierh <- c(head(sort(boxplot(nb, plot = FALSE)$out), 
+                out[2]), head(sort(boxplot(na, plot = FALSE)$out), 
+                out[2]))
+        }
+        else {
+            outlierh <- outliert
+        }
+        xdf <- xdf[-c(which(nb %in% outliert), which(na %in% 
+            outlierh)), ]
+    }
+    else {
+        NA
+    }
+    ifelse(missing(cp) == TRUE, cp <- "bin5", NA)
+    ifelse(is.list(bins) == TRUE, flgb <- FALSE, flgb <- TRUE)
     if (is.null(bins) == TRUE) {
         flgb <- FALSE
         if (isTRUE(cp == "bin8") == TRUE) {
@@ -67,19 +92,35 @@ function (x, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,
         else {
             NA
         }
-        pbins <- pretty(min(as.numeric(as.vector(xdf[, which(colnames(xdf) == 
-            vars[1])])), na.rm = TRUE):max(as.numeric(as.vector(xdf[, 
-            which(colnames(xdf) == vars[2])])), na.rm = TRUE))
-        brks <- seq(from = range(pbins)[1], to = range(pbins)[2], 
-            by = bins)
-        ifelse(isTRUE(max(brks) < max(pbins)) == TRUE, brks <- append(brks, 
-            max(brks) + bins), NA)
-        obin <- bins
-        bins <- list()
-        for (i in seq_len(length(brks) - 1L)) {
-            bins[[i]] <- rev(seq(from = brks[i + 1L], to = brks[i]))
+        if (all(is.na(as.numeric(as.vector(xdf[, which(colnames(xdf) == 
+            vars[2])])))) == TRUE && all(is.na(as.numeric(as.vector(xdf[, 
+            which(colnames(xdf) == vars[2])])))) == TRUE) 
+            return(NULL)
+        if (all(is.na(as.numeric(as.vector(xdf[, which(colnames(xdf) == 
+            vars[2])])))) == TRUE || all(is.na(as.numeric(as.vector(xdf[, 
+            which(colnames(xdf) == vars[2])])))) == TRUE) {
+            obin <- bins <- seq(from = min(c(as.numeric(as.vector(xdf[, 
+                which(colnames(xdf) == vars[2])])), as.numeric(as.vector(xdf[, 
+                which(colnames(xdf) == vars[1])]))), na.rm = TRUE), 
+                to = max(c(as.numeric(as.vector(xdf[, which(colnames(xdf) == 
+                  vars[2])])), as.numeric(as.vector(xdf[, which(colnames(xdf) == 
+                  vars[1])]))), na.rm = TRUE))
         }
-        rm(i)
+        else {
+            pbins <- pretty(min(as.numeric(as.vector(xdf[, which(colnames(xdf) == 
+                vars[1])])), na.rm = TRUE):max(as.numeric(as.vector(xdf[, 
+                which(colnames(xdf) == vars[2])])), na.rm = TRUE))
+            brks <- seq(from = range(pbins)[1], to = range(pbins)[2], 
+                by = bins)
+            ifelse(isTRUE(max(brks) < max(pbins)) == TRUE, brks <- append(brks, 
+                max(brks) + bins), NA)
+            obin <- bins
+            bins <- list()
+            for (i in seq_len(length(brks) - 1L)) {
+                bins[[i]] <- rev(seq(from = brks[i + 1L], to = brks[i]))
+            }
+            rm(i)
+        }
     }
     else {
         NA
@@ -89,7 +130,9 @@ function (x, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,
         breaks <- append(breaks, min(bins[[k]]))
     }
     rm(k)
-    breaks <- append(breaks, max(bins[[length(bins)]]))
+    ifelse(isTRUE(max(breaks) %in% bins[[length(bins)]]) == TRUE && 
+        isTRUE(flgb == FALSE) == TRUE, NA, breaks <- append(breaks, 
+        max(bins[[length(bins)]])))
     if (isTRUE(flgb == TRUE) == TRUE) {
         lbs <- numeric(0)
         for (i in 1:(length(breaks) - 1)) lbs[i] <- paste(breaks[i], 
@@ -107,23 +150,31 @@ function (x, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,
     ifelse(isTRUE("id" %in% colnames(xdf)) == FALSE, NA, names(dur) <- unlist(xdf$id))
     for (i in seq_len(nrow(xdf))) {
         if (is.na(tpq[i]) == TRUE || is.na(taq[i]) == TRUE) {
-            dur[[i]] <- 1
+            ifelse(is.na(tpq[i]) == TRUE && is.na(taq[i]) == 
+                TRUE, dur[[i]] <- 0, dur[[i]] <- 1L)
         }
         else {
             dur[[i]] <- tpq[i] - taq[i]
         }
     }
     rm(i)
-    pertaq <- vector("list", length = length(bins))
-    pertpq <- vector("list", length = length(bins))
-    names(pertaq) <- names(pertpq) <- names(bins)
-    for (k in seq_len(length(bins))) {
-        ifelse(isTRUE(length(which(taq %in% (bins[[k]] - 1L))) > 
-            0) == TRUE, pertaq[[k]] <- which(taq %in% (bins[[k]] - 
-            1L)), NA)
-        ifelse(isTRUE(length(which(tpq %in% (bins[[k]] + 1L))) > 
-            0) == TRUE, pertpq[[k]] <- which(tpq %in% (bins[[k]] + 
-            1L)), NA)
+    if (isTRUE(sum(unlist(dur)) < 2) == TRUE) {
+        pertaq <- taq[which(!(is.na(taq)))]
+        pertpq <- tpq[which(!(is.na(tpq)))]
+    }
+    else {
+        pertaq <- vector("list", length = length(bins))
+        pertpq <- vector("list", length = length(bins))
+        names(pertaq) <- names(pertpq) <- names(bins)
+        for (k in seq_len(length(bins))) {
+            ifelse(isTRUE(length(which(taq %in% (bins[[k]] - 
+                1L))) > 0) == TRUE, pertaq[[k]] <- which(taq %in% 
+                (bins[[k]] - 1L)), NA)
+            ifelse(isTRUE(length(which(tpq %in% (bins[[k]] + 
+                1L))) > 0) == TRUE, pertpq[[k]] <- which(tpq %in% 
+                (bins[[k]] + 1L)), NA)
+        }
+        rm(k)
     }
     if (isTRUE(aoristic == TRUE) == TRUE) {
         pertmq <- vector("list", length = length(bins))
@@ -133,18 +184,28 @@ function (x, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,
                 tmpmq <- NULL
             }
             else {
-                tmpmq <- which(breaks %in% seq(taq[i], taq[i] + 
-                  (unlist(dur)[i] - 1L)))
+                ifelse(isTRUE(sum(unlist(dur)) < 2) == TRUE, 
+                  tmpmq <- taq[i], tmpmq <- which(breaks %in% 
+                    seq(taq[i], taq[i] + (unlist(dur)[i] - 1L))))
             }
-            for (k in tmpmq) {
-                tmpm <- append(pertmq[[k]], i)
-                pertmq[[k]] <- tmpm
+            if (isTRUE(sum(unlist(dur)) < 2) == FALSE) {
+                for (k in tmpmq) {
+                  tmpm <- append(pertmq[[k]], i)
+                  pertmq[[k]] <- tmpm
+                }
+                rm(k)
             }
-            rm(k)
+            else {
+                pertmq <- NULL
+            }
         }
-        rm(i)
-        pertq <- lapply(mapply(c, pertaq, pertmq, pertpq, SIMPLIFY = FALSE), 
-            unique)
+        if (isTRUE(sum(unlist(dur)) < 2) == TRUE) {
+            pertq <- c(pertaq, pertpq)
+        }
+        else {
+            pertq <- lapply(mapply(c, pertaq, pertmq, pertpq, 
+                SIMPLIFY = FALSE), unique)
+        }
         wpu <- weight/unlist(dur)
         wpu[which(wpu == Inf)] <- 0
         xaor <- data.frame(matrix(nrow = nrow(xdf), ncol = length(bins)))
@@ -157,7 +218,9 @@ function (x, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,
                 xaor[slc, k] <- length(bins[[k]]) * wpu[slc]
             }
             else {
-                xaor[slc, k] <- obin * wpu[slc]
+                ifelse(isTRUE(flgb == FALSE) == TRUE, xaor[slc, 
+                  k] <- 1L * wpu[slc], xaor[slc, k] <- obin * 
+                  wpu[slc])
             }
         }
         rm(k)

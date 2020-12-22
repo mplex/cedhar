@@ -3,7 +3,7 @@
 ## PLOT FUNCTION plot.dates() to plot time intervals
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.7 (08-12-2020)
+## version 0.0.8 (22-12-2020)
 ##
 ## PARAMETERS
 ## x      (data frame object of variables and observations)
@@ -32,6 +32,8 @@ function (x, y, file = NULL, taq, tpq, out, main = NULL, xlab = NULL,
     ylab = NULL, xlim = NULL, cex, pch, col, lwd, lty, alpha, 
     ...) 
 {
+    ifelse(missing(taq) == TRUE, taq <- "not_before", NA)
+    ifelse(missing(tpq) == TRUE, tpq <- "not_after", NA)
     ifelse(missing(lwd) == TRUE, lwd <- 1L, NA)
     ifelse(missing(lty) == TRUE, lty <- 1L, NA)
     ifelse(missing(cex) == TRUE, cex <- 1L, NA)
