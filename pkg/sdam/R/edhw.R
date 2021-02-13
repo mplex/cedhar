@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.7.8 (22-12-2020)
+## version 0.7.7 (13-02-2021)
 ##
 ## PARAMETERS
 ##
@@ -13,16 +13,14 @@
 ##
 ## OPTIONAL PARAMETERS
 ##
-## x         (list, typically fragments of EDH dataset or database API)
-## split     (logical, divide the data into groups by id?)
-## select    (vector, people variables to select)
-## addID     (logical, add "HD id" to output?)
-## limit     (integers, vector with # records to limit output, offset supported)
-## id        (integer or character, select only hd_nr records)
-## na.rm     (logical, remove data entries with <NA>?)
-## clean     (optional for lists only, clean x?)
-## province  (Roman province)
-## gender    (people gender in EDH)
+## x      (list, typically fragments of EDH dataset or database API)
+## split  (logical, divide the data into groups by id?)
+## select (vector, people variables to select)
+## addID  (logical, add "HD id" to output?)
+## limit  (integers, vector with # records to limit output, offset supported)
+## id     (integer or character, select only hd_nr records)
+## na.rm  (logical, remove data entries with <NA>?)
+## clean  (optional for lists only, clean x?)
 ##
 
 
@@ -50,8 +48,6 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
         ifelse(isTRUE(is.list(x) == TRUE) == TRUE, x <- as.data.frame(x), 
             NA)
         if (missing(province) == FALSE) {
-            utils::data("rp", package = "sdam", envir = environment())
-            rp <- get("rp", envir = environment())
             xp <- x[x$province == unlist(rp[which(names(rp) == 
                 province)], use.names = FALSE), ]
         }
@@ -86,6 +82,8 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
         ifelse(isTRUE(is.character(x) == TRUE) == TRUE, x <- eval(parse(text = x)), 
             NA)
     }
+    ifelse(isTRUE(typeof(x[[1]]) == "list") == FALSE, x <- list(x), 
+        NA)
     if (missing(vars) == TRUE) {
         flgv <- FALSE
         if (match.arg(as) == "list") {
