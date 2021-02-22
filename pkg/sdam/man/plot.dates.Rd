@@ -11,6 +11,8 @@ A function to plot interval dates.
 plot.dates(x, y, file = NULL, taq, tpq, out, main = NULL, xlab = NULL, ylab = NULL, 
            xlim = NULL, cex, pch, col, lwd, lty, alpha, ...)
 }
+%\method{plot.dates}{plot}(x, y, file = NULL, taq, tpq, out, main = NULL, xlab = NULL, ylab = NULL, 
+%                     xlim = NULL, cex, pch, col, lwd, lty, alpha, \dots)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{

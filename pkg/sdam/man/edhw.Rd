@@ -110,7 +110,7 @@ in \code{vars}.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{get.edh}}, \code{\link{get.edhw}}, \code{\link{prex}}, \code{\link{plot.dates}}
+\code{\link{get.edh}}, \code{\link{get.edhw}}, \code{\link{prex}}, \code{\link{plot.dates}}, \code{\link{EDH}}
 }
 \examples{
 \dontrun{
