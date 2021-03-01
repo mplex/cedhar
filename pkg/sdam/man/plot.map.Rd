@@ -8,7 +8,7 @@ Plot cartographical map
 A function to plot a cartographical map, initially of a Roman province or an Italian region.
 }
 \usage{
-plot.map(x, cap, date, name, fsize, fcol, ...)
+plot.map(x, cap, date, name, fsize, fcol, fsize2, fcol2, ...)
 }
 %\method{plot.map}{plot}(x, cap, date, name, fsize, fcol, \dots)
 %\method{plot}{map}(x, cap, date, name, fsize, fcol, \dots)
@@ -31,6 +31,12 @@ plot.map(x, cap, date, name, fsize, fcol, ...)
 }
   \item{fcol}{
 (optional) font color in main title
+}
+  \item{fsize2}{
+(optional) font size in date
+}
+  \item{fcol2}{
+(optional) font color in date
 }
   \item{\dots}{
   additional optional parameters
