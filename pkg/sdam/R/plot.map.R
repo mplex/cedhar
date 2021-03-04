@@ -3,7 +3,7 @@
 ## FUNCTION plot.map() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.3 (01-03-2021)
+## version 0.0.4 (03-03-2021)
 ##
 ## PARAMETERS
 ##
@@ -18,11 +18,15 @@
 ## fcol   (optional, title's font color)
 ## fsize2 (optional, date's font size)
 ## fcol2  (optional, date's font color)
+## xd     (optional, x positioning for date)
+## yd     (optional, y positioning for date)
 ##
 
 
+
 plot.map <-
-function (x, cap, date, name, fsize, fcol, fsize2, fcol2, ...) 
+function (x, cap, date, name, fsize, fcol, fsize2, fcol2, xd, 
+    yd, ...) 
 {
     if (!(exists("rpmp"))) {
         utils::data("rpmp", package = "sdam", envir = environment())
@@ -40,7 +44,6 @@ function (x, cap, date, name, fsize, fcol, fsize2, fcol2, ...)
     else {
         NA
     }
-#    require("grid", "grImport2", quietly = TRUE)
     grid::grid.newpage()
     grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste(paste("rpmp", 
         x, sep = "$"), "[[1]]", sep = "")))))
@@ -65,9 +68,11 @@ function (x, cap, date, name, fsize, fcol, fsize2, fcol2, ...)
             ifelse(missing(fsize2) == TRUE, fsize2 <- 8, invisible(NA))
             ifelse(missing(fcol2) == TRUE, fcol2 <- "#808080", 
                 invisible(NA))
+            ifelse(missing(xd) == TRUE, xd <- 0.68, invisible(NA))
+            ifelse(missing(yd) == TRUE, yd <- 0.3, invisible(NA))
             est <- eval(parse(text = paste(paste("rpmcd[[", which(names(rpmcd) %in% 
                 x), "]]", sep = ""), "provd", sep = "$")))
-            grid::grid.text(paste("est.", est), x = 0.68, y = 0.3, 
+            grid::grid.text(paste("est.", est), x = xd, y = yd, 
                 gp = grid::gpar(fontsize = fsize2, col = fcol2))
         }
         else {
