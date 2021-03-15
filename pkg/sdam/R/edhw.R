@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.8.0 (12-03-2021)
+## version 0.8.2 (15-03-2021)
 ##
 ## PARAMETERS
 ##
@@ -105,12 +105,12 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
         }
     }
     else {
+        flgv <- TRUE
         if (is.character(vars) == FALSE) {
             if (isTRUE(isTRUE(is.list(vars) == TRUE) == TRUE) || 
                 isTRUE(is.vector(vars) == FALSE) == TRUE) 
                 stop("'vars' should be a vector or character.")
         }
-        flgv <- TRUE
         ifelse(isTRUE("id" %in% vars) == TRUE, vars <- vars[which(!(vars == 
             "id"))], NA)
     }
@@ -173,6 +173,10 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
             xn[sapply(lapply(xn, function(x) {
                 x$id
             }), is.null)] <- NULL
+            if (is.null(xn[which(as.vector(unlist(lapply(xn, 
+                `[`, "id"))) == sprintf("HD%06d", as.numeric(i)))][[1]]$id) == 
+                TRUE) 
+                return(NULL)
             edhlm <- list()
             for (i in id) {
                 if (isTRUE(length(which(as.vector(unlist(lapply(xn, 
@@ -276,11 +280,10 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
             TRUE) == TRUE) {
             edhl <- lapply(edhlm, `[`, vars)
             ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == 
-                FALSE) == TRUE, valids <- seq_len(length(edhl)), 
-                valids <- which(as.vector(unlist(lapply(edhl, 
-                  function(x) {
-                    all(is.na(as.vector(unlist(x))))
-                  }))) == FALSE))
+                TRUE) == TRUE, valids <- which(as.vector(unlist(lapply(edhl, 
+                function(x) {
+                  all(is.na(as.vector(unlist(x))))
+                }))) == FALSE), valids <- seq_len(length(edhl)))
             if (missing(na.rm) == FALSE && isTRUE(na.rm == TRUE) == 
                 TRUE) {
                 edhrm <- lapply(lapply(lapply(edhl, names), is.na), 
@@ -501,18 +504,12 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
                   if (isTRUE(length(edhlq) > 0) == TRUE) {
                     if (isTRUE(length(valids) == 1) == TRUE) {
                       edhlq <- as.list(unlist(edhlq[valids]))
-                      xdfq <- data.frame(matrix(unlist(edhlq), 
-                        ncol = length(edhlq), byrow = TRUE))
-                      colnames(xdfq) <- names(edhlq)
                     }
                     else {
                       edhlq <- edhlq[valids]
-                      xdfq <- data.frame(matrix(unlist(edhlq), 
-                        ncol = max(lengths(edhlq)), byrow = TRUE))
-                      qlbs <- sort(unique(unlist(lapply(edhlq, 
-                        "names"))), na.last = TRUE)
-                      colnames(xdfq) <- as.vector(stats::na.omit(qlbs))
                     }
+                    xdfq <- as.data.frame(do.call(rbind, lapply(edhlq, 
+                      `length<-`, max(lengths(edhlq)))))
                     if (isTRUE(addID == TRUE) == TRUE) {
                       xdfq$id <- ids[valids]
                       ifelse(isTRUE(flgv == TRUE) == TRUE, xdfq <- rev(xdfq), 
@@ -742,9 +739,6 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
             }
         }
         if (isTRUE(flgp == FALSE) == TRUE) {
-            ids <- lapply(edhlm, function(x) {
-                x$id
-            })
             edhlq <- lapply(edhlm, `[`, sort(vars[which(vars != 
                 "people")]))
             ifelse(lapply(edhlq, function(z) {
@@ -781,6 +775,7 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
                   colnames(xdfq) <- as.vector(stats::na.omit(qlbs))
                 }
                 if (isTRUE(addID == TRUE) == TRUE) {
+                  ids[sapply(ids, is.null)] <- NA
                   xdfq$id <- as.vector(unlist(ids))
                   ifelse(isTRUE(flgv == TRUE) == TRUE, xdfq <- rev(xdfq), 
                     NA)
