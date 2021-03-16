@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.8.3 (16-03-2021)
+## version 0.8.3 (15-03-2021)
 ##
 ## PARAMETERS
 ##
@@ -55,18 +55,25 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
                 NA)
         }
         if (missing(province) == FALSE) {
+            if (!(exists("rp"))) {
+                utils::data("rp", package = "sdam", envir = environment())
+                rp <- get("rp", envir = environment())
+            }
+            else {
+                NA
+            }
             xp <- x[x$province == unlist(rp[which(names(rp) == 
                 province)], use.names = FALSE), ]
         }
         else {
-            ifelse(missing(province) == TRUE, xp <- x, NA)
+            xp <- x
         }
         if (missing(gender) == FALSE) {
             xp <- xp[-which(is.na(xp$gender)), ]
             return(xp[-which(xp$gender != gender), ])
         }
         else {
-            NA
+            return(xp)
         }
     }
     else if (isTRUE(is.list(x) == TRUE) == TRUE) {
