@@ -3,7 +3,7 @@
 ## FUNCTION dts() to convert date formats into numerical
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.4 (17-02-2021)
+## version 0.0.5 (16-03-2021)
 ##
 ## PARAMETERS
 ## x        (scalar or vector,  with character dates)
@@ -18,6 +18,9 @@ function (x, cent, sep)
         x
     }
     else {
+        if (isTRUE(length(x) > 1) == TRUE && is.na(suppressWarnings(as.numeric(x))) == 
+            FALSE) 
+            return(as.numeric(x))
         if (missing(cent) == FALSE && isTRUE(cent == TRUE) == 
             TRUE) {
             ifelse(missing(sep) == TRUE, sep <- " to ", NA)
@@ -52,11 +55,18 @@ function (x, cent, sep)
             else {
                 xn <- sub("or.*", "", x, ignore.case = TRUE)
             }
-            xnd <- sapply(sub("C", "", sub("[.].*", "", xn), 
-                ignore.case = TRUE), function(y) {
+            pck <- which(gsub("[^-]", "", xn) %in% "-")
+            ifelse(isTRUE(length(pck) > 0) == TRUE, xn[pck] <- paste0(gsub("-.*", 
+                "\\1", xn[pck]), " ", gsub("([^A-Za-z])+", "", 
+                gsub(".*-", "\\1", xn[pck]))), NA)
+            xn2 <- toupper(sub("C", "", sub("[.].*", "", xn), 
+                ignore.case = TRUE))
+            xnd <- sapply(xn2, function(y) {
                 tmp <- suppressWarnings(sapply(y, function(z) as.numeric(paste(strsplit(z, 
                   "")[[1]][which(!(strsplit(z, "")[[1]] %in% 
                   c("?", " ", "B")))], collapse = "")) * (-1L)))
+                ifelse(isTRUE(suppressWarnings(as.numeric(y)) > 
+                  0) == TRUE, tmp <- tmp * (-1L), NA)
                 mmd <- vector(length = length(y))
                 mmd[which(!(is.na(tmp)))] <- as.vector(tmp)[which(!(is.na(tmp)))]
                 mmd[which(is.na(tmp))] <- suppressWarnings(sapply(y[which(is.na(tmp))], 
