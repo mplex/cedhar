@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.8.2 (15-03-2021)
+## version 0.8.3 (16-03-2021)
 ##
 ## PARAMETERS
 ##
@@ -43,23 +43,30 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
         class(x) <- NULL
         comment(x) <- NULL
     }
-    else if (isTRUE(is.data.frame(x) == TRUE) == TRUE) {
+    else if (isTRUE(is.data.frame(x) == TRUE) == TRUE || isTRUE(is.data.frame(x[[1]]) == 
+        TRUE) == TRUE) {
         flgdf <- TRUE
-        ifelse(isTRUE(is.list(x) == TRUE) == TRUE, x <- as.data.frame(x), 
-            NA)
+        if (isTRUE(is.data.frame(x[[1]]) == TRUE) == TRUE) {
+            warning("\"x\" is list of data frames, only first component is taken.")
+            x <- x[[1]]
+        }
+        else {
+            ifelse(isTRUE(is.list(x) == TRUE) == TRUE, x <- as.data.frame(x), 
+                NA)
+        }
         if (missing(province) == FALSE) {
             xp <- x[x$province == unlist(rp[which(names(rp) == 
                 province)], use.names = FALSE), ]
         }
         else {
-            xp <- x
+            ifelse(missing(province) == TRUE, xp <- x, NA)
         }
         if (missing(gender) == FALSE) {
             xp <- xp[-which(is.na(xp$gender)), ]
             return(xp[-which(xp$gender != gender), ])
         }
         else {
-            return(xp)
+            NA
         }
     }
     else if (isTRUE(is.list(x) == TRUE) == TRUE) {
@@ -173,10 +180,6 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
             xn[sapply(lapply(xn, function(x) {
                 x$id
             }), is.null)] <- NULL
-            if (is.null(xn[which(as.vector(unlist(lapply(xn, 
-                `[`, "id"))) == sprintf("HD%06d", as.numeric(i)))][[1]]$id) == 
-                TRUE) 
-                return(NULL)
             edhlm <- list()
             for (i in id) {
                 if (isTRUE(length(which(as.vector(unlist(lapply(xn, 
@@ -216,14 +219,8 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
     }
     if (isTRUE(flgdf == TRUE) == TRUE) {
         if (match.arg(as) == "df") {
-            if (missing(vars) == FALSE) {
-                x <- x[which(colnames(x) %in% vars)]
-            }
-            else {
-                NA
-            }
             if (missing(id) == FALSE) {
-                tmp <- x
+                tmp <- x[[1]]
                 if (any(is.na(do.call(c, lapply(tmp$id, (function(x) {
                   if (is.null(x) | length(x) == 0) {
                     NA
@@ -239,10 +236,12 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
                   return(tmpx[pck, ])
                 }
                 else {
-                  return(tmp[which(unlist(lapply(tmp$id, function(x) {
+                  pck <- which(unlist(lapply(tmp$id, function(x) {
                     (as.numeric(paste(strsplit(x, "")[[1]][3:8], 
                       collapse = "")))
-                  })) %in% id), ])
+                  })) %in% id)
+                  return(tmp[pck, c(which("id" %in% xvars), which(xvars %in% 
+                    vars))])
                 }
             }
             else if (missing(limit) == FALSE) {
