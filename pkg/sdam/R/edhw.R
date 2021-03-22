@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.8.3 (15-03-2021)
+## version 0.8.5 (22-03-2021)
 ##
 ## PARAMETERS
 ##
@@ -97,6 +97,7 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
             NA)
     }
     if (missing(vars) == TRUE) {
+        ifelse(match.arg(as) == "df", flgp <- TRUE, flgp <- FALSE)
         flgv <- FALSE
         if (match.arg(as) == "list") {
             if (missing(id) == TRUE && missing(limit) == TRUE) {
@@ -105,8 +106,10 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
             }
             else {
                 if (missing(id) == FALSE) {
+                  ifelse(is.character(id) == TRUE, id <- as.numeric(gsub("HD", 
+                    "", id)), NA)
                   ifelse(isTRUE(flgdf == TRUE) == TRUE, return(as.list(x[id])), 
-                    return(x[id]))
+                    NA)
                 }
                 else if (missing(id) == TRUE) {
                   NA
@@ -127,9 +130,9 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
         }
         ifelse(isTRUE("id" %in% vars) == TRUE, vars <- vars[which(!(vars == 
             "id"))], NA)
+        ifelse(isTRUE("people" %in% vars) == TRUE || any(grepl("people.", 
+            vars, fixed = TRUE)) == TRUE, flgp <- TRUE, flgp <- FALSE)
     }
-    ifelse(isTRUE("people" %in% vars) == TRUE || any(grepl("people.", 
-        vars, fixed = TRUE)) == TRUE, flgp <- TRUE, flgp <- FALSE)
     if (isTRUE(flgdf == TRUE) == TRUE) {
         xvars <- colnames(x)
     }
@@ -168,46 +171,25 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
     }
     if (missing(addID) == FALSE && isTRUE(addID == FALSE) == 
         TRUE) {
-        if (missing(na.rm) == FALSE && isTRUE(na.rm == TRUE) == 
-            TRUE) {
-            warning("'addID' is set to TRUE for 'na.rm'.")
+        if ((missing(na.rm) == FALSE && isTRUE(na.rm == TRUE) == 
+            TRUE) | (match.arg(as) == "df")) {
+            warning("'addID' is set to TRUE for 'na.rm' and data frame output.")
             addID <- TRUE
         }
         else {
-            ifelse(isTRUE("id" %in% vars) == TRUE, addID <- TRUE, 
-                addID <- FALSE)
+            addID <- FALSE
         }
     }
-    else {
+    else if (missing(addID) == FALSE && isTRUE(addID == TRUE) == 
+        TRUE) {
         addID <- TRUE
+    }
+    else {
+        ifelse(match.arg(as) == "df", addID <- TRUE, addID <- FALSE)
     }
     if (isTRUE(flgdf == FALSE) == TRUE) {
         if (missing(id) == FALSE) {
-            xn <- x
-            xn[sapply(lapply(xn, function(x) {
-                x$id
-            }), is.null)] <- NULL
-            edhlm <- list()
-            for (i in id) {
-                if (isTRUE(length(which(as.vector(unlist(lapply(xn, 
-                  `[`, "id"))) == sprintf("HD%06d", as.numeric(i)))) > 
-                  0) == TRUE) {
-                  if ((xn[which(as.vector(unlist(lapply(xn, `[`, 
-                    "id"))) == sprintf("HD%06d", as.numeric(i)))][[1]]$id == 
-                    sprintf("HD%06d", as.numeric(i))) == FALSE) {
-                    edhlm[length(edhlm) + 1L] <- xn[i]
-                  }
-                  else {
-                    edhlm[length(edhlm) + 1L] <- xn[as.numeric(which(unlist(lapply(xn, 
-                      `[`, "id")) == sprintf("HD%06d", as.numeric(i))))]
-                  }
-                }
-                else {
-                  ifelse(isTRUE(length(id) == 1L) == TRUE, return(NULL), 
-                    NA)
-                }
-            }
-            rm(i)
+            edhlm <- x[as.numeric(gsub("HD", "", id))]
         }
         else if (missing(id) == TRUE) {
             if (missing(limit) == TRUE || (missing(limit) == 
@@ -802,7 +784,8 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
         }
     }
     else if (match.arg(as) == "list") {
-        if (isTRUE(flgp == TRUE) == TRUE) {
+        if (isTRUE(flgp == TRUE) == TRUE && isTRUE(flgv == TRUE) == 
+            TRUE) {
             if (missing(select) == FALSE) {
                 edhlp <- lapply(edhlm, `[`, "people")
                 if (missing(na.rm) == FALSE && isTRUE(na.rm == 
@@ -860,8 +843,14 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
                 id = ids, edhl)), return(Map(c, id = ids, edhl2)))
         }
         else {
-            ifelse(isTRUE(flgp == FALSE) == TRUE, return(edhl), 
-                return(edhl2))
+            if (isTRUE(flgp == FALSE) == TRUE) {
+                ifelse(isTRUE(length(edhl) == 1) == TRUE, return(edhl[[1]]), 
+                  return(edhl))
+            }
+            else {
+                ifelse(isTRUE(length(edhl2) == 1) == TRUE, return(edhl2[[1]]), 
+                  return(edhl2))
+            }
         }
     }
     else {
