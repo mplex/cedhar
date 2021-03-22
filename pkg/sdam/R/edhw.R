@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.8.5 (22-03-2021)
+## version 0.8.6 (22-03-2021)
 ##
 ## PARAMETERS
 ##
@@ -189,7 +189,32 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
     }
     if (isTRUE(flgdf == FALSE) == TRUE) {
         if (missing(id) == FALSE) {
-            edhlm <- x[as.numeric(gsub("HD", "", id))]
+            id <- as.numeric(gsub("HD", "", id))
+            xn <- x
+            xn[sapply(lapply(xn, function(x) {
+                x$id
+            }), is.null)] <- NULL
+            edhlm <- list()
+            for (i in id) {
+                if (isTRUE(length(which(as.vector(unlist(lapply(xn, 
+                  `[`, "id"))) == sprintf("HD%06d", as.numeric(i)))) > 
+                  0) == TRUE) {
+                  if ((xn[which(as.vector(unlist(lapply(xn, `[`, 
+                    "id"))) == sprintf("HD%06d", as.numeric(i)))][[1]]$id == 
+                    sprintf("HD%06d", as.numeric(i))) == FALSE) {
+                    edhlm[length(edhlm) + 1L] <- xn[i]
+                  }
+                  else {
+                    edhlm[length(edhlm) + 1L] <- xn[as.numeric(which(unlist(lapply(xn, 
+                      `[`, "id")) == sprintf("HD%06d", as.numeric(i))))]
+                  }
+                }
+                else {
+                  ifelse(isTRUE(length(id) == 1L) == TRUE, return(NULL), 
+                    NA)
+                }
+            }
+            rm(i)
         }
         else if (missing(id) == TRUE) {
             if (missing(limit) == TRUE || (missing(limit) == 
