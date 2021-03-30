@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.9.5 (26-03-2021)
+## version 0.9.6 (30-03-2021)
 ##
 ## PARAMETERS
 ##
@@ -20,7 +20,7 @@
 ## limit    (integers, vector with nr records limit in output, offset supported)
 ## id       (integer or character, select only hd_nr records)
 ## na.rm    (logical, remove data entries with <NA>?)
-## ldf      (optional, is x a list of data frames?)
+## ldf      (optional and experimental, is x a list of data frames?)
 ## province (optional, choose EDH province)
 ## gender   (optional, choose EDH gender)
 ##
@@ -538,12 +538,15 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
                   if (isTRUE(length(edhlq) > 0) == TRUE) {
                     if (isTRUE(length(valids) == 1) == TRUE) {
                       edhlq <- as.list(unlist(edhlq[valids]))
+                      xdfq <- data.frame(matrix(unlist(edhlq), 
+                        ncol = length(edhlq), byrow = TRUE))
+                      colnames(xdfq) <- names(edhlq)
                     }
                     else {
                       edhlq <- edhlq[valids]
+                      xdfq <- as.data.frame(do.call(rbind, lapply(edhlq, 
+                        `length<-`, max(lengths(edhlq)))), stringsAsFactors = TRUE)
                     }
-                    xdfq <- as.data.frame(do.call(rbind, lapply(edhlq, 
-                      `length<-`, max(lengths(edhlq)))), stringsAsFactors = TRUE)
                     if (isTRUE(addID == TRUE) == TRUE) {
                       xdfq$id <- ids[valids]
                       ifelse(isTRUE(flgv == TRUE) == TRUE, xdfq <- rev(xdfq), 
