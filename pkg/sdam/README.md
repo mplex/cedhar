@@ -8,6 +8,12 @@ at the School of Culture and Society at Aarhus University.
 
 
 
+### Vignettes
+
+* [Plotting ancient Roman provinces and regions](https://sdam-au.github.io/sdam/articles/RomanProvs.html)
+* [Re-encoding Greek characters from 'EDH' dataset](https://sdam-au.github.io/sdam/articles/Encoding.html)
+
+
 <br/>
 
 ### Installation
@@ -32,7 +38,7 @@ devtools::install_github("sdam-au/sdam")
 ## Load package
 library("sdam")
 packageVersion("sdam")
-#[1] ‘0.4.5’
+#[1] â€˜0.6.0â€™
 ```
 
 ```r
@@ -178,12 +184,6 @@ prex(x=get.edh(search="inscriptions", province="Iud"), vars=c("not_before", "not
 ```
 
 
-
-
-### Vignettes
-
-* [Plotting ancient Roman provinces and regions](https://sdam-au.github.io/sdam/articles/RomanProvs.html)
-* [Re-encoding Greek characters from 'EDH' dataset](https://sdam-au.github.io/sdam/articles/Encoding.html)
 
 
 <!-- Look at the ['sdam' R package documentation](https://sdam-au.github.io/sdam/) to find more about the distinct variables in `EDH` dataset 
