@@ -3,7 +3,7 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.5 (10-05-2021)
+## version 0.0.6 (01-06-2021)
 ##
 ## OPTIONAL PARAMETERS
 ##
@@ -53,14 +53,6 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra"), settl,
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
                 "[[6]]", "[[1]]", sep = "")))))
         })
-        if (missing(settl) == FALSE && isTRUE(settl == FALSE) == 
-            TRUE) {
-            invisible(NA)
-        }
-        else {
-            grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
-                "[[1]]", "[[1]]", sep = "")))))
-        }
         if (missing(roads) == FALSE && isTRUE(roads == FALSE) == 
             TRUE) {
             invisible(NA)
@@ -76,6 +68,14 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra"), settl,
         else {
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
                 "[[7]]", "[[1]]", sep = "")))))
+        }
+        if (missing(settl) == FALSE && isTRUE(settl == FALSE) == 
+            TRUE) {
+            invisible(NA)
+        }
+        else {
+            grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
+                "[[1]]", "[[1]]", sep = "")))))
         }
         if (missing(main) == TRUE) {
             invisible(NA)

@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.9.7 (31-03-2021)
+## version 0.9.8 (04-06-2021)
 ##
 ## PARAMETERS
 ##
@@ -34,6 +34,7 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
     flgdf <- FALSE
     if (is.null(x) == TRUE) {
         warning("\"x\" is NULL and dataset \"EDH\" is taken if available.")
+        flglv <- TRUE
         if (!(exists("EDH"))) {
             utils::data("EDH", package = "sdam", envir = environment())
             EDH <- get("EDH", envir = environment())
@@ -41,7 +42,6 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
         else {
             NA
         }
-        flglv <- FALSE
         x <- EDH
         class(x) <- NULL
         comment(x) <- NULL
@@ -103,6 +103,26 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
     else {
         ifelse(isTRUE(is.character(x) == TRUE) == TRUE, x <- eval(parse(text = x)), 
             NA)
+    }
+    ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == FALSE) == 
+        TRUE, na.rm <- FALSE, na.rm <- TRUE)
+    if (missing(addID) == FALSE && isTRUE(addID == FALSE) == 
+        TRUE) {
+        if ((isTRUE(na.rm == TRUE) == TRUE) | (match.arg(as) == 
+            "df")) {
+            warning("'addID' is set to TRUE for 'na.rm' and data frame output.")
+            addID <- TRUE
+        }
+        else {
+            addID <- FALSE
+        }
+    }
+    else if (missing(addID) == FALSE && isTRUE(addID == TRUE) == 
+        TRUE) {
+        addID <- TRUE
+    }
+    else {
+        ifelse(match.arg(as) == "df", addID <- TRUE, addID <- FALSE)
     }
     if (missing(vars) == TRUE) {
         flgv <- FALSE
@@ -189,26 +209,6 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
         else {
             NA
         }
-    }
-    ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == FALSE) == 
-        TRUE, na.rm <- FALSE, na.rm <- TRUE)
-    if (missing(addID) == FALSE && isTRUE(addID == FALSE) == 
-        TRUE) {
-        if ((isTRUE(na.rm == TRUE) == TRUE) | (match.arg(as) == 
-            "df")) {
-            warning("'addID' is set to TRUE for 'na.rm' and data frame output.")
-            addID <- TRUE
-        }
-        else {
-            addID <- FALSE
-        }
-    }
-    else if (missing(addID) == FALSE && isTRUE(addID == TRUE) == 
-        TRUE) {
-        addID <- TRUE
-    }
-    else {
-        ifelse(match.arg(as) == "df", addID <- TRUE, addID <- FALSE)
     }
     if (isTRUE(flgdf == FALSE) == TRUE) {
         if (missing(id) == FALSE) {
