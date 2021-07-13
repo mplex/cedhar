@@ -173,7 +173,7 @@ there are two possible outcomes.</p>
 <p>The probability mass function (p.m.f.) corresponding to the binomial distribution
 represents the probability of <span class="math notranslate nohighlight">\(x\)</span> successes in a binomial experiment</p>
 <p><span class="math notranslate nohighlight">\(P(x) \;=\; {n\choose x}  ~p^x (1-p)^{n-x}\)</span></p>
-<p>where <span class="math notranslate nohighlight">\(P(x)\)</span> is the  distribution function for the probability of success for <span class="math notranslate nohighlight">\(x = 0, 1, 2, \dots, n\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(P(x)\)</span> is the distribution function for the probability of success for <span class="math notranslate nohighlight">\(x = 0, 1, 2, \dots, n\)</span>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -253,8 +253,8 @@ a long development and abrupt decay.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>There is also a discrete version of the uniform distribution with a
-mass probability function.</p>
+<p>There is also a discrete version of the uniform distribution
+that is a generalization of the Bernoulli distribution.</p>
 </div>
 </div></blockquote>
 <div class="line-block">
@@ -452,13 +452,19 @@ the probability of existence for each time block is defined as</p>
 </div>
 <div class="section" id="imputation-and-missing-data">
 <span id="missing"></span><h2>Imputation and Missing data<a class="headerlink" href="#imputation-and-missing-data" title="Permalink to this headline">¶</a></h2>
-<p>In statistics, <em>imputation</em> is the process of replacing missing data with plausible estimates.</p>
+<p>In statistics, <em>imputation</em> is the process of replacing missing data with plausible estimates,
+and <em>multiple imputation</em> is the method of choice for complex incomplete data problems.</p>
+<p>With the <em>joint modeling</em> approach, imputing multivariate data involves specifying a
+multivariate distribution for the missing data, and then drawing imputation from their
+conditional distributions by Markov chain Monte Carlo (MCMC) techniques.</p>
+<p>The <em>fully conditional specification</em> is a variable-by-variable type of imputation that is
+made by iterating over conditional densities.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <div class="section" id="missing-data">
 <h3>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h3>
-<p>Every data point has some likelihood of being missing, and Rubin (1976) classified missing data problems
+<p>Every data point has some likelihood of being missing. Rubin (1976) classified missing data problems
 into three categories: missing completely at random (MCAR), missing at random (MAR) and missing not at random (MNAR).</p>
 <p>For some parameter <span class="math notranslate nohighlight">\(\psi\)</span>, where <span class="math notranslate nohighlight">\(Y_{obs}\)</span> is the observed sample data and <span class="math notranslate nohighlight">\(Y_{mis}\)</span> the unobserved sample data,
 the overall probability of being missing <span class="math notranslate nohighlight">\(x\)</span> depends,</p>
@@ -507,7 +513,7 @@ the overall probability of being missing <span class="math notranslate nohighlig
 <div class="section" id="function-usage">
 <h3>Function usage<a class="headerlink" href="#function-usage" title="Permalink to this headline">¶</a></h3>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># probability of existence</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">taq</span><span class="p">,</span> <span class="n">tpq</span><span class="p">,</span> <span class="n">vars</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">aoristic</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="m">1</span><span class="p">,,</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">taq</span><span class="p">,</span> <span class="n">tpq</span><span class="p">,</span> <span class="n">vars</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">cp</span><span class="p">,</span> <span class="n">aoristic</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span>
         <span class="n">DF</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="kc">...</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -590,8 +596,8 @@ the overall probability of being missing <span class="math notranslate nohighlig
 <div class="section" id="details">
 <h4>Details<a class="headerlink" href="#details" title="Permalink to this headline">¶</a></h4>
 <p>In case that <cite>bins</cite> is <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, then the time breaks take the chronological period specified in <cite>cp</cite>, which by
-default is <code class="docutils literal notranslate"><span class="pre">&quot;bin5&quot;</span></code> or five-periods for the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset. Another built-in option is <code class="docutils literal notranslate"><span class="pre">&quot;bin8&quot;</span></code> for eight
-chronological periods, and <cite>cp</cite> is open for other chronological phases as long as they are recorded as a list object.</p>
+default is <code class="docutils literal notranslate"><span class="pre">&quot;bin5&quot;</span></code> or a five-periods model for the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset; the other built-in option is <code class="docutils literal notranslate"><span class="pre">&quot;bin8&quot;</span></code> for eight
+chronological periods. Argument <cite>cp</cite> is open for other chronological phases as long as they are recorded as a list object.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -602,12 +608,12 @@ of <code class="docutils literal notranslate"><span class="pre">Iudaea</span></c
 <span class="n">R</span><span class="o">&gt;</span> <span class="n">iud</span> <span class="o">&lt;-</span> <span class="nf">get.edh</span><span class="p">(</span><span class="n">search</span><span class="o">=</span><span class="s">&quot;inscriptions&quot;</span><span class="p">,</span> <span class="n">province</span><span class="o">=</span><span class="s">&quot;Iud&quot;</span><span class="p">)</span>
 
 <span class="c1"># 5-chronological periods</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">)</span>
 <span class="c1">#  Arch     Class      Hell       Rom       Byz</span>
 <span class="c1"># 0.000     0.000  1337.904 13405.017     0.000</span>
 
 <span class="c1"># 8-chronological periods</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">)</span>
 <span class="c1">#  Arch     Class      Hell      ERom      MRom      LRom      EByz      LByz</span>
 <span class="c1">#0.0000    0.0000 1337.9040 2396.4529 1200.5623  320.5379    0.0000    0.0000</span>
 </pre></div>
@@ -620,14 +626,15 @@ of <code class="docutils literal notranslate"><span class="pre">Iudaea</span></c
 </div>
 <div class="section" id="plotting-aoristic-sum">
 <h3>Plotting aoristic sum<a class="headerlink" href="#plotting-aoristic-sum" title="Permalink to this headline">¶</a></h3>
-<p>To visualize the aoristic sum from <code class="docutils literal notranslate"><span class="pre">Iudaea</span></code> as bar plots and function <code class="docutils literal notranslate"><span class="pre">prex()</span></code></p>
+<p>To visualize the aoristic sum from the Roman province of Iudaea or <code class="docutils literal notranslate"><span class="pre">iud</span></code> as bar plots with function <code class="docutils literal notranslate"><span class="pre">prex()</span></code>
+and two types of chronological phases</p>
 <blockquote>
 <div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1">#  five chronological phases</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">),</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin5&quot;</span><span class="p">),</span>
 <span class="o">+</span>          <span class="n">main</span><span class="o">=</span><span class="s">&quot;Aoristic sum Iudaea (5-periods)&quot;</span> <span class="p">)</span>
 
 <span class="c1"># eight chronological phases</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">),</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">barplot</span><span class="p">(</span><span class="nf">prex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">iud</span><span class="p">,</span> <span class="n">taq</span><span class="o">=</span><span class="s">&quot;not_before&quot;</span><span class="p">,</span> <span class="n">tpq</span><span class="o">=</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="n">cp</span><span class="o">=</span><span class="s">&quot;bin8&quot;</span><span class="p">),</span>
 <span class="o">+</span>          <span class="n">horiz</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">las</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">main</span><span class="o">=</span><span class="s">&quot;Aoristic sum Iudaea (8-periods)&quot;</span> <span class="p">)</span>
 </pre></div>
 </div>

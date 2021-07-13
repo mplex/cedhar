@@ -90,7 +90,7 @@ represents the probability of :math:`x` successes in a binomial experiment
 :math:`P(x) \;=\; {n\choose x}  ~p^x (1-p)^{n-x}`
 
 
-where :math:`P(x)` is the  distribution function for the probability of success for :math:`x = 0, 1, 2, \dots, n`. 
+where :math:`P(x)` is the distribution function for the probability of success for :math:`x = 0, 1, 2, \dots, n`. 
 
 
 |
@@ -212,8 +212,9 @@ Uniform distribution plot for :math:`P(x_1 < X < x_2)`.
 
     .. note:: 
     
-        There is also a discrete version of the uniform distribution with a
-        mass probability function.
+        There is also a discrete version of the uniform distribution 
+        that is a generalization of the Bernoulli distribution. 
+
 
 
 |
@@ -533,8 +534,6 @@ An example of a transition probabilities are increase :math:`=0.4`; stability :m
 
 
 
-
-
 |
 
 .. _missing:
@@ -542,15 +541,27 @@ An example of a transition probabilities are increase :math:`=0.4`; stability :m
 Imputation and Missing data
 ===========================
 
-In statistics, *imputation* is the process of replacing missing data with plausible estimates. 
+In statistics, *imputation* is the process of replacing missing data with plausible estimates, 
+and *multiple imputation* is the method of choice for complex incomplete data problems. 
+
+With the *joint modeling* approach, imputing multivariate data involves specifying a 
+multivariate distribution for the missing data, and then drawing imputation from their 
+conditional distributions by Markov chain Monte Carlo (MCMC) techniques. 
+
+The *fully conditional specification* is a variable-by-variable type of imputation that is 
+made by iterating over conditional densities. 
+
+
+
 
 
 |
 
+
 Missing data
 ------------
 
-Every data point has some likelihood of being missing, and Rubin (1976) classified missing data problems 
+Every data point has some likelihood of being missing. Rubin (1976) classified missing data problems 
 into three categories: missing completely at random (MCAR), missing at random (MAR) and missing not at random (MNAR).
 
 For some parameter :math:`\psi`, where :math:`Y_{obs}` is the observed sample data and :math:`Y_{mis}` the unobserved sample data, 
@@ -606,7 +617,7 @@ Function usage
 .. code-block:: R
 
     # probability of existence
-    R> prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,, 
+    R> prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, weight = 1, 
             DF, out, plot = FALSE, main = NULL, ...)
     
 
@@ -691,8 +702,8 @@ Details
 +++++++
 
 In case that `bins` is ``NULL``, then the time breaks take the chronological period specified in `cp`, which by
-default is ``"bin5"`` or five-periods for the ``EDH`` dataset. Another built-in option is ``"bin8"`` for eight
-chronological periods, and `cp` is open for other chronological phases as long as they are recorded as a list object.
+default is ``"bin5"`` or a five-periods model for the ``EDH`` dataset; the other built-in option is ``"bin8"`` for eight
+chronological periods. Argument `cp` is open for other chronological phases as long as they are recorded as a list object.
 
 
 |
@@ -708,12 +719,12 @@ of ``Iudaea`` computed with ``prex()``
        R> iud <- get.edh(search="inscriptions", province="Iud")
        
        # 5-chronological periods
-       R> prex(x=iud, taq="not_before", tpq"not_after", cp="bin5")
+       R> prex(x=iud, taq="not_before", tpq="not_after", cp="bin5")
        #  Arch     Class      Hell       Rom       Byz 
        # 0.000     0.000  1337.904 13405.017     0.000 
        
        # 8-chronological periods
-       R> prex(x=iud, taq="not_before", tpq"not_after", cp="bin8")
+       R> prex(x=iud, taq="not_before", tpq="not_after", cp="bin8")
        #  Arch     Class      Hell      ERom      MRom      LRom      EByz      LByz 
        #0.0000    0.0000 1337.9040 2396.4529 1200.5623  320.5379    0.0000    0.0000 
 
@@ -723,17 +734,18 @@ of ``Iudaea`` computed with ``prex()``
 Plotting aoristic sum
 ---------------------
 
-To visualize the aoristic sum from ``Iudaea`` as bar plots and function ``prex()``
+To visualize the aoristic sum from the Roman province of Iudaea or ``iud`` as bar plots with function ``prex()`` 
+and two types of chronological phases 
 
     .. code-block:: R
     
        
        #  five chronological phases
-       R> barplot(prex(x=iud, taq="not_before", tpq"not_after", cp="bin5"), 
+       R> barplot(prex(x=iud, taq="not_before", tpq="not_after", cp="bin5"), 
        +          main="Aoristic sum Iudaea (5-periods)" )
        
        # eight chronological phases
-       R> barplot(prex(x=iud, taq="not_before", tpq"not_after", cp="bin8"), 
+       R> barplot(prex(x=iud, taq="not_before", tpq="not_after", cp="bin8"), 
        +          horiz=TRUE, las=1, main="Aoristic sum Iudaea (8-periods)" )
 
 

@@ -186,7 +186,23 @@ Making Documentation
 News from ``sdam`` package
 --------------------------
 
-* **Version 0.3.0** (beta) released (21-11-2020).
+* **Version 0.5.0**  released (19-04-2021).
+
+    - ``rpmcd`` dataset is updated.
+
+
+|
+
+
+* **Version 0.4.0**  released (around March 2021).
+
+    - *New functions* ``plot.map()``, ``dts()`` and ``cln()``, and datasets ``rpm`` and ``rpmcd``
+
+
+|
+
+
+* **Version 0.3.0**  released (21-11-2020).
     - *New functions* ``plot.dates()`` and ``prex()`` (cf. )
 
     - ``rp`` dataset is added (**v0.3.7**)
@@ -216,6 +232,11 @@ News from ``sdam`` package
 
 * **Version 0.1.0** released (6-5-2020).
     - *First functions* ``get.edh()``, ``get.edhw()``, ``request()``, ``simil()``, and ``EDH`` *dataset*
+
+|
+
+
+(see also package's `manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_ )
 
 
 

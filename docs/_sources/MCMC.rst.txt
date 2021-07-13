@@ -141,12 +141,14 @@ MCMC Simulation
 Thinning
 --------
 
+
     .. todo:: 
     
         Thinning interval for reducing autocorrelation of random points in the sampling...
 
 
 |
+
 
 
 Convergence
@@ -156,6 +158,13 @@ Convergence in MCMC is obtained when these outcomes become minimal with the incr
 
 * the change in the variance
 * the standard error
+
+    .. note:: 
+    
+        Thinning interval is to achieve convergence.
+
+
+
 
 |
 
