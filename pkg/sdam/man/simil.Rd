@@ -8,21 +8,21 @@ Similarity between (column) vectors
 A function to compute the Similarity between vectors, which can arise from columns in a data frame or list entries.
 }
 \usage{
-simil(x, att, null, uniq, diag.incl)
+simil(x, type = c("sm", "ja", "ra"), vars, uniq, diag.incl)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 	A list or a data frame 
 }
-  \item{att}{
+  \item{type}{
+   Type format of data frame. Currently either \code{"long"} or \code{"wide"} (\code{"narrow"} not yet implemented)
+}
+  \item{vars}{
 	Column(s) in \code{x} representing attributes (vector)
 }
-  \item{null}{
-	Include NA or NULLs? (optional and logical) 
-}
   \item{uniq}{
-	remove duplicates? (optional and logical)
+	Only unique elements? (optional and logical)
 }
   \item{diag.incl}{
 	include entries in matrix diagonal? (optional and logical) 
@@ -48,7 +48,7 @@ Other similarity measures will be added in the near future.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{get.edh}}
+\code{\link{edhw}}, \code{\link{prex}}, \code{\link{get.edh}}
 }
 \examples{
 # TBD 
