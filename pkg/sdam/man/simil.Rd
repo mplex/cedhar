@@ -2,21 +2,18 @@
 \alias{simil}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Similarity between (column) vectors
+Simple matching counting of data frame coocurrences
 }
 \description{
-A function to compute the Similarity between vectors, which can arise from columns in a data frame or list entries.
+A function to compute the similarity between columns in a dataframe or list entries by simple matching counting.
 }
 \usage{
-simil(x, type = c("sm", "ja", "ra"), vars, uniq, diag.incl)
+simil(x, vars, uniq, diag.incl)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
 	A list or a data frame 
-}
-  \item{type}{
-   Type format of data frame. Currently either \code{"long"} or \code{"wide"} (\code{"narrow"} not yet implemented)
 }
   \item{vars}{
 	Column(s) in \code{x} representing attributes (vector)
@@ -42,7 +39,7 @@ A valued matrix with similarities among units by simple matching.
 Antonio Rivero Ostoic
 }
 \note{
-Other similarity measures will be added in the near future.
+This function is in an early development phase.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

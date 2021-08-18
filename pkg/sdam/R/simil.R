@@ -1,20 +1,19 @@
 
 ## 
-## FUNCTION simil() similarity based on data frame coocurrences
+## FUNCTION simil() for simple matching counting of data frame coocurrences
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.2 (02-08-2021)
+## version 0.0.3 (03-08-2021)
 ##
 ## Parameters
 ## x         (data frame or list object with vectors to compare)
-## type      (similarity type: simple matching, not implemented Jaccard or Rand)
 ## vars      (vector with column(s) in x representing attribute variables)
 ## uniq      (optional for only unique elements?)
 ## diag.incl (optional and logical include entries in diagonal?)
 
 
 simil <-
-function (x, type = c("sm", "ja", "ra"), vars, uniq, diag.incl) 
+function (x, vars, uniq, diag.incl) 
 {
     ifelse(is.data.frame(x) == FALSE, x <- as.data.frame(do.call(rbind, 
         x)), NA)
@@ -22,7 +21,8 @@ function (x, type = c("sm", "ja", "ra"), vars, uniq, diag.incl)
         vars <- seq_len(ncol(x))
     }
     else {
-        ifelse(is.vector(vars) == TRUE, NA, stop("\"att\" must be a vector."))
+        if (is.vector(vars) == FALSE) 
+            stop("\"vars\" must be a vector.")
     }
     ifelse(missing(uniq) == FALSE && isTRUE(uniq == FALSE) == 
         TRUE, NA, x <- unique(x))
@@ -30,22 +30,16 @@ function (x, type = c("sm", "ja", "ra"), vars, uniq, diag.incl)
         ncol = nrow(x), dimnames = list(unlist(x[, 1]), unlist(x[, 
             1]))), mat <- matrix(0L, nrow = nrow(x), ncol = nrow(x), 
         dimnames = list(x$ID, x$ID)))
-    switch(match.arg(type), sm = {
-        for (at in vars) {
-            ccat <- unlist(unique(x[, at]))
-            for (i in seq_len(length(ccat))) {
-                slc <- which(x[, at] == ccat[i])
-                mat[slc, slc] <- mat[slc, slc] + 1L
-            }
-            rm(i)
+    for (at in vars) {
+        ccat <- unlist(unique(x[, at]))
+        for (i in seq_len(length(ccat))) {
+            slc <- which(x[, at] == ccat[i])
+            mat[slc, slc] <- mat[slc, slc] + 1L
         }
-        rm(at)
-        ifelse(missing(diag.incl) == FALSE && isTRUE(diag.incl == 
-            TRUE) == TRUE, NA, diag(mat) <- 0)
-        return(multiplex::dichot(mat, c = max(mat)))
-    }, ja = {
-        NA
-    }, ra = {
-        NA
-    })
+        rm(i)
+    }
+    rm(at)
+    ifelse(missing(diag.incl) == FALSE && isTRUE(diag.incl == 
+        TRUE) == TRUE, NA, diag(mat) <- 0)
+    return(mat)
 }

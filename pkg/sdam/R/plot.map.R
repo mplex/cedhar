@@ -3,15 +3,15 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.6 (01-06-2021)
+## version 0.0.7 (03-08-2021)
 ##
 ## OPTIONAL PARAMETERS
 ##
 ## x      (char or vector, province or region acronym)
 ## type   (if x=NULL, type of c. map: plain, roman provinces, senatorial-imperial, tetrarchy)
-## settl  (logical, display settlements?)
-## roads  (logical, display roads?)
-## shipr  (logical, display shipping routes?)
+## settl  (optional and logical, display settlements?)
+## roads  (optional and logical, display roads?)
+## shipr  (optional and logical, display shipping routes?)
 ## main   (plot's title)
 ## cap    (only province or region, logical, display caption?)
 ## date   (only province or region, logical, display est date in caption?)
@@ -23,7 +23,6 @@
 ## xd     (only province or region, x positioning for date)
 ## yd     (only province or region, y positioning for date)
 ##
-
 
 
 plot.map <-
@@ -53,29 +52,29 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra"), settl,
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
                 "[[6]]", "[[1]]", sep = "")))))
         })
-        if (missing(roads) == FALSE && isTRUE(roads == FALSE) == 
+        if (missing(roads) == FALSE && isTRUE(roads == TRUE) == 
             TRUE) {
-            invisible(NA)
-        }
-        else {
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
                 "[[3]]", "[[1]]", sep = "")))))
         }
-        if (missing(shipr) == FALSE && isTRUE(shipr == FALSE) == 
-            TRUE) {
+        else {
             invisible(NA)
         }
-        else {
+        if (missing(shipr) == FALSE && isTRUE(shipr == TRUE) == 
+            TRUE) {
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
                 "[[7]]", "[[1]]", sep = "")))))
         }
-        if (missing(settl) == FALSE && isTRUE(settl == FALSE) == 
-            TRUE) {
+        else {
             invisible(NA)
         }
-        else {
+        if (missing(settl) == FALSE && isTRUE(settl == TRUE) == 
+            TRUE) {
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
                 "[[1]]", "[[1]]", sep = "")))))
+        }
+        else {
+            invisible(NA)
         }
         if (missing(main) == TRUE) {
             invisible(NA)
