@@ -13,8 +13,8 @@
 \tabular{ll}{
 Package: \tab sdam \cr
 Type: \tab Package \cr
-Version: \tab 0.6.3 \cr
-Date: \tab 2 September 2021 \cr
+Version: \tab 0.6.5 \cr
+Date: \tab 7 September 2021 \cr
 License: \tab CC BY-SA 4.0 \cr
 }
 
@@ -41,7 +41,8 @@ of ancient Roman provinces that are found in \code{EDH}. This function uses data
 \code{rpmcd}, and \code{retn} for a Roman Empire transport network.
 
 Similarity by simple matching among column vectors is achieved by the \code{simil()} function for making 
-analyses of relations between assemblages and artifacts. 
+analyses of relations between assemblages and artifacts. Such similarity measure is the basis for function 
+\code{edhwpd()} to organize the EDH dataset per province and dates. 
 }
 \author{
 Author: \packageAuthor{sdam} 

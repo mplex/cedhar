@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.1 (02-09-2021)
+## version 0.1.2 (07-09-2021)
 ##
 ## PARAMETERS
 ##
@@ -219,8 +219,8 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
                   id <- tmp
                 }
             }
-            ifelse(missing(id) == FALSE, x <- x[which(x$id %in% 
-                id), ], NA)
+            ifelse(missing(id) == FALSE && isTRUE(flgdf == TRUE) == 
+                TRUE, x <- x[which(x$id %in% id), ], NA)
             ifelse(isTRUE(flgdf == TRUE) == TRUE || (missing(ldf) == 
                 FALSE && isTRUE(ldf == TRUE) == TRUE), return(x), 
                 vars <- unique(names(unlist(x))))

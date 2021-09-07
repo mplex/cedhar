@@ -60,7 +60,7 @@ edhw(x = NULL, vars, as = c("df", "list"), type = c("long", "wide", "narrow"),
 }
 }
 \details{
-This is a convenient function to extract \emph{variables} from the \code{EDH} dataset attached 
+This is an interface to extract attribute variables in \code{vars} from the \code{EDH} dataset attached 
 to this package. However, the input in \code{x} can be fragments of the \code{EDH} dataset or from 
 the Epigraphic Database Heidelberg API obtained by functions \code{get.edh()} or \code{get.edhw()}
 with the \code{"rjson"} format, or transformed data organized, for example, by provinces. 
@@ -117,11 +117,11 @@ in \code{vars}.
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link{get.edh}}, \code{\link{get.edhw}}, \code{\link{prex}}, \code{\link{plot.dates}}, \code{\link{EDH}}
+\code{\link{get.edh}}, \code{\link{get.edhw}}, \code{\link{edhwpd}}, \code{\link{prex}}, \code{\link{plot.dates}}, \code{\link{EDH}}
 }
 \examples{
 \dontrun{
-## load data set
+## load dataset
 data(EDH)
 
 ## make a list for three variables in 'EDH' for first 4 entries

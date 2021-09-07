@@ -91,33 +91,7 @@ Notice that \code{hd_nr} is not the same as \code{ID} nor \code{id}.
 
 Use function \code{\link{get.edhw}} in case you want to grab several items.
 
-Entries in \code{country} are abbreviated country names where the inscription was located. 
-A list with the of valid values for countries from the EDH API are 
-
-\tabular{llllll}{
-\code{"ad"}  \tab  Andorra                 \tab  \code{"gr"}  \tab  Greece                  \tab  \code{"pl"}  \tab  Poland                \cr 
-\code{"al"}  \tab  Albania                 \tab  \code{"hr"}  \tab  Croatia                 \tab  \code{"pt"}  \tab  Portugal              \cr 
-\code{"am"}  \tab  Armenia                 \tab  \code{"hu"}  \tab  Hungary                 \tab  \code{"rks"} \tab  Kosovo                \cr 
-\code{"at"}  \tab  Austria                 \tab  \code{"il"}  \tab  Israel                  \tab  \code{"ro"}  \tab  Romania               \cr 
-\code{"az"}  \tab  Azerbaijan              \tab  \code{"iq"}  \tab  Iraq                    \tab  \code{"rs"}  \tab  Serbia                \cr 
-\code{"ba"}  \tab  Bosnia and Herzegovina  \tab  \code{"it"}  \tab  Italy                   \tab  \code{"ru"}  \tab  Russia                \cr 
-\code{"be"}  \tab  Belgium                 \tab  \code{"jo"}  \tab  Jordan                  \tab  \code{"sa"}  \tab  Saudi Arabia          \cr 
-\code{"bg"}  \tab  Bulgaria                \tab  \code{"kg"}  \tab  Kyrgyzstan              \tab  \code{"sd"}  \tab  Sudan                 \cr 
-\code{"ch"}  \tab  Switzerland             \tab  \code{"kz"}  \tab  Kazakhstan              \tab  \code{"se"}  \tab  Sweden                \cr 
-\code{"cy"}  \tab  Cyprus                  \tab  \code{"lb"}  \tab  Lebanon                 \tab  \code{"si"}  \tab  Slovenia              \cr 
-\code{"cz"}  \tab  Czech Republic          \tab  \code{"li"}  \tab  Liechtenstein           \tab  \code{"sk"}  \tab  Slovakia              \cr 
-\code{"de"}  \tab  Germany                 \tab  \code{"lu"}  \tab  Luxembourg              \tab  \code{"sm"}  \tab  San Marino            \cr 
-\code{"dk"}  \tab  Denmark                 \tab  \code{"ly"}  \tab  Libyan Arab Jamahiriya  \tab  \code{"sy"}  \tab  Syrian Arab Republic  \cr 
-\code{"dz"}  \tab  Algeria                 \tab  \code{"ma"}  \tab  Morocco                 \tab  \code{"tj"}  \tab  Tajikistan            \cr 
-\code{"eg"}  \tab  Egypt                   \tab  \code{"mc"}  \tab  Monaco                  \tab  \code{"tn"}  \tab  Tunisia               \cr 
-\code{"es"}  \tab  Spain                   \tab  \code{"md"}  \tab  Moldova                 \tab  \code{"tr"}  \tab  Turkey                \cr 
-\code{"fr"}  \tab  France                  \tab  \code{"me"}  \tab  Montenegro              \tab  \code{"ua"}  \tab  Ukraine               \cr 
-\code{"gb"}  \tab  United Kingdom          \tab  \code{"mk"}  \tab  Macedonia               \tab  \code{"uz"}  \tab  Uzbekistan            \cr 
-\code{"ge"}  \tab  Georgia                 \tab  \code{"mt"}  \tab  Malta                   \tab  \code{"va"}  \tab  Vatican City State    \cr 
-\code{"gi"}  \tab  Gibraltar               \tab  \code{"nl"}  \tab  Netherlands             \tab  \code{"ye"}  \tab  Yemen                 \cr 
-}
-
-And for the ancient Roman provinces the valid values are
+A list with the of valid values from the EDH API for the ancient Roman provinces are
 
 \tabular{llllll}{
 \code{"Ach"}  \tab  Achaia                           \tab  \code{"Cor"}  \tab  Corsica                       \tab  \code{"Mes"}  \tab  Mesopotamia                   \cr 
@@ -143,6 +117,32 @@ And for the ancient Roman provinces the valid values are
 \code{"Cap"}  \tab  Cappadocia                       \tab  \code{"MaT"}  \tab  Mauretania Tingitana          \tab  \code{"Val"}  \tab  Valeria                       \cr 
 \code{"Cil"}  \tab  Cilicia                          \tab  \code{"Mak"}  \tab  Macedonia                     \tab  \code{"VeH"}  \tab  Venetia et Histria (Regio X)  \cr 
 }
+
+And the valid values for \code{country} entries are abbreviated country names where the inscription was located. 
+
+\tabular{llllll}{
+\code{"ad"}  \tab  Andorra                 \tab  \code{"gr"}  \tab  Greece                  \tab  \code{"pl"}  \tab  Poland                \cr 
+\code{"al"}  \tab  Albania                 \tab  \code{"hr"}  \tab  Croatia                 \tab  \code{"pt"}  \tab  Portugal              \cr 
+\code{"am"}  \tab  Armenia                 \tab  \code{"hu"}  \tab  Hungary                 \tab  \code{"rks"} \tab  Kosovo                \cr 
+\code{"at"}  \tab  Austria                 \tab  \code{"il"}  \tab  Israel                  \tab  \code{"ro"}  \tab  Romania               \cr 
+\code{"az"}  \tab  Azerbaijan              \tab  \code{"iq"}  \tab  Iraq                    \tab  \code{"rs"}  \tab  Serbia                \cr 
+\code{"ba"}  \tab  Bosnia and Herzegovina  \tab  \code{"it"}  \tab  Italy                   \tab  \code{"ru"}  \tab  Russia                \cr 
+\code{"be"}  \tab  Belgium                 \tab  \code{"jo"}  \tab  Jordan                  \tab  \code{"sa"}  \tab  Saudi Arabia          \cr 
+\code{"bg"}  \tab  Bulgaria                \tab  \code{"kg"}  \tab  Kyrgyzstan              \tab  \code{"sd"}  \tab  Sudan                 \cr 
+\code{"ch"}  \tab  Switzerland             \tab  \code{"kz"}  \tab  Kazakhstan              \tab  \code{"se"}  \tab  Sweden                \cr 
+\code{"cy"}  \tab  Cyprus                  \tab  \code{"lb"}  \tab  Lebanon                 \tab  \code{"si"}  \tab  Slovenia              \cr 
+\code{"cz"}  \tab  Czech Republic          \tab  \code{"li"}  \tab  Liechtenstein           \tab  \code{"sk"}  \tab  Slovakia              \cr 
+\code{"de"}  \tab  Germany                 \tab  \code{"lu"}  \tab  Luxembourg              \tab  \code{"sm"}  \tab  San Marino            \cr 
+\code{"dk"}  \tab  Denmark                 \tab  \code{"ly"}  \tab  Libyan Arab Jamahiriya  \tab  \code{"sy"}  \tab  Syrian Arab Republic  \cr 
+\code{"dz"}  \tab  Algeria                 \tab  \code{"ma"}  \tab  Morocco                 \tab  \code{"tj"}  \tab  Tajikistan            \cr 
+\code{"eg"}  \tab  Egypt                   \tab  \code{"mc"}  \tab  Monaco                  \tab  \code{"tn"}  \tab  Tunisia               \cr 
+\code{"es"}  \tab  Spain                   \tab  \code{"md"}  \tab  Moldova                 \tab  \code{"tr"}  \tab  Turkey                \cr 
+\code{"fr"}  \tab  France                  \tab  \code{"me"}  \tab  Montenegro              \tab  \code{"ua"}  \tab  Ukraine               \cr 
+\code{"gb"}  \tab  United Kingdom          \tab  \code{"mk"}  \tab  Macedonia               \tab  \code{"uz"}  \tab  Uzbekistan            \cr 
+\code{"ge"}  \tab  Georgia                 \tab  \code{"mt"}  \tab  Malta                   \tab  \code{"va"}  \tab  Vatican City State    \cr 
+\code{"gi"}  \tab  Gibraltar               \tab  \code{"nl"}  \tab  Netherlands             \tab  \code{"ye"}  \tab  Yemen                 \cr 
+}
+
 
 }
 \value{
@@ -215,7 +215,7 @@ and \code{"bibliography"} may be implemented in the future.
 %}
 
 \seealso{
-\code{\link{edhw}}, \code{\link{get.edhw}}, \code{\link{plot.map}}, \code{\link{simil}}
+\code{\link{get.edhw}}, \code{\link{edhw}}, \code{\link{edhwpd}}, \code{\link{plot.map}}, \code{\link{simil}}
 }
 \examples{
 ## get inscriptions from EDH API data

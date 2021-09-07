@@ -3,7 +3,7 @@
 ## FUNCTION cln() to re-encode Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.1 (30-08-2021)
+## version 0.1.2 (07-09-2021)
 ##
 ## PARAMETERS
 ## x        (scalar or vector, with character to clean)
@@ -749,7 +749,7 @@ function (x, level = 1, what, na.rm)
             rm(k)
         }
         if (isTRUE(flgdf == TRUE) == TRUE) {
-            resdf <- noquote(matrix(unlist(resll), ncol = ncol(xdf), 
+            resdf <- data.frame(matrix(unlist(resll), ncol = ncol(xdf), 
                 byrow = FALSE, dimnames = list(rownames(xdf), 
                   colnames(xdf))))
             resdf[is.null(resdf)] <- NA
