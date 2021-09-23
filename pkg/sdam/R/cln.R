@@ -1,17 +1,3 @@
-
-## 
-## FUNCTION cln() to re-encode Greek characters
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
-##
-## version 0.1.2 (07-09-2021)
-##
-## PARAMETERS
-## x        (scalar or vector, with character to clean)
-## level    (optional clean level, either 0 or no-clean, default 1 or 2 with 'what')
-## what     (optional, additional characters to clean)
-## na.rm    (logical and optional, remove NA?)
-
-
 cln <-
 function (x, level = 1, what, na.rm) 
 {

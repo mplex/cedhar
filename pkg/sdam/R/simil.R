@@ -1,17 +1,3 @@
-
-## 
-## FUNCTION simil() for simple matching counting of data frame coocurrences
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
-##
-## version 0.0.3 (03-08-2021)
-##
-## Parameters
-## x         (data frame or list object with vectors to compare)
-## vars      (vector with column(s) in x representing attribute variables)
-## uniq      (optional for only unique elements?)
-## diag.incl (optional and logical include entries in diagonal?)
-
-
 simil <-
 function (x, vars, uniq, diag.incl) 
 {

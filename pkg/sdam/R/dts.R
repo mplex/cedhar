@@ -1,16 +1,3 @@
-
-## 
-## FUNCTION dts() to convert date formats into numerical
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
-##
-## version 0.0.6 (24-03-2021)
-##
-## PARAMETERS
-## x        (scalar or vector,  with character dates)
-## cent     (optional and logiucal, centuries?)
-## sep      (separator, works only for 'cent')
-
-
 dts <-
 function (x, cent, sep) 
 {
