@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Compute similarity in Epigraphic Networks" name="description" />
 <meta content="epigraphic, documentation, dataset, networks" name="keywords" />
 
-    <title>Epigraphic Networks using R &#8212; cedhar 0.0.8 documentation</title>
+    <title>Epigraphic Networks using R &#8212; cedhar 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,7 +17,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Modules" href="modules.html" />
+    <link rel="next" title="Multiple imputation for missing dating data" href="Imputation.html" />
     <link rel="prev" title="Markov chain Monte Carlo" href="MCMC.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -27,12 +27,12 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="modules.html" title="Modules"
+          <a href="Imputation.html" title="Multiple imputation for missing dating data"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="MCMC.html" title="Markov chain Monte Carlo"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -49,9 +49,9 @@
 <li><a class="reference internal" href="#optional-parameters">Optional parameters</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#edh-dataset">EDH dataset</a><ul>
+<li><a class="reference internal" href="#similarity-measures">Similarity measures</a></li>
+<li><a class="reference internal" href="#structures-of-similarity-in-the-edh-dataset">Structures of similarity in the EDH dataset</a><ul>
 <li><a class="reference internal" href="#epigraphic-network-data">Epigraphic network data</a><ul>
-<li><a class="reference internal" href="#regular-expressions">Regular expressions</a></li>
 <li><a class="reference internal" href="#subsetting-the-data">Subsetting the data</a></li>
 <li><a class="reference internal" href="#ranked-frequency">Ranked frequency</a></li>
 </ul>
@@ -70,8 +70,8 @@
   <p class="topless"><a href="MCMC.html"
                         title="previous chapter">Markov chain Monte Carlo</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="modules.html"
-                        title="next chapter">Modules</a></p>
+  <p class="topless"><a href="Imputation.html"
+                        title="next chapter">Multiple imputation for missing dating data</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -119,7 +119,7 @@ columns representing –in this case– different attributes for epigraphic insc
 <dd></dd></dl>
 
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># arguments supported (currently)</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="nf">simil</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">att</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">uniq</span><span class="p">,</span> <span class="n">diag.incl</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="nf">simil</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vars</span><span class="p">,</span> <span class="n">type</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;sm&quot;</span><span class="p">,</span><span class="s">&quot;ja&quot;</span><span class="p">,</span><span class="s">&quot;ra&quot;</span><span class="p">),</span> <span class="n">uniq</span><span class="p">,</span> <span class="n">diag.incl</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Which returns a square and valued matrix with similarity meassures based on simple match among variables.</p>
@@ -136,9 +136,14 @@ columns representing –in this case– different attributes for epigraphic insc
 <div><p>a data frame with an <cite>id</cite> column</p>
 </div></blockquote>
 </li>
-<li><p><cite>att:</cite></p>
+<li><p><cite>vars:</cite></p>
 <blockquote>
-<div><p>(vector) column(s) in <code class="docutils literal notranslate"><span class="pre">x</span></code> representing attributes</p>
+<div><p>(vector) column(s) in <code class="docutils literal notranslate"><span class="pre">x</span></code> representing attributes or variables</p>
+</div></blockquote>
+</li>
+<li><p><cite>type:</cite></p>
+<blockquote>
+<div><p>whether the similarity measure is by simple matching <code class="docutils literal notranslate"><span class="pre">&quot;sm&quot;</span></code>, Jaccard <code class="docutils literal notranslate"><span class="pre">&quot;ja&quot;</span></code>, or Rand index <code class="docutils literal notranslate"><span class="pre">&quot;ra&quot;</span></code></p>
 </div></blockquote>
 </li>
 </ul>
@@ -149,14 +154,9 @@ columns representing –in this case– different attributes for epigraphic insc
 <div class="section" id="optional-parameters">
 <h3>Optional parameters<a class="headerlink" href="#optional-parameters" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p><cite>null:</cite></p>
-<blockquote>
-<div><p>include in computation <code class="docutils literal notranslate"><span class="pre">NA</span></code> or <code class="docutils literal notranslate"><span class="pre">NULLs</span></code>?</p>
-</div></blockquote>
-</li>
 <li><p><cite>uniq:</cite></p>
 <blockquote>
-<div><p>remove duplicates from <code class="docutils literal notranslate"><span class="pre">x</span></code>?</p>
+<div><p>(optional and logical) only unique elements?</p>
 </div></blockquote>
 </li>
 <li><p><cite>diag.incl:</cite></p>
@@ -168,7 +168,7 @@ columns representing –in this case– different attributes for epigraphic insc
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>At this point, the ID column represents the labels of the nodes. In
+<p>Note that at this point the ID column represents the labels of the nodes. In
 case that an ID column does not exists, then the first column is taken
 as <em>id</em> provided that there are not duplicated entry names in <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
 <div class="line-block">
@@ -176,8 +176,24 @@ as <em>id</em> provided that there are not duplicated entry names in <code class
 </div>
 </div>
 </div>
-<div class="section" id="edh-dataset">
-<h2>EDH dataset<a class="headerlink" href="#edh-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="similarity-measures">
+<h2>Similarity measures<a class="headerlink" href="#similarity-measures" title="Permalink to this headline">¶</a></h2>
+<p>For cases where duplication does not matter, a good option is <em>Jaccard similarity</em>
+whose index is the proportion of the number of observations in both sets to the number
+in either set. This index is formally expressed as <span class="math notranslate nohighlight">\(J(A,B)= \left| A \cap B \right| / \left| A \cup B \right|\)</span>.
+(Otherwise</p>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Rand index plain and corrected by chance.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="structures-of-similarity-in-the-edh-dataset">
+<h2>Structures of similarity in the EDH dataset<a class="headerlink" href="#structures-of-similarity-in-the-edh-dataset" title="Permalink to this headline">¶</a></h2>
 <p>We illustrate the use of the <code class="docutils literal notranslate"><span class="pre">simil()</span></code> function with ancient inscriptions from
 the Epigraphic Database Heidelberg, and we first follow the entry <a class="reference internal" href="Epigraphic.html#edh"><span class="std std-ref">Epigraphic Database Heidelberg</span></a>
 to see how accessing the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset using <code class="docutils literal notranslate"><span class="pre">sdam</span></code> [R] package.</p>
@@ -201,8 +217,8 @@ to see how accessing the <code class="docutils literal notranslate"><span class=
 For example, a list object named <code class="docutils literal notranslate"><span class="pre">epinet</span></code> with the <code class="docutils literal notranslate"><span class="pre">ID</span></code> of the inscription plus seven other characteristics from
 the <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset is produced by <code class="docutils literal notranslate"><span class="pre">edhw()</span></code>.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose variables of interest and record it as a data frame</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;type_of_monument&quot;</span><span class="p">,</span> <span class="s">&quot;language&quot;</span><span class="p">,</span> <span class="s">&quot;material&quot;</span><span class="p">,</span> <span class="s">&quot;country&quot;</span><span class="p">,</span> <span class="s">&quot;findspot_ancient&quot;</span><span class="p">,</span>
-                    <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">)</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet</span> <span class="o">&lt;-</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;type_of_inscription&quot;</span><span class="p">,</span> <span class="s">&quot;language&quot;</span><span class="p">,</span> <span class="s">&quot;material&quot;</span><span class="p">,</span> <span class="s">&quot;country&quot;</span><span class="p">,</span>
+                  <span class="s">&quot;findspot_ancient&quot;</span><span class="p">,</span> <span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">as</span><span class="o">=</span><span class="s">&quot;df&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -211,51 +227,40 @@ the <code class="docutils literal notranslate"><span class="pre">EDH</span></cod
 <p>Take a look at this data:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># first eight entries in the data frame</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">epinet</span><span class="p">,</span> <span class="m">8</span><span class="p">)</span>
-<span class="c1">#        id country findspot_ancient language                                material not_after not_before   type_of_inscription</span>
-<span class="c1">#1 HD000001   Italy       Cumae, bei    Latin                Marmor, geädert / farbig      0130       0071               epitaph</span>
-<span class="c1">#2 HD000002   Italy             Roma    Latin       marble: rocks - metamorphic rocks      0200       0051               epitaph</span>
-<span class="c1">#3 HD000003   Spain             &lt;NA&gt;    Latin       marble: rocks - metamorphic rocks      0170       0131 honorific inscription</span>
-<span class="c1">#4 HD000004   Spain    Ipolcobulcula    Latin    limestone: rocks - clastic sediments      0200       0151    votive inscription</span>
-<span class="c1">#5 HD000005   Italy             Roma    Latin                                    &lt;NA&gt;      0200       0001               epitaph</span>
-<span class="c1">#6 HD000006   Spain      Sabora, bei    Latin    limestone: rocks - clastic sediments      0150       0071               epitaph</span>
-<span class="c1">#7 HD000007   Italy             Roma    Latin travertine: rocks - chemische Sedimente     -0051      -0100               epitaph</span>
-<span class="c1">#8 HD000008   Italy            Roma?    Latin       marble: rocks - metamorphic rocks      0200       0101               epitaph</span>
+<span class="c1">#        id   type_of_inscription not_before not_after                                material language findspot_ancient country</span>
+<span class="c1">#1 HD000001               epitaph       0071      0130                Marmor, geädert / farbig    Latin       Cumae, bei   Italy</span>
+<span class="c1">#2 HD000002               epitaph       0051      0200       marble: rocks - metamorphic rocks    Latin             Roma   Italy</span>
+<span class="c1">#3 HD000003 honorific inscription       0131      0170       marble: rocks - metamorphic rocks    Latin             &lt;NA&gt;   Spain</span>
+<span class="c1">#4 HD000004    votive inscription       0151      0200    limestone: rocks - clastic sediments    Latin    Ipolcobulcula   Spain</span>
+<span class="c1">#5 HD000005               epitaph       0001      0200                                    &lt;NA&gt;    Latin             Roma   Italy</span>
+<span class="c1">#6 HD000006               epitaph       0071      0150    limestone: rocks - clastic sediments    Latin      Sabora, bei   Spain</span>
+<span class="c1">#7 HD000007               epitaph      -0100     -0051 travertine: rocks - chemische Sedimente    Latin             Roma   Italy</span>
+<span class="c1">#8 HD000008               epitaph       0101      0200       marble: rocks - metamorphic rocks    Latin            Roma?   Italy</span>
 </pre></div>
 </div>
 <p>For instance, entry <code class="docutils literal notranslate"><span class="pre">8</span></code> indicates that this ancient findspot is uncertain.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="section" id="regular-expressions">
-<h4>Regular expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h4>
-<p>To remove question marks, for example, we use a regular expression</p>
-<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet2</span> <span class="o">&lt;-</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">sapply</span><span class="p">(</span><span class="n">epinet</span><span class="p">,</span> <span class="nf">function </span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="nf">as.list</span><span class="p">(</span><span class="nf">gsub</span><span class="p">(</span><span class="s">&#39;\\?&#39;</span><span class="p">,</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span> <span class="p">))</span>
+<p>Function <code class="docutils literal notranslate"><span class="pre">cln()</span></code></p>
+<div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="n">epinet2</span> <span class="o">&lt;-</span> <span class="nf">cln</span><span class="p">(</span><span class="n">epinet</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Make another function for cleaning? After all, <code class="docutils literal notranslate"><span class="pre">sapply()</span></code> converts <code class="docutils literal notranslate"><span class="pre">&lt;NA&gt;</span></code> into <code class="docutils literal notranslate"><span class="pre">NA</span></code>.</p>
-</div>
-</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>And then we take a look at <code class="docutils literal notranslate"><span class="pre">epinet2</span></code> again, and we assume the questioned entries.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># first eight entries in the new data frame</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">head</span><span class="p">(</span><span class="n">epinet2</span><span class="p">,</span> <span class="m">8</span><span class="p">)</span>
-<span class="c1">#        id country findspot_ancient language                                material not_after not_before   type_of_inscription</span>
-<span class="c1">#1 HD000001   Italy       Cumae, bei    Latin                Marmor, geädert / farbig      0130       0071               epitaph</span>
-<span class="c1">#2 HD000002   Italy             Roma    Latin       marble: rocks - metamorphic rocks      0200       0051               epitaph</span>
-<span class="c1">#3 HD000003   Spain               NA    Latin       marble: rocks - metamorphic rocks      0170       0131 honorific inscription</span>
-<span class="c1">#4 HD000004   Spain    Ipolcobulcula    Latin    limestone: rocks - clastic sediments      0200       0151    votive inscription</span>
-<span class="c1">#5 HD000005   Italy             Roma    Latin                                      NA      0200       0001               epitaph</span>
-<span class="c1">#6 HD000006   Spain      Sabora, bei    Latin    limestone: rocks - clastic sediments      0150       0071               epitaph</span>
-<span class="c1">#7 HD000007   Italy             Roma    Latin travertine: rocks - chemische Sedimente     -0051      -0100               epitaph</span>
-<span class="c1">#8 HD000008   Italy             Roma    Latin       marble: rocks - metamorphic rocks      0200       0101               epitaph</span>
+<span class="c1">#        id   type_of_inscription not_before not_after                                material language findspot_ancient country</span>
+<span class="c1">#1 HD000001               epitaph       0071      0130                Marmor, geädert / farbig    Latin       Cumae, bei   Italy</span>
+<span class="c1">#2 HD000002               epitaph       0051      0200       marble: rocks - metamorphic rocks    Latin             Roma   Italy</span>
+<span class="c1">#3 HD000003 honorific inscription       0131      0170       marble: rocks - metamorphic rocks    Latin               NA   Spain</span>
+<span class="c1">#4 HD000004    votive inscription       0151      0200    limestone: rocks - clastic sediments    Latin    Ipolcobulcula   Spain</span>
+<span class="c1">#5 HD000005               epitaph       0001      0200                                      NA    Latin             Roma   Italy</span>
+<span class="c1">#6 HD000006               epitaph       0071      0150    limestone: rocks - clastic sediments    Latin      Sabora, bei   Spain</span>
+<span class="c1">#7 HD000007               epitaph      -0100     -0051 travertine: rocks - chemische Sedimente    Latin             Roma   Italy</span>
+<span class="c1">#8 HD000008               epitaph       0101      0200       marble: rocks - metamorphic rocks    Latin             Roma   Italy</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -268,7 +273,7 @@ the <code class="docutils literal notranslate"><span class="pre">EDH</span></cod
 <span class="c1"># [5] &quot;France&quot;                 &quot;Libyan Arab Jamahiriya&quot; &quot;Germany&quot;                &quot;Hungary&quot;</span>
 <span class="c1"># [9] &quot;Austria&quot;                &quot;Bulgaria&quot;               &quot;Bosnia and Herzegovina&quot; &quot;Montenegro&quot;</span>
 <span class="c1">#[13] &quot;Netherlands&quot;            &quot;Tunisia&quot;                &quot;Romania&quot;                &quot;Algeria&quot;</span>
-<span class="c1">#[17] &quot;Jordan&quot;                 &quot;NULL&quot;                   &quot;Croatia&quot;                &quot;Switzerland&quot;</span>
+<span class="c1">#[17] &quot;Jordan&quot;                 NA                       &quot;Croatia&quot;                &quot;Switzerland&quot;</span>
 <span class="c1">#[21] &quot;Belgium&quot;                &quot;Albania&quot;                &quot;Serbia&quot;                 &quot;Egypt&quot;</span>
 <span class="c1">#[25] &quot;Syrian Arab Republic&quot;   &quot;Morocco&quot;                &quot;Turkey&quot;                 &quot;Lebanon&quot;</span>
 <span class="c1">#[29] &quot;Kosovo&quot;                 &quot;Macedonia&quot;              &quot;Slovakia&quot;               &quot;Greece&quot;</span>
@@ -283,24 +288,23 @@ the <code class="docutils literal notranslate"><span class="pre">EDH</span></cod
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-</div>
 <div class="section" id="subsetting-the-data">
 <h4>Subsetting the data<a class="headerlink" href="#subsetting-the-data" title="Permalink to this headline">¶</a></h4>
 <p>For example, we use the <code class="docutils literal notranslate"><span class="pre">base</span></code> [R] function <code class="docutils literal notranslate"><span class="pre">subset()</span></code> to substract epigraphic material in “Greek-Latin” from Egypt.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># a subset of a subset</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">subset</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">epinet2</span><span class="p">,</span> <span class="n">country</span><span class="o">==</span><span class="s">&quot;Egypt&quot;</span><span class="p">),</span> <span class="n">language</span><span class="o">==</span><span class="s">&quot;Greek-Latin&quot;</span><span class="p">)</span>
-<span class="c1">#            id country findspot_ancient    language    material not_after not_before     type_of_monument</span>
-<span class="c1">#2003  HD002009   Egypt           Philae Greek-Latin          NA        NA      -0116 architectural member</span>
-<span class="c1">#23091 HD023319   Egypt               NA Greek-Latin Holz, Wachs        NA       0145              diptych</span>
-<span class="c1">#23138 HD023368   Egypt            Syene Greek-Latin          NA        NA      -0029                   NA</span>
-<span class="c1">#27345 HD024001   Egypt               NA Greek-Latin Holz, Wachs        NA       0145              diptych</span>
-<span class="c1">#27351 HD024009   Egypt            Syene Greek-Latin          NA        NA      -0029                   NA</span>
-<span class="c1">#32500 HD030457   Egypt       Alexandria Greek-Latin          NA      0011       0010                   NA</span>
-<span class="c1">#34436 HD032412   Egypt          Schedia Greek-Latin          NA        NA         NA                   NA</span>
-<span class="c1">#51198 HD049264   Egypt         Berenice Greek-Latin          NA        NA       0006                cliff</span>
-<span class="c1">#54194 HD052276   Egypt       Alexandria Greek-Latin          NA      0225       0155                stele</span>
-<span class="c1">#58318 HD056791   Egypt         Berenice Greek-Latin          NA      0200       0001                stele</span>
-<span class="c1">#70110 HD068637   Egypt      Leontopolis Greek-Latin          NA     -0030      -0037                   NA</span>
+<span class="c1">#            id        type_of_inscription not_before not_after    material    language findspot_ancient country</span>
+<span class="c1">#2003  HD002003 identification inscription      -0116        NA          NA Greek-Latin           Philae   Egypt</span>
+<span class="c1">#23091 HD023091                         NA       0145        NA Holz, Wachs Greek-Latin               NA   Egypt</span>
+<span class="c1">#23138 HD023138         votive inscription      -0029        NA          NA Greek-Latin            Syene   Egypt</span>
+<span class="c1">#27345 HD023091                         NA       0145        NA Holz, Wachs Greek-Latin               NA   Egypt</span>
+<span class="c1">#27351 HD023138         votive inscription      -0029        NA          NA Greek-Latin            Syene   Egypt</span>
+<span class="c1">#32500 HD030147                         NA       0010      0011          NA Greek-Latin       Alexandria   Egypt</span>
+<span class="c1">#34436 HD032079                         NA         NA        NA          NA Greek-Latin          Schedia   Egypt</span>
+<span class="c1">#51198 HD048625 identification inscription       0006        NA          NA Greek-Latin         Berenice   Egypt</span>
+<span class="c1">#54194 HD051485                         NA       0155      0225          NA Greek-Latin       Alexandria   Egypt</span>
+<span class="c1">#58318 HD055974                         NA       0001      0200          NA Greek-Latin         Berenice   Egypt</span>
+<span class="c1">#70110 HD067781   public legal inscription      -0037     -0030          NA Greek-Latin      Leontopolis   Egypt</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -312,33 +316,33 @@ the <code class="docutils literal notranslate"><span class="pre">EDH</span></cod
 <p>A ranked frequency of different <em>kinds of inscriptions</em> including missing information is computed as follows:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">sort</span><span class="p">(</span><span class="nf">table</span><span class="p">(</span><span class="nf">unlist</span><span class="p">(</span><span class="n">epinet2</span><span class="o">$</span><span class="n">type_of_inscription</span><span class="p">),</span> <span class="n">useNA</span><span class="o">=</span><span class="s">&quot;ifany&quot;</span><span class="p">),</span> <span class="n">decreasing</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="c1">#                              Var1  Freq</span>
-<span class="c1">#1                          epitaph 27898</span>
-<span class="c1">#2                             &lt;NA&gt; 21883</span>
-<span class="c1">#3               votive inscription 14213</span>
-<span class="c1">#4         owner/artist inscription  4876</span>
-<span class="c1">#5            honorific inscription  4314</span>
-<span class="c1">#6  building/dedicatory inscription  3378</span>
-<span class="c1">#7                mile-/leaguestone  1713</span>
-<span class="c1">#8       identification inscription  1353</span>
-<span class="c1">#9                 military diploma   507</span>
-<span class="c1">#10                     acclamation   495</span>
-<span class="c1">#11                            list   356</span>
-<span class="c1">#12                         defixio   309</span>
-<span class="c1">#13                           label   266</span>
-<span class="c1">#14        public legal inscription   254</span>
-<span class="c1">#15            boundary inscription   252</span>
+<span class="c1">#1                          epitaph 28522</span>
+<span class="c1">#2                             &lt;NA&gt; 22222</span>
+<span class="c1">#3               votive inscription 14683</span>
+<span class="c1">#4         owner/artist inscription  5164</span>
+<span class="c1">#5            honorific inscription  4338</span>
+<span class="c1">#6  building/dedicatory inscription  3450</span>
+<span class="c1">#7                mile-/leaguestone  1766</span>
+<span class="c1">#8       identification inscription  1600</span>
+<span class="c1">#9                      acclamation   525</span>
+<span class="c1">#10                military diploma   507</span>
+<span class="c1">#11                            list   363</span>
+<span class="c1">#12                         defixio   311</span>
+<span class="c1">#13                           label   287</span>
+<span class="c1">#14            boundary inscription   258</span>
+<span class="c1">#15        public legal inscription   256</span>
 <span class="c1">#16                         elogium   154</span>
-<span class="c1">#17                seat inscription    86</span>
-<span class="c1">#18                          prayer    56</span>
-<span class="c1">#19                          letter    39</span>
-<span class="c1">#20       private legal inscription    34</span>
-<span class="c1">#21         assignation inscription    13</span>
-<span class="c1">#22                        calendar    12</span>
+<span class="c1">#17                seat inscription    88</span>
+<span class="c1">#18                          letter    81</span>
+<span class="c1">#19                          prayer    57</span>
+<span class="c1">#20       private legal inscription    37</span>
+<span class="c1">#21         assignation inscription    15</span>
+<span class="c1">#22                        calendar    14</span>
 <span class="c1">#23                     adnuntiatio     3</span>
 </pre></div>
 </div>
 <p>That is, a decreasing sorted table given as data frame of the <code class="docutils literal notranslate"><span class="pre">type_of_inscription</span></code>
-component of <code class="docutils literal notranslate"><span class="pre">epinet2</span></code>. Since <code class="docutils literal notranslate"><span class="pre">epinet2</span></code> is a list object, it is required to <em>unlist</em> the
+component of <code class="docutils literal notranslate"><span class="pre">epinet2</span></code>. Since <code class="docutils literal notranslate"><span class="pre">epinet2</span></code> is a list object, it is required to “unlist” the
 data object to produce a table with the frequencies.</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -353,13 +357,13 @@ For this, we look at the attribute types stored in different columns.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="o">&gt;</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">epinet2</span><span class="p">))</span>
 <span class="c1">#    colnames(epinet2)</span>
 <span class="c1">#1                  id</span>
-<span class="c1">#2             country</span>
-<span class="c1">#3    findspot_ancient</span>
-<span class="c1">#4            language</span>
+<span class="c1">#2 type_of_inscription</span>
+<span class="c1">#3          not_before</span>
+<span class="c1">#4           not_after</span>
 <span class="c1">#5            material</span>
-<span class="c1">#6           not_after</span>
-<span class="c1">#7          not_before</span>
-<span class="c1">#8 type_of_inscription</span>
+<span class="c1">#6            language</span>
+<span class="c1">#7    findspot_ancient</span>
+<span class="c1">#8             country</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -367,14 +371,14 @@ For this, we look at the attribute types stored in different columns.</p>
 </div>
 <p>For instance, in case we want to choose <code class="docutils literal notranslate"><span class="pre">&quot;type_of_inscription&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;material&quot;</span></code>, and <code class="docutils literal notranslate"><span class="pre">&quot;findspot_ancient&quot;</span></code>,
 these correspond to columns 8, 5, and 3.</p>
-<p>Similarities among Egyptian epigraphs <cite>by simple matching</cite> with the above attribute variables are recorded in
+<p>Similarities among Egyptian epigraphs <cite>by simple matching</cite> or default type <code class="docutils literal notranslate"><span class="pre">&quot;sm&quot;</span></code> with the above attribute variables are recorded in
 a matrix object named <code class="docutils literal notranslate"><span class="pre">epEgs</span></code> where the <code class="docutils literal notranslate"><span class="pre">ID</span></code> in <code class="docutils literal notranslate"><span class="pre">epinet2</span></code> corresponds to the dimensions labels.</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># similarity function on the subset for the three variables</span>
-<span class="n">R</span><span class="o">&gt;</span> <span class="n">epEgs</span> <span class="o">&lt;-</span> <span class="nf">simil</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">epinet2</span><span class="p">,</span> <span class="n">country</span><span class="o">==</span><span class="s">&quot;Egypt&quot;</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">6</span><span class="p">))</span>
+<span class="n">R</span><span class="o">&gt;</span> <span class="n">epEgs</span> <span class="o">&lt;-</span> <span class="nf">simil</span><span class="p">(</span><span class="nf">subset</span><span class="p">(</span><span class="n">epinet2</span><span class="p">,</span> <span class="n">country</span><span class="o">==</span><span class="s">&quot;Egypt&quot;</span><span class="p">),</span> <span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">5</span><span class="p">,</span><span class="m">6</span><span class="p">))</span>
 
 <span class="c1"># number of rows in this square matrix</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">epEgs</span><span class="p">)</span>
-<span class="c1">#[1] 175</span>
+<span class="c1">#[1] 170</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -431,16 +435,16 @@ depends on <code class="docutils literal notranslate"><span class="pre">multiple
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="modules.html" title="Modules"
+          <a href="Imputation.html" title="Multiple imputation for missing dating data"
              >next</a> |</li>
         <li class="right" >
           <a href="MCMC.html" title="Markov chain Monte Carlo"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, CEDHAR - Aarhus University.
+        &#169; Copyright 2021, CEDHAR - Aarhus University.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>

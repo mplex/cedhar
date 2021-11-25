@@ -71,8 +71,6 @@ to infer on multiple parameters.
 
 
 
-
-
 |
 
 
@@ -113,6 +111,15 @@ A plot of the binomial distribution for :math:`n=30` and with different :math:`p
         The Bernoulli distribution is a special case of the binomial distribution 
         when :math:`n = 1`. 
 
+|
+
+
+    .. note:: 
+    
+        The Beta distribution models the probability :math:`(p)` of success rather than the number of occurrences :math:`(x)`,  
+        and it represents all the possible values of :math:`(p)` when we do not know what that probability is.
+
+
 
 |
 
@@ -146,9 +153,6 @@ where :math:`U = 2(d + c - b - a)^{-1}` corresponds to the uniform distribution.
 ..  	U \bigl(\frac{x-a}{b-a}\bigr) \\
 ..  	U  \quad   b \leqslant x < c \\
 ..  \end{cases}
-
-
-
 
 
 
@@ -266,6 +270,17 @@ Normal distributions with different variances :math:`\sigma^2` and same mean :ma
 .. +-------------------------------------+
 
 
+|
+
+
+    .. todo:: 
+    
+        Expectations of the distributions.
+
+
+
+
+
 
 |
 
@@ -314,6 +329,19 @@ To study temporal uncertainty, the following notation is adopted:
 
 
 
+
+
+
+.. _aora:
+
+
+Aoristic analysis
+=================
+
+Aoristic analysis is based on the creation of a series of these artificial divisions of 
+the range of time with a fixed value, called time blocks, and the definition of their probability of existence. 
+
+
 |
 
 
@@ -331,18 +359,7 @@ These upper and lower bounds are termed
 * *terminus post quem* (TPQ) or "limit after which"
 
 
-
 |
-
-
-.. _aora:
-
-
-Aoristic analysis
-=================
-
-Aoristic analysis is based on the creation of a series of these artificial divisions of 
-the range of time with a fixed value, called time blocks, and the definition of their probability of existence. 
 
 
 Temporal resolution
@@ -421,15 +438,15 @@ To compute :math:`p[t_i]`, Crema (2012, p. 447) takes the following example (yea
 
 Hence, :math:`\Delta \tau` in this case is :math:`54`.
 
-|
 
 ..  The probabilities of existence of inscriptions 8 and 5 chronological periods are 
 
 
 
-
-
 |
+
+Time-block boundaries
+---------------------
 
 
 To retrieve the minimum probability :math:`P[\varphi_\alpha]` for the boundaries of the first and last time-blocks, 
@@ -491,7 +508,7 @@ where :math:`d` is the duration of :math:`e`.
 
 
 
-
+|
 
 
 Temporal resolution for time blocks
@@ -534,61 +551,6 @@ An example of a transition probabilities are increase :math:`=0.4`; stability :m
 
 
 
-|
-
-.. _missing:
-
-Imputation and Missing data
-===========================
-
-In statistics, *imputation* is the process of replacing missing data with plausible estimates, 
-and *multiple imputation* is the method of choice for complex incomplete data problems. 
-
-With the *joint modeling* approach, imputing multivariate data involves specifying a 
-multivariate distribution for the missing data, and then drawing imputation from their 
-conditional distributions by Markov chain Monte Carlo (MCMC) techniques. 
-
-The *fully conditional specification* is a variable-by-variable type of imputation that is 
-made by iterating over conditional densities. 
-
-
-
-
-
-|
-
-
-Missing data
-------------
-
-Every data point has some likelihood of being missing. Rubin (1976) classified missing data problems 
-into three categories: missing completely at random (MCAR), missing at random (MAR) and missing not at random (MNAR).
-
-For some parameter :math:`\psi`, where :math:`Y_{obs}` is the observed sample data and :math:`Y_{mis}` the unobserved sample data, 
-the overall probability of being missing :math:`x` depends, 
-
-
-* MCAR: only on some parameters :math:`\psi` 
-
-     :math:`P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid \psi)`
-
-* MAR: on observed information, including any design factors 
-
-     :math:`P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid Y_{obs}, \psi)`
-
-* MNAR: also depends on unobserved information, including :math:`Y_{mis}` itself 
-
-     :math:`P(x=0 \mid Y_{obs}, Y_{mis}, \psi)`
-
-
-
-|
-
-
-
-    .. seealso:: 
-     
-        :ref:`Complete cases <ccases>`
 
 |
 

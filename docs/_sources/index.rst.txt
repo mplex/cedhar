@@ -20,6 +20,7 @@
    Uncertainty
    MCMC
    EpigraphicNetwork
+   Imputation
    modules
 
 

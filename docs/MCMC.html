@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Monte Carlo methods and Markov chain" name="description" />
 <meta content="Bayesian, MCMC" name="keywords" />
 
-    <title>Markov chain Monte Carlo &#8212; cedhar 0.0.8 documentation</title>
+    <title>Markov chain Monte Carlo &#8212; cedhar 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="Uncertainty.html" title="Temporal Uncertainty"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -50,9 +50,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#diagnostics">Diagnostics</a><ul>
-<li><a class="reference internal" href="#burn-in">Burn-in</a></li>
 <li><a class="reference internal" href="#mcmc-simulation">MCMC Simulation</a></li>
-<li><a class="reference internal" href="#thinning">Thinning</a></li>
 <li><a class="reference internal" href="#convergence">Convergence</a></li>
 </ul>
 </li>
@@ -135,7 +133,7 @@ the set of possible configurations of a system, we use Markov chain Monte Carlo 
 </div>
 <div class="section" id="metropolis-hastings">
 <h2>Metropolis-Hastings<a class="headerlink" href="#metropolis-hastings" title="Permalink to this headline">¶</a></h2>
-<p>The <em>Metropolis-Hastings</em> algorithm serves to generate a sample from the posterior distribution
+<p>The <em>Metropolis-Hastings</em> algorithm serves to generate a sample for the posterior distribution
 of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the parameter of the data point’s distribution.</p>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -167,44 +165,15 @@ of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the pa
 <div class="section" id="diagnostics">
 <h2>Diagnostics<a class="headerlink" href="#diagnostics" title="Permalink to this headline">¶</a></h2>
 <p>Diagnostics is to assess the MCMC performance.</p>
-<p>The trace plot (or time-series plot) is to judge how quickly the MCMC procedure converges in distribution.</p>
-<p>When the variability is not the same over all iterations, the trace plot presents a “random walk” pattern.</p>
 <div class="line-block">
 <div class="line"><br /></div>
-</div>
-<div class="section" id="burn-in">
-<h3>Burn-in<a class="headerlink" href="#burn-in" title="Permalink to this headline">¶</a></h3>
-<p>First generate a series of random numbers from a normal distribution with a mean value and some arbitrary variance.</p>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>Throwing away early samples is called burn-in…</p>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </div>
 <div class="section" id="mcmc-simulation">
 <h3>MCMC Simulation<a class="headerlink" href="#mcmc-simulation" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id2">
-<p class="admonition-title">Todo</p>
-<p>After the burn-in, are the MCM iterations…</p>
-</div>
-</div></blockquote>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-<div class="section" id="thinning">
-<h3>Thinning<a class="headerlink" href="#thinning" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><div class="admonition-todo admonition" id="id3">
-<p class="admonition-title">Todo</p>
-<p>Thinning interval for reducing autocorrelation of random points in the sampling…</p>
-</div>
-</div></blockquote>
+<p>First generate a series of random numbers from a normal distribution with a mean value and some arbitrary variance.</p>
+<p>After throwing away early samples, a process called <em>burn-in</em>, use algorithm for the MCMC iterations.</p>
+<p>The trace plot (or time-series plot) is to judge how quickly the MCMC procedure converges in distribution.</p>
+<p>When the variability is not the same over all iterations, the trace plot presents a “random walk” pattern.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -212,17 +181,19 @@ of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the pa
 <div class="section" id="convergence">
 <h3>Convergence<a class="headerlink" href="#convergence" title="Permalink to this headline">¶</a></h3>
 <p>Convergence in MCMC is obtained when these outcomes become minimal with the increase of <span class="math notranslate nohighlight">\(n\)</span>:</p>
-<ul>
+<ul class="simple">
 <li><p>the change in the variance</p></li>
-<li><p>the standard error</p>
+<li><p>the standard error</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Thinning interval is to achieve convergence.</p>
+<p><em>Thinning interval</em> is to achieve convergence by reducing autocorrelation of random points in the sampling.</p>
 </div>
 </div></blockquote>
-</li>
-</ul>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -230,8 +201,11 @@ of <span class="math notranslate nohighlight">\(\theta\)</span>, which is the pa
 </div>
 <div class="section" id="summed-probability-distribution">
 <h2>Summed probability distribution<a class="headerlink" href="#summed-probability-distribution" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <blockquote>
-<div><div class="admonition-todo admonition" id="id4">
+<div><div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
 <p>A proxy for population levels is found in summed probability distributions (SPD) of dates,
 which is the summation of the posterior probability distributions of calibrated dates.</p>
@@ -298,11 +272,11 @@ is the unconditional probability of the observation.</p>
         <li class="right" >
           <a href="Uncertainty.html" title="Temporal Uncertainty"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, CEDHAR - Aarhus University.
+        &#169; Copyright 2021, CEDHAR - Aarhus University.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>

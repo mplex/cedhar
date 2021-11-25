@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta content="Multiple imputation methods" name="description" />
+<meta content="imputation, missing-data, time, epigraphic, dataset" name="keywords" />
+
+    <title>Multiple imputation for missing dating data &#8212; cedhar 0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Modules" href="modules.html" />
+    <link rel="prev" title="Epigraphic Networks using R" href="EpigraphicNetwork.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modules.html" title="Modules"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/CEDHAR_logo_black_large_800x100.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Multiple imputation for missing dating data</a><ul>
+<li><a class="reference internal" href="#network-imputation-for-missing-dating-data-in-edh">Network imputation for missing dating data in <code class="docutils literal notranslate"><span class="pre">EDH</span></code></a><ul>
+<li><a class="reference internal" href="#contents">Contents</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#imputation-and-missing-data">Imputation and Missing data</a></li>
+<li><a class="reference internal" href="#missing-dating-data">Missing dating data</a><ul>
+<li><a class="reference internal" href="#missing-data-problems">Missing data problems</a></li>
+<li><a class="reference internal" href="#mice-algorithm">MICE algorithm</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#temporal-uncertainty-and-relative-dating">Temporal uncertainty and relative dating</a></li>
+<li><a class="reference internal" href="#roman-inscriptions-in-edh-database">Roman inscriptions in EDH database</a></li>
+<li><a class="reference internal" href="#restricted-imputation-on-dates">Restricted imputation on dates</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="EpigraphicNetwork.html"
+                        title="previous chapter">Epigraphic Networks using R</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="next chapter">Modules</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Imputation.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <span class="target" id="imput"></span><div class="section" id="multiple-imputation-for-missing-dating-data">
+<span id="index-0"></span><h1>Multiple imputation for missing dating data<a class="headerlink" href="#multiple-imputation-for-missing-dating-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="network-imputation-for-missing-dating-data-in-edh">
+<h2>Network imputation for missing dating data in <code class="docutils literal notranslate"><span class="pre">EDH</span></code><a class="headerlink" href="#network-imputation-for-missing-dating-data-in-edh" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="contents">
+<h3>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Imputation and Missing data</dt><dd><ul>
+<li><p>Missing data problems</p></li>
+<li><p>MICE algorithm</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Temporal uncertainty and relative dating</dt><dd><ul>
+<li><p>time-spans of existence and missing dates (within-phase uncertainty)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Roman inscriptions in EDH database</dt><dd><ul>
+<li><p>variable attributes similarities</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Statistical inference on missing dates</dt><dd><ul>
+<li><p>multivariate and univariate distribution of missing data (joint vs conditional modelling)</p></li>
+<li><p>MCMC</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>FCS and multiple imputation for EDH province data set</dt><dd><ul>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">mice</span></code> implementation</dt><dd><ul>
+<li><p>Predictive mean matching</p></li>
+<li><p>Random forest</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Deterministic methods on EDH data subsets</dt><dd><ul>
+<li><p>MNAR dates with supervised (restricted) imputation</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="imputation-and-missing-data">
+<span id="missing"></span><h2>Imputation and Missing data<a class="headerlink" href="#imputation-and-missing-data" title="Permalink to this headline">¶</a></h2>
+<p>In statistics, <em>imputation</em> is the process of replacing missing data with plausible estimates,
+and <em>multiple imputation</em> is the method of choice for complex incomplete data problems.</p>
+<p>With the <em>joint modeling</em> approach, imputing multivariate data involves specifying a
+multivariate distribution for the missing data, and then drawing imputation from their
+conditional distributions by Markov chain Monte Carlo (MCMC) techniques.</p>
+<p>The <em>fully conditional specification</em> is a variable-by-variable type of imputation that is
+made by iterating over conditional densities.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="missing-dating-data">
+<h2>Missing dating data<a class="headerlink" href="#missing-dating-data" title="Permalink to this headline">¶</a></h2>
+<p>The treatment of missing values defining the timespan of the existence of historical artefacts concerns with the temporal uncertainty problem.
+Time uncertainty relates to the missing information in the limits of the timespan, which represent boundaries of existence with a <em>terminus ante-</em> and <em>post-quem</em>, abbreviated as TAQ and TPQ.</p>
+<p>As study case, the artefacts are epigraphic material or inscriptions recorded in the EDH dataset with unknown information in time in both limits of the timespan, and hence there is no timespan, or just in either TAQ or TPQ.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="section" id="missing-data-problems">
+<h3>Missing data problems<a class="headerlink" href="#missing-data-problems" title="Permalink to this headline">¶</a></h3>
+<p>Every data point has some likelihood of being missing. Rubin (1976) classified missing data problems
+into three categories: missing completely at random (MCAR), missing at random (MAR) and missing not at random (MNAR).</p>
+<p>For some parameter <span class="math notranslate nohighlight">\(\psi\)</span>, where <span class="math notranslate nohighlight">\(Y_{obs}\)</span> is the observed sample data and <span class="math notranslate nohighlight">\(Y_{mis}\)</span> the unobserved sample data,
+the overall probability of being missing <span class="math notranslate nohighlight">\(x\)</span> depends,</p>
+<ul>
+<li><p>MCAR: only on some parameters <span class="math notranslate nohighlight">\(\psi\)</span></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid \psi)\)</span></p>
+</div></blockquote>
+</li>
+<li><p>MAR: on observed information, including any design factors</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid Y_{obs}, \psi)\)</span></p>
+</div></blockquote>
+</li>
+<li><p>MNAR: also depends on unobserved information, including <span class="math notranslate nohighlight">\(Y_{mis}\)</span> itself</p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi)\)</span></p>
+</div></blockquote>
+</li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="EDHVariables.html#ccases"><span class="std std-ref">Complete cases</span></a></p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="mice-algorithm">
+<h3>MICE algorithm<a class="headerlink" href="#mice-algorithm" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">mice</span></code> is an <code class="docutils literal notranslate"><span class="pre">R</span></code> package that implements Multivariate Imputation by Chained Equations using Fully Conditional Specification</p>
+<p>MICE algorithm is a Markov chain Monte Carlo (MCMC) method, where the state space is the collection of all imputed values.</p>
+<p>…</p>
+<p>Missing data patterns:
+- Monotone: increasing order of the number of missing data</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+<div class="section" id="temporal-uncertainty-and-relative-dating">
+<h2>Temporal uncertainty and relative dating<a class="headerlink" href="#temporal-uncertainty-and-relative-dating" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>(see <a class="reference internal" href="Uncertainty.html#uncertainty"><span class="std std-ref">Temporal Uncertainty</span></a>)</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="roman-inscriptions-in-edh-database">
+<h2>Roman inscriptions in EDH database<a class="headerlink" href="#roman-inscriptions-in-edh-database" title="Permalink to this headline">¶</a></h2>
+<p>TDB</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+<div class="section" id="restricted-imputation-on-dates">
+<h2>Restricted imputation on dates<a class="headerlink" href="#restricted-imputation-on-dates" title="Permalink to this headline">¶</a></h2>
+<p>One strategy for dealing with temporal uncertainty if they have missing data for both limits TAQ and TPQ is performing a classification of the inscription to the chronological period with the highest probability of belonging.</p>
+<p>The classification takes available characteristics of other inscriptions assigned to a chronological phase to provide with clues in finding such likelihoods for records having a temporal uncertainty.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modules.html" title="Modules"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, CEDHAR - Aarhus University.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
+    </div>
+  </body>
+</html>

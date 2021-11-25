@@ -217,10 +217,13 @@ TeX and LaTeX
 -------------
 
 
-``TeX`` is a format first released in 1978 that allows typesetting complex mathematical formulae, and also the engine or program 
-that does the typesetting. ``LaTex`` is a generalised set of macros built on top of ``TeX`` to take care of the content of the document. 
+First released in 1978, ``TeX`` is a format that allows typesetting complex mathematical formulae. ``TeX`` is also the engine or program 
+that does the typesetting. 
+
+``LaTex`` is a generalised set of macros built on top of ``TeX`` to take care of the content of the document. 
 
 
+     .. todo::  TODO 
 
 
 
@@ -232,7 +235,7 @@ Another data format
 -------------------
 
 
-     .. todo::  TBD
+     .. todo::  TODO Another data format
 
 
 

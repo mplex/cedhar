@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Extracting variables from the EDH dataset" name="description" />
 <meta content="extraction, manipulation, epigraphic, dataset" name="keywords" />
 
-    <title>Extracting EDH Variables &#8212; cedhar 0.0.8 documentation</title>
+    <title>Extracting EDH Variables &#8212; cedhar 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -49,7 +49,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#attributes-in-edh-dataset">Attributes in <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</a></li>
-<li><a class="reference internal" href="#example-relative-dating-in-edh">Example: Relative dating in EDH</a><ul>
+<li><a class="reference internal" href="#relative-dating-in-edh">Relative dating in EDH</a><ul>
 <li><a class="reference internal" href="#complete-cases">Complete cases</a></li>
 </ul>
 </li>
@@ -283,24 +283,27 @@ items</p>
 <div class="line"><br /></div>
 </div>
 </div>
-<div class="section" id="example-relative-dating-in-edh">
-<span id="rel-dat"></span><h2>Example: Relative dating in EDH<a class="headerlink" href="#example-relative-dating-in-edh" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="relative-dating-in-edh">
+<span id="rel-dat"></span><h2>Relative dating in EDH<a class="headerlink" href="#relative-dating-in-edh" title="Permalink to this headline">¶</a></h2>
 <p>We are going to apply the <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> function to check the relative dating of Roman inscriptions, and
 for a simple relative dating analysis, we choose chronological data variables in <code class="docutils literal notranslate"><span class="pre">vars</span></code>:</p>
 <div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># make a list for relative variables in &#39;EDH&#39; (default)</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>In this case, the boundaries of the time span of existence TPQ and TAQ are variables <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code>,
-respectively.</p>
-<ul class="simple">
-<li><p>(see <a class="reference internal" href="Uncertainty.html#tapq"><span class="std std-ref">Boundaries of existence</span></a> for the meaning of TAQ and TPQ.)</p></li>
-</ul>
+<p>Since argument <em>x</em> is not specified in the function, the <code class="docutils literal notranslate"><span class="pre">&quot;EDH&quot;</span></code> dataset in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package is taken if available
+with a <em>Warning</em> message.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>Since argument <em>x</em> is not specified in the function, the “EDH” dataset in the <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package is taken if available
-with a <em>Warning</em> message.</p>
+<p>In this case, the boundaries of the timespan of existence are variables <code class="docutils literal notranslate"><span class="pre">&quot;not_after&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;not_before&quot;</span></code>,
+respectively.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p>(see <a class="reference internal" href="Uncertainty.html#aora"><span class="std std-ref">Aoristic analysis</span></a> for a treatment of timespan of existence.)</p></li>
+</ul>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -342,31 +345,27 @@ Hence, e.g. <code class="docutils literal notranslate"><span class="pre">apply(f
 <div class="section" id="complete-cases">
 <span id="ccases"></span><h3>Complete cases<a class="headerlink" href="#complete-cases" title="Permalink to this headline">¶</a></h3>
 <p>By default, function <code class="docutils literal notranslate"><span class="pre">edhw()</span></code> do not remove missing data when present in all variables, but is possible to
-remove missing information by activating the <em>na.rm</em> argument.</p>
+remove missing information by activating the <em>na.rm</em> argument and work with complete cases.</p>
 <blockquote>
 <div><div class="highlight-R notranslate"><div class="highlight"><pre><span></span><span class="c1"># remove missing data</span>
 <span class="n">R</span><span class="o">&gt;</span> <span class="nf">str</span><span class="p">(</span><span class="nf">edhw</span><span class="p">(</span><span class="n">vars</span><span class="o">=</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;not_after&quot;</span><span class="p">,</span> <span class="s">&quot;not_before&quot;</span><span class="p">),</span> <span class="n">na.rm</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="c1">#List of 60224</span>
 <span class="c1"># $ :List of 3</span>
-<span class="c1">#  ..$ id        : chr &quot;HD000001&quot;</span>
-<span class="c1">#  ..$ not_after : chr &quot;0130&quot;</span>
-<span class="c1">#  ..$ not_before: chr &quot;0071&quot;</span>
-<span class="c1"># $ :List of 3</span>
-<span class="c1">#  ..$ id        : chr &quot;HD000002&quot;</span>
-<span class="c1">#  ..$ not_after : chr &quot;0200&quot;</span>
-<span class="c1">#  ..$ not_before: chr &quot;0051&quot;</span>
 <span class="c1"># ...</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>And work with complete cases.</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>However, tackling the temporal uncertainty problem is an important type of analysis.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <blockquote>
 <div><div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="Uncertainty.html#missing"><span class="std std-ref">Missing data</span></a> within uncertainty.</p>
+<p><a class="reference internal" href="Uncertainty.html#missing"><span class="std std-ref">Missing data</span></a> within temporal uncertainty.</p>
 </div>
 </div></blockquote>
 <div class="line-block">
@@ -394,11 +393,11 @@ remove missing information by activating the <em>na.rm</em> argument.</p>
         <li class="right" >
           <a href="Epigraphic.html" title="Epigraphic Database Heidelberg"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, CEDHAR - Aarhus University.
+        &#169; Copyright 2021, CEDHAR - Aarhus University.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>

@@ -1,0 +1,183 @@
+
+.. _imput:
+
+
+
+.. index:: multiple imputation
+
+
+
+*******************************************
+Multiple imputation for missing dating data
+*******************************************
+
+
+
+Network imputation for missing dating data in ``EDH``
+=====================================================
+
+|
+
+Contents
+--------
+
+* Imputation and Missing data 
+	- Missing data problems
+	- MICE algorithm
+
+* Temporal uncertainty and relative dating
+	- time-spans of existence and missing dates (within-phase uncertainty)
+
+* Roman inscriptions in EDH database
+	- variable attributes similarities
+
+* Statistical inference on missing dates
+	- multivariate and univariate distribution of missing data (joint vs conditional modelling) 
+	- MCMC
+
+* FCS and multiple imputation for EDH province data set
+	- ``mice`` implementation
+		- Predictive mean matching 
+		- Random forest
+
+* Deterministic methods on EDH data subsets
+	- MNAR dates with supervised (restricted) imputation
+
+
+|
+
+.. _missing:
+
+Imputation and Missing data
+===========================
+
+In statistics, *imputation* is the process of replacing missing data with plausible estimates, 
+and *multiple imputation* is the method of choice for complex incomplete data problems. 
+
+With the *joint modeling* approach, imputing multivariate data involves specifying a 
+multivariate distribution for the missing data, and then drawing imputation from their 
+conditional distributions by Markov chain Monte Carlo (MCMC) techniques. 
+
+The *fully conditional specification* is a variable-by-variable type of imputation that is 
+made by iterating over conditional densities. 
+
+
+
+|
+
+
+
+Missing dating data
+===================
+
+The treatment of missing values defining the timespan of the existence of historical artefacts concerns with the temporal uncertainty problem. 
+Time uncertainty relates to the missing information in the limits of the timespan, which represent boundaries of existence with a *terminus ante-* and *post-quem*, abbreviated as TAQ and TPQ.
+
+As study case, the artefacts are epigraphic material or inscriptions recorded in the EDH dataset with unknown information in time in both limits of the timespan, and hence there is no timespan, or just in either TAQ or TPQ.
+
+|
+
+
+
+
+
+|
+
+
+Missing data problems
+---------------------
+
+Every data point has some likelihood of being missing. Rubin (1976) classified missing data problems 
+into three categories: missing completely at random (MCAR), missing at random (MAR) and missing not at random (MNAR).
+
+For some parameter :math:`\psi`, where :math:`Y_{obs}` is the observed sample data and :math:`Y_{mis}` the unobserved sample data, 
+the overall probability of being missing :math:`x` depends, 
+
+
+* MCAR: only on some parameters :math:`\psi` 
+
+     :math:`P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid \psi)`
+
+* MAR: on observed information, including any design factors 
+
+     :math:`P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid Y_{obs}, \psi)`
+
+* MNAR: also depends on unobserved information, including :math:`Y_{mis}` itself 
+
+     :math:`P(x=0 \mid Y_{obs}, Y_{mis}, \psi)`
+
+
+
+|
+
+
+
+    .. seealso:: 
+     
+        :ref:`Complete cases <ccases>`
+
+
+
+
+
+|
+
+
+
+MICE algorithm
+--------------
+
+``mice`` is an ``R`` package that implements Multivariate Imputation by Chained Equations using Fully Conditional Specification
+
+MICE algorithm is a Markov chain Monte Carlo (MCMC) method, where the state space is the collection of all imputed values.
+
+...
+
+
+Missing data patterns:	
+- Monotone: increasing order of the number of missing data
+
+
+|
+
+Temporal uncertainty and relative dating
+========================================
+
+* (see :ref:`Temporal Uncertainty <uncertainty>`)
+
+
+
+
+|
+
+
+Roman inscriptions in EDH database
+==================================
+
+
+TDB
+
+
+
+|
+
+
+
+Restricted imputation on dates
+==============================
+
+One strategy for dealing with temporal uncertainty if they have missing data for both limits TAQ and TPQ is performing a classification of the inscription to the chronological period with the highest probability of belonging. 
+
+The classification takes available characteristics of other inscriptions assigned to a chronological phase to provide with clues in finding such likelihoods for records having a temporal uncertainty.
+
+
+
+|
+
+
+
+.. meta::
+   :description: Multiple imputation methods
+   :keywords: imputation, missing-data, time, epigraphic, dataset 
+
+

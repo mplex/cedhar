@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Modules &#8212; cedhar 0.0.8 documentation</title>
+    <title>Modules &#8212; cedhar 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,7 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Epigraphic Networks using R" href="EpigraphicNetwork.html" /> 
+    <link rel="prev" title="Multiple imputation for missing dating data" href="Imputation.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -24,9 +24,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
+          <a href="Imputation.html" title="Multiple imputation for missing dating data"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -35,8 +35,8 @@
               <img class="logo" src="_static/CEDHAR_logo_black_large_800x100.png" alt="Logo"/>
             </a></p>
   <h4>Previous topic</h4>
-  <p class="topless"><a href="EpigraphicNetwork.html"
-                        title="previous chapter">Epigraphic Networks using R</a></p>
+  <p class="topless"><a href="Imputation.html"
+                        title="previous chapter">Multiple imputation for missing dating data</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -80,10 +80,12 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="sdam.html#r-package-sdam">R package <code class="docutils literal notranslate"><span class="pre">sdam</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sdam.html#package-description">Package Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="sdam.html#package-installation">Package installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdam.html#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdam.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdam.html#assembly">Assembly</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdam.html#making-documentation">Making Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdam.html#datasets">Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sdam.html#vignettes-in-website">Vignettes in website</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sdam.html#news-from-sdam-package">News from <code class="docutils literal notranslate"><span class="pre">sdam</span></code> package</a></li>
 </ul>
 </li>
@@ -105,7 +107,7 @@
 <li class="toctree-l1"><a class="reference internal" href="EDHVariables.html">Extracting <code class="docutils literal notranslate"><span class="pre">EDH</span></code> Variables</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="EDHVariables.html#edh-variables">EDH variables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="EDHVariables.html#attributes-in-edh-dataset">Attributes in <code class="docutils literal notranslate"><span class="pre">EDH</span></code> dataset</a></li>
-<li class="toctree-l2"><a class="reference internal" href="EDHVariables.html#example-relative-dating-in-edh">Example: Relative dating in EDH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EDHVariables.html#relative-dating-in-edh">Relative dating in EDH</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Time.html">Time and dating</a><ul>
@@ -121,7 +123,6 @@
 <li class="toctree-l2"><a class="reference internal" href="Uncertainty.html#aoristic-analysis">Aoristic analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Uncertainty.html#probability-of-existence-t-i">Probability of existence <span class="math notranslate nohighlight">\(t_i\)</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="Uncertainty.html#probabilities-of-existence-for-time-blocks">Probabilities of existence for time blocks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Uncertainty.html#imputation-and-missing-data">Imputation and Missing data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Uncertainty.html#computing-the-probability-of-existence">Computing the probability of existence</a></li>
 </ul>
 </li>
@@ -136,8 +137,18 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="EpigraphicNetwork.html">Epigraphic Networks using R</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="EpigraphicNetwork.html#measuring-similarity-of-artefact-assemblages-and-geographic-proximity">Measuring similarity of artefact assemblages and geographic proximity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="EpigraphicNetwork.html#edh-dataset">EDH dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EpigraphicNetwork.html#similarity-measures">Similarity measures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="EpigraphicNetwork.html#structures-of-similarity-in-the-edh-dataset">Structures of similarity in the EDH dataset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="EpigraphicNetwork.html#example-similarity-among-egyptian-epigraphs">Example: Similarity among Egyptian epigraphs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Imputation.html">Multiple imputation for missing dating data</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Imputation.html#network-imputation-for-missing-dating-data-in-edh">Network imputation for missing dating data in <code class="docutils literal notranslate"><span class="pre">EDH</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="Imputation.html#imputation-and-missing-data">Imputation and Missing data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Imputation.html#missing-dating-data">Missing dating data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Imputation.html#temporal-uncertainty-and-relative-dating">Temporal uncertainty and relative dating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Imputation.html#roman-inscriptions-in-edh-database">Roman inscriptions in EDH database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Imputation.html#restricted-imputation-on-dates">Restricted imputation on dates</a></li>
 </ul>
 </li>
 </ul>
@@ -157,13 +168,13 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="EpigraphicNetwork.html" title="Epigraphic Networks using R"
+          <a href="Imputation.html" title="Multiple imputation for missing dating data"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, CEDHAR - Aarhus University.
+        &#169; Copyright 2021, CEDHAR - Aarhus University.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>

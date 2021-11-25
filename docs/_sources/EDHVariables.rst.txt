@@ -192,8 +192,8 @@ items
 .. _rel-dat:
 
 
-Example: Relative dating in EDH
-===============================
+Relative dating in EDH
+======================
 
 We are going to apply the ``edhw()`` function to check the relative dating of Roman inscriptions, and 
 for a simple relative dating analysis, we choose chronological data variables in ``vars``: 
@@ -215,19 +215,24 @@ for a simple relative dating analysis, we choose chronological data variables in
     R> edhw(vars=c("not_after", "not_before"))
     
 
-In this case, the boundaries of the time span of existence TPQ and TAQ are variables ``"not_after"`` and ``"not_before"``, 
-respectively. 
 
-
-* (see :ref:`Boundaries of existence <tapq>` for the meaning of TAQ and TPQ.)
-..  * (see :ref:`Time spans of existence <tmsp>` for an application of ``EDHdates``.)
-
+Since argument *x* is not specified in the function, the ``"EDH"`` dataset in the ``sdam`` package is taken if available 
+with a *Warning* message.
 
 |
 
 
-Since argument *x* is not specified in the function, the "EDH" dataset in the ``sdam`` package is taken if available 
-with a *Warning* message.
+In this case, the boundaries of the timespan of existence are variables ``"not_after"`` and ``"not_before"``, 
+respectively. 
+
+|
+
+
+
+..  * (see :ref:`Boundaries of existence <tapq>` for the meaning of TAQ and TPQ.)
+
+* (see :ref:`Aoristic analysis <aora>` for a treatment of timespan of existence.)
+
 
 |
 
@@ -281,7 +286,7 @@ Complete cases
 --------------
 
 By default, function ``edhw()`` do not remove missing data when present in all variables, but is possible to 
-remove missing information by activating the *na.rm* argument.
+remove missing information by activating the *na.rm* argument and work with complete cases.
 
 
     .. code-block:: R
@@ -290,17 +295,20 @@ remove missing information by activating the *na.rm* argument.
         R> str(edhw(vars=c("not_after", "not_before"), na.rm=TRUE))
         #List of 60224
         # $ :List of 3
-        #  ..$ id        : chr "HD000001"
-        #  ..$ not_after : chr "0130"
-        #  ..$ not_before: chr "0071"
-        # $ :List of 3
-        #  ..$ id        : chr "HD000002"
-        #  ..$ not_after : chr "0200"
-        #  ..$ not_before: chr "0051"
         # ...
+        
+..        #  ..$ id        : chr "HD000001"
+..        #  ..$ not_after : chr "0130"
+..        #  ..$ not_before: chr "0071"
+..        # $ :List of 3
+..        #  ..$ id        : chr "HD000002"
+..        #  ..$ not_after : chr "0200"
+..        #  ..$ not_before: chr "0051"
 
 
-And work with complete cases. 
+|
+
+However, tackling the temporal uncertainty problem is an important type of analysis.
 
 
 |
@@ -308,7 +316,7 @@ And work with complete cases.
 
     .. seealso:: 
     
-        :ref:`Missing data <missing>` within uncertainty. 
+        :ref:`Missing data <missing>` within temporal uncertainty. 
 
 
 | 

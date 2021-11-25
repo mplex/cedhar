@@ -63,18 +63,17 @@ R package ``sdam``
 ******************
 
 
-Package Description
--------------------
+Description
+-----------
 
 
 The `R package "sdam" <https://sdam-au.github.io/sdam/>`_ provides tools for performing 
 analyses within Social Dynamics and complexity in the Ancient Mediterranean 
 (`SDAM <https://sdam-au.github.io/sdam-au/>`_) project. 
 
-..  , which is a research group based 
 
 * (See `"sdam" manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_)
-..  * (See :ref:`"SDAM project" <sdam-proj>`)
+
 
 
 |
@@ -125,8 +124,9 @@ development.
 
 .. _sdam-inst:
 
-Package installation
---------------------
+
+Installation
+------------
 
 
 You can install the ``sdam`` package from these GitHub repositories using  the ``R`` console 
@@ -177,6 +177,43 @@ Making Documentation
         Making Documentation workflow
 
 
+
+|
+
+
+Datasets
+--------
+
+* ``EDH``: Epigraphic Database Heidelberg
+* ``rp``: Roman provinces
+* ``rpmcd``: Caption maps and affiliation dates of Roman provinces
+* ``rpmp``: Maps of ancient Roman provinces and Italian regions
+* ``retn``: Roman Empire transport network
+* ``rpd``: Roman provinces dates from ``EDH``
+
+
+
+|
+
+
+Vignettes in `website <https://sdam-au.github.io/sdam/>`_
+---------------------------------------------------------
+
+* `Centrality measures in ORBIS Roman transport network (24-Nov-2021) <https://htmlpreview.github.io/?https://github.com/sdam-au/R_code/blob/master/HTML/Centrality%20measures%20in%20ORBIS%20Roman%20transport%20network.html>`_ 
+* `ORBIS Roman World transport network (14-Sep-2021. Update: 22-Sep-2021) <https://htmlpreview.github.io/?https://github.com/sdam-au/R_code/blob/master/HTML/ORBIS%20Roman%20World%20transport%20network%20centrality%20measures.html>`_ 
+* `Plotting Roman Roads (update: 14-Sep-2021) <https://htmlpreview.github.io/?https://github.com/sdam-au/R_code/blob/master/HTML/Plotting%20Roman%20Roads%20(update).html>`_ 
+* `Plotting Roman Roads and Time (17-Aug-2021) <https://htmlpreview.github.io/?https://github.com/sdam-au/R_code/blob/master/HTML/Plotting%20Roman%20Roads%20and%20Time.html>`_ 
+
+
+
+|
+
+    .. seealso:: 
+    
+        *  package's `manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_ 
+
+
+
 |
 
 
@@ -185,6 +222,26 @@ Making Documentation
 
 News from ``sdam`` package
 --------------------------
+
+
+* **Version 0.7.0**  released (20-09-2021).
+
+    - *New dataset* ``rpd``
+    - ``rpmcd`` dataset is updated.
+
+
+|
+
+
+
+* **Version 0.6.0**  released (02-08-2021).
+
+    - *New function*. ``cln()`` and ``retn`` dataset.
+
+
+|
+
+
 
 * **Version 0.5.0**  released (19-04-2021).
 
@@ -236,15 +293,9 @@ News from ``sdam`` package
 |
 
 
-(see also package's `manual <https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf>`_ )
 
 
-
-|
-
-    .. todo:: 
-    
-        Connect with GitHub ``sdam-au\sdam\docs``
+..  Connect with GitHub ``sdam-au\sdam\docs``
 
 
 |

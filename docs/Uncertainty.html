@@ -6,7 +6,7 @@
     <meta charset="utf-8" /><meta content="Probability and Uncertainty" name="description" />
 <meta content="temporal uncertainty, Chronology" name="keywords" />
 
-    <title>Temporal Uncertainty &#8212; cedhar 0.0.8 documentation</title>
+    <title>Temporal Uncertainty &#8212; cedhar 0.1.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="Time.html" title="Time and dating"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -56,23 +56,20 @@
 <li><a class="reference internal" href="#normal-distribution">Normal distribution</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#notation">Notation</a><ul>
-<li><a class="reference internal" href="#boundaries-of-existence">Boundaries of existence</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#notation">Notation</a></li>
 <li><a class="reference internal" href="#aoristic-analysis">Aoristic analysis</a><ul>
+<li><a class="reference internal" href="#boundaries-of-existence">Boundaries of existence</a></li>
 <li><a class="reference internal" href="#temporal-resolution">Temporal resolution</a></li>
 <li><a class="reference internal" href="#aoristic-sum">Aoristic sum</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#probability-of-existence-t-i">Probability of existence <span class="math notranslate nohighlight">\(t_i\)</span></a></li>
+<li><a class="reference internal" href="#probability-of-existence-t-i">Probability of existence <span class="math notranslate nohighlight">\(t_i\)</span></a><ul>
+<li><a class="reference internal" href="#time-block-boundaries">Time-block boundaries</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#probabilities-of-existence-for-time-blocks">Probabilities of existence for time blocks</a><ul>
 <li><a class="reference internal" href="#temporal-resolution-for-time-blocks">Temporal resolution for time blocks</a></li>
 <li><a class="reference internal" href="#rate-of-change">Rate of change</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#imputation-and-missing-data">Imputation and Missing data</a><ul>
-<li><a class="reference internal" href="#missing-data">Missing data</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#computing-the-probability-of-existence">Computing the probability of existence</a><ul>
@@ -201,6 +198,16 @@ when <span class="math notranslate nohighlight">\(n = 1\)</span>.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Beta distribution models the probability <span class="math notranslate nohighlight">\((p)\)</span> of success rather than the number of occurrences <span class="math notranslate nohighlight">\((x)\)</span>,
+and it represents all the possible values of <span class="math notranslate nohighlight">\((p)\)</span> when we do not know what that probability is.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 <div class="section" id="trapezoidal-distribution">
 <span id="trap"></span><h3>Trapezoidal distribution<a class="headerlink" href="#trapezoidal-distribution" title="Permalink to this headline">¶</a></h3>
@@ -301,6 +308,15 @@ Any arbitrary normal distribution can be converted to <span class="math notransl
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+<blockquote>
+<div><div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Expectations of the distributions.</p>
+</div>
+</div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </div>
 </div>
 <div class="section" id="notation">
@@ -323,6 +339,11 @@ Any arbitrary normal distribution can be converted to <span class="math notransl
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
+</div>
+<div class="section" id="aoristic-analysis">
+<span id="aora"></span><h2>Aoristic analysis<a class="headerlink" href="#aoristic-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Aoristic analysis is based on the creation of a series of these artificial divisions of
+the range of time with a fixed value, called time blocks, and the definition of their probability of existence.</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -338,11 +359,6 @@ These upper and lower bounds are termed</p>
 <div class="line"><br /></div>
 </div>
 </div>
-</div>
-<div class="section" id="aoristic-analysis">
-<span id="aora"></span><h2>Aoristic analysis<a class="headerlink" href="#aoristic-analysis" title="Permalink to this headline">¶</a></h2>
-<p>Aoristic analysis is based on the creation of a series of these artificial divisions of
-the range of time with a fixed value, called time blocks, and the definition of their probability of existence.</p>
 <div class="section" id="temporal-resolution">
 <h3>Temporal resolution<a class="headerlink" href="#temporal-resolution" title="Permalink to this headline">¶</a></h3>
 <p>Temporal resolution <span class="math notranslate nohighlight">\(\varphi\)</span> refers to the duration of time blocks, and
@@ -363,7 +379,7 @@ with aoristic analysis <span class="math notranslate nohighlight">\(\varphi\)</s
        <span class="n">sums</span>
 </pre></div>
 </div>
-<div class="admonition-todo admonition" id="id1">
+<div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>Aoristic sum explained in R…</p>
 </div>
@@ -392,9 +408,8 @@ with aoristic analysis <span class="math notranslate nohighlight">\(\varphi\)</s
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+<div class="section" id="time-block-boundaries">
+<h3>Time-block boundaries<a class="headerlink" href="#time-block-boundaries" title="Permalink to this headline">¶</a></h3>
 <p>To retrieve the minimum probability <span class="math notranslate nohighlight">\(P[\varphi_\alpha]\)</span> for the boundaries of the first and last time-blocks,
 we define <span class="math notranslate nohighlight">\(\varphi_\alpha = 1\)</span> where</p>
 <p><span class="math notranslate nohighlight">\(\phi_\alpha / \Delta_\tau = 1/54 = P[\phi_\alpha] = .018\)</span> (approx)</p>
@@ -415,6 +430,7 @@ we define <span class="math notranslate nohighlight">\(\varphi_\alpha = 1\)</spa
 <div class="line"><br /></div>
 </div>
 </div>
+</div>
 <div class="section" id="probabilities-of-existence-for-time-blocks">
 <h2>Probabilities of existence for time blocks<a class="headerlink" href="#probabilities-of-existence-for-time-blocks" title="Permalink to this headline">¶</a></h2>
 <p>The probability of existence for each time block (Appendix A, Crema, 2012)</p>
@@ -430,6 +446,9 @@ where <span class="math notranslate nohighlight">\(d\)</span> is the duration of
 from <span class="math notranslate nohighlight">\(1\)</span> to <span class="math notranslate nohighlight">\(\Delta t_i/\varphi\)</span>, which are the edges of the time span.</p>
 </div>
 </div></blockquote>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="section" id="temporal-resolution-for-time-blocks">
 <h3>Temporal resolution for time blocks<a class="headerlink" href="#temporal-resolution-for-time-blocks" title="Permalink to this headline">¶</a></h3>
 <p>The duration of time blocks that is <span class="math notranslate nohighlight">\(\varphi\)</span> in the denominator for computing
@@ -445,55 +464,6 @@ the probability of existence for each time block is defined as</p>
 <p>Rate of change refers to transition probabilities like increase/stability/decrease as with the <a class="reference internal" href="#trap"><span class="std std-ref">trapezoidal</span></a> distribution.</p>
 <p>Rate of chage =  <span class="math notranslate nohighlight">\(\frac{(e~t_{i+1} - e~t_i)}{\varphi}\)</span></p>
 <p>An example of a transition probabilities are increase <span class="math notranslate nohighlight">\(=0.4\)</span>; stability <span class="math notranslate nohighlight">\(=0.5\)</span> and decrease <span class="math notranslate nohighlight">\(=0.1\)</span></p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</div>
-</div>
-<div class="section" id="imputation-and-missing-data">
-<span id="missing"></span><h2>Imputation and Missing data<a class="headerlink" href="#imputation-and-missing-data" title="Permalink to this headline">¶</a></h2>
-<p>In statistics, <em>imputation</em> is the process of replacing missing data with plausible estimates,
-and <em>multiple imputation</em> is the method of choice for complex incomplete data problems.</p>
-<p>With the <em>joint modeling</em> approach, imputing multivariate data involves specifying a
-multivariate distribution for the missing data, and then drawing imputation from their
-conditional distributions by Markov chain Monte Carlo (MCMC) techniques.</p>
-<p>The <em>fully conditional specification</em> is a variable-by-variable type of imputation that is
-made by iterating over conditional densities.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="section" id="missing-data">
-<h3>Missing data<a class="headerlink" href="#missing-data" title="Permalink to this headline">¶</a></h3>
-<p>Every data point has some likelihood of being missing. Rubin (1976) classified missing data problems
-into three categories: missing completely at random (MCAR), missing at random (MAR) and missing not at random (MNAR).</p>
-<p>For some parameter <span class="math notranslate nohighlight">\(\psi\)</span>, where <span class="math notranslate nohighlight">\(Y_{obs}\)</span> is the observed sample data and <span class="math notranslate nohighlight">\(Y_{mis}\)</span> the unobserved sample data,
-the overall probability of being missing <span class="math notranslate nohighlight">\(x\)</span> depends,</p>
-<ul>
-<li><p>MCAR: only on some parameters <span class="math notranslate nohighlight">\(\psi\)</span></p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid \psi)\)</span></p>
-</div></blockquote>
-</li>
-<li><p>MAR: on observed information, including any design factors</p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi) = P(x=0 \mid Y_{obs}, \psi)\)</span></p>
-</div></blockquote>
-</li>
-<li><p>MNAR: also depends on unobserved information, including <span class="math notranslate nohighlight">\(Y_{mis}\)</span> itself</p>
-<blockquote>
-<div><p><span class="math notranslate nohighlight">\(P(x=0 \mid Y_{obs}, Y_{mis}, \psi)\)</span></p>
-</div></blockquote>
-</li>
-</ul>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<blockquote>
-<div><div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="EDHVariables.html#ccases"><span class="std std-ref">Complete cases</span></a></p>
-</div>
-</div></blockquote>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -693,11 +663,11 @@ and two types of chronological phases</p>
         <li class="right" >
           <a href="Time.html" title="Time and dating"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.0.8 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">cedhar 0.1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, CEDHAR - Aarhus University.
+        &#169; Copyright 2021, CEDHAR - Aarhus University.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.1.
     </div>
   </body>
