@@ -1,0 +1,129 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {1}Digital Humanities}{3}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Data for humanities}{3}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}Data formats}{3}{subsection.1.2}% 
+\contentsline {subsubsection}{JSON structure}{3}{subsubsection*.2}% 
+\contentsline {paragraph}{JSON in R}{4}{paragraph*.3}% 
+\contentsline {subsubsection}{eXtensible Markup Language}{4}{subsubsection*.4}% 
+\contentsline {subsubsection}{Lightweight markup languages}{4}{subsubsection*.5}% 
+\contentsline {paragraph}{Markdown}{4}{paragraph*.6}% 
+\contentsline {paragraph}{reStructuredText}{5}{paragraph*.7}% 
+\contentsline {subsubsection}{TeX and LaTeX}{5}{subsubsection*.8}% 
+\contentsline {subsubsection}{Another data format}{6}{subsubsection*.9}% 
+\contentsline {section}{\numberline {2}User Acceptance Testing}{6}{section.2}% 
+\contentsline {subsection}{\numberline {2.1}User Acceptance Test for R package release}{6}{subsection.2.1}% 
+\contentsline {subsubsection}{Human testing}{6}{subsubsection*.10}% 
+\contentsline {subsubsection}{Machine testing}{7}{subsubsection*.11}% 
+\contentsline {subsubsection}{UAT for users in GitHub}{7}{subsubsection*.12}% 
+\contentsline {subsubsection}{UAT exercise}{7}{subsubsection*.13}% 
+\contentsline {section}{\numberline {3}The SDAM project}{8}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Objectives}{8}{subsection.3.1}% 
+\contentsline {section}{\numberline {4}R package \sphinxstyleliteralintitle {\sphinxupquote {sdam}}}{8}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}Package Description}{8}{subsection.4.1}% 
+\contentsline {subsection}{\numberline {4.2}Package installation}{9}{subsection.4.2}% 
+\contentsline {subsection}{\numberline {4.3}Assembly}{9}{subsection.4.3}% 
+\contentsline {subsection}{\numberline {4.4}Making Documentation}{9}{subsection.4.4}% 
+\contentsline {subsection}{\numberline {4.5}News from \sphinxstyleliteralintitle {\sphinxupquote {sdam}} package}{10}{subsection.4.5}% 
+\contentsline {section}{\numberline {5}DEiC\IeC {\textquoteright }s sciencedata.dk}{10}{section.5}% 
+\contentsline {subsection}{\numberline {5.1}Accessing DEiC\IeC {\textquoteright }s sciencedata.dk using R}{11}{subsection.5.1}% 
+\contentsline {subsubsection}{Functions Usage}{11}{subsubsection*.14}% 
+\contentsline {subsubsection}{Parameters}{11}{subsubsection*.16}% 
+\contentsline {subsubsection}{Additional parameters}{12}{subsubsection*.17}% 
+\contentsline {subsubsection}{Arguments}{12}{subsubsection*.18}% 
+\contentsline {subsubsection}{Output}{12}{subsubsection*.19}% 
+\contentsline {subsubsection}{Details}{13}{subsubsection*.20}% 
+\contentsline {subsection}{\numberline {5.2}Authentification}{13}{subsection.5.2}% 
+\contentsline {subsection}{\numberline {5.3}Responses}{14}{subsection.5.3}% 
+\contentsline {subsection}{\numberline {5.4}Examples}{14}{subsection.5.4}% 
+\contentsline {subsubsection}{Method GET}{14}{subsubsection*.21}% 
+\contentsline {subsubsection}{Method PUT}{15}{subsubsection*.22}% 
+\contentsline {paragraph}{\sphinxstyleliteralintitle {\sphinxupquote {PUT}} in own folder}{15}{paragraph*.23}% 
+\contentsline {paragraph}{\sphinxstyleliteralintitle {\sphinxupquote {PUT}} in a sharing folder}{15}{paragraph*.24}% 
+\contentsline {subsubsection}{Method DELETE}{16}{subsubsection*.25}% 
+\contentsline {subsubsection}{Method POST}{16}{subsubsection*.26}% 
+\contentsline {section}{\numberline {6}Epigraphic Database Heidelberg}{17}{section.6}% 
+\contentsline {subsection}{\numberline {6.1}Open Data Repository}{17}{subsection.6.1}% 
+\contentsline {subsection}{\numberline {6.2}Response}{17}{subsection.6.2}% 
+\contentsline {subsection}{\numberline {6.3}Accessing the EDH database using R}{17}{subsection.6.3}% 
+\contentsline {subsubsection}{Function usage}{18}{subsubsection*.27}% 
+\contentsline {subsubsection}{Search parameters}{18}{subsubsection*.29}% 
+\contentsline {paragraph}{Inscriptions and Geography}{18}{paragraph*.30}% 
+\contentsline {paragraph}{Inscriptions only}{19}{paragraph*.31}% 
+\contentsline {paragraph}{Geography only}{20}{paragraph*.32}% 
+\contentsline {paragraph}{Extra parameters}{20}{paragraph*.33}% 
+\contentsline {subsection}{\numberline {6.4}Examples}{20}{subsection.6.4}% 
+\contentsline {subsection}{\numberline {6.5}Accessing Epigraphic Database Heidelberg: Inscriptions}{21}{subsection.6.5}% 
+\contentsline {subsubsection}{Output}{22}{subsubsection*.36}% 
+\contentsline {section}{\numberline {7}Extracting \sphinxstyleliteralintitle {\sphinxupquote {EDH}} Variables}{23}{section.7}% 
+\contentsline {subsection}{\numberline {7.1}EDH variables}{23}{subsection.7.1}% 
+\contentsline {subsubsection}{Function usage}{24}{subsubsection*.38}% 
+\contentsline {subsubsection}{Parameters}{24}{subsubsection*.39}% 
+\contentsline {subsection}{\numberline {7.2}Attributes in \sphinxstyleliteralintitle {\sphinxupquote {EDH}} dataset}{25}{subsection.7.2}% 
+\contentsline {subsection}{\numberline {7.3}Relative dating in EDH}{25}{subsection.7.3}% 
+\contentsline {subsubsection}{Complete cases}{26}{subsubsection*.41}% 
+\contentsline {section}{\numberline {8}Time and dating}{27}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Chronological periods of the Mediterranean Sea}{27}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}Relative dating of Roman inscriptions}{28}{subsection.8.2}% 
+\contentsline {subsubsection}{Dates in data frames}{28}{subsubsection*.42}% 
+\contentsline {subsubsection}{Time spans of existence}{29}{subsubsection*.43}% 
+\contentsline {subsubsection}{Plotting time intervals}{29}{subsubsection*.44}% 
+\contentsline {subsubsection}{Treating Outliers}{30}{subsubsection*.45}% 
+\contentsline {paragraph}{Plotting without outliers}{32}{paragraph*.46}% 
+\contentsline {subsection}{\numberline {8.3}Plotting time intervals}{33}{subsection.8.3}% 
+\contentsline {subsubsection}{Function usage}{33}{subsubsection*.48}% 
+\contentsline {subsubsection}{Parameters}{34}{subsubsection*.49}% 
+\contentsline {section}{\numberline {9}Temporal Uncertainty}{35}{section.9}% 
+\contentsline {subsection}{\numberline {9.1}Probability and uncertainty}{35}{subsection.9.1}% 
+\contentsline {subsubsection}{Probability space}{35}{subsubsection*.50}% 
+\contentsline {subsection}{\numberline {9.2}Probability distributions}{36}{subsection.9.2}% 
+\contentsline {subsubsection}{Binomial distribution}{36}{subsubsection*.51}% 
+\contentsline {subsubsection}{Trapezoidal distribution}{37}{subsubsection*.52}% 
+\contentsline {paragraph}{Uniform distribution}{37}{paragraph*.53}% 
+\contentsline {subsubsection}{Normal distribution}{38}{subsubsection*.54}% 
+\contentsline {subsection}{\numberline {9.3}Notation}{39}{subsection.9.3}% 
+\contentsline {subsection}{\numberline {9.4}Aoristic analysis}{39}{subsection.9.4}% 
+\contentsline {subsubsection}{Boundaries of existence}{39}{subsubsection*.55}% 
+\contentsline {subsubsection}{Temporal resolution}{40}{subsubsection*.56}% 
+\contentsline {subsubsection}{Aoristic sum}{40}{subsubsection*.57}% 
+\contentsline {subsection}{\numberline {9.5}Probability of existence \(t_i\)}{40}{subsection.9.5}% 
+\contentsline {subsubsection}{Time\sphinxhyphen {}block boundaries}{41}{subsubsection*.58}% 
+\contentsline {subsection}{\numberline {9.6}Probabilities of existence for time blocks}{41}{subsection.9.6}% 
+\contentsline {subsubsection}{Temporal resolution for time blocks}{41}{subsubsection*.59}% 
+\contentsline {subsubsection}{Rate of change}{42}{subsubsection*.60}% 
+\contentsline {subsection}{\numberline {9.7}Imputation and Missing data}{42}{subsection.9.7}% 
+\contentsline {subsubsection}{Missing data}{42}{subsubsection*.61}% 
+\contentsline {subsection}{\numberline {9.8}Computing the probability of existence}{43}{subsection.9.8}% 
+\contentsline {subsubsection}{Function usage}{43}{subsubsection*.63}% 
+\contentsline {subsubsection}{Parameters}{43}{subsubsection*.64}% 
+\contentsline {paragraph}{Details}{44}{paragraph*.65}% 
+\contentsline {subsubsection}{Plotting aoristic sum}{44}{subsubsection*.66}% 
+\contentsline {section}{\numberline {10}Markov chain Monte Carlo}{45}{section.10}% 
+\contentsline {subsection}{\numberline {10.1}Monte Carlo}{45}{subsection.10.1}% 
+\contentsline {subsection}{\numberline {10.2}Markov chain}{45}{subsection.10.2}% 
+\contentsline {subsection}{\numberline {10.3}Metropolis\sphinxhyphen {}Hastings}{46}{subsection.10.3}% 
+\contentsline {subsubsection}{Algorithm}{46}{subsubsection*.67}% 
+\contentsline {subsection}{\numberline {10.4}Diagnostics}{46}{subsection.10.4}% 
+\contentsline {subsubsection}{MCMC Simulation}{46}{subsubsection*.68}% 
+\contentsline {subsubsection}{Convergence}{47}{subsubsection*.69}% 
+\contentsline {subsection}{\numberline {10.5}Summed probability distribution}{47}{subsection.10.5}% 
+\contentsline {subsection}{\numberline {10.6}Bayesian statistics}{47}{subsection.10.6}% 
+\contentsline {subsubsection}{Bayes theorem}{47}{subsubsection*.70}% 
+\contentsline {section}{\numberline {11}Epigraphic Networks using R}{48}{section.11}% 
+\contentsline {subsection}{\numberline {11.1}Measuring similarity of artefact assemblages and geographic proximity}{48}{subsection.11.1}% 
+\contentsline {subsubsection}{Function usage}{48}{subsubsection*.71}% 
+\contentsline {subsubsection}{Parameters}{48}{subsubsection*.73}% 
+\contentsline {subsubsection}{Optional parameters}{49}{subsubsection*.74}% 
+\contentsline {subsection}{\numberline {11.2}Similarity measures}{49}{subsection.11.2}% 
+\contentsline {subsection}{\numberline {11.3}Structures of similarity in the EDH dataset}{49}{subsection.11.3}% 
+\contentsline {subsubsection}{Epigraphic network data}{49}{subsubsection*.75}% 
+\contentsline {paragraph}{Subsetting the data}{51}{paragraph*.76}% 
+\contentsline {paragraph}{Ranked frequency}{51}{paragraph*.77}% 
+\contentsline {subsection}{\numberline {11.4}Example: Similarity among Egyptian epigraphs}{52}{subsection.11.4}% 
+\contentsline {subsubsection}{Plot similarities}{52}{subsubsection*.78}% 
+\contentsline {section}{\numberline {12}Multiple imputation for missing dating data}{53}{section.12}% 
+\contentsline {subsection}{\numberline {12.1}Network imputation for missing dating data in archaeological artefacts}{53}{subsection.12.1}% 
+\contentsline {subsubsection}{Contents}{53}{subsubsection*.79}% 
+\contentsline {subsection}{\numberline {12.2}Intro}{54}{subsection.12.2}% 
+\contentsline {section}{\numberline {13}Modules}{54}{section.13}% 
+\contentsline {section}{\numberline {14}Indices and tables}{54}{section.14}% 
+\contentsline {subsection}{\numberline {14.1}Print}{54}{subsection.14.1}% 
