@@ -8,12 +8,12 @@ Get data from the Epigraphic Database Heidelberg API
 A function to obtain data from the Epigraphic Database Heidelberg API repository.
 }
 \usage{
-get.edh(search = c("inscriptions", "geography"), 
-        url = "https://edh-www.adw.uni-heidelberg.de/data/api", 
-        hd_nr, province, country, findspot_modern, findspot_ancient, 
-        year_not_before, year_not_after, tm_nr, transcription, type, 
-        bbox, findspot, pleiades_id, geonames_id, offset, limit, 
-        maxlimit = 4000, addID, printQ)
+get.edh(search = c("inscriptions", "geography"), url =
+                 "https://edh.ub.uni-heidelberg.de/data/api", hd_nr,
+                 province, country, findspot_modern, findspot_ancient,
+                 year_not_before, year_not_after, tm_nr, transcription,
+                 type, bbox, findspot, pleiades_id, geonames_id,
+                 offset, limit, maxlimit = 4000, addID, printQ)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -82,6 +82,8 @@ get.edh(search = c("inscriptions", "geography"),
 }
 }
 \details{
+This function is for the new [EDH] database [API] in year 2022. 
+
 Since with the \code{inscriptions} option the \code{id} "component" of the 
 output list is not with a numeric format, then the function adds an \code{ID} 
 at the beginning of the list with the identifier with a numerical format. 
@@ -194,34 +196,30 @@ A list object with at least one the following items:
 And also the query is printed if specified by \code{printQ}. 
 }
 \references{
-https://edh-www.adw.uni-heidelberg.de/data/api
-
-https://edh-www.adw.uni-heidelberg.de/data/api/terms/country
-
-https://edh-www.adw.uni-heidelberg.de/data/api/terms/province
+https://edh.ub.uni-heidelberg.de/data/api
 }
 \author{
 Antonio Rivero Ostoic
 }
-\note{
-The other two search options from the [EDH] database [API], which are \code{"photos"} 
-and \code{"bibliography"} may be implemented in the future. 
-}
-
-
-%\section{Warning }{
-%Queries with more than 4000 records can produce a timeout from the server, and a \emph{Warning} 
-%message is produced.
+%\note{
+%The other two search options from the [EDH] database [API], which are \code{"photos"} 
+%and \code{"bibliography"} may be implemented in the future. 
 %}
+
+
+\section{Warning }{
+Queries with more than 4000 records can produce a timeout from the server, and a \emph{Warning} 
+message is produced.
+}
 
 \seealso{
 \code{\link{get.edhw}}, \code{\link{edhw}}, \code{\link{edhwpd}}, \code{\link{plot.map}}, \code{\link{simil}}
 }
 \examples{
-## get inscriptions from EDH API data
 ## Not run:
+# get inscriptions from EDH API data
 get.edh(findspot_modern="madrid")
-## End(**Not run**)
+## End(Not run)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
