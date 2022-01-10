@@ -1,3 +1,30 @@
+
+## 
+## FUNCTION request() to get data API from a given server
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+##
+## First aimed to interact with DEiC's sciencedata.dk
+## version 0.2.6 (20-09-2021)
+##
+## PARAMETERS
+## file      (object under 'method')
+## URL       (protocol and domain of the url)
+## method    (the http "verb" for the object)
+##             "GET" (list)
+##             "POST" (place)
+##             "PUT" (update)
+##             "DELETE" (cancel)
+## anonymous (logical, unauthenticated user?)
+## path      (optional, add path to the url)
+## 
+## ADDITIONAL PARAMETERS:
+## cred      (vector for username and password credentials)
+## subdomain (optional, add subdomain to the url)
+## force     (optional, force remote file overwriting)
+## ...       (extra parameters if required)
+##
+
+
 request <-
 function (file, URL = "https://sciencedata.dk", method = c("GET", 
     "POST", "PUT", "DELETE"), anonymous = FALSE, cred = NULL, 

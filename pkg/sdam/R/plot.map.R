@@ -1,3 +1,30 @@
+
+## 
+## FUNCTION plot.map() to plot cartographical maps of the Roman Empire
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+##
+## version 0.0.7 (03-08-2021)
+##
+## OPTIONAL PARAMETERS
+##
+## x      (char or vector, province or region acronym)
+## type   (if x=NULL, type of c. map: plain, roman provinces, senatorial-imperial, tetrarchy)
+## settl  (optional and logical, display settlements?)
+## roads  (optional and logical, display roads?)
+## shipr  (optional and logical, display shipping routes?)
+## main   (plot's title)
+## cap    (only province or region, logical, display caption?)
+## date   (only province or region, logical, display est date in caption?)
+## name   (only province or region, logical, display title's name?)
+## fsize  (title's font size)
+## fcol   (title's font color)
+## fsize2 (only province or region, date's font size)
+## fcol2  (only province or region, date's font color)
+## xd     (only province or region, x positioning for date)
+## yd     (only province or region, y positioning for date)
+##
+
+
 plot.map <-
 function (x = NULL, type = c("plain", "rp", "si", "tetra"), settl, 
     roads, shipr, main, cap, date, name, fsize, fcol, fsize2, 

@@ -1,3 +1,17 @@
+
+## 
+## FUNCTION cln() to re-encode Greek characters
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+##
+## version 0.1.3 (10-01-2022)
+##
+## PARAMETERS
+## x        (scalar or vector, with character to clean)
+## level    (optional clean level, either 0 or no-clean, default 1 or 2 with 'what')
+## what     (optional, additional characters to clean)
+## na.rm    (logical and optional, remove NA?)
+
+
 cln <-
 function (x, level = 1, what, na.rm) 
 {
@@ -16,6 +30,23 @@ function (x, level = 1, what, na.rm)
             x[is.null(x)] <- NA
             x[x == ""] <- NA
             xdf <- data.frame(x, stringsAsFactors = FALSE)
+            if (isTRUE(level > 1) == TRUE) {
+                xdf <- as.data.frame(sapply(xdf, function(z) as.list(gsub(paste0("\\", 
+                  ".$", sep = ""), "", z))))
+                xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("\\s+", 
+                  " ", z)))
+                xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("-\\s", 
+                  "-", z)))
+                xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("\\s-", 
+                  "-", z)))
+                xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("/\\s", 
+                  "/", z)))
+                xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("\\s/", 
+                  "/", z)))
+                xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("\\s$", 
+                  "", z)))
+                rownames(xdf) <- rnx
+            }
             x <- as.list(sapply(xdf, as.character))
         }
         else {
@@ -36,20 +67,13 @@ function (x, level = 1, what, na.rm)
     if (isTRUE(level > 0) == TRUE && (isTRUE("<" %in% xx1) == 
         TRUE && isTRUE(">" %in% xx1) == TRUE)) {
         flgx <- TRUE
-        xz <- x
-        dbe <- c("\U0080", "\U0081", "\U0082", "\U0083", "\U0084", 
-            "\U0085", "\U0086", "\U0087", "\U0088", "\U0089", "\U008A", 
-            "\U008B", "\U008C", "\U008D", "\U008E", "\U008F", "\U0090", 
-            "\U0091", "\U0092", "\U0093", "\U0094", "\U0095", "\U0096", 
-            "\U0097", "\U0099", "\U0099", "\U009A", "\U009B", "\U009C", 
-            "\U009D", "\U009E", "\U009F") 
-#        dbe <- c("<U+0080>", "\201"     , "<U+0082>", "<U+0083>", 
-#            "<U+0084>", "<U+0085>", "<U+0086>", "<U+0087>", "<U+0088>", 
-#            "<U+0089>", "<U+008A>", "<U+008B>", "<U+008C>", "\215"     , 
-#            "<U+008E>", "\217"     , "\220"     , "<U+0091>", 
-#            "<U+0092>", "<U+0093>", "<U+0094>", "<U+0095>", "<U+0096>", 
-#            "<U+0097>", "<U+0099>", "<U+0099>", "<U+009A>", "<U+009B>", 
-#            "<U+009C>", "\235"     , "<U+009E>", "<U+009F>")
+        dbe <- c("<U+0080>", "\201"     , "<U+0082>", "<U+0083>", 
+            "<U+0084>", "<U+0085>", "<U+0086>", "<U+0087>", "<U+0088>", 
+            "<U+0089>", "<U+008A>", "<U+008B>", "<U+008C>", "\215"     , 
+            "<U+008E>", "\217"     , "\220"     , "<U+0091>", 
+            "<U+0092>", "<U+0093>", "<U+0094>", "<U+0095>", "<U+0096>", 
+            "<U+0097>", "<U+0099>", "<U+0099>", "<U+009A>", "<U+009B>", 
+            "<U+009C>", "\235"     , "<U+009E>", "<U+009F>")
         names(dbe) <- c("80", "81", "82", "83", "84", "85", "86", 
             "87", "88", "89", "8A", "8B", "8C", "8D", "8E", "8F", 
             "90", "91", "92", "93", "94", "95", "96", "97", "99", 
@@ -349,8 +373,7 @@ function (x, level = 1, what, na.rm)
                     "*"), collapse = "")), NA)
                 }
             }
-            ifelse(isTRUE(flgx == FALSE) == TRUE, names(respl) <- x, 
-                names(respl) <- xz)
+            names(respl) <- x
             return(respl)
         }
     }

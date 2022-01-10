@@ -1,3 +1,26 @@
+
+## 
+## FUNCTION prex() to compute probability of existence ot time events
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+##
+## version 0.0.9 (12-03-2021)
+##
+## PARAMETERS
+## x        (list or data frame object from EDH database)
+## taq      (terminus ante quem)
+## tpq      (terminus post quem)
+## vars     (vector, variables or attributes to be chosen from x)
+## bins     (bin periods, integer)
+## cp       (chronological periods)
+## aoristic (aoristic sum)
+## weight   (weight to observations)
+## DF       (data frame in output?)
+## out      (number of outliers to omit)
+## plot     (plot results?)
+## main     (plot's main title)
+## ...      (additional parameters)
+
+
 prex <-
 function (x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, 
     weight = 1, DF, out, plot = FALSE, main = NULL, ...) 

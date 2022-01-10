@@ -1,3 +1,23 @@
+
+## 
+## FUNCTION edhwpd() to organize EDH dataset province and dates by similarity
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+##
+## version 0.0.2 (20-09-2021)
+##
+## PARAMETERS
+##
+## vars     (vector, variables or attributes to be chosen from x)
+## province (choosen EDH province abbreviation)
+##
+## OPTIONAL PARAMETERS
+##
+## x        (list, typically fragments of EDH dataset or database API)
+## dates    (vector with TAQ and TPQ)
+## clean    (logical, to remove ?*+ characters and re-encode if needed)
+##
+
+
 edhwpd <-
 function (x = NULL, vars, province, dates, clean) 
 {
