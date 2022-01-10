@@ -24,6 +24,7 @@
 ## lwd    (width)
 ## lty    (shape)
 ## alpha  (alpha color transparency)
+## id     (IDs in x)
 ## ...    (optional parameters)
 
 
