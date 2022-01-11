@@ -44,19 +44,19 @@ packageVersion("sdam")
 ```
 
 ```r
-## Load epigraphic data
+## load epigraphic data
 data("EDH")
 ```
 
 ```r
-# Look at how many inscriptions?
+# look at how many inscriptions?
 length(EDH)
 # [1] 84701
 ```
 
 
 ```r
-# Also look at the object structure
+# also look at the object structure
 str(EDH)
 ```
 
@@ -104,6 +104,7 @@ iud_df0 <- edhw(vars=c("not_after", "not_before"), x=iud, as="df", na.rm=TRUE)
 Now we compare outcomes with these two options.
 
 ```r
+# bind columns
 cbind(head(iud_df,10), head(iud_df0,10))
 #         id not_before not_after       id not_before not_after
 #1  HD001461       0071      0130 HD001461       0071      0130
@@ -120,7 +121,9 @@ cbind(head(iud_df,10), head(iud_df0,10))
 
 Hence, not available data is removed in `iud_df0`.
 
+<br/>
 
+## WARNING: `people` is for `EDH` dataset only
 
 ### People
 
@@ -165,6 +168,8 @@ edhw(vars="people", as="df", id=4444)
 #3 HD004444  Mercurialis   male       Iul. Mercurialis  Iulius*         3      <NA> equestrian order
 ```
 
+<br/>
+
 
 ### Probability of existence
 
@@ -193,6 +198,7 @@ and applications with the different functions. -->
 
 
 ### See also
-* [`"sdam"` manual](https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf)
+* [Release candidate of `"sdam"`](https://sdam-au.github.io/sdam/)
+* [Manual of `"sdam"`](https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf)
 * [Social Dynamics and complexity in the Ancient Mediterranean Project](https://sdam-au.github.io/sdam-au/)
 
