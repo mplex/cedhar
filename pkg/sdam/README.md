@@ -198,7 +198,7 @@ and applications with the different functions. -->
 
 
 ### See also
-* [Release candidate of `"sdam"`](https://sdam-au.github.io/sdam/)
-* [Manual of `"sdam"`](https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf)
+* [Release candidate version](https://github.com/sdam-au/sdam)
+* [Manual](https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf)
 * [Social Dynamics and complexity in the Ancient Mediterranean Project](https://sdam-au.github.io/sdam-au/)
 
