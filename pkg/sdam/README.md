@@ -173,8 +173,11 @@ edhw(vars="people", as="df", id=4444)
 
 ### Probability of existence
 
-Since `sdam` v0.3.0 there is a dedicated function to compute probability of existence of date points or intervals. 
-We obtain inscriptions from Iudaea in EDH data base, and then compute the aoristic sum with a 5-bin chronological phases. 
+To compute probability of existence of date points or intervals from the new API for the EDH data base, 
+use the dedicated function from `sdam` `v0.8.1` or higher. 
+
+Below we obtain inscriptions from the Roman province of Iudaea in EDH data base, and compute the aoristic sum 
+of inscriptions with a 5-bin chronological phases. 
 
 ```r
 prex(x=get.edh(search="inscriptions", province="Iud"), vars=c("not_before", "not_after"), cp="bin5")
@@ -182,7 +185,7 @@ prex(x=get.edh(search="inscriptions", province="Iud"), vars=c("not_before", "not
 #    0.000     0.000  1337.904 13405.017     0.000
 ```
 
-Since most of the inscriptions are within the Roman period, we try an eight-bin chronological phases option. 
+Since most of the inscriptions are within the Roman period, we perform the computation with the eight-bin chronological phases option. 
 
 ```r
 prex(x=get.edh(search="inscriptions", province="Iud"), vars=c("not_before", "not_after"), cp="bin8")
@@ -199,6 +202,7 @@ and applications with the different functions. -->
 
 ### See also
 * [Release candidate version](https://github.com/sdam-au/sdam)
+* [Code snippets using `"sdam"`](https://github.com/sdam-au/R_code)
 * [Manual](https://github.com/mplex/cedhar/blob/master/typesetting/reports/sdam.pdf)
 * [Social Dynamics and complexity in the Ancient Mediterranean Project](https://sdam-au.github.io/sdam-au/)
 
