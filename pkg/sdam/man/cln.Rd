@@ -5,10 +5,10 @@
 Clean and re-encode a vector, list or dataframe
 }
 \description{
-A function to re-encode Greek (and other) characters and to remove symbols at the end of a record.
+A function to re-encode Greek (and other) characters or remove symbols in records. 
 }
 \usage{
-cln(x, level = 1, what, na.rm)
+cln(x, level = 1, what, na.rm, case)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -16,13 +16,16 @@ cln(x, level = 1, what, na.rm)
     a vector, list or dataframe
 }
   \item{level}{
-    optional clean level, either \code{0} for no-clean, default \code{1} or \code{2} (see details)
+    optional clean level, \code{0} for no-clean, default \code{1} or \code{2} (see details)
 }
   \item{what}{
     additional characters to clean, optional
 }
   \item{na.rm}{
    Remove entries with NA data? (optional and logical)
+}
+  \item{case}{
+   Use capitalization, \code{1} first uppercase, \code{2} lowercase, \code{3} uppercase (optional)
 }
 }
 \details{

@@ -3,23 +3,24 @@
 ## FUNCTION cln() to re-encode Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.3 (10-01-2022)
+## version 0.1.5 (18-01-2022)
 ##
 ## PARAMETERS
 ## x        (scalar or vector, with character to clean)
-## level    (optional clean level, either 0 or no-clean, default 1 or 2 with 'what')
+## level    (optional clean level, 0 for no-clean, default 1 or 2 with 'what')
 ## what     (optional, additional characters to clean)
-## na.rm    (logical and optional, remove NA?)
+## na.rm    (logical and optional, remove NAs?)
+## case     (optional, 1 for 1st uppercase, 2 lower, 3 upper)
 
 
 cln <-
-function (x, level = 1, what, na.rm) 
+function (x, level = 1, what, na.rm, case) 
 {
     ifelse(missing(what) == TRUE, what <- c("?", "+", "*"), what <- c("?", 
         "+", "*", what))
-    if (is.data.frame(x) == TRUE) {
-        flgdf <- TRUE
-        if (isTRUE(level > 0) == TRUE) {
+    if (isTRUE(level > 0) == TRUE) {
+        if (is.data.frame(x) == TRUE) {
+            flgdf <- TRUE
             rnx <- rownames(x)
             for (w in seq_len(length(what))) {
                 x <- as.data.frame(sapply(x, function(z) as.list(gsub(paste0("\\", 
@@ -29,32 +30,67 @@ function (x, level = 1, what, na.rm)
             rownames(x) <- rnx
             x[is.null(x)] <- NA
             x[x == ""] <- NA
-            xdf <- data.frame(x, stringsAsFactors = FALSE)
+            xdf <- data.frame(x, stringsAsFactors = FALSE, check.names = FALSE)
             if (isTRUE(level > 1) == TRUE) {
                 xdf <- as.data.frame(sapply(xdf, function(z) as.list(gsub(paste0("\\", 
-                  ".$", sep = ""), "", z))))
+                  ".$", sep = ""), "", z))), check.names = FALSE)
                 xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("\\s+", 
-                  " ", z)))
+                  " ", z)), check.names = FALSE)
                 xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("-\\s", 
-                  "-", z)))
+                  "-", z)), check.names = FALSE)
                 xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("\\s-", 
-                  "-", z)))
+                  "-", z)), check.names = FALSE)
                 xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("/\\s", 
-                  "/", z)))
+                  "/", z)), check.names = FALSE)
                 xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("\\s/", 
-                  "/", z)))
+                  "/", z)), check.names = FALSE)
                 xdf <- as.data.frame(apply(xdf, 2, function(z) gsub("\\s$", 
-                  "", z)))
+                  "", z)), check.names = FALSE)
                 rownames(xdf) <- rnx
             }
             x <- as.list(sapply(xdf, as.character))
         }
         else {
-            return(x)
+            flgdf <- FALSE
         }
     }
     else {
-        flgdf <- FALSE
+        return(x)
+    }
+    if (missing(case) == FALSE && is.numeric(case) == TRUE) {
+        if (isTRUE(flgdf == TRUE) == TRUE) {
+            if (isTRUE(case == 1L) == TRUE) {
+                x[] <- lapply(x, function(z) {
+                  gsub("(^[[:alpha:]])", "\\U\\1", z, perl = TRUE)
+                })
+                ifelse(isTRUE(level > 1) == TRUE, x[] <- lapply(x, 
+                  function(z) {
+                    gsub("\\b([[:lower:]])([[:lower:]]+)", "\\U\\1\\L\\2", 
+                      z, perl = TRUE)
+                  }), NA)
+            }
+            else if (isTRUE(case == 2L) == TRUE) {
+                x[] <- lapply(x, tolower)
+            }
+            else if (isTRUE(case == 3L) == TRUE) {
+                x[] <- lapply(x, toupper)
+            }
+        }
+        else {
+            if (isTRUE(case == 1L) == TRUE) {
+                x <- gsub("\\b([[:lower:]])([[:lower:]]+)", "\\U\\1\\L\\2", 
+                  x, perl = TRUE)
+            }
+            else if (isTRUE(case == 2L) == TRUE) {
+                x <- tolower(x)
+            }
+            else if (isTRUE(case == 3L) == TRUE) {
+                x <- toupper(x)
+            }
+        }
+    }
+    else {
+        NA
     }
     if (isTRUE(flgdf == FALSE) == TRUE && isTRUE(length(x) == 
         1) == TRUE) {
@@ -760,10 +796,12 @@ function (x, level = 1, what, na.rm)
         if (isTRUE(flgdf == TRUE) == TRUE) {
             resdf <- data.frame(matrix(unlist(resll), ncol = ncol(xdf), 
                 byrow = FALSE, dimnames = list(rownames(xdf), 
-                  colnames(xdf))))
+                  colnames(xdf))), check.names = FALSE)
             resdf[is.null(resdf)] <- NA
             resdf[resdf == ""] <- NA
-            return(resdf)
+            ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == 
+                TRUE) == TRUE, return(resdf[complete.cases(resdf), 
+                ]), return(resdf))
         }
         else if (isTRUE(flgdf == FALSE) == TRUE) {
             if (missing(na.rm) == FALSE && isTRUE(na.rm == FALSE) == 

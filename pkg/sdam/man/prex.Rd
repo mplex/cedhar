@@ -9,7 +9,7 @@ A function to compute the probability of existence of events.
 }
 \usage{
 prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, weight = 1, 
-     DF, out, plot = FALSE, main = NULL, ...)
+     DF, out, plot = FALSE, main = NULL, ylim, ...)
 }
 
 \arguments{
@@ -48,6 +48,9 @@ prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,
 }
   \item{main}{
   plot's main title (optional)
+}
+  \item{ylim}{
+  limit in \eqn{y}-axis (optional)
 }
   \item{\dots}{
   additional optional parameters
