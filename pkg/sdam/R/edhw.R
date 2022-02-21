@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.2 (07-09-2021)
+## version 0.1.3 (21-02-2022)
 ##
 ## PARAMETERS
 ##
@@ -32,6 +32,8 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
     "wide", "narrow"), split, select, addID, limit, id, na.rm, 
     ldf, province, gender, rp, ...) 
 {
+    if (is.null(x) == TRUE) 
+        stop("'x' is NULL")
     flgdf <- FALSE
     if (is.null(x) == TRUE) {
         warning("\"x\" is NULL and dataset \"EDH\" is taken if available.")
@@ -203,7 +205,8 @@ function (x = NULL, vars, as = c("df", "list"), type = c("long",
             }
         }
         else if (match.arg(as) == "df") {
-            if (isTRUE(is.numeric(id) == TRUE) == TRUE) {
+            if (missing(id) == FALSE && isTRUE(is.numeric(id) == 
+                TRUE) == TRUE) {
                 if (isTRUE(length(id) == 1) == TRUE) {
                   id <- paste0("HD", paste(rep(0, 6 - nchar(id)), 
                     collapse = ""), id, sep = "")
