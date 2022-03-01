@@ -18,6 +18,7 @@
 ## out      (number of outliers to omit)
 ## plot     (plot results?)
 ## main     (plot's main title)
+## ylim     (limit y axis, only with plot)
 ## ...      (additional parameters)
 
 

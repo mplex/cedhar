@@ -8,8 +8,8 @@ Compute probability of existence
 A function to compute the probability of existence of events.
 }
 \usage{
-prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, weight = 1, 
-     DF, out, plot = FALSE, main = NULL, ylim, ...)
+prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, 
+     weight = 1, DF, out, plot = FALSE, main = NULL, ylim, ...)
 }
 
 \arguments{
@@ -50,7 +50,7 @@ prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, weight = 1,
   plot's main title (optional)
 }
   \item{ylim}{
-  limit in \eqn{y}-axis (optional)
+  limit in \eqn{y}-axis (optional, only with plot)
 }
   \item{\dots}{
   additional optional parameters
