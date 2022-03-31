@@ -3,7 +3,7 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire and the Mediterranean Sea
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.0 (31-03-2022)
+## version 0.1.1 (31-03-2022)
 ##
 ## OPTIONAL PARAMETERS
 ##
@@ -22,13 +22,14 @@
 ## fcol2  (only province or region, date's font color)
 ## xd     (only province or region, x positioning for date)
 ## yd     (only province or region, y positioning for date)
+## new    (optional, whether plot has superimposed graphic)
 ##
 
 
 plot.map <-
 function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"), 
     settl, roads, shipr, main, cap, date, name, fsize, fcol, 
-    fsize2, fcol2, xd, yd, ...) 
+    fsize2, fcol2, xd, yd, new, ...) 
 {
     if (is.null(x) == TRUE) {
         if (!(exists("retn"))) {
@@ -38,7 +39,12 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
         else {
             invisible(NA)
         }
-        invisible(plot.new())
+        if (missing(new) == FALSE && isTRUE(new == TRUE) == TRUE) {
+            invisible(plot.new())
+        }
+        else {
+            invisible(NA)
+        }
         grid::grid.newpage()
         switch(match.arg(type), plain = {
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn", 
