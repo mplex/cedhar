@@ -8,8 +8,8 @@ Plot cartographical map
 A function to plot a cartographical map, initially of a Roman province or an Italian region.
 }
 \usage{
-plot.map(x = NULL, type = c("plain", "rp", "si", "tetra"), settl, roads, shipr, main, 
-         cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, ...)
+plot.map(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, 
+         main, cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,6 +26,8 @@ plot.map(x = NULL, type = c("plain", "rp", "si", "tetra"), settl, roads, shipr, 
         \code{si} Senatorial-Imperial
         
         \code{tetra} Tetrarchy
+        
+        \code{med} Mediterranean sea
 }
   \item{settl}{
   (logical for cartographical map) Display settlements?
