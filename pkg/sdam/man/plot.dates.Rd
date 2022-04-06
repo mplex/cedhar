@@ -32,7 +32,7 @@ plot.dates(x, y, file = NULL, taq, tpq, id, out, main = NULL,
   \emph{terminus post quem}
 }
   \item{id}{
-  IDs in dataset \code{x}
+  IDs as variable or rownames in dataset \code{x}
 }
   \item{out}{
   number of outliers to omit (integer or vector where first entry id for latest date)
