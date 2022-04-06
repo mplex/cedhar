@@ -3,17 +3,17 @@
 ## PLOT FUNCTION plot.dates() to plot time intervals
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.4 (10-01-2022)
+## version 0.1.5 (06-04-2022)
 ##
 ## PARAMETERS
 ## x      (data frame or table of variables and observations)
-## y      (optional identifiers)
-## file   (path to file for a PDF format=
 ## taq    (terminus ante quem)
 ## tpq    (terminus post quem)
-## out    (number of outliers to omit)
 ## 
 ## OPTIONAL PARAMETERS
+## y      (optional identifiers)
+## file   (path to file for a PDF format)
+## out    (number of outliers to omit)
 ## main   (main tile)
 ## xlab   (x label)
 ## ylab   (y label)
@@ -24,8 +24,8 @@
 ## lwd    (width)
 ## lty    (shape)
 ## alpha  (alpha color transparency)
-## id     (IDs in x)
-## ...    (optional parameters)
+## id     (IDs as variable or rownames in x)
+## ...    (other optional parameters)
 
 
 plot.dates <-
@@ -76,11 +76,18 @@ function (x, y, file = NULL, taq, tpq, id, out, main = NULL,
         else {
             stop("Unknown data format in \"x\"")
         }
-        if (missing(id) == FALSE && any(colnames(x) %in% id) == 
-            TRUE) {
-            xdates <- cbind(id = x[, which(colnames(x) %in% id)], 
-                xdates)
-            ifelse(is.null(ylab) == TRUE, ylab <- id, NA)
+        if (missing(id) == FALSE) {
+            if (any(colnames(x) %in% id) == TRUE) {
+                xdates <- cbind(id = x[, which(colnames(x) %in% 
+                  id)], xdates)
+                ifelse(is.null(ylab) == TRUE, ylab <- id, NA)
+            }
+            else if (all(rownames(x) == id) == TRUE) {
+                xdates <- cbind(id = rownames(x), xdates)
+            }
+            else {
+                NA
+            }
         }
         else {
             NA
