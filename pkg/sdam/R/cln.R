@@ -3,7 +3,7 @@
 ## FUNCTION cln() to re-encode Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.1 (05-04-2022)
+## version 0.2.3 (19-04-2022)
 ##
 ## PARAMETERS
 ## x        (scalar or vector, with character to clean)
@@ -14,17 +14,10 @@
 ## repl     (optional, data frame with text for replacement)
 
 cln <-
-function (x, level, what, na.rm, case, repl) 
+function (x, level = 1, what, na.rm, case, repl) 
 {
     ifelse(missing(what) == TRUE, what <- c("?", "+", "*"), what <- c("?", 
         "+", "*", what))
-    if (missing(level) == TRUE) {
-        ifelse(isTRUE(length(what) == 3) == TRUE, level <- 1L, 
-            level <- 2L)
-    }
-    else {
-        level <- 1L
-    }
     if (isTRUE(level > 0) == TRUE) {
         if (is.data.frame(x) == TRUE) {
             flgdf <- TRUE
@@ -60,8 +53,6 @@ function (x, level, what, na.rm, case, repl)
         else {
             flgdf <- FALSE
             ifelse(is.vector(x) == TRUE, flgvc <- TRUE, flgvc <- FALSE)
-            x[is.null(x)] <- NA
-            x[x == ""] <- NA
             if (isTRUE(level > 1) == TRUE) {
                 x <- gsub("\\s+", " ", x)
                 x <- gsub("-\\s", "-", x)
@@ -789,12 +780,10 @@ function (x, level, what, na.rm, case, repl)
         if (isTRUE(length(what) > 3) == TRUE && isTRUE(level > 
             1) == TRUE) {
             for (i in seq(4, length(what))) {
-                resl <- lapply(resl, function(z) gsub(what[i], 
-                  "", z))
+                resl <- rapply(resl, function(x) ifelse(x == 
+                  what[i], NA, x), how = "replace")
             }
             rm(i)
-            resl <- rapply(resl, function(z) ifelse(z == "", 
-                NA, z), how = "replace")
         }
         else {
             NA
@@ -816,8 +805,8 @@ function (x, level, what, na.rm, case, repl)
         }
         if (isTRUE(flgdf == TRUE) == TRUE) {
             resdf <- data.frame(matrix(unlist(resll), ncol = ncol(xdf), 
-                byrow = FALSE, dimnames = list(rnx, colnames(xdf))), 
-                check.names = FALSE, stringsAsFactors = FALSE)
+                byrow = FALSE, dimnames = list(rownames(xdf), 
+                  colnames(xdf))), check.names = FALSE, stringsAsFactors = FALSE)
             if (missing(repl) == FALSE) {
                 if ((is.data.frame(repl) == FALSE | isTRUE(ncol(repl) < 
                   2) == TRUE) && is.vector(repl) == FALSE) {
@@ -838,7 +827,6 @@ function (x, level, what, na.rm, case, repl)
                     rm(i)
                   }
                   colnames(resdf) <- colnames(xdf)
-                  rownames(resdf) <- rnx
                 }
             }
             resdf[is.null(resdf)] <- NA
@@ -850,8 +838,8 @@ function (x, level, what, na.rm, case, repl)
         else if (isTRUE(flgdf == FALSE) == TRUE) {
             if (missing(repl) == FALSE && is.vector(repl) == 
                 TRUE) {
-                resll <- mapply(gsub, repl[1], repl[2], resll, 
-                  USE.NAMES = FALSE)
+                resll <- as.data.frame(mapply(gsub, repl[1], 
+                  repl[2], resll, USE.NAMES = FALSE), stringsAsFactors = FALSE)
             }
             if (missing(na.rm) == FALSE && isTRUE(na.rm == FALSE) == 
                 TRUE) {
@@ -864,8 +852,9 @@ function (x, level, what, na.rm, case, repl)
                   x[x == ""] <- NA
                   return(x)
                 })
-                ifelse(isTRUE(flgvc == TRUE) == TRUE, return(unlist(resl2, 
-                  use.names = FALSE)), return(resl2))
+                ifelse(isTRUE(flgvc == TRUE) == TRUE | is.vector(resl2) == 
+                  TRUE, return(unlist(resl2, use.names = FALSE)), 
+                  return(resl2))
             }
         }
     }
