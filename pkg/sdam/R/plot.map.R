@@ -3,7 +3,7 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire and the Mediterranean Basin
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.2 (19-04-2022)
+## version 0.1.3 (19-04-2022)
 ##
 ## OPTIONAL PARAMETERS
 ##
@@ -51,7 +51,7 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
                 "[[1]]", sep = "")))))
         }, rp = {
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn$rpcoast", 
-                "[[5]]", "[[1]]", sep = "")))))
+                "[[1]]", sep = "")))))
         }, si = {
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn$rpsi", 
                 "[[1]]", sep = "")))))
