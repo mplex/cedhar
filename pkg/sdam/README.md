@@ -40,7 +40,7 @@ devtools::install_github("sdam-au/sdam")
 ## Load package
 library("sdam")
 packageVersion("sdam")
-#[1] ‘0.6.2’
+#[1] ‘0.8.8’
 ```
 
 ```r
