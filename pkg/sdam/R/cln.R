@@ -3,7 +3,7 @@
 ## FUNCTION cln() to re-encode Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.3 (19-04-2022)
+## version 0.2.4 (20-04-2022)
 ##
 ## PARAMETERS
 ## x        (scalar or vector, with character to clean)
@@ -109,24 +109,20 @@ function (x, level = 1, what, na.rm, case, repl)
         xx1 <- strsplit(paste(as.vector(unlist(x)), collapse = ""), 
             "")[[1]]
     }
-    if (isTRUE(level > 0) == TRUE && (isTRUE("<" %in% xx1) == 
-        TRUE && isTRUE(">" %in% xx1) == TRUE)) {
-        flgx <- TRUE
-        dbe <- c("<U+0080>", "\201"     , "<U+0082>", "<U+0083>", 
-            "<U+0084>", "<U+0085>", "<U+0086>", "<U+0087>", "<U+0088>", 
-            "<U+0089>", "<U+008A>", "<U+008B>", "<U+008C>", "\215"     , 
-            "<U+008E>", "\217"     , "\220"     , "<U+0091>", 
-            "<U+0092>", "<U+0093>", "<U+0094>", "<U+0095>", "<U+0096>", 
-            "<U+0097>", "<U+0099>", "<U+0099>", "<U+009A>", "<U+009B>", 
-            "<U+009C>", "\235"     , "<U+009E>", "<U+009F>")
-        names(dbe) <- c("80", "81", "82", "83", "84", "85", "86", 
-            "87", "88", "89", "8A", "8B", "8C", "8D", "8E", "8F", 
-            "90", "91", "92", "93", "94", "95", "96", "97", "99", 
-            "99", "9A", "9B", "9C", "9D", "9E", "9F")
-    }
-    else {
-        flgx <- FALSE
-    }
+    dbe <- c("<U+0080>", "\201"     , "<U+0082>", "<U+0083>", 
+        "<U+0084>", "<U+0085>", "<U+0086>", "<U+0087>", "<U+0088>", 
+        "<U+0089>", "<U+008A>", "<U+008B>", "<U+008C>", "\215"     , 
+        "<U+008E>", "\217"     , "\220"     , "<U+0091>", "<U+0092>", 
+        "<U+0093>", "<U+0094>", "<U+0095>", "<U+0096>", "<U+0097>", 
+        "<U+0099>", "<U+0099>", "<U+009A>", "<U+009B>", "<U+009C>", 
+        "\235"     , "<U+009E>", "<U+009F>")
+    names(dbe) <- c("80", "81", "82", "83", "84", "85", "86", 
+        "87", "88", "89", "8A", "8B", "8C", "8D", "8E", "8F", 
+        "90", "91", "92", "93", "94", "95", "96", "97", "99", 
+        "99", "9A", "9B", "9C", "9D", "9E", "9F")
+    ifelse(isTRUE(level > 0) == TRUE && (isTRUE("<" %in% xx1) == 
+        TRUE && isTRUE(">" %in% xx1) == TRUE), flgx <- TRUE, 
+        flgx <- FALSE)
     if (isTRUE(flgdf == FALSE) == TRUE) {
         ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == FALSE) == 
             TRUE, invisible(NA), x <- Filter(function(y) !all(is.na(y)), 
@@ -804,9 +800,17 @@ function (x, level = 1, what, na.rm, case, repl)
             rm(k)
         }
         if (isTRUE(flgdf == TRUE) == TRUE) {
-            resdf <- data.frame(matrix(unlist(resll), ncol = ncol(xdf), 
-                byrow = FALSE, dimnames = list(rownames(xdf), 
-                  colnames(xdf))), check.names = FALSE, stringsAsFactors = FALSE)
+            if (isTRUE(flgx == TRUE) == TRUE || any(xx1 %in% 
+                dbe) == TRUE) {
+                resdf <- noquote(matrix(unlist(resll), ncol = ncol(xdf), 
+                  byrow = FALSE, dimnames = list(rownames(xdf), 
+                    colnames(xdf))), right = TRUE)
+            }
+            else {
+                resdf <- data.frame(matrix(unlist(resll), ncol = ncol(xdf), 
+                  byrow = FALSE, dimnames = list(rownames(xdf), 
+                    colnames(xdf))), check.names = FALSE, stringsAsFactors = FALSE)
+            }
             if (missing(repl) == FALSE) {
                 if ((is.data.frame(repl) == FALSE | isTRUE(ncol(repl) < 
                   2) == TRUE) && is.vector(repl) == FALSE) {
