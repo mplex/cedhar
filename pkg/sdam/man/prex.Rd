@@ -8,13 +8,23 @@ Compute probability of existence
 A function to compute the probability of existence of events.
 }
 \usage{
-prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE, 
-     weight = 1, DF, out, plot = FALSE, main = NULL, ylim, ...)
+prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars, 
+    bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
+    ylim, ...)
 }
 
 \arguments{
   \item{x}{
   list or data frame object of variables and observations.
+}
+  \item{type}{
+      Type of date format to plot: 
+        
+        \code{aoristic} aoristic sum
+        
+        \code{mp} mid points and range
+        
+        \code{other} 
 }
   \item{taq}{
   \emph{terminus ante quem} (TAQ)
@@ -30,9 +40,6 @@ prex(x, taq, tpq, vars, bins = NULL, cp, aoristic = TRUE,
 }
   \item{cp}{
   chronological phase
-}
-  \item{aoristic}{
-  return aoristic sum? (logical)
 }
   \item{weight}{
   weight to observations
