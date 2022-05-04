@@ -3,7 +3,7 @@
 ## FUNCTION cln() to re-encode Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.5 (20-04-2022)
+## version 0.2.6 (04-05-2022)
 ##
 ## PARAMETERS
 ## x        (scalar or vector, with character to clean)
@@ -804,6 +804,7 @@ function (x, level = 1, what, na.rm, case, repl)
         if (isTRUE(flgdf == TRUE) == TRUE) {
             if (isTRUE(flgx == TRUE) == TRUE || any(xx1 %in% 
                 dbe) == TRUE) {
+                Sys.setlocale(category = "LC_ALL", locale = ".1250")
                 resdf <- noquote(matrix(unlist(resll), ncol = ncol(xdf), 
                   byrow = FALSE, dimnames = list(rownames(xdf), 
                     colnames(xdf))), right = TRUE)
@@ -835,11 +836,12 @@ function (x, level = 1, what, na.rm, case, repl)
                   colnames(resdf) <- colnames(xdf)
                 }
             }
-            resdf[is.null(resdf)] <- NA
-            resdf[resdf == ""] <- NA
             ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == 
-                TRUE) == TRUE, return(resdf[complete.cases(resdf), 
-                ]), return(resdf))
+                TRUE) == TRUE, resdf <- resdf[complete.cases(resdf), 
+                ], invisible(NA))
+            is.na(resdf) <- resdf == "NULL"
+            resdf[resdf == ""] <- NA
+            return(resdf)
         }
         else if (isTRUE(flgdf == FALSE) == TRUE) {
             if (missing(repl) == FALSE && is.vector(repl) == 
