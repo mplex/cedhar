@@ -3,7 +3,7 @@
 ## FUNCTION simil() for simple matching counting of data frame coocurrences
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.3 (03-08-2021)
+## version 0.0.4 (05-05-2022)
 ##
 ## Parameters
 ## x         (data frame or list object with vectors to compare)
@@ -31,12 +31,18 @@ function (x, vars, uniq, diag.incl)
             1]))), mat <- matrix(0L, nrow = nrow(x), ncol = nrow(x), 
         dimnames = list(x$ID, x$ID)))
     for (at in vars) {
-        ccat <- unlist(unique(x[, at]))
-        for (i in seq_len(length(ccat))) {
-            slc <- which(x[, at] == ccat[i])
-            mat[slc, slc] <- mat[slc, slc] + 1L
+        if (at %in% colnames(x) == FALSE) {
+            warning(paste("Variable", paste0("\"", at, "\""), 
+                "not in 'x' and therefore is ignored.", sep = " "))
         }
-        rm(i)
+        else {
+            ccat <- unlist(unique(x[, at]))
+            for (i in seq_len(length(ccat))) {
+                slc <- which(x[, at] == ccat[i])
+                mat[slc, slc] <- mat[slc, slc] + 1L
+            }
+            rm(i)
+        }
     }
     rm(at)
     ifelse(missing(diag.incl) == FALSE && isTRUE(diag.incl == 

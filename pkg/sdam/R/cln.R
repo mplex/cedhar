@@ -3,7 +3,7 @@
 ## FUNCTION cln() to re-encode Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.6 (04-05-2022)
+## version 0.2.7 (05-05-2022)
 ##
 ## PARAMETERS
 ## x        (scalar or vector, with character to clean)
@@ -165,7 +165,6 @@ function (x, level = 1, what, na.rm, case, repl)
             rm(w)
         }
         else if (isTRUE(level == 1) == TRUE) {
-            x1 <- gsub("\\s*\\([^\\)]\\)", "", x1)
             x1 <- paste(strsplit(x1, "")[[1]][which(!(strsplit(x1, 
                 "")[[1]] == "?"))], collapse = "")
         }
@@ -467,7 +466,6 @@ function (x, level = 1, what, na.rm, case, repl)
                 xi <- paste(trimws(strsplit(xi, "/")[[1]]), collapse = "/")
             }
             else if (isTRUE(level == 1) == TRUE) {
-                xi <- gsub("\\s*\\([^\\)]\\)", "", xi)
                 xi <- paste(strsplit(xi, "")[[1]][which(!(strsplit(xi, 
                   "")[[1]] == "?"))], collapse = "")
             }
