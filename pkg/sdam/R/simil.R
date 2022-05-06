@@ -3,17 +3,25 @@
 ## FUNCTION simil() for simple matching counting of data frame coocurrences
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.4 (05-05-2022)
+## version 0.0.5 (06-05-2022)
 ##
-## Parameters
+## PARAMETERS
+##
 ## x         (data frame or list object with vectors to compare)
+##
+## OPTIONAL PARAMETERS
+##
 ## vars      (vector with column(s) in x representing attribute variables)
-## uniq      (optional for only unique elements?)
-## diag.incl (optional and logical include entries in diagonal?)
+## uniq      (only unique elements?)
+## diag.incl (logical, include entries in diagonal?)
+## dichot    (dichotomize output?)
+## rm.isol   (remove isolates?)
+## k         (cut-off for dichotomization)
+
 
 
 simil <-
-function (x, vars, uniq, diag.incl) 
+function (x, vars, uniq, diag.incl, dichot, rm.isol, k) 
 {
     ifelse(is.data.frame(x) == FALSE, x <- as.data.frame(do.call(rbind, 
         x)), NA)
@@ -47,5 +55,20 @@ function (x, vars, uniq, diag.incl)
     rm(at)
     ifelse(missing(diag.incl) == FALSE && isTRUE(diag.incl == 
         TRUE) == TRUE, NA, diag(mat) <- 0)
+    if (missing(dichot) == FALSE && isTRUE(dichot == TRUE) == 
+        TRUE) {
+        ifelse(missing(k) == TRUE, mat <- multiplex::dichot(mat, 
+            c = max(mat)), mat <- multiplex::dichot(mat, c = k))
+    }
+    else {
+        NA
+    }
+    if (isTRUE(max(mat) > 0) == TRUE) {
+        ifelse(missing(rm.isol) == FALSE && isTRUE(rm.isol == 
+            TRUE) == TRUE, mat <- multiplex::rm.isol(mat), NA)
+    }
+    else {
+        invisible(NA)
+    }
     return(mat)
 }

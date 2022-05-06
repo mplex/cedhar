@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.5 (01-03-2022)
+## version 0.1.6 (06-05-2022)
 ##
 ## PARAMETERS
 ##
@@ -19,18 +19,18 @@
 ## addID    (logical, add "HD id" to output?)
 ## limit    (integers, vector with nr records limit in output, offset supported)
 ## id       (integer or character, select only hd_nr records)
-## na.rm    (logical, remove data entries with <NA>?)
-## ldf      (optional and experimental, is x a list of data frames?)
-## province (optional, choose EDH province)
-## gender   (optional, choose EDH gender)
-## rp       (optional list of Roman provinces complementing the 'rp' dataset)
-##
+## na.rm    (logical, remove entries with missing data?)
+## ldf      (experimental, is 'x' a list of data frames?)
+## province (choose EDH province)
+## gender   (choose EDH gender)
+## rp       (list of Roman provinces complementing the 'rp' dataset)
+## clean    (clean output?)
 
 
 edhw <-
 function (x = "EDH", vars, as = c("df", "list"), type = c("long", 
     "wide", "narrow"), split, select, addID, limit, id, na.rm, 
-    ldf, province, gender, rp, ...) 
+    ldf, province, gender, rp, clean, ...) 
 {
     if (is.null(x) == TRUE) 
         stop("'x' is NULL")
@@ -95,7 +95,10 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         }) == FALSE), ])
         if (missing(gender) == FALSE) {
             xp <- xp[-which(is.na(xp$gender)), ]
-            return(xp[-which(xp$gender != gender), ])
+            ifelse(missing(clean) == FALSE && isTRUE(clean == 
+                TRUE) == TRUE, return(cln(xp[-which(xp$gender != 
+                gender), ])), return(xp[-which(xp$gender != gender), 
+                ]))
         }
         else {
             if (missing(province) == FALSE || missing(gender) == 
@@ -105,10 +108,12 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                     lapply(as.list(x), "as.vector")
                   })
                   names(xpl) <- NULL
-                  return(xpl)
+                  ifelse(missing(clean) == FALSE && isTRUE(clean == 
+                    TRUE) == TRUE, return(cln(xpl)), return(xpl))
                 }
                 else {
-                  return(xp)
+                  ifelse(missing(clean) == FALSE && isTRUE(clean == 
+                    TRUE) == TRUE, return(cln(xp)), return(xp))
                 }
             }
             else {
@@ -957,6 +962,11 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                 ifelse(isTRUE(na.rm == TRUE) == TRUE, edhl2 <- Filter(function(x) !all(is.na(x)), 
                   edhl2), NA)
             }
+        }
+        if (missing(clean) == FALSE && isTRUE(clean == TRUE) == 
+            TRUE) {
+            ifelse(isTRUE(flgp == FALSE) == TRUE, edhl <- cln(edhl), 
+                edhl2 <- cln(edhl2))
         }
         if (isTRUE(addID == TRUE) == TRUE) {
             ifelse(isTRUE(flgp == FALSE) == TRUE, return(Map(c, 
