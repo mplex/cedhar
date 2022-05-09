@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.6 (06-05-2022)
+## version 0.1.7 (09-05-2022)
 ##
 ## PARAMETERS
 ##
@@ -64,6 +64,43 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
             ifelse(isTRUE(is.list(x) == TRUE) == TRUE, x <- as.data.frame(x), 
                 NA)
         }
+        if (match.arg(as) == "df") {
+            if (missing(id) == FALSE) {
+                if (missing(vars) == FALSE) {
+                  ifelse(all(vars %in% colnames(x)) == TRUE, 
+                    return(x[which(x$id %in% id), vars]), NA)
+                }
+                else {
+                  return(x[which(x$id %in% id), ])
+                }
+            }
+            else if (missing(limit) == FALSE) {
+                NA
+            }
+        }
+        else if (match.arg(as) == "list") {
+            if (missing(id) == FALSE) {
+                if (missing(vars) == FALSE) {
+                  ifelse(all(vars %in% colnames(x)) == TRUE, 
+                    return(as.list(x[which(x$id %in% id), vars])), 
+                    NA)
+                }
+                else {
+                  return(as.list(x[which(x$id %in% id), ]))
+                }
+            }
+            else if (missing(limit) == FALSE) {
+                if (missing(vars) == FALSE) {
+                  ifelse(all(vars %in% colnames(x)) == TRUE, 
+                    xll <- as.list(x[seq_len(limit), which(colnames(x) %in% 
+                      c("id", vars))]), NA)
+                }
+                else {
+                  xll <- as.list(x[seq_len(limit), ])
+                }
+                return(xll)
+            }
+        }
         if (missing(province) == FALSE) {
             if (missing(rp) == TRUE) {
                 utils::data("rp", package = "sdam", envir = environment())
@@ -113,7 +150,8 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                 }
                 else {
                   ifelse(missing(clean) == FALSE && isTRUE(clean == 
-                    TRUE) == TRUE, return(cln(xp)), return(xp))
+                    TRUE) == TRUE, return(as.data.frame.matrix(as.table(cln(xp)))), 
+                    return(xp))
                 }
             }
             else {

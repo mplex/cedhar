@@ -3,7 +3,7 @@
 ## FUNCTION simil() for simple matching counting of data frame coocurrences
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.5 (06-05-2022)
+## version 0.0.6 (09-05-2022)
 ##
 ## PARAMETERS
 ##
@@ -34,10 +34,18 @@ function (x, vars, uniq, diag.incl, dichot, rm.isol, k)
     }
     ifelse(missing(uniq) == FALSE && isTRUE(uniq == FALSE) == 
         TRUE, NA, x <- unique(x))
-    ifelse(is.null(x$ID) == TRUE, mat <- matrix(0L, nrow = nrow(x), 
+    ifelse(is.null(x$id) == TRUE, mat <- matrix(0L, nrow = nrow(x), 
         ncol = nrow(x), dimnames = list(unlist(x[, 1]), unlist(x[, 
             1]))), mat <- matrix(0L, nrow = nrow(x), ncol = nrow(x), 
-        dimnames = list(x$ID, x$ID)))
+        dimnames = list(x$id, x$id)))
+    if (any(duplicated(dimnames(mat)[[1]])) == TRUE) {
+        ifelse(is.null(x$id) == TRUE, dimnames(mat)[[1]] <- dimnames(mat)[[2]] <- make.names(dimnames(mat)[[1]], 
+            unique = TRUE), dimnames(mat)[[1]] <- dimnames(mat)[[2]] <- make.names(x$id, 
+            unique = TRUE))
+    }
+    else {
+        NA
+    }
     for (at in vars) {
         if (at %in% colnames(x) == FALSE) {
             warning(paste("Variable", paste0("\"", at, "\""), 
