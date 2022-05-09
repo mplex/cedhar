@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.7 (09-05-2022)
+## version 0.1.8 (09-05-2022)
 ##
 ## PARAMETERS
 ##
@@ -149,9 +149,20 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                     TRUE) == TRUE, return(cln(xpl)), return(xpl))
                 }
                 else {
-                  ifelse(missing(clean) == FALSE && isTRUE(clean == 
-                    TRUE) == TRUE, return(as.data.frame.matrix(as.table(cln(xp)))), 
-                    return(xp))
+                  if (missing(clean) == FALSE && isTRUE(clean == 
+                    TRUE) == TRUE) {
+                    xpc <- cln(xp)
+                    if (isTRUE(class(xpc) == "noquote") == TRUE) {
+                      xpcdf <- as.data.frame.matrix(as.table(xpc))
+                      return(xpcdf)
+                    }
+                    else {
+                      return(xpc)
+                    }
+                  }
+                  else {
+                    return(xp)
+                  }
                 }
             }
             else {
