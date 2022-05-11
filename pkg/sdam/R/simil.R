@@ -3,7 +3,7 @@
 ## FUNCTION simil() for simple matching counting of data frame coocurrences
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.6 (09-05-2022)
+## version 0.0.7 (11-05-2022)
 ##
 ## PARAMETERS
 ##
@@ -17,7 +17,6 @@
 ## dichot    (dichotomize output?)
 ## rm.isol   (remove isolates?)
 ## k         (cut-off for dichotomization)
-
 
 
 simil <-
@@ -63,20 +62,30 @@ function (x, vars, uniq, diag.incl, dichot, rm.isol, k)
     rm(at)
     ifelse(missing(diag.incl) == FALSE && isTRUE(diag.incl == 
         TRUE) == TRUE, NA, diag(mat) <- 0)
+    classmat <- noquote("SimMatrix")
     if (missing(dichot) == FALSE && isTRUE(dichot == TRUE) == 
         TRUE) {
-        ifelse(missing(k) == TRUE, mat <- multiplex::dichot(mat, 
-            c = max(mat)), mat <- multiplex::dichot(mat, c = k))
+        ifelse(missing(k) == TRUE, kmat <- max(mat), kmat <- k)
+        mat <- multiplex::dichot(mat, c = kmat)
+        classmat <- noquote(append(classmat, c("dichotomous", 
+            kmat)))
     }
     else {
         NA
     }
     if (isTRUE(max(mat) > 0) == TRUE) {
-        ifelse(missing(rm.isol) == FALSE && isTRUE(rm.isol == 
-            TRUE) == TRUE, mat <- multiplex::rm.isol(mat), NA)
+        if (missing(rm.isol) == FALSE && isTRUE(rm.isol == TRUE) == 
+            TRUE) {
+            mat <- multiplex::rm.isol(mat)
+            classmat <- noquote(append(classmat, "rm.isol"))
+        }
+        else {
+            NA
+        }
     }
     else {
         invisible(NA)
     }
+    class(mat) <- classmat
     return(mat)
 }
