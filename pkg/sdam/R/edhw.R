@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.8 (09-05-2022)
+## version 0.2.0 (19-05-2022)
 ##
 ## PARAMETERS
 ##
@@ -34,6 +34,8 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
 {
     if (is.null(x) == TRUE) 
         stop("'x' is NULL")
+    ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == TRUE) == 
+        TRUE, na.rm <- TRUE, na.rm <- FALSE)
     flgdf <- FALSE
     if (isTRUE(x == "EDH") == TRUE) {
         warning("\"x\" is for dataset \"EDH\".")
@@ -125,8 +127,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         else {
             xp <- x
         }
-        ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == FALSE) == 
-            TRUE, NA, xp <- xp[which(lapply(strsplit(rownames(xp), 
+        ifelse(isTRUE(na.rm == FALSE) == TRUE, NA, xp <- xp[which(lapply(strsplit(rownames(xp), 
             "[.]"), function(x) {
             "NA" %in% x
         }) == FALSE), ])
@@ -194,8 +195,6 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         ifelse(isTRUE(is.character(x) == TRUE) == TRUE, x <- eval(parse(text = x)), 
             NA)
     }
-    ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == FALSE) == 
-        TRUE, na.rm <- FALSE, na.rm <- TRUE)
     if (missing(addID) == FALSE && isTRUE(addID == FALSE) == 
         TRUE) {
         if ((isTRUE(na.rm == TRUE) == TRUE) | (match.arg(as) == 

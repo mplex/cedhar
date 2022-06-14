@@ -3,29 +3,33 @@
 ## FUNCTION prex() to compute probability of existence ot time events
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.1 (03-05-2022)
+## version 0.1.3 (14-06-2022)
 ##
 ## PARAMETERS
-## x        (list or data frame object from EDH database)
+## x        (list or data frame object with dating data)
 ## type     (aoristic sum, mid point and range, other)
 ## taq      (terminus ante quem)
 ## tpq      (terminus post quem)
 ## vars     (vector, variables or attributes to be chosen from x)
 ## bins     (bin periods, integer)
 ## cp       (chronological periods)
+##
+## OPTIONAL PARAMETERS
+##
 ## weight   (weight to observations)
-## DF       (data frame in output?)
+## DF       (ignored if plot, data frame in output?)
 ## out      (number of outliers to omit)
 ## plot     (plot results?)
 ## main     (plot's main title)
 ## ylim     (limit y axis, only with plot)
+## keep     (only 'mp', keep variables in output?)
 ## ...      (additional parameters)
 
 
 prex <-
 function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars, 
     bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
-    ylim, ...) 
+    ylim, keep, ...) 
 {
     if (missing(vars) == FALSE && (missing(taq) == TRUE | missing(tpq) == 
         TRUE)) {
@@ -44,6 +48,9 @@ function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
     ifelse(is.data.frame(x) == TRUE, xdf <- as.data.frame(x[, 
         which(colnames(x) %in% c(taq, tpq))]), xdf <- suppressWarnings(edhw(x = x, 
         vars = c(taq, tpq), as = "df", ...)))
+    if (isTRUE(ncol(xdf) == 0) == TRUE) {
+        stop("'vars', 'taq', or 'tpq' not in 'x'.")
+    }
     if (missing(out) == FALSE) {
         nb <- as.numeric(as.vector(xdf[, which(colnames(xdf) %in% 
             vars[1])]))
@@ -238,64 +245,25 @@ function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
         rm(k)
         prxs <- colSums(xaor, na.rm = TRUE)
     }
-    else if (match.arg(type) == "mp") {
+    else if (match.arg(type) == "mp" || match.arg(type) == "other") {
         xmp <- cbind(xdf, rep(NA, nrow(xdf)), rep(NA, nrow(xdf)))
         colnames(xmp) <- c(colnames(xdf), "Mid point", "Range")
         for (k in seq_len(nrow(xdf))) {
-            taqa <- xdf[k, 1]
-            tpqa <- xdf[k, 2]
+            taqa <- as.numeric(as.vector(xdf[k, 1]))
+            tpqa <- as.numeric(as.vector(xdf[k, 2]))
             xmp[k, 3] <- (tpqa + taqa)/2L
             xmp[k, 4] <- (tpqa - taqa)
         }
         rm(k)
-        return(xmp)
-    }
-    else if (match.arg(type) == "other") {
-        prxa <- vector("list", length = length(bins))
-        names(prxa) <- names(bins)
-        for (k in seq_len(length(bins))) {
-            if (is.null(pertaq[[k]]) == FALSE) {
-                for (i in seq_len(length(pertaq[[k]]))) {
-                  if (isTRUE(dur[pertaq[[k]][i]] < breaks[k + 
-                    1] - taq[pertaq[[k]][i]]) == TRUE) {
-                    tmpr <- append(prxa[[k]], 1)
-                  }
-                  else {
-                    tmpr <- append(prxa[[k]], (breaks[k + 1] - 
-                      taq[pertaq[[k]][i]])/as.numeric(dur[[pertaq[[k]][i]]]))
-                  }
-                  prxa[[k]] <- tmpr
-                }
-                rm(i)
-            }
-            else {
-                NA
-            }
+        if (match.arg(type) == "mp") {
+            ifelse(missing(keep) == FALSE && isTRUE(keep == TRUE) == 
+                TRUE, return(cbind(x, xmp[, 3:4])), return(xmp))
         }
-        rm(k)
-        prxp <- vector("list", length = length(bins))
-        names(prxp) <- names(bins)
-        for (k in seq_len(length(bins))) {
-            if (is.null(pertpq[[k]]) == FALSE) {
-                for (i in seq_len(length(pertpq[[k]]))) {
-                  if (isTRUE(dur[pertpq[[k]][i]] < tpq[pertpq[[k]][i]] - 
-                    breaks[k]) == TRUE) {
-                    tmpr <- append(prxp[[k]], 1)
-                  }
-                  else {
-                    tmpr <- append(prxp[[k]], (tpq[pertpq[[k]][i]] - 
-                      breaks[k])/as.numeric(dur[pertpq[[k]][i]]))
-                  }
-                  prxp[[k]] <- tmpr
-                }
-                rm(i)
-            }
-            else {
-                NA
-            }
+        else {
+            xmph <- graphics::hist(xmp$`Mid point`, breaks = obin, 
+                plot = FALSE)
+            return(xmph$counts)
         }
-        rm(k)
-        prxs <- mapply(c, prxa, prxp, SIMPLIFY = FALSE)
     }
     if (isTRUE(plot == FALSE) == TRUE) {
         if (missing(DF) == FALSE && isTRUE(DF == TRUE) == TRUE) {

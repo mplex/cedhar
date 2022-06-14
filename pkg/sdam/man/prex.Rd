@@ -9,8 +9,8 @@ A function to compute the probability of existence of events.
 }
 \usage{
 prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars, 
-    bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
-    ylim, ...)
+     bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
+     ylim, keep, ...)
 }
 
 \arguments{
@@ -59,6 +59,9 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
   \item{ylim}{
   limit in \eqn{y}-axis (optional, only with plot)
 }
+  \item{keep}{
+  for \code{mp}, keep variables in output? (optional)
+}
   \item{\dots}{
   additional optional parameters
 }
@@ -75,7 +78,8 @@ as a list object.
 When \code{aoristic} is set to \code{FALSE}, then a simple matching of only TAQ and TPQ is computed from \code{x}. 
 }
 \value{
-A data frame with values according to either \code{bins} or \code{cp}.
+A data frame with values according to either \code{bins} or \code{cp}. 
+If \code{plot}, a bar plot with bars of outcomes by \code{bins} or \code{cp}.
 }
 \references{
 For aoristic sum: Crema, E. (2012) ``Modelling temporal uncertainty in archaeological analysis'' \emph{J Archaeol Method Theory}.
@@ -97,7 +101,5 @@ Antonio Rivero Ostoic
 \examples{
 #TBD.
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+\keyword{ datagen }%
 \keyword{ metrics }% use one of  RShowDoc("KEYWORDS")
-%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
