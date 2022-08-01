@@ -8,12 +8,12 @@ Organize EDH dataset province and dates by similarity
 Wrapper function to organize EDH dataset province and dates by simple match similarity.
 }
 \usage{
-edhwpd(x = NULL, vars, province, dates, clean)
+edhwpd(x = "EDH", vars, province, dates, clean, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-typically fragments of EDH dataset or database API (optional, list)
+EDH dataset (or fragments of) or database API (optional, list)
 }
   \item{vars}{
 variables or attributes to be chosen from \code{x} (vector)
@@ -26,6 +26,9 @@ vector with TAQ and TPQ (optional)
 }
   \item{clean}{
 whether to remove special characters in text (optional and logical)
+}
+  \item{\dots}{
+   optional arguments if needed.
 }
 }
 \details{

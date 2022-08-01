@@ -9,8 +9,8 @@ A function to compute the probability of existence of events.
 }
 \usage{
 prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars, 
-    bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
-    ylim, ...)
+     bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
+     ylim, keep, ...)
 }
 
 \arguments{
@@ -58,6 +58,9 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
 }
   \item{ylim}{
   limit in \eqn{y}-axis (optional, only with plot)
+}
+  \item{keep}{
+  for \code{mp}, keep variables in output? (optional)
 }
   \item{\dots}{
   additional optional parameters

@@ -8,12 +8,14 @@ Plot interval dates
 A function to plot interval dates.
 }
 \usage{
-plot.dates(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
+%plot.dates(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
+%    col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
+%    xlim = NULL, axes = TRUE, alpha, file = NULL, ...)
+%}
+\method{plot}{dates}(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
     col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
-    xlim = NULL, axes = TRUE, alpha, file = NULL, ...)
+    xlim = NULL, axes = TRUE, alpha, file = NULL, \dots)
 }
-%\method{plot.dates}{plot}(x, y, file = NULL, taq, tpq, out, main = NULL, xlab = NULL, ylab = NULL, 
-%                     xlim = NULL, cex, pch, col, lwd, lty, alpha, \dots)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{

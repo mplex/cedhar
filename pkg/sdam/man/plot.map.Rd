@@ -8,8 +8,10 @@ Plot cartographical map
 A function to plot a cartographical map of Roman world and Mediterranean region.
 }
 \usage{
-plot.map(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, 
-         main, cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, new, ...)
+\method{plot}{map}(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, 
+         main, cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, new, \dots)
+%plot.map(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, 
+%         main, cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, new, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
