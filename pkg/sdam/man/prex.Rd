@@ -9,8 +9,8 @@ A function to compute the probability of existence of events.
 }
 \usage{
 prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars, 
-     bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
-     ylim, keep, ...)
+    bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
+    ylim, ...)
 }
 
 \arguments{
@@ -59,16 +59,14 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
   \item{ylim}{
   limit in \eqn{y}-axis (optional, only with plot)
 }
-  \item{keep}{
-  for \code{mp}, keep variables in output? (optional)
-}
   \item{\dots}{
   additional optional parameters
 }
 }
 \details{
 Currently, the probability of existence is the \emph{aoristic sum} computed across events for portions of time 
-delimited by a TAQ in \code{taq} and TPQ in \code{tpq}, or else by the boundaries of existence in \code{vars}. 
+delimited by a TAQ in \code{taq} and TPQ in \code{tpq}, which are from the standpoint of the timespan. 
+Alternatively, these two boundaries of existence are specified in \code{vars}. 
 
 In case that \code{bins} is \code{NULL}, then the time breaks take the chronological periods in \code{cp}, which 
 by default is \code{"bin5"} or five-periods for the \code{EDH} dataset. Another built-in option is \code{"bin8"} 
