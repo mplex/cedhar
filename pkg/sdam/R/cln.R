@@ -3,7 +3,7 @@
 ## FUNCTION cln() to clean and re-encode glyphs and Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.3.3 (14-06-2022)
+## version 0.3.7 (03-08-2022)
 ##
 ##
 ## PARAMETERS
@@ -97,13 +97,13 @@ function (x, level = 1, what, na.rm, case, repl)
         xx1 <- strsplit(paste(as.vector(unlist(x)), collapse = ""), 
             "")[[1]]
     }
-    dbe <- c("<U+0080>", "\201"     , "<U+0082>", "<U+0083>", 
-        "<U+0084>", "<U+0085>", "<U+0086>", "<U+0087>", "<U+0088>", 
-        "<U+0089>", "<U+008A>", "<U+008B>", "<U+008C>", "\215"     , 
-        "<U+008E>", "\217"     , "\220"     , "<U+0091>", "<U+0092>", 
+    dbe <- c("<U+0080>", "\201"     , "<U+0082>", "\203"     , 
+        "<U+0084>", "<U+0085>", "<U+0086>", "<U+0087>", "\210"     , 
+        "<U+0089>", "<U+008A>", "<U+008B>", "<U+008C>", "<U+008D>", 
+        "<U+008E>", "<U+008F>", "\220"     , "<U+0091>", "<U+0092>", 
         "<U+0093>", "<U+0094>", "<U+0095>", "<U+0096>", "<U+0097>", 
         "<U+0099>", "<U+0099>", "<U+009A>", "<U+009B>", "<U+009C>", 
-        "\235"     , "<U+009E>", "<U+009F>")
+        "<U+009D>", "<U+009E>", "<U+009F>")
     names(dbe) <- c("80", "81", "82", "83", "84", "85", "86", 
         "87", "88", "89", "8A", "8B", "8C", "8D", "8E", "8F", 
         "90", "91", "92", "93", "94", "95", "96", "97", "99", 
@@ -255,7 +255,8 @@ function (x, level = 1, what, na.rm, case, repl)
                   }
                 }
             }
-            if (isTRUE(flgc == TRUE) == TRUE) {
+            if (isTRUE(flgc == TRUE) == TRUE || (isTRUE(j < max(seq_along(gsx))) == 
+                TRUE && isTRUE(flgvc == FALSE) == TRUE)) {
                 if (isTRUE((i + 2L) < gsx[j + 1]) == TRUE) {
                   res <- append(res, xx[(i + 2L):(gsx[j + 1L] - 
                     1L)])
@@ -360,9 +361,10 @@ function (x, level = 1, what, na.rm, case, repl)
                 xxp <- strsplit(x1p, "")[[1]]
                 xxpp <- xxp[min(c(gs2p, gs3p)):length(xxp)]
                 x1pp <- paste(xxpp, collapse = "")
-                gs2pp <- which(as.raw(utf8ToInt(x1pp)) %in% c("cf", 
-                  "ce"))
-                gs3pp <- which(as.raw(utf8ToInt(x1pp)) %in% c("e1"))
+                gs2pp <- which(suppressWarnings(as.raw(utf8ToInt(x1pp))) %in% 
+                  c("cf", "ce"))
+                gs3pp <- which(suppressWarnings(as.raw(utf8ToInt(x1pp))) %in% 
+                  c("e1"))
                 if (isTRUE(length(gs3pp) > 0) == TRUE) {
                   gs3pp <- gs3pp[which(gs3pp%%2 != 0)]
                 }
@@ -586,7 +588,9 @@ function (x, level = 1, what, na.rm, case, repl)
                         }
                       }
                     }
-                    if (isTRUE(flgc == TRUE) == TRUE) {
+                    if (isTRUE(flgc == TRUE) == TRUE || (isTRUE(j < 
+                      max(seq_along(gsx))) == TRUE && isTRUE(length(c(gs2, 
+                      gs3)) == 0) == TRUE)) {
                       if (isTRUE((i + 2L) < gsx[j + 1]) == TRUE) {
                         res <- append(res, xx[(i + 2L):(gsx[j + 
                           1L] - 1L)])
@@ -595,8 +599,10 @@ function (x, level = 1, what, na.rm, case, repl)
                         invisible(NA)
                       }
                     }
+                    else if (isTRUE(length(gsx) == 1) == TRUE) {
+                      res <- append(res, xx[(i + 2L):length(xx)])
+                    }
                   }
-                  rm(j)
                   if (isTRUE(flgc == TRUE) == TRUE) {
                     if (isTRUE((length(res) + (length(chk) * 
                       2L)) < length(xx)) == TRUE) {
@@ -645,9 +651,9 @@ function (x, level = 1, what, na.rm, case, repl)
                       xxp <- strsplit(xj, "")[[1]]
                       xxpp <- xxp[min(c(gs2p, gs3p)):length(xxp)]
                       x1pp <- paste(xxpp, collapse = "")
-                      gs2pp <- which(as.raw(utf8ToInt(x1pp)) %in% 
+                      gs2pp <- which(suppressWarnings(as.raw(utf8ToInt(x1pp))) %in% 
                         c("cf", "ce"))
-                      gs3pp <- which(as.raw(utf8ToInt(x1pp)) %in% 
+                      gs3pp <- which(suppressWarnings(as.raw(utf8ToInt(x1pp))) %in% 
                         c("e1"))
                       if (isTRUE(length(gs3pp) > 0) == TRUE) {
                         gs3pp <- gs3pp[which(gs3pp%%2 != 0)]
@@ -656,7 +662,8 @@ function (x, level = 1, what, na.rm, case, repl)
                         gs3pp <- NULL
                       }
                       if (isTRUE(length(c(gs2pp, gs3pp)) > 0) == 
-                        TRUE) {
+                        TRUE && isTRUE(any(utf8ToInt(x1pp) > 
+                        255) == FALSE) == TRUE) {
                         x3 <- strsplit(rawToChar(as.raw(utf8ToInt(x1pp))), 
                           "")[[1]]
                         res <- vector()
@@ -668,12 +675,16 @@ function (x, level = 1, what, na.rm, case, repl)
                               toRaw = TRUE), from = "UTF-16LE", 
                               to = "UTF-8"))
                           }
-                          else if (isTRUE(i %in% gs3p) == TRUE) {
+                          else if (isTRUE(i %in% c(gs3p, gs3pp)) == 
+                            TRUE) {
                             tmp <- paste(x3[i:(i + 2L)], collapse = "")
                             res <- append(res, iconv(iconv(tmp, 
                               from = "UTF-8", to = "UTF-16LE", 
                               toRaw = TRUE), from = "UTF-16LE", 
                               to = "UTF-8"))
+                          }
+                          else {
+                            invisible(NA)
                           }
                         }
                         rm(i)
@@ -750,7 +761,7 @@ function (x, level = 1, what, na.rm, case, repl)
                         }
                       }
                       else {
-                        invisible(NA)
+                        resl[[k]] <- paste(res, collapse = "")
                       }
                     }
                   }
@@ -800,7 +811,6 @@ function (x, level = 1, what, na.rm, case, repl)
                 }
             }
         }
-        rm(k)
         if (isTRUE(length(what) > 3) == TRUE && isTRUE(level > 
             1) == TRUE) {
             for (i in seq(4, length(what))) {

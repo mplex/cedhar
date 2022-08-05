@@ -34,10 +34,10 @@ cln(x, level, what, na.rm, case, repl)
 \details{
 This function is meant to re-encode Greek (and other) characters in the \code{EDH} set given 
 either as list format, vector, or a dataframe produced with function \code{edhw()} for example. 
-By default, symbols \code{"?" "*" "+"} placed at the end of each record are removed after the re-encoding. 
+By default, the symbols \code{"?" "*" "+"} placed at the end of each record are removed after the re-encoding. 
 However, when level is \code{0} only re-encoding is performed, and level \code{2} is either to force 
 an extra iteration in the re-encoding, removing extra spaces, or clean \code{what} is invoked. 
-With \code{repl}, is possible to replace a list of text in two columns, for `text to replace' and for `text that replace'
+With \code{repl}, is possible to replace a list of text in two columns, for `text to replace' and for `text that replaces'
 }
 \value{
 Depending on the input, a vector, list or dataframe.

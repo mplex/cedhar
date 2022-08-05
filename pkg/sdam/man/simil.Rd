@@ -57,8 +57,12 @@ Other similarity measures will be added in the near future.
 \code{\link{get.edh}}, \code{\link[multiplex:dichot]{dichot}}, \code{\link[multiplex:rm.isol]{rm.isol}}
 }
 \examples{
-# TBD 
+\dontrun{
+# get inscriptions from province
+Arm <- edhw(province="Armenia")
 
+# produce matrix of similarities of three attributes
+simil(Arm, c(2,4,6))}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

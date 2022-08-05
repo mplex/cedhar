@@ -8,13 +8,12 @@ Plot interval dates
 A function to plot interval dates.
 }
 \usage{
-%plot.dates(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
-%    col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
-%    xlim = NULL, axes = TRUE, alpha, file = NULL, ...)
-%}
 \method{plot}{dates}(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
     col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
     xlim = NULL, axes = TRUE, alpha, file = NULL, \dots)
+%plot.dates(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
+%    col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
+%    xlim = NULL, axes = TRUE, alpha, file = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,11 +26,11 @@ A function to plot interval dates.
   \item{type}{
       Type of date format to plot: 
         
-        \code{ts} timespans
+        \code{ts} timespans with end points
         
         \code{mp} mid points and range
         
-        \code{rg} only range
+        \code{rg} range only
 }
   \item{taq}{
   \emph{terminus ante quem}
@@ -107,7 +106,15 @@ If \code{x} is \code{NULL}, then \code{EDH} dataset is taken.
 \code{\link{get.edh}}, \code{\link{edhw}}, \code{\link{prex}}.
 }
 \examples{
-#TBD.
+# first 100 entries in the EDH dataset
+data("EDH")
+EDHdates <- edhw(vars=c("not_after", "not_before"), as="df", limit=100)
+
+# timespans
+plot.dates(EDHdates, taq="not_before", tpq="not_after")
+
+# mid points
+plot.dates(EDHdates, type="mp", taq="not_before", tpq="not_after")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

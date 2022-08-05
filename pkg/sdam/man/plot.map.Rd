@@ -5,7 +5,7 @@
 Plot cartographical map
 }
 \description{
-A function to plot a cartographical map of Roman world and Mediterranean region.
+A function to plot a cartographical map of the Roman world and Mediterranean region.
 }
 \usage{
 \method{plot}{map}(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, 
@@ -35,7 +35,7 @@ A function to plot a cartographical map of Roman world and Mediterranean region.
   (logical for cartographical map) display settlements?
 }
   \item{roads}{
-  (logical for cartographical map) display terretrial routes?
+  (logical for cartographical map) display terrestrial routes?
 }
   \item{shipr}{
   (logical for cartographical map) display shipping routes?
@@ -78,7 +78,7 @@ A function to plot a cartographical map of Roman world and Mediterranean region.
 }
 }
 \details{
-This plot function is for creating cartographical maps of ancient provinces and Italian regions of the Roman Empire around year 117 AD. 
+This plot function is for creating cartographical maps of ancient provinces and Italian regions of the Roman Empire around the year AD 117. 
 The input data \code{x} can be a character vector, but this is intended for a recording output. 
 By default, arguments \code{name} and \code{cap} are set to \code{TRUE} while \code{date} is set to \code{FALSE}; however, \code{main} prevails over \code{name}.
 
@@ -103,7 +103,11 @@ Positions for caption and date are fixed for a PDF output.
 \code{\link{rpmp}}, \code{\link{rpmcd}}, \code{\link{get.edh}}, \code{\link{rp}}, \code{\link{EDH}}
 }
 \examples{
-#TBD.
+# Roman province of Aegyptus
+plot.map(x="Aeg")
+
+# Roman Empire transport network
+plot.map(roads=TRUE, shipr=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

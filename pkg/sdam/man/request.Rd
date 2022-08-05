@@ -1,7 +1,7 @@
 \name{request}
 \alias{request}
-\alias{ssdk}
-\alias{SSDK}
+\alias{sddk}
+\alias{SDDK}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Perform a HTTP request

@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.2 (01-08-2022)
+## version 0.2.3 (05-08-2022)
 ##
 ## PARAMETERS
 ##
@@ -21,7 +21,7 @@
 ## id       (integer or character, select only hd_nr records)
 ## na.rm    (logical, remove entries with missing data?)
 ## ldf      (experimental, is 'x' a list of data frames?)
-## province (choose EDH province)
+## province (choose EDH province, name or abbreviation)
 ## gender   (choose EDH gender)
 ## rp       (list of Roman provinces complementing the 'rp' dataset)
 ## clean    (clean output?)
@@ -39,8 +39,6 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
     flgdf <- FALSE
     if (isTRUE(x == "EDH") == TRUE) {
         warning("\"x\" is for dataset \"EDH\".")
-        if (missing(province) == FALSE) 
-            warning("'province' works with 'x' as data frame")
         flglv <- TRUE
         if (!(exists("EDH"))) {
             utils::data("EDH", package = "sdam", envir = environment())
@@ -173,8 +171,6 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         }
     }
     else if (isTRUE(is.list(x) == TRUE) == TRUE) {
-        if (missing(province) == FALSE) 
-            warning("'province' works with 'x' as data frame")
         if (is.list(x[[1]]) == TRUE) {
             ifelse(is.list(x[[1]][[1]]) == FALSE, flglv <- TRUE, 
                 flglv <- FALSE)
@@ -217,7 +213,10 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
     if (missing(vars) == TRUE) {
         flgv <- FALSE
         ifelse(match.arg(as) == "df", flgp <- TRUE, flgp <- FALSE)
-        if (match.arg(as) == "list") {
+        if (match.arg(as) == "list" || (missing(province) == 
+            FALSE)) {
+            if (match.arg(as) == "df") 
+                warning("\"province\" with no \"vars\" returns lists.")
             if (missing(id) == TRUE && missing(limit) == TRUE) {
                 if (isTRUE(flgdf == TRUE) == TRUE) {
                   edhl <- list()
@@ -237,7 +236,28 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   return(edhl)
                 }
                 else {
-                  return(x)
+                  if (missing(province) == TRUE) {
+                    return(x)
+                  }
+                  else {
+                    if (missing(rp) == TRUE) {
+                      utils::data("rp", package = "sdam", envir = environment())
+                      rp <- get("rp", envir = environment())
+                    }
+                    else {
+                      NA
+                    }
+                    prvx <- x[which(sapply(lapply(x, `[`, c("id", 
+                      "province_label")), tail, 1) == unlist(rp[which(names(rp) == 
+                      province)], use.names = FALSE))]
+                    ifelse(isTRUE(length(prvx) > 0) == TRUE, 
+                      invisible(NA), prvx <- x[which(sapply(lapply(x, 
+                        `[`, c("id", "province_label")), tail, 
+                        1) == unlist(rp[which(rp == province)], 
+                        use.names = FALSE))])
+                    ifelse(isTRUE(length(prvx) == 0) == TRUE, 
+                      return(NULL), return(prvx))
+                  }
                 }
             }
             else {

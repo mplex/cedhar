@@ -47,7 +47,7 @@ edhw(x = "EDH", vars, as = c("df", "list"), type = c("long", "wide", "narrow"),
    is \code{x} list of data frames? (optional and logical)
 }
   \item{province}{
-   Roman province in \code{EDH} as in \code{\link{rp}} dataset
+   Roman province in \code{EDH} as in \code{\link{rp}} dataset (name or abbreviation)
 }
   \item{gender}{
    people gender in \code{EDH} (male or female)
@@ -70,7 +70,7 @@ with the \code{"rjson"} format, or transformed data organized, for example, by p
 When \code{x} is explicit, it must be at least a list object with a comparable structure to the \code{EDH} dataset. 
 
 Through \code{vars} argument and return the output either \code{as} a list with \code{list} 
-or a data frame with \code{df}. In case argument \code{vars} is missing, then all entries in \code{x} are taken. 
+or a data frame with \code{df}. In case that argument \code{vars} is missing, then all entries in \code{x} are taken. 
 
 By default, a list object is returned, with or without an `ID' identification provided by the \code{addID} argument. 
 When the input list is converted into a data frame, the ordering of the variables is given alphabetically. 
@@ -91,14 +91,14 @@ appear in different rows and each variable is assigned into a single column, and
 \code{select} \code{"people"} variables like gender and origin.
 
 By setting \code{"wide"} in \code{type}, it is possible to place the different people from a single entry 
-column by column in the data frame and each record has a single row. Finally, argument \code{split} allows 
+column by column in the data frame and each record has a single row. Finally, argument \code{split} allows for 
 dividing the data in the data frame into groups by `id', which corresponds to the HD number of inscription 
 in the \code{EDH} dataset. 
 
 Ad hoc arguments are the \code{EDH} entries \code{province} and \code{gender} for entering a Roman province 
-and people's gender in \code{x} as a data frame; otherwise these arguments are ignored. 
+and people's gender in \code{x} as a data frame; otherwise, these arguments are ignored. 
 When \code{province} is used, it is possible to refer to a customized list of provinces with argument \code{rp}; 
-otherwise dataset \code{"rp"} is employed. 
+otherwise, dataset \code{"rp"} is the default where names and abbreviations are accepted. 
 
 Argument \code{ldf} is a flag when the input is a created list of data frames that is 
 organized by variables rather than by records as in \code{EDH}. 
@@ -113,8 +113,10 @@ https://edh.ub.uni-heidelberg.de/data/api
 Antonio Rivero Ostoic
 }
 \note{
-When choosing \code{"people"} variables with \code{select} with a data frame output, then this attribute must be 
+When choosing \code{"people"} variables with \code{select} with a data frame output, then people attribute must be 
 in \code{vars}. 
+
+Argument \code{province} with no \code{vars} returns a list of lists.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~

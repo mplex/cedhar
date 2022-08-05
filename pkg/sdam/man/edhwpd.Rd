@@ -34,8 +34,7 @@ whether to remove special characters in text (optional and logical)
 \details{
 As with function \code{edhw}, this is an interface to extract attribute variables 
 in \code{vars} from the \code{EDH} or similar dataset if \code{x} is not specified. 
-The aim is to organize data per province and dates by simple match similarity among
-records. 
+This wrapper funtion aims to organize data per Roman province and date by simple match similarities among records. 
 
 The Roman Empire \code{province} is the abbreviation used in the value given by 
 function \code{get.edh} and which is in \code{"rp"} dataset. 

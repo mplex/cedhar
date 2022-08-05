@@ -36,13 +36,13 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
    boundaries of existence in \code{x} (vector for TAQ and TPQ)
 }
   \item{bins}{
-  length of the break (integer)
+  length of the break (integer and optional)
 }
   \item{cp}{
-  chronological phase
+  chronological phase (\code{"bin5"} or \code{"bin8"}, or a list)
 }
   \item{weight}{
-  weight to observations
+  weight to observations (optional)
 }
   \item{DF}{
   return also data frame with observations? Ignored for plot (logical and optional)
@@ -100,7 +100,15 @@ Antonio Rivero Ostoic
 \code{\link{edhw}}, \code{\link{plot.dates}}
 }
 \examples{
-#TBD.
+# first 100 entries in the EDH dataset
+data("EDH")
+EDHdates <- edhw(vars=c("not_after", "not_before"), as="df", limit=100)
+
+# compute aoristic sum with five-periods
+prex(x=EDHdates, taq="not_before", tpq="not_after", cp="bin5")
+
+# compute aoristic sum with 75 year span
+prex(x=EDHdates, taq="not_before", tpq="not_after", bins=75, plot=TRUE)
 }
 \keyword{ datagen }%
 \keyword{ metrics }% use one of  RShowDoc("KEYWORDS")
