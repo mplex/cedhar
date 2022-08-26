@@ -4,7 +4,7 @@
 Get data from the Epigraphic Database Heidelberg API
 }
 \description{
-A function to obtain data from the Epigraphic Database Heidelberg new API repository.
+A function to obtain data from the Epigraphic Database Heidelberg REST like API repository.
 }
 \usage{
 get.edh(search = c("inscriptions", "geography"), url =
@@ -16,46 +16,46 @@ get.edh(search = c("inscriptions", "geography"), url =
 }
 \arguments{
   \item{search}{
-	Whether the search is on \code{inscriptions} \emph{or} on \code{geography}.
+	whether the search is on \code{inscriptions} \emph{or} on \code{geography}.
 }
   \item{url}{
-	Open data repository API
+	open data repository API
 }
   \item{hd_nr}{
 	HD number of inscription
 }
   \item{province}{
-	Ancient Roman province name
+	ancient Roman province name
 }
   \item{country}{
-	Actual country name
+	actual country name
 }
   \item{findspot_modern}{
-	Actual location name findspot
+	actual location name findspot
 }
   \item{findspot_ancient}{
-	Ancient location name findspot
+	ancient location name findspot
 }
   \item{year_not_before}{
-	Year, not before (integer, BC years are negative)
+	year, not before (integer, BC years are negative)
 }
   \item{year_not_after}{
-	Year, not after (integer, BC years are negative)
+	year, not after (integer, BC years are negative)
 }
   \item{tm_nr}{
-	Trismegistos ID (integer)
+	trismegistos ID (integer)
 }
   \item{transcription}{
-	Automatic leading and trailing truncation (brackets are ignored)
+	automatic leading and trailing truncation (brackets are ignored)
 }
   \item{type}{
-	Type of inscription (case insensitive)
+	type of inscription (case insensitive)
 }
   \item{bbox}{
-	Bounding box with character format \code{bbox = "minLong, minLat, maxLong, maxLat"}
+	bounding box with character format \code{bbox = "minLong, minLat, maxLong, maxLat"}
 }
   \item{findspot}{
-	Level of village, street etc. (add leading and/or trailing)
+	level of village, street etc. (add leading and/or trailing)
 }
   \item{pleiades_id}{
 	Pleiades identifier of a place (integer)
@@ -64,32 +64,31 @@ get.edh(search = c("inscriptions", "geography"), url =
 	Geonames identifier of a place (integer)
 }
   \item{offset}{
-	Clause to specify which row to start from retrieving data (optional and integer)
+	clause to specify which row to start from retrieving data (optional and integer)
 }
   \item{limit}{
-	Clause to limit the number of results (optional and integer)
+	clause to limit the number of results (optional and integer)
 }
   \item{maxlimit}{
-	Maximum limit of the query (integer, default 4000)
+	maximum limit of the query (integer, default 4000)
 }
   \item{addID}{
-	Add identification to the output? (optional and logical)
+	add identification to the output? (optional and logical)
 }
   \item{printQ}{
-	Print also query? (optional and logical)
+	print also query? (optional and logical)
 }
 }
 \details{
 Since with the \code{inscriptions} option the \code{id} "component" of the 
 output list is not with a numeric format, then the function adds an \code{ID} 
 at the beginning of the list with the identifier with a numerical format. 
+\code{hd_nr} has not the same value as \code{ID} nor \code{id}. 
+In case you want to grab several items from the Epigraphic Database Heidelberg API 
+use function \code{\link{get.edhw}}.
 
-Notice that \code{hd_nr} is not the same as \code{ID} nor \code{id}. 
-
-
-Use function \code{\link{get.edhw}} in case you want to grab several items.
-
-A list with the of valid values from the EDH API for the ancient Roman provinces are
+A list with the of valid values from the EDH API for the ancient Roman provinces 
+that are also available in dataset \code{\link{rp}} are
 
 \tabular{llllll}{
 \code{"Ach"}  \tab  Achaia                           \tab  \code{"Cor"}  \tab  Corsica                       \tab  \code{"Mes"}  \tab  Mesopotamia                   \cr 
@@ -198,22 +197,23 @@ https://edh.ub.uni-heidelberg.de/data/api
 Antonio Rivero Ostoic
 }
 \note{
-This function is for the [EDH] database [API] starting in year January 2022. 
+This function requires "\code{\link[rjson]{rjson}}", and is for the [EDH] database [API] at the URL in references starting in year January 2022, 
+and changes in the URL should be updated with the url option. 
+
+Search options \code{"photos"} and \code{"bibliography"} are not supported.
 }
-%The other two search options from the [EDH] database [API], which are \code{"photos"} 
-%and \code{"bibliography"} may be implemented in the future. 
 
 
 \section{Warning }{
-For queries having more than 4000 records, which can produce a timeout from the server.
+For queries having more than 4000 records, the server can produce a timeout break to be handled by \code{offset}.
 }
 
 \seealso{
-\code{\link{get.edhw}}, \code{\link{edhw}}, \code{\link{edhwpd}}, \code{\link{plot.map}}, \code{\link{simil}}
+\code{\link{get.edhw}}, \code{\link{edhw}}, \code{\link{edhwpd}}, \code{\link{rp}}, \code{\link{plot.map}}, \code{\link{simil}}, \code{\link[rjson]{rjson}}
 }
 \examples{
 ## Not run:
-# get inscriptions from EDH API data
+# get inscriptions from EDH database API
 get.edh(findspot_modern="madrid")
 ## End(Not run)
 }

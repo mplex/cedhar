@@ -1,11 +1,10 @@
 \name{plot.dates}
 \alias{plot.dates}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Plot interval dates
 }
 \description{
-A function to plot interval dates.
+A function to plot interval dates with different forms.
 }
 \usage{
 \method{plot}{dates}(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
@@ -21,28 +20,28 @@ A function to plot interval dates.
   dataset as a data frame object of variables and observations. 
 }
   \item{y}{
-  optional identifiers (vector).
+  vector of identifiers (optional)
 }
   \item{type}{
       Type of date format to plot: 
         
-        \code{ts} timespans with end points
+        \code{ts} timespans with endpoints
         
         \code{mp} mid points and range
         
         \code{rg} range only
 }
   \item{taq}{
-  \emph{terminus ante quem}
+  timespan endpoint \emph{terminus ante quem} (TAQ)
 }
   \item{tpq}{
-  \emph{terminus post quem}
+  timespan endpoint \emph{terminus post quem} (TPQ)
 }
   \item{id}{
   IDs as variable or rownames in dataset \code{x}
 }
   \item{out}{
-  number of outliers to omit (integer or vector where first entry id for latest date)
+  integer or vector with number of outliers to omit (first entry id for latest date)
 }
   \item{col}{
   color of \code{pch}
@@ -78,7 +77,7 @@ A function to plot interval dates.
   alpha transparency for time interval segments
 }
   \item{file}{
-  path to file for a PDF format (optional)
+  path to produce a file with a PDF format (optional)
 }
   \item{\dots}{
   additional optional parameters
@@ -86,7 +85,7 @@ A function to plot interval dates.
 }
 \details{
 This plot function is for time interval segments given in the dataset \code{x}, which is 
-given as a data frame or as a ``tibble'' class object.
+given as a dataframe or as a ``tibble'' class object.
 }
 \value{
 A graphical plot.
@@ -97,13 +96,11 @@ A graphical plot.
 Antonio Rivero Ostoic
 }
 \note{
-If \code{x} is \code{NULL}, then \code{EDH} dataset is taken.
+If \code{x} is \code{NULL}, then \code{\link{EDH}} dataset is taken by default.
 }
-
 %% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-\code{\link{get.edh}}, \code{\link{edhw}}, \code{\link{prex}}.
+\code{\link{dts}}, \code{\link{get.edh}}, \code{\link{edhw}}, \code{\link{prex}}, \code{\link[tibble]{tibble}}
 }
 \examples{
 # first 100 entries in the EDH dataset
@@ -119,4 +116,4 @@ plot.dates(EDHdates, type="mp", taq="not_before", tpq="not_after")
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ graphs }% use one of  RShowDoc("KEYWORDS")
-%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ utilities }
