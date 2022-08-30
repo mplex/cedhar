@@ -10,10 +10,10 @@ at the School of Culture and Society at Aarhus University.
 
 ### Vignettes
 
-* [Re-encoding Greek characters from 'EDH' dataset](https://sdam-au.github.io/sdam/articles/Encoding.html)
-* [Plotting ancient Roman provinces and regions](https://sdam-au.github.io/sdam/articles/RomanProvs.html)
-* [Plotting Roman Empire transport network](https://sdam-au.github.io/sdam/articles/TransportNetwork.html)
-
+* [Datasets in `"sdam"` package](https://sdam-au.github.io/sdam/articles/Intro.html)
+* [Re-encoding `people` in the `EDH` dataset](https://sdam-au.github.io/sdam/articles/Encoding.html)
+* [Dates and missing dating data](https://sdam-au.github.io/sdam/articles/Dates.html)
+* [Cartographical maps and networks](https://sdam-au.github.io/sdam/articles/Maps.html)
 
 
 <br/>
