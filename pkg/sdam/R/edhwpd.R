@@ -86,6 +86,7 @@ function (x = "EDH", vars, province, dates, clean, ...)
     }
     else {
         lddf <- ddf
+        lbs1 <- vector()
     }
     if (isTRUE(length(vars) > 2) == TRUE && isTRUE(all.equal(mat1, 
         smat1) == FALSE) == TRUE) {
