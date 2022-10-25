@@ -4,10 +4,10 @@
 Restricted multiply-imputed data subsets
 }
 \description{
-A function to perform multiple imputation of missing dating data in the \code{\link{EDH}} dataset.
+A function to perform multiple imputation of missing dating data in the \code{EDH} dataset.
 }
 \usage{
-rmids(x, vars, collapse)
+rmids(x, vars, collapse, pool, type = c("1", "2"))
 }
 \arguments{
   \item{x}{
@@ -19,15 +19,21 @@ rmids(x, vars, collapse)
   \item{collapse}{
   collapse list of dataframes?  (optional and logical, default \code{FALSE})
 }
+  \item{pool}{
+  pool the results?  (optional and logical)
+}
+  \item{type}{
+  type of pooling: \code{"1"} for min TAQ and max TPQ. \code{"2"} for conditional pooling
+}
 }
 \details{
 \emph{Imputation} refers to the replacement process of missing data, and this is the case of entries in the 
 Epigraphic Database Heidelberg and related datasets. 
 In this context, the missing data for imputation are the endpoints of the timespan of existence of epigraphs or inscriptions 
-represented by variables TAQ and TPQ (cf. \code{\link{prex}}) as \code{"not_before"} and \code{"not_after"} in the \code{\link{EDH}} dataset 
+represented by variables TAQ and TPQ (cf. \code{\link{prex}}) as \code{"not_before"} and \code{"not_after"} in the \code{EDH} dataset 
 with cases of censoring with one limit of the timespan known.
 
-To perform imputation on subsets of missing dating data in the \code{\link{EDH}} dataset, 
+To perform imputation on subsets of missing dating data in the \code{EDH} dataset, 
 function \code{\link{edhwpd}} serves to organize records per Roman province and dates 
 by simple match similarity of different attribute variables specified in \code{vars}. 
 Such organisation is in the form of a dataframe or a list of dataframes depending on the province characteristics, and 
@@ -66,15 +72,11 @@ dataframe produced from a list of dataframes.
 }
 \examples{
 \dontrun{
-## extract from EDH dataset province, dates, and single variable attribute
-rom <- edhwpd(vars="type_of_inscription", province="Rom", dates=c("not_after", "not_before"))
+# extract from EDH dataset province, dates, and single variable attribute
+arm <- edhwpd(vars="type_of_inscription", province="Arm", dates=c("not_after", "not_before"))
 
 # perform restricted imputation
-rmids(rom, vars=c("not_after", "not_before"))}
+rmids(arm, vars=c("not_after", "not_before"))}
 }
-\keyword{ datagen }%
-% \keyword{ ~kwd2 }
-% For non-standard keywords, use \concept instead of \keyword:
+\keyword{ datagen }
 \concept{ imputation }
-% \concept{ ~cpt2 }
-% Use only one concept per line.

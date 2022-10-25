@@ -77,13 +77,14 @@ delimited by a TAQ in \code{taq} and TPQ in \code{tpq}, which are endpoints from
 Alternatively, these two boundaries of existence of x are specified in \code{vars}. 
 
 In case the \code{bins} are set to \code{NULL}, then the time breaks take the chronological periods in \code{cp}, which by default 
-is \code{"bin5"} or five-periods for the \code{\link{EDH}} dataset. 
-Another built-in option is \code{"bin8"} for eight chronological periods, but option \code{cp} is open for other periodization models 
-as long as the categories of time blocks are components of a list object.
+is \code{"bin5"} or five-periods for the \code{EDH} dataset, which are \code{Arch} (Archaic), \code{Class} (Classical), \code{Hell} 
+(Hellenistic), \code{Rom}, (Roman), and \code{Byz} (Byzantine). 
+Another built-in option is \code{"bin8"} for eight chronological periods where the Roman period is divided into \code{ERom} (Early Roman), \code{MRom} (Middle Roman), and \code{LRom} (Late Roman) while the Byzantine period is divided into \code{EByz} (Early Byzantine) and \code{MByz} (Middle Byzantine). 
+However, option \code{cp} is open for other periodization models as long as the categories of time blocks are components of a list object.
 }
 \value{
-A data frame with values according to either \code{bins} or \code{cp}. 
-If \code{plot} is specified, a bar plot with bars of outcomes by \code{bins} or \code{cp}.
+A data frame with values according to the chosen either \code{bins} or \code{cp}. 
+If \code{plot} is specified, a bar plot with bars of outcomes.
 }
 \references{
 Crema, E. ``Modelling temporal uncertainty in archaeological analysis,'' \emph{J Archaeol Method Theory}, 19:440--461. (2012). 
@@ -105,15 +106,15 @@ When \code{aoristic} is set to \code{FALSE}, then a simple matching of only TAQ 
 \code{\link{edhw}}, \code{\link{plot.dates}}, \code{\link{dts}}.
 }
 \examples{
-# first 100 entries in the EDH dataset
-data("EDH")
+\dontrun{
+# first 100 entries in the EDH dataset (default)
 EDHdates <- edhw(vars=c("not_after", "not_before"), as="df", limit=100)
 
 # compute aoristic sum with five-periods
 prex(x=EDHdates, taq="not_before", tpq="not_after", cp="bin5")
 
 # compute aoristic sum with 75 year span
-prex(x=EDHdates, taq="not_before", tpq="not_after", bins=75, plot=TRUE)
+prex(x=EDHdates, taq="not_before", tpq="not_after", bins=75, plot=TRUE)}
 }
-\keyword{ datagen }%
-\keyword{ metrics }% use one of  RShowDoc("KEYWORDS")
+\keyword{ datagen }
+\keyword{ metrics }

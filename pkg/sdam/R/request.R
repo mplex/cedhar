@@ -4,7 +4,7 @@
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
 ## First aimed to interact with DEiC's sciencedata.dk
-## version 0.2.7 (23-05-2022)
+## version 0.2.7 (01-09-2022)
 ##
 ## PARAMETERS
 ## file      (object under 'method')
@@ -111,18 +111,18 @@ function (file, URL = "https://sciencedata.dk", method = c("GET",
                 }
             }
             else if (isTRUE(flg == 2) == TRUE) {
-                cat("File not overwritten.\n")
+                message("File not overwritten.\n")
             }
         }
         if (missing(rm.file) == FALSE && isTRUE(rm.file == TRUE) == 
             TRUE) {
             unlink(file)
-            cat("File on local machine deleted. \n")
+            message("File on local machine deleted.\n")
         }
     }
     else if (match.arg(method) == "POST") {
         if (isTRUE(URL0 == "https://sciencedata.dk") == TRUE) 
-            stop("Method \"POST\" is not yet implemented in \"sciencedata.dk\"")
+            stop("Method \"POST\" is not yet supported.")
         FILE <- httr::upload_file(file)
         if (is.null(cred) == TRUE) {
             httr::POST(paste0(URL, strsplit(file, "/")[[1]][length(strsplit(file, 

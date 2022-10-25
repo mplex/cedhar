@@ -1,9 +1,9 @@
 
 ## 
 ## FUNCTION cln() to clean and re-encode glyphs and Greek characters
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.4.2 (23-08-2022)
+## version 0.4.4 (24-10-2022)
 ##
 ##
 ## PARAMETERS
@@ -103,13 +103,13 @@ function (x, level = 1, what, na.rm, case, repl, unlist)
         xx1 <- strsplit(paste(as.vector(unlist(x)), collapse = ""), 
             "")[[1]]
     }
-    dbe <- c("<U+0080>", "\201"     , "<U+0082>", "<U+0083>", 
-        "<U+0084>", "<U+0085>", "<U+0086>", "<U+0087>", "<U+0088>", 
-        "<U+0089>", "<U+008A>", "<U+008B>", "<U+008C>", "\215"     , 
-        "<U+008E>", "\217"     , "\220"     , "<U+0091>", "<U+0092>", 
+    dbe <- c("<U+0080>", "\201"     , "<U+0082>", "\203"     , 
+        "<U+0084>", "<U+0085>", "<U+0086>", "<U+0087>", "\210"     , 
+        "<U+0089>", "<U+008A>", "<U+008B>", "<U+008C>", "<U+008D>", 
+        "<U+008E>", "<U+008F>", "\220"     , "<U+0091>", "<U+0092>", 
         "<U+0093>", "<U+0094>", "<U+0095>", "<U+0096>", "<U+0097>", 
         "<U+0099>", "<U+0099>", "<U+009A>", "<U+009B>", "<U+009C>", 
-        "\235"     , "<U+009E>", "<U+009F>")
+        "<U+009D>", "<U+009E>", "<U+009F>")
     names(dbe) <- c("80", "81", "82", "83", "84", "85", "86", 
         "87", "88", "89", "8A", "8B", "8C", "8D", "8E", "8F", 
         "90", "91", "92", "93", "94", "95", "96", "97", "99", 
@@ -873,9 +873,9 @@ function (x, level = 1, what, na.rm, case, repl, unlist)
             if (isTRUE(flgx == TRUE) == TRUE || any(xx1 %in% 
                 dbe) == TRUE) {
                 Sys.setlocale(category = "LC_ALL", locale = ".1250")
-                resdf <- noquote(matrix(unlist(resll), ncol = ncol(xdf), 
+                resdf <- matrix(unlist(resll), ncol = ncol(xdf), 
                   byrow = FALSE, dimnames = list(rownames(xdf), 
-                    colnames(xdf))), right = TRUE)
+                    colnames(xdf)))
             }
             else {
                 resdf <- data.frame(matrix(unlist(resll), ncol = ncol(xdf), 

@@ -1,9 +1,9 @@
 
 ## 
 ## INTERNAL FUNCTION cs() for case sensitive text in cln()
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.0.2 (14-06-2022)
+## version 0.0.4 (24-10-2022)
 ##
 ## PARAMETERS
 ## xz       (list, vector, or data frame with characters)
@@ -39,9 +39,10 @@ function (xz, level = 1, case = 1, flgdf = FALSE, na.rm = FALSE)
     }
     else {
         if (isTRUE(case == 1L) == TRUE) {
-            xz <- lapply(xz, function(z) {
-                gsub("(^[[:alpha:]])", "\\U\\1", z, perl = TRUE)
-            })
+            xz <- gsub("\\b([[:lower:]])([[:lower:]]+)", "\\U\\1\\L\\2", 
+                xz, perl = TRUE)
+            xz <- gsub("\\b([[:upper:]])([[:upper:]]+)", "\\U\\1\\L\\2", 
+                xz, perl = TRUE)
         }
         else if (isTRUE(case == 2L) == TRUE) {
             xz <- lapply(xz, tolower)

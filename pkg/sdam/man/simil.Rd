@@ -50,16 +50,12 @@ A valued matrix of similarities among items in \code{x}.
 \author{
 Antonio Rivero Ostoic
 }
-
-%\note{
-%}
-
 %% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
 \code{\link{edhw}}, \code{\link{get.edh}}, \code{\link[multiplex:dichot]{dichot}}, \code{\link[multiplex:rm.isol]{rm.isol}}, \code{\link[multigraph]{multigraph}}.
 }
 \examples{
+\dontrun{
 # get inscriptions from a Roman province
 arm <- edhw(province="Armenia")
 
@@ -69,7 +65,7 @@ armv <- edhw(x=arm, as="df",
 
 # matrix of similarities of two variables
 simil(armv, vars=c("findspot_ancient", "language"))}
-% R documentation directory.
-\keyword{ metrics }% use one of  RShowDoc("KEYWORDS")
-\keyword{ manip }% use one of  RShowDoc("KEYWORDS")
+}
+\keyword{ metrics }
+\keyword{ manip }
 \keyword{ utilities }

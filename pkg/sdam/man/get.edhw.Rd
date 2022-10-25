@@ -48,12 +48,9 @@ Large samples can take a lot of time.
 \code{\link{get.edh}}, \code{\link{simil}}, \code{\link[rjson]{rjson}}
 }
 \examples{
-## get 10 records from EDH API data
-## Not run:
-get.edhw(hd_nr=1:10)
-## End(**Not run**)
+\dontrun{
+# get 10 records from EDH API data
+get.edhw(hd_nr=1:10)}
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ IO }% use one of  RShowDoc("KEYWORDS")
+\keyword{ IO }
 \keyword{ utilities }

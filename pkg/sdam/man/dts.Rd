@@ -30,8 +30,8 @@ it is many times convenient to convert these type of dating data into a numerica
 In case that the input data has two or more plausible dates, then the outcome by default takes the first value of the input; 
 otherwise the last date with option \code{last}.
 
-\code{\link{dts}} also accepts dates involving centuries with the \code{cent} option. 
-In this case, it is possible to specify a separator of the century endpoints in sep or use "\code{ to }" as the default separator.
+\code{\link{dts}} also accepts dates involving centuries with the \code{cent} option, and in this case, 
+it is possible to specify a separator of the century endpoints in \code{sep} or use "\code{ to }" as the default separator.
 
 For dates having character format, then hyphens are regarded as separators of the plausible dates in \code{x}.
 }
@@ -63,12 +63,5 @@ dts("58 BC - 30 AD", last=TRUE)
 # use century notation
 dts("15th Cent. AD", cent=TRUE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory (show via RShowDoc("KEYWORDS")):
-\keyword{ manip }% use one of  RShowDoc("KEYWORDS")
+\keyword{ manip }
 \keyword{ utilities }
-% Use only one keyword per line.
-% For non-standard keywords, use \concept instead of \keyword:
-% \concept{ ~cpt1 }
-% \concept{ ~cpt2 }
-% Use only one concept per line.

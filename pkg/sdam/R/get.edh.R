@@ -3,7 +3,7 @@
 ## FUNCTION get.edh() to get data API from the Epigraphic Database Heidelberg EDH
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.3.1 (26-08-2022)
+## version 0.3.2 (31-08-2022)
 ##
 ## Parameter description NEW API YEAR 2022 https://edh.ub.uni-heidelberg.de/data/api
 ##
@@ -135,7 +135,7 @@ function (search = c("inscriptions", "geography"), url = "https://edh.ub.uni-hei
     }
     rm(i)
     if (isTRUE(printQ == TRUE) == TRUE) {
-        print(sub("&$", "", nstring))
+        message(sub("&$", "", nstring))
     }
     raw.dat <- rjson::fromJSON(file = sub("&$", "", nstring))
     dat <- raw.dat$items

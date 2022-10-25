@@ -166,11 +166,9 @@ A list object with at least one the following items:
 \item{"modern_region"}{ }
 \item{"not_after"}{ }
 \item{"not_before"}{ }
-\item{}{ }
 \item{"people"}{This item is another list with at least one the following items: \cr  \cr  
 \code{"person_id"} \cr  \code{"nomen"} \cr  \code{"cognomen"} \cr  \code{"praenomen"} \cr  \code{"name"} \cr  \code{"gender"} \cr  \code{"status"} \cr  \code{"tribus"} \cr  
 \code{"origo"} \cr  \code{"occupation"} \cr  \code{"age: years"} \cr  \code{"age: months"} \cr  \code{"age: days"} }
-\item{}{ }
 \item{"present_location"}{ }
 \item{"religion"}{ }
 \item{"province_label"}{ }
@@ -184,11 +182,9 @@ A list object with at least one the following items:
 \item{"width"}{ }
 \item{"work_status"}{ }
 \item{"year_of_find"}{ }
-\item{}{ }
 \item{"ID"}{(Optional), only if \code{addID} is set to \code{TRUE}.}
-\item{}{ }
 
-And the query is printed if specified by \code{printQ}. 
+The query is also printed if specified by \code{printQ}. 
 }
 \references{
 https://edh.ub.uni-heidelberg.de/data/api
@@ -212,10 +208,9 @@ For queries having more than 4000 records, the server can produce a timeout brea
 \code{\link{get.edhw}}, \code{\link{edhw}}, \code{\link{edhwpd}}, \code{\link{rp}}, \code{\link{plot.map}}, \code{\link{simil}}, \code{\link[rjson]{rjson}}
 }
 \examples{
-## Not run:
+\dontrun{
 # get inscriptions from EDH database API
-get.edh(findspot_modern="madrid")
-## End(Not run)
+get.edh(findspot_modern="madrid")}
 }
-\keyword{ IO }% use one of  RShowDoc("KEYWORDS")
+\keyword{ IO }
 \keyword{ utilities }

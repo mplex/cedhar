@@ -34,7 +34,7 @@ cln(x, level, what, na.rm, case, repl, unlist)
 }
 }
 \details{
-This function is meant to re-encode Greek (and other) characters in the \code{\link{EDH}} set given either as list format, 
+This function is meant to re-encode Greek (and other) characters in the \code{EDH} set given either as list format, 
 vector, or a dataframe produced with function \code{\link{edhw}} for example. 
 
 By default, the symbols \code{"?" "*" "+"} placed at the end of each record are removed after the re-encoding. 
@@ -65,13 +65,11 @@ Encoding more than once the same input requires re-starting the console; otherwi
 }
 
 \seealso{
-\code{\link{edhw}}, \code{\link{get.edh}}, \code{\link{edhwpd}}
+\code{\link{edhw}}, \code{\link{get.edh}}, \code{\link{edhwpd}}, \code{\link{cs}}
 }
 \examples{
 # clean Greek characters
 cln("Caesar?*+")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ utilities }% use one of  RShowDoc("KEYWORDS")
-\keyword{ manip }% use one of  RShowDoc("KEYWORDS")
+\keyword{ utilities }
+\keyword{ manip }

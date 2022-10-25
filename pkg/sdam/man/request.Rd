@@ -112,7 +112,5 @@ request("filename.extension", method="PUT", rm.file=TRUE)}
 request("filename.extension", method="DELETE")}
 
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ IO }% use one of  RShowDoc("KEYWORDS")
+\keyword{ IO }
 \keyword{ utilities }

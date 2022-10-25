@@ -1,9 +1,9 @@
 
 ## 
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.2.8 (23-08-2022)
+## version 0.4.0 (24-10-2022)
 ##
 ## PARAMETERS
 ##
@@ -21,7 +21,7 @@
 ## id       (integer or character, select only hd_nr records)
 ## na.rm    (logical, remove entries with missing data?)
 ## ldf      (experimental, is 'x' a list of data frames?)
-## province (choose EDH province, name or abbreviation)
+## province (choose EDH provinces, names or abbreviations)
 ## gender   (choose EDH gender)
 ## rp       (list of Roman provinces complementing the 'rp' dataset)
 
@@ -108,19 +108,41 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
             else {
                 NA
             }
-            if (isTRUE(province %in% names(rp)) == FALSE) {
-                if (isTRUE(province %in% rp) == FALSE) 
-                  stop("\"province\" not found. Use \"rp\" argument with province names.")
-                province <- names(rp)[which(rp %in% province)]
+            if (isTRUE(length(province) == 1) == TRUE) {
+                if (isTRUE(province %in% names(rp)) == FALSE) {
+                  if (isTRUE(province %in% rp) == FALSE) 
+                    stop("\"province\" not found. Use \"rp\" argument with province names.")
+                  province <- names(rp)[which(rp %in% province)]
+                }
+                else {
+                  NA
+                }
+                xp <- x[x$province_label == unlist(rp[which(names(rp) == 
+                  province)], use.names = FALSE), ]
+                xp <- xp[which(!(is.na(xp$province_label))), 
+                  ]
+                ifelse(missing(vars) == TRUE, NA, xp <- xp[, 
+                  -which(!(colnames(xp) %in% c(vars, "id")))])
+            }
+            else if (isTRUE(length(province) > 1) == TRUE) {
+                warning("Using veral provinces with DF is experimental.")
+                xl <- vector("list")
+                for (k in seq_len(length(province))) {
+                  xp <- x[x$province_label == unlist(rp[which(names(rp) == 
+                    province[k])], use.names = FALSE), ]
+                  xp <- xp[which(!(is.na(xp$province_label))), 
+                    ]
+                  ifelse(missing(vars) == TRUE, NA, xp <- xp[, 
+                    -which(!(colnames(xp) %in% c(vars, "id")))])
+                  xl <- append(xl, xp)
+                }
+                rm(k)
+                xp <- xl[order(unlist(lapply(xl, `[`, "id"), 
+                  use.names = FALSE))]
             }
             else {
                 NA
             }
-            xp <- x[x$province_label == unlist(rp[which(names(rp) == 
-                province)], use.names = FALSE), ]
-            xp <- xp[which(!(is.na(xp$province_label))), ]
-            ifelse(missing(vars) == TRUE, NA, xp <- xp[, -which(!(colnames(xp) %in% 
-                c(vars, "id")))])
         }
         else {
             xp <- x
@@ -221,7 +243,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   if (missing(province) == TRUE) {
                     return(x)
                   }
-                  else {
+                  else if (missing(province) == FALSE) {
                     if (missing(rp) == TRUE) {
                       utils::data("rp", package = "sdam", envir = environment())
                       rp <- get("rp", envir = environment())
@@ -229,14 +251,38 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                     else {
                       NA
                     }
-                    prvx <- x[which(sapply(lapply(x, `[`, c("id", 
-                      "province_label")), tail, 1) == unlist(rp[which(names(rp) == 
-                      province)], use.names = FALSE))]
-                    ifelse(isTRUE(length(prvx) > 0) == TRUE, 
-                      invisible(NA), prvx <- x[which(sapply(lapply(x, 
-                        `[`, c("id", "province_label")), tail, 
-                        1) == unlist(rp[which(rp == province)], 
-                        use.names = FALSE))])
+                    if (isTRUE(length(province) == 1) == TRUE) {
+                      prvx <- x[which(sapply(lapply(x, `[`, c("id", 
+                        "province_label")), tail, 1) == unlist(rp[which(names(rp) == 
+                        province)], use.names = FALSE))]
+                      ifelse(isTRUE(length(prvx) > 0) == TRUE, 
+                        invisible(NA), prvx <- x[which(sapply(lapply(x, 
+                          `[`, c("id", "province_label")), tail, 
+                          1) == unlist(rp[which(rp == province)], 
+                          use.names = FALSE))])
+                    }
+                    else if (isTRUE(length(province) > 1) == 
+                      TRUE) {
+                      xl <- vector("list")
+                      for (k in seq_len(length(province))) {
+                        prvx <- x[which(sapply(lapply(x, `[`, 
+                          c("id", "province_label")), tail, 1) == 
+                          unlist(rp[which(names(rp) == province[k])], 
+                            use.names = FALSE))]
+                        ifelse(isTRUE(length(prvx) > 0) == TRUE, 
+                          invisible(NA), prvx <- x[which(sapply(lapply(x, 
+                            `[`, c("id", "province_label")), 
+                            tail, 1) == unlist(rp[which(rp == 
+                            province[k])], use.names = FALSE))])
+                        xl <- append(xl, prvx)
+                      }
+                      rm(k)
+                      prvx <- xl[order(unlist(lapply(xl, `[`, 
+                        "id"), use.names = FALSE))]
+                    }
+                    else {
+                      NA
+                    }
                     ifelse(isTRUE(length(prvx) == 0) == TRUE, 
                       return(NULL), return(prvx))
                   }

@@ -96,24 +96,18 @@ A graphical plot.
 Antonio Rivero Ostoic
 }
 \note{
-If \code{x} is \code{NULL}, then \code{\link{EDH}} dataset is taken by default.
+If \code{x} is \code{NULL}, then \code{EDH} dataset is taken by default.
 }
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 \seealso{
 \code{\link{dts}}, \code{\link{get.edh}}, \code{\link{edhw}}, \code{\link{prex}}, \code{\link[tibble]{tibble}}
 }
 \examples{
-# first 100 entries in the EDH dataset
-data("EDH")
+\dontrun{
+# first 100 entries in the EDH dataset (default)
 EDHdates <- edhw(vars=c("not_after", "not_before"), as="df", limit=100)
 
 # timespans
-plot.dates(EDHdates, taq="not_before", tpq="not_after")
-
-# mid points
-plot.dates(EDHdates, type="mp", taq="not_before", tpq="not_after")
+plot.dates(EDHdates, taq="not_before", tpq="not_after")}
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ graphs }% use one of  RShowDoc("KEYWORDS")
+\keyword{ graphs }
 \keyword{ utilities }
