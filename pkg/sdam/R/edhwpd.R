@@ -3,7 +3,7 @@
 ## FUNCTION edhwpd() to organize EDH dataset province and dates by similarity
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.0.5 (31-08-2022)
+## version 0.0.3 (01-08-2022)
 ##
 ## PARAMETERS
 ##
@@ -28,19 +28,8 @@ function (x = "EDH", vars, province, dates, clean, ...)
     if (isTRUE(x == "EDH") == TRUE) {
         warning("\"x\" is for dataset \"EDH\".")
         if (!(exists("EDH"))) {
-            if (is.na(suppressMessages(request("EDH.rda", "https://github.com/", 
-                path = "sdam-au/sdam/raw/master/data/", anonymous = TRUE))) == 
-                TRUE) {
-                EDHurl <- "https://github.com/sdam-au/sdam/raw/master/data/EDH.rda"
-            }
-            else {
-                EDHurl <- "https://github.com/mplex/cedhar/raw/master/pkg/sdam/data/EDH.rda"
-            }
-            tmp <- tempfile()
-            utils::download.file(EDHurl, tmp)
-            load(gzfile(tmp))
-            unlink(tmp)
-            rm(tmp)
+            utils::data("EDH", package = "sdam", envir = environment())
+            EDH <- get("EDH", envir = environment())
         }
         else {
             NA
