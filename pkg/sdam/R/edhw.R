@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.4.1 (24-11-2022)
+## version 0.4.2 (25-11-2022)
 ##
 ## PARAMETERS
 ##
@@ -295,7 +295,6 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                     stop("Invalid \"id\".")
                   }
                   else {
-                    oid <- id
                     ifelse(is.character(id) == TRUE, id <- as.numeric(gsub("HD", 
                       "", id)), NA)
                   }
