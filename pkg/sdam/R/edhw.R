@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.4.0 (24-10-2022)
+## version 0.4.1 (24-11-2022)
 ##
 ## PARAMETERS
 ##
@@ -295,6 +295,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                     stop("Invalid \"id\".")
                   }
                   else {
+                    oid <- id
                     ifelse(is.character(id) == TRUE, id <- as.numeric(gsub("HD", 
                       "", id)), NA)
                   }
@@ -324,13 +325,13 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   id <- tmp
                 }
             }
-            ifelse(missing(id) == FALSE && isTRUE(flgdf == TRUE) == 
-                TRUE, x <- x[which(x$id %in% id), ], NA)
             ifelse(isTRUE(flgdf == TRUE) == TRUE || (missing(ldf) == 
                 FALSE && isTRUE(ldf == TRUE) == TRUE), return(x), 
                 vars <- unique(names(unlist(x))))
             ifelse(isTRUE("people" %in% vars) == TRUE || any(grepl("people.", 
                 vars, fixed = TRUE)) == TRUE, flgp <- TRUE, flgp <- FALSE)
+            ifelse(is.character(id) == TRUE, id <- as.numeric(gsub("HD", 
+                "", id)), NA)
         }
     }
     else if (missing(vars) == FALSE) {
@@ -634,6 +635,26 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   }
                 }
                 else {
+                  if (isTRUE(length(ids) == 1) == TRUE) {
+                    return(as.data.frame(edhl))
+                  }
+                  else {
+                    albs <- unique(unlist(pnames))
+                    edhldf <- data.frame(matrix(ncol = length(albs), 
+                      nrow = 0))
+                    for (k in seq_len(length(edhl))) {
+                      tmpdf <- data.frame(matrix(ncol = length(albs), 
+                        nrow = 1))
+                      tmpdf[1, as.vector(sapply(attr(edhl[[k]], 
+                        "names"), function(w) {
+                        which(w == albs)
+                      }))] <- unlist(edhl[[k]], use.names = FALSE)
+                      edhldf <- rbind(edhldf, tmpdf[1, ])
+                    }
+                    rm(k, tmpdf)
+                    colnames(edhldf) <- albs
+                    return(edhldf)
+                  }
                   edhlp <- lapply(edhlm, `[`, "people")
                   edhlp <- lapply(edhlp, setNames, "people")
                   edhlp <- lapply(edhlp, function(x) {
