@@ -3,7 +3,7 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire and the Mediterranean Basin
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.6 (02-09-2022)
+## version 0.1.4 (30-04-2022)
 ##
 ## OPTIONAL PARAMETERS
 ##
@@ -91,19 +91,8 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
     }
     else {
         if (!(exists("rpmp"))) {
-            if (is.na(suppressMessages(request("rpmp.rda", "https://github.com/", 
-                path = "sdam-au/sdam/raw/master/data/", anonymous = TRUE))) == 
-                TRUE) {
-                rpmpurl <- "https://github.com/sdam-au/sdam/raw/master/data/rpmp.rda"
-            }
-            else {
-                rpmpurl <- "https://github.com/mplex/cedhar/raw/master/pkg/sdam/data/rpmp.rda"
-            }
-            tmp <- tempfile()
-            utils::download.file(rpmpurl, tmp, quiet = TRUE)
-            load(gzfile(tmp))
-            unlink(tmp)
-            rm(tmp)
+            utils::data("rpmp", package = "sdam", envir = environment())
+            rpmp <- get("rpmp", envir = environment())
         }
         else {
             invisible(NA)

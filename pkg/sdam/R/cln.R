@@ -1,27 +1,3 @@
-
-## 
-## FUNCTION cln() to clean and re-encode glyphs and Greek characters
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
-##
-## version 0.4.4 (24-10-2022)
-##
-##
-## PARAMETERS
-##
-## x        (scalar or vector, with character to clean)
-## level    (clean level, 0 for no-clean, default 1 to 9)
-##
-## OPTIONAL PARAMETERS
-##
-## what     (additional characters to clean)
-## na.rm    (logical, remove NAs?)
-## case     (1 for 1st uppercase, 2 lower, 3 upper)
-## repl     (data frame with text for replacement)
-## unlist   (return vector when vector?)
-##
-## DEPENDS: cs() (if 'case')
-##
-
 cln <-
 function (x, level = 1, what, na.rm, case, repl, unlist) 
 {

@@ -1,31 +1,3 @@
-
-## 
-## FUNCTION prex() to compute probability of existence ot time events
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
-##
-## version 0.1.3 (14-06-2022)
-##
-## PARAMETERS
-## x        (list or data frame object with dating data)
-## type     (aoristic sum, mid point and range, other)
-## taq      (terminus ante quem)
-## tpq      (terminus post quem)
-## vars     (vector, variables or attributes to be chosen from x)
-## bins     (bin periods, integer)
-## cp       (chronological periods)
-##
-## OPTIONAL PARAMETERS
-##
-## weight   (weight to observations)
-## DF       (ignored if plot, data frame in output?)
-## out      (number of outliers to omit)
-## plot     (plot results?)
-## main     (plot's main title)
-## ylim     (limit y axis, only with plot)
-## keep     (only 'mp', keep variables in output?)
-## ...      (additional parameters)
-
-
 prex <-
 function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars, 
     bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 

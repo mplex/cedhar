@@ -1,7 +1,7 @@
 \name{cln}
 \alias{cln}
 \title{
-Clean and re-encode a vector, list or dataframe
+Cleanse and re-encode a vector, list or dataframe
 }
 \description{
 A function to re-encode Greek (and other) characters and to remove symbols.

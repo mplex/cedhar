@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.4.2 (25-11-2022)
+## version 0.4.1 (20-02-2023)
 ##
 ## PARAMETERS
 ##
@@ -324,13 +324,13 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   id <- tmp
                 }
             }
+            ifelse(missing(id) == FALSE && isTRUE(flgdf == TRUE) == 
+                TRUE, x <- x[which(x$id %in% id), ], NA)
             ifelse(isTRUE(flgdf == TRUE) == TRUE || (missing(ldf) == 
                 FALSE && isTRUE(ldf == TRUE) == TRUE), return(x), 
                 vars <- unique(names(unlist(x))))
             ifelse(isTRUE("people" %in% vars) == TRUE || any(grepl("people.", 
                 vars, fixed = TRUE)) == TRUE, flgp <- TRUE, flgp <- FALSE)
-            ifelse(is.character(id) == TRUE, id <- as.numeric(gsub("HD", 
-                "", id)), NA)
         }
     }
     else if (missing(vars) == FALSE) {
@@ -634,26 +634,6 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   }
                 }
                 else {
-                  if (isTRUE(length(ids) == 1) == TRUE) {
-                    return(as.data.frame(edhl))
-                  }
-                  else {
-                    albs <- unique(unlist(pnames))
-                    edhldf <- data.frame(matrix(ncol = length(albs), 
-                      nrow = 0))
-                    for (k in seq_len(length(edhl))) {
-                      tmpdf <- data.frame(matrix(ncol = length(albs), 
-                        nrow = 1))
-                      tmpdf[1, as.vector(sapply(attr(edhl[[k]], 
-                        "names"), function(w) {
-                        which(w == albs)
-                      }))] <- unlist(edhl[[k]], use.names = FALSE)
-                      edhldf <- rbind(edhldf, tmpdf[1, ])
-                    }
-                    rm(k, tmpdf)
-                    colnames(edhldf) <- albs
-                    return(edhldf)
-                  }
                   edhlp <- lapply(edhlm, `[`, "people")
                   edhlp <- lapply(edhlp, setNames, "people")
                   edhlp <- lapply(edhlp, function(x) {
@@ -723,32 +703,37 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
             }
             ids <- ids[which(is.na(pnames) == FALSE)]
             if (match.arg(type) == "long") {
-                if (isTRUE(length(edhlp) > 0) == TRUE && is.null(unlist(edhlp)) == 
-                  FALSE) {
-                  xdfp <- data.frame(matrix(ncol = length(plbs), 
-                    nrow = 0))
+                if (isTRUE(length(edhlp) > 0) == TRUE && is.null(unlist(edhlp)) == FALSE) {
+                  xdfp <- data.frame(matrix(ncol = length(plbs), nrow = 0))
                   colnames(xdfp) <- plbs
-                  xdfp0 <- lapply(edhlp, function(w) {
-                    if (is.null(unlist(w)) == FALSE && is.na(unlist(w)) == 
-                      FALSE) {
-                      tmpdf <- data.frame(matrix(ncol = length(plbs), 
-                        nrow = 0))
+#	lx<-lapply(edhlp,`[`,"people")
+#	ww <- which(is.na(unlist(lapply(lx, function(z) attr(z,"names")),use.names=FALSE))!=TRUE)
+#
+                  xdfp0 <- suppressWarnings(lapply(edhlp, function(w) {
+#                  xdfp0 <- lapply(edhlp, function(w) {
+#                    uw <- unlist(w,use.names=FALSE)
+#                    if(is.null(uw)==FALSE && is.na(uw)==FALSE) {
+                    if (is.null(unlist(w)) == FALSE && is.na(unlist(w)) == FALSE) {
+                      tmpdf <- data.frame(matrix(ncol = length(plbs), nrow = 0))
                       colnames(tmpdf) <- plbs
+#		      wp <- w$people
+#                      for (i in seq_len(length(wp))) {
+#                        wp[[i]] <- wp[[i]][order(names(wp[[i]]))]
+#                        wp[[i]][lengths(wp[[i]]) == 0L] <- NA
+#                        tmpdf[i, which((plbs %in% attr(wp[[i]],"names")))] <- as.vector(unlist(wp[[i]]))
+#                      }
                       for (i in seq_len(length(w$people))) {
                         w$people[[i]] <- w$people[[i]][order(names(w$people[[i]]))]
-                        w$people[[i]][lengths(w$people[[i]]) == 
-                          0L] <- NA
-                        tmpdf[i, which((plbs %in% attr(w$people[[i]], 
-                          "names")))] <- as.vector(unlist(w$people[[i]]))
+                        w$people[[i]][lengths(w$people[[i]]) == 0L] <- NA
+                        tmpdf[i, which((plbs %in% attr(w$people[[i]],"names")))] <- as.vector(unlist(w$people[[i]]))
                       }
                       rm(i)
                       xdfp <- rbind(xdfp, tmpdf)
                     }
-                    else {
-                      NA
-                    }
+                    else { NA }
                     return(xdfp)
-                  })
+                  }))
+#                  })
                   if (isTRUE(addID == TRUE) == TRUE) {
                     for (k in seq_len(length(xdfp0))) {
                       ifelse(isTRUE(nrow(xdfp0[[k]]) == 0) == 

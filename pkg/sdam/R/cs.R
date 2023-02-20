@@ -1,18 +1,3 @@
-
-## 
-## INTERNAL FUNCTION cs() for case sensitive text in cln()
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
-##
-## version 0.0.4 (24-10-2022)
-##
-## PARAMETERS
-## xz       (list, vector, or data frame with characters)
-## level    (clean level, 0 for no-clean, default 1 or 2 with 'what')
-## case     (1 for 1st uppercase, 2 lower, 3 upper)
-## flgdf    (logical, dataframe?)
-## na.rm    (logical, remove NAs?)
-
-
 cs <-
 function (xz, level = 1, case = 1, flgdf = FALSE, na.rm = FALSE) 
 {

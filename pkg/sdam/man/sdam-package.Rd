@@ -13,8 +13,8 @@
 \tabular{ll}{
 Package: \tab sdam \cr
 Type: \tab Package \cr
-Version: \tab 1.1.7 \cr
-Date: \tab 24 November 2022 \cr
+Version: \tab 1.1.7-3 \cr
+Date: \tab 2 February 2023 \cr
 License: \tab CC BY-SA 4.0 \cr
 }
 
@@ -28,7 +28,7 @@ and its neighbouring regions in the antiquity period before the Middle Ages.
 Currently, it is possible to access data of writing material from the Epigraphic Database Heidelberg API with function \code{\link{get.edh}} 
 and the wrapper function \code{\link{get.edhw}}. Most of the epigraphic data, at least until 10-11-2020, is available 
 in the \code{EDH} dataset, which can be transformed in diverse ways by using function \code{\link{edhw}} and function \code{\link{cln}} for re-encoding and 
-cleaning portions of text in inscriptions in the \code{EDH} dataset.
+cleansing portions of text in inscriptions in the \code{EDH} dataset.
 
 With function \code{\link{prex}}, there is also the possibility to compute probabilities of existence of inscriptions and 
 other artefacts with either the aoristic sum or count matching for observations for different periodization options. 

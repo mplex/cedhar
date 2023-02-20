@@ -1,16 +1,3 @@
-
-## 
-## FUNCTION rmids() for restricted multiply-imputed data subsets
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
-##
-## version 0.0.6 (29-08-2022)
-##
-## PARAMETERS
-## x         (data set to impute, dataframe or lists of dataframes)
-## vars      (attribute variables in x, optional vector)
-## collapse  (collapse list of dataframes?, optional and logical)
-
-
 rmids <-
 function (x, vars, collapse, pool, type = c("1", "2")) 
 {
