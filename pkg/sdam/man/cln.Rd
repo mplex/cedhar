@@ -1,24 +1,23 @@
 \name{cln}
 \alias{cln}
 \title{
-Cleanse and re-encode a vector, list or dataframe
+Cleansing and re-encoding a vector, list or dataframe
 }
 \description{
-A function to re-encode Greek (and other) characters and to remove symbols.
+A wrapper function to re-encode Greek and Latin extended characters and to remove symbols from text.
 }
 \usage{
-cln(x, level, what, na.rm, case, repl, unlist)
+cln(x, level = 1, chr.rm, na.rm, case, repl)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-    a vector, list or dataframe
+    a vector, list or dataframe with text for cleansing
 }
   \item{level}{
-    optional clean level, either \code{0} for no-clean, default \code{1} to most strict \code{9} (see details)
+    optional clean level, either \code{0} for no-cleansing, default \code{1} to \code{3} (see details)
 }
-  \item{what}{
-    additional characters to clean (optional)
+  \item{chr.rm}{
+    characters to remove (optional)
 }
   \item{na.rm}{
    remove entries with NA data? (optional and logical)
@@ -29,26 +28,19 @@ cln(x, level, what, na.rm, case, repl, unlist)
   \item{repl}{
    data frame with text to replace (optional)
 }
-  \item{unlist}{
-   return a vector? (optional and logical, for vector input)
-}
 }
 \details{
 This function is meant to re-encode Greek (and other) characters in the \code{EDH} set given either as list format, 
 vector, or a dataframe produced with function \code{\link{edhw}} for example. 
 
-By default, the symbols \code{"?" "*" "+"} placed at the end of each record are removed after the re-encoding. 
-However, when level is \code{0} only re-encoding is performed, and level \code{2} is either to force an extra iteration 
-in the re-encoding, to remove extra spaces, or what is in \code{what} at the end of a record when clean what is invoked. 
-With level \code{9} all content after an opening parenthesis is removed with all the consequences for the input text. 
+When \code{level} is \code{0} only the input is returned. Use level \code{2} for text in Latin adn Greek mixed, and 
+level \code{3}  to force an extra iteration in the cleansing.
+in the re-encoding, to remove extra spaces, or what is in \code{chr.rm} at the end of a record when clean what is invoked. 
 
 With \code{repl}, is possible to replace a list of text in two columns, for `text to replace' and for `text that replaces'. 
-
-Disabling option \code{unlist} returns a vector in case that \code{x} is also a vector; otherwise, it returns a list with the two 
-versions of the input.
 }
 \value{
-Depending on the input, a vector, list or dataframe.
+Depending on the input, a vector or dataframe with text cleansed.
 }
 %\references{
 %% ~put references to the literature/web site here ~
@@ -56,20 +48,21 @@ Depending on the input, a vector, list or dataframe.
 \author{
 Antonio Rivero Ostoic
 }
-%\note{
-%%  ~~further notes~~
-%}
+\note{
+This function is meant for the \code{EDH} dataset. 
+}
 
 \section{Warning }{
-Encoding more than once the same input requires re-starting the console; otherwise, the re-encoding is not complete.
+Re-encoding tests where made on a Windows platform with \emph{locale} \code{Danish_Denmark.utf8}; see \code{?Sys.setlocale()} 
+to eventually change this setting.
 }
 
 \seealso{
-\code{\link{edhw}}, \code{\link{get.edh}}, \code{\link{edhwpd}}, \code{\link{cs}}
+\code{\link{edhw}}, \code{\link{get.edh}}, \code{\link{edhwpd}}, \code{\link{cs}}, \code{\link{clv}}
 }
 \examples{
 # clean Greek characters
-cln("Caesar?*+")
+cln("Caesar?*+", chr.rm=c("*","+"))
 }
 \keyword{ utilities }
 \keyword{ manip }

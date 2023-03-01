@@ -1,3 +1,35 @@
+
+## 
+## PLOT FUNCTION plot.dates() to plot time intervals
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+##
+## version 0.1.7 (09-08-2022)
+##
+## PARAMETERS
+## x      (data frame or table of variables and observations)
+## type   (timespans, mid point and range, only range)
+## taq    (terminus ante quem)
+## tpq    (terminus post quem)
+## 
+## OPTIONAL PARAMETERS
+## y      (optional identifiers)
+## id     (IDs as variable or rownames in x)
+## out    (number of outliers to omit)
+## col    (colors of pch and time interval segment)
+## cex    (size of pch)
+## lwd    (width)
+## lty    (shape)
+## pch    (symbol for taq and tpq)
+## main   (main tile)
+## xlab   (x label)
+## ylab   (y label)
+## xlim   (x limit)
+## axes   (includes axes in plot?)
+## alpha  (alpha color transparency)
+## file   (path to file for a PDF format)
+## ...    (other optional parameters)
+
+
 plot.dates <-
 function (x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
     col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 

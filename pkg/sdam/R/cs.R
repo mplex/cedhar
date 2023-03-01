@@ -1,11 +1,29 @@
+
+## 
+## INTERNAL FUNCTION cs() for case sensitive text in cln()
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
+##
+## version 0.1.0 (01-03-2023)
+##
+## PARAMETERS
+## xz       (list, vector, or data frame with characters)
+## level    (clean level, 2 for Latin-Greek mixed text)
+## case     (1 for 1st uppercase, 2 lower, 3 upper)
+## na.rm    (logical, remove NAs?)
+
+
 cs <-
-function (xz, level = 1, case = 1, flgdf = FALSE, na.rm = FALSE) 
+function (xz, level = 1, case = 0, na.rm = FALSE) 
 {
+    ifelse(isTRUE(is.data.frame(xz) == TRUE) == TRUE, flgdf <- TRUE, 
+        flgdf <- FALSE)
     if (isTRUE(flgdf == TRUE) == TRUE) {
         xzl <- xz
         if (isTRUE(case == 1L) == TRUE) {
-            xzl[] <- lapply(xz, function(z) {
-                gsub("(^[[:alpha:]])", "\\U\\1", z, perl = TRUE)
+            xzl[] <- sapply(xz, function(w) {
+                s <- strsplit(w, " ")[[1]]
+                paste(toupper(substring(s, 1, 1)), substring(s, 
+                  2), sep = "", collapse = " ")
             })
             ifelse(isTRUE(level > 1) == TRUE, xzl[] <- lapply(xz, 
                 function(z) {
@@ -24,10 +42,11 @@ function (xz, level = 1, case = 1, flgdf = FALSE, na.rm = FALSE)
     }
     else {
         if (isTRUE(case == 1L) == TRUE) {
-            xz <- gsub("\\b([[:lower:]])([[:lower:]]+)", "\\U\\1\\L\\2", 
-                xz, perl = TRUE)
-            xz <- gsub("\\b([[:upper:]])([[:upper:]]+)", "\\U\\1\\L\\2", 
-                xz, perl = TRUE)
+            xz <- sapply(xz, function(w) {
+                s <- strsplit(w, " ")[[1]]
+                paste(toupper(substring(s, 1, 1)), substring(s, 
+                  2), sep = "", collapse = " ")
+            })
         }
         else if (isTRUE(case == 2L) == TRUE) {
             xz <- lapply(xz, tolower)
@@ -48,5 +67,5 @@ function (xz, level = 1, case = 1, flgdf = FALSE, na.rm = FALSE)
         ifelse(isTRUE(level > 0) == TRUE, xz[xz == ""] <- NA, 
             invisible(NA))
     }
-    return(xz)
+    ifelse(isTRUE(flgdf == TRUE) == TRUE, return(xz), return(as.vector(xz)))
 }

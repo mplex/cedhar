@@ -1,3 +1,43 @@
+
+## 
+## FUNCTION get.edh() to get data API from the Epigraphic Database Heidelberg EDH
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+##
+## version 0.3.2 (31-08-2022)
+##
+## Parameter description NEW API YEAR 2022 https://edh.ub.uni-heidelberg.de/data/api
+##
+## search (whether to search in "inscriptions" or in "geography")
+
+## SEARCH PARAMETERS FOR INSCRIPTIONS AND GEOGRAPHY:
+## GET LIST OF VALID CODES FOR PROVINCES, COUNTRIES AND TYPE OF INSCRIPTIONS AT https://edh.ub.uni-heidelberg.de/data/api
+## province (Roman province, case insensitive)
+## country (modern country, case insensitive)
+## findspot_modern (add leading and/or trailing truncation by asterisk *
+## findspot_ancient (add leading and/or trailing truncation by asterisk *
+## bbox (bounding box in the format bbox=minLong , minLat , maxLong , maxLat, query example: https://edh.ub.uni-heidelberg.de/data/api/inschrift/suche?bbox=11,47,12,48)
+## offset (which row to start from retrieving data, integer)
+## limit (limit the number of results, integer or vector)
+##
+## SEARCH PARAMETERS FOR INSCRIPTIONS:
+## hd_nr (HD-No of inscription)
+## year_not_before (integer, BC years are negative integers)
+## year_not_after (integer, BC years are negative integers)
+## tm_nr (integer, Trismegistos ID)
+## transcription (automatic leading & trailing truncation, brackets are ignored)
+## type (type of inscription, case insensitive)
+##
+## SEARCH PARAMETERS FOR GEOGRAPHY:
+## findspot (level of village, street etc.; add leading and/or trailing truncation by asterisk *
+## pleiades_id (Pleiades identifier of a place; integer value)
+## geonames_id (Geonames identifier of a place; integer value)
+## 
+## ADDITIONAL PARAMETERS:
+## maxlimit (maximum limit of the query; integer with default value)
+## addID (whether or not add numeric ID to the list)
+## printQ (also print query?)
+
+
 get.edh <-
 function (search = c("inscriptions", "geography"), url = "https://edh.ub.uni-heidelberg.de/data/api", 
     hd_nr, province, country, findspot_modern, findspot_ancient, 
