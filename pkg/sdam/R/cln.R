@@ -3,7 +3,7 @@
 ## FUNCTION cln() for cleansing and re-encoding glyphs and Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.5.2 (01-03-2023)
+## version 0.5.3 (01-03-2023)
 ##
 ##
 ## PARAMETERS
@@ -153,8 +153,15 @@ function (x, level = 1, chr.rm, na.rm, case, repl)
                 res <- resl
                 attr(res, "names") <- attr(x, "names")
             }
-            ifelse(missing(na.rm) == FALSE && isTRUE(na.rm == 
-                TRUE) == TRUE, return(res[!is.na(res)]), return(res))
+            if (missing(na.rm) == FALSE && isTRUE(na.rm == TRUE) == 
+                TRUE) {
+                ifelse(isTRUE(is.list(xo) == FALSE) == TRUE, 
+                  return(unlist(res[!is.na(res)])), return(res[!is.na(res)]))
+            }
+            else {
+                ifelse(isTRUE(is.list(xo) == FALSE) == TRUE, 
+                  return(unlist(res)), return(res))
+            }
         }
     }
 }
