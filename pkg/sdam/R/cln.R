@@ -3,7 +3,7 @@
 ## FUNCTION cln() for cleansing and re-encoding glyphs and Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.5.3 (01-03-2023)
+## version 0.5.4 (06-03-2023)
 ##
 ##
 ## PARAMETERS
@@ -41,8 +41,8 @@ function (x, level = 1, chr.rm, na.rm, case, repl)
         else {
             invisible(NA)
         }
-        rnx <- rownames(x)
         if (missing(chr.rm) == FALSE) {
+            rnx <- rownames(x)
             for (w in seq_len(length(chr.rm))) {
                 x <- as.data.frame(sapply(x, function(z) as.list(gsub(paste0("\\", 
                   chr.rm[w], sep = ""), "", z))), check.names = FALSE)
@@ -100,8 +100,14 @@ function (x, level = 1, chr.rm, na.rm, case, repl)
             resdf[resdf == ""] <- NA
             if (isTRUE(attr(resdf, "names")[1] == "id") == TRUE) {
                 df <- resdf[, 2:ncol(resdf)]
-                return(resdf[-which(rowSums(is.na(df)) == ncol(df)), 
-                  ])
+                if (isTRUE(length(which(rowSums(is.na(df)) == 
+                  ncol(df))) == 0) == TRUE) {
+                  return(resdf)
+                }
+                else {
+                  return(resdf[-which(rowSums(is.na(df)) == ncol(df)), 
+                    ])
+                }
             }
             else {
                 return(resdf[-which(rowSums(is.na(resdf)) == 
