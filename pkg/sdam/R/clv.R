@@ -3,7 +3,7 @@
 ## INTERNAL FUNCTION clv() for cleansing vectors in cln()
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.2.0 (01-03-2023)
+## version 0.2.4 (17-04-2023)
 ##
 ## PARAMETERS
 ## x        (vector with text for cleansing)
@@ -11,10 +11,11 @@
 ## case     (1 for 1st uppercase, 2 lower, 3 upper)
 ## chr.rm   (vector of characters to remove)
 ## na.rm    (logical, remove NAs?)
+## space    (1 double to single space/space at end, 2 around -/=)
 
 
 clv <-
-function (x, level = 1, case, chr.rm, na.rm = FALSE) 
+function (x, level = 1, case, chr.rm, na.rm = FALSE, space) 
 {
     xo <- x
     ifelse(is.factor(x) == TRUE, x <- as.vector(x), NA)
@@ -23,6 +24,26 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE)
     is.na(x) <- x == "NULL"
     x[x == ""] <- NA
     x[x == "NA"] <- NA
+    if (missing(space) == FALSE && is.numeric(space) == TRUE) {
+        if (isTRUE(space > 0) == TRUE) {
+            x <- gsub("\\s+", " ", x)
+            x <- gsub("\\s$", "", x)
+            if (isTRUE(space > 1) == TRUE) {
+                x <- gsub("-\\s", "-", x)
+                x <- gsub("\\s-", "-", x)
+                x <- gsub("/\\s", "/", x)
+                x <- gsub("\\s/", "/", x)
+                x <- gsub("=\\s", "=", x)
+                x <- gsub("\\s=", "=", x)
+            }
+            else {
+                NA
+            }
+        }
+        else {
+            NA
+        }
+    }
     xx1 <- strsplit(x, "")[[1]]
     if (isTRUE(level > 0) == TRUE && (isTRUE("<" %in% xx1) == 
         TRUE && isTRUE(">" %in% xx1) == TRUE)) {
@@ -38,19 +59,36 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE)
             "90", "91", "92", "93", "94", "95", "96", "97", "99", 
             "99", "9A", "9B", "9C", "9D", "9E", "9F")
         ck <- which(xx1 %in% "<")
+        ck2 <- which(xx1 %in% ">")
         x0 <- vector()
         ifelse(isTRUE(ck[1] == 1) == TRUE, NA, x0 <- append(x0, 
             xx1[1:ck[1] - 1L]))
         for (i in seq_len(length(ck))) {
-            x0 <- append(x0, as.vector(dbe[which(names(dbe) %in% 
-                paste(xx1[(ck[i] + 5L):(ck[i] + 6L)], collapse = ""))]))
-            if (isTRUE(ck[i] == max(ck)) == TRUE) {
-                ifelse(isTRUE(tail(xx1, 1) == ">") == TRUE, NA, 
-                  x0 <- append(x0, xx1[(ck[i] + 8L):length(xx1)]))
+            if (isTRUE(ck2[i] - ck[i] < 3L) == TRUE || isTRUE(length(which(names(dbe) %in% 
+                paste(xx1[(ck[i] + 5L):(ck[i] + 6L)], collapse = ""))) == 
+                0) == TRUE) {
+                warning(c("Couldn't resolve \"", paste(xx1[ck[i]:ck2[i]], 
+                  collapse = ""), "\""), call. = FALSE)
+                if (isTRUE(length(ck2) == i) == TRUE || isTRUE(length(x0) == 
+                  tail(ck2, 1)) == TRUE) {
+                  x0 <- append(x0, xx1[ck[i]:length(xx1)])
+                  break
+                }
+                else {
+                  x0 <- append(x0, xx1[ck[i]:ck2[i + 1]])
+                }
             }
             else {
-                x0 <- append(x0, xx1[(ck[i] + 8L):(ck[i + 1L] - 
-                  1L)])
+                x0 <- append(x0, as.vector(dbe[which(names(dbe) %in% 
+                  paste(xx1[(ck[i] + 5L):(ck[i] + 6L)], collapse = ""))]))
+                if (isTRUE(ck[i] == max(ck)) == TRUE) {
+                  ifelse(isTRUE(tail(xx1, 1) == ">") == TRUE, 
+                    NA, x0 <- append(x0, xx1[(ck[i] + 8L):length(xx1)]))
+                }
+                else {
+                  x0 <- append(x0, xx1[(ck[i] + 8L):(ck[i + 1L] - 
+                    1L)])
+                }
             }
         }
         rm(i)
@@ -100,7 +138,36 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE)
             return(x1)
         }
     }
-    xx <- strsplit(rawToChar(as.raw(utix1)), "")[[1]]
+    if (isTRUE(length(gs1) == 0) == TRUE) {
+        xx <- strsplit(rawToChar(as.raw(utix1)), "")[[1]]
+    }
+    else {
+        if (isTRUE(length(gs1 == 1L) == TRUE)) {
+            xx <- c(xx1[1:(gs1 - 1)], xx1[gs1], xx1[(gs1 + 1):length(xx1)])
+        }
+        else {
+            k <- 1
+            xx <- c(xx1[1:(gs1[k] - 1)], xx1[gs1[k]], xx1[(gs1[k] + 
+                1):(gs1[k + 1] - 1)])
+            for (i in gs1) {
+                if (isTRUE(length(xx) == length(xx1)) == TRUE) {
+                  NA
+                }
+                else {
+                  k <- k + 1L
+                  if (isTRUE(k == length(gs1)) == TRUE) {
+                    xx <- append(xx, c(xx1[gs1[k]], xx1[(gs1[k] + 
+                      1):length(xx1)]))
+                  }
+                  else {
+                    xx <- append(xx, xx1[gs1[k]], xx1[(gs1[k] + 
+                      1):(gs1[k + 1] - 1)])
+                  }
+                }
+            }
+            rm(i)
+        }
+    }
     if (isTRUE(length(c(gs2, gs2a, gs3)) == 0) == TRUE | isTRUE(flgc == 
         FALSE) == TRUE) {
         res <- paste(xx, collapse = "")

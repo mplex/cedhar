@@ -7,7 +7,7 @@ Cleansing vector text
 Internal function for cleansing and re-encoding text in vector format.
 }
 \usage{
-clv(x, level = 1, case, chr.rm, na.rm = FALSE)
+clv(x, level = 1, case, chr.rm, na.rm = FALSE, space)
 }
 \arguments{
   \item{x}{
@@ -24,6 +24,9 @@ clv(x, level = 1, case, chr.rm, na.rm = FALSE)
 }
   \item{na.rm}{
    remove entries with NA data?
+}
+  \item{space}{
+    optional remove extra spaces,\code{1} double to single spaces/space at end, \code{2} remove also spaces around \code{ / }, \code{ - },  and \code{ = }
 }
 }
 \details{

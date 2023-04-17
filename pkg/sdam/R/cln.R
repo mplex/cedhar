@@ -3,7 +3,7 @@
 ## FUNCTION cln() for cleansing and re-encoding glyphs and Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.5.4 (06-03-2023)
+## version 0.5.6 (17-04-2023)
 ##
 ##
 ## PARAMETERS
@@ -17,13 +17,14 @@
 ## na.rm    (logical, remove NAs?)
 ## case     (1 for 1st uppercase, 2 lower, 3 upper)
 ## repl     (data frame with text for replacement)
+## space    (1 double to single space/space at end, 2 around -/=)
 ##
 ## DEPENDS: clv() (cleansing vector)
 ##          cs() (if 'case')
 ##
 
 cln <-
-function (x, level = 1, chr.rm, na.rm, case, repl) 
+function (x, level = 1, chr.rm, na.rm, case, repl, space) 
 {
     if (isTRUE(level == 0) == TRUE) 
         return(x)
@@ -54,26 +55,26 @@ function (x, level = 1, chr.rm, na.rm, case, repl)
         x[x == ""] <- NA
         xdf <- data.frame(x, stringsAsFactors = FALSE, check.names = FALSE)
         x <- as.list(sapply(xdf, as.character))
-        xx1 <- strsplit(paste(as.vector(unlist(x)), collapse = ""), 
-            "")[[1]]
-        ifelse(isTRUE(level > 0) == TRUE && (isTRUE("<" %in% 
-            xx1) == TRUE && isTRUE(">" %in% xx1) == TRUE), flgx <- TRUE, 
-            flgx <- FALSE)
         ifelse(isTRUE(typeof(x) == "list") == TRUE, x1 <- unlist(x, 
             use.names = FALSE), x1 <- as.vector(x))
         resl <- vector("list", length = length(x1))
         for (k in seq_len(length(x1))) {
             xi <- as.character(x1[k])
             resl[[k]] <- clv(xi, level = level, chr.rm = chr.rm, 
-                case = case, na.rm = na.rm)
+                case = case, na.rm = na.rm, space = space)
         }
         rm(k)
         resdf <- data.frame(matrix(unlist(resl), ncol = ncol(xdf), 
             byrow = FALSE, dimnames = list(rownames(xdf), colnames(xdf))), 
             check.names = FALSE, stringsAsFactors = FALSE)
-        ifelse(isTRUE(level > 0) == TRUE, resdf <- data.frame(lapply(resdf, 
-            trimws), stringsAsFactors = FALSE, check.names = FALSE), 
-            invisible(NA))
+        if (isTRUE(level > 0) == TRUE) {
+            resdf <- data.frame(lapply(resdf, trimws), stringsAsFactors = FALSE, 
+                check.names = FALSE)
+            rownames(resdf) <- rownames(xdf)
+        }
+        else {
+            NA
+        }
         if (missing(repl) == FALSE) {
             if (is.vector(repl) == TRUE && is.data.frame(repl) == 
                 FALSE) {
@@ -131,12 +132,14 @@ function (x, level = 1, chr.rm, na.rm, case, repl)
             names(x1) <- xo
             if (isTRUE(level == 3) == TRUE) {
                 res <- clv(clv(x1, level = level, chr.rm = chr.rm, 
-                  case = case, na.rm = na.rm))
+                  case = case, na.rm = na.rm, space = space))
+                names(res) <- xo
                 return(res)
             }
             else {
                 res <- clv(x1, level = level, chr.rm = chr.rm, 
-                  case = case, na.rm = na.rm)
+                  case = case, na.rm = na.rm, space = space)
+                names(res) <- xo
                 return(res)
             }
         }
@@ -145,7 +148,7 @@ function (x, level = 1, chr.rm, na.rm, case, repl)
             for (k in seq_len(length(x1))) {
                 xi <- as.character(x1[k])
                 resl[[k]] <- clv(xi, level = level, chr.rm = chr.rm, 
-                  case = case, na.rm = na.rm)
+                  case = case, na.rm = na.rm, space = space)
             }
             rm(k)
             if (isTRUE(length(x1[[1]]) == 1) == FALSE) {
