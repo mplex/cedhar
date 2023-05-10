@@ -3,7 +3,7 @@
 ## INTERNAL FUNCTION clv() for cleansing vectors in cln()
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.2.4 (17-04-2023)
+## version 0.2.5 (10-05-2023)
 ##
 ## PARAMETERS
 ## x        (vector with text for cleansing)
@@ -128,6 +128,13 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE, space)
     else {
         gs3 <- NULL
     }
+    gsx <- which(as.raw(utix1) %in% c("9f"))
+    if (isTRUE(length(gsx) > 0) == TRUE) {
+        gs1 <- gs1[-which(gs1 %in% (gsx - 1L))]
+    }
+    else {
+        NA
+    }
     if (isTRUE(length(c(gs1, gs2, gs2a, gs3)) == 0) == TRUE) {
         if (missing(case) == FALSE && is.numeric(case) == TRUE) {
             x1c <- cs(x1, level = level, case = case, na.rm = na.rm)
@@ -142,13 +149,14 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE, space)
         xx <- strsplit(rawToChar(as.raw(utix1)), "")[[1]]
     }
     else {
-        if (isTRUE(length(gs1 == 1L) == TRUE)) {
+        if (isTRUE(length(gs1) == 1L) == TRUE) {
             xx <- c(xx1[1:(gs1 - 1)], xx1[gs1], xx1[(gs1 + 1):length(xx1)])
         }
         else {
             k <- 1
             xx <- c(xx1[1:(gs1[k] - 1)], xx1[gs1[k]], xx1[(gs1[k] + 
                 1):(gs1[k + 1] - 1)])
+            lxx <- length(xx)
             for (i in gs1) {
                 if (isTRUE(length(xx) == length(xx1)) == TRUE) {
                   NA
@@ -159,9 +167,13 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE, space)
                     xx <- append(xx, c(xx1[gs1[k]], xx1[(gs1[k] + 
                       1):length(xx1)]))
                   }
-                  else {
+                  else if (isTRUE(length(gs1) > k) == TRUE) {
                     xx <- append(xx, xx1[gs1[k]], xx1[(gs1[k] + 
                       1):(gs1[k + 1] - 1)])
+                  }
+                  else {
+                    warning(c("Couldn't resolve \"", xx, "\""), 
+                      call. = FALSE)
                   }
                 }
             }

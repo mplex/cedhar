@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.5.4 (28-02-2023)
+## version 0.5.5 (10-05-2023)
 ##
 ## PARAMETERS
 ##
@@ -843,6 +843,8 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                       TRUE || isTRUE(!("id" %in% colnames(xdfq))) == 
                       TRUE, NA, xdfpq$id <- paste("HD", xdfpq$id, 
                       sep = ""))
+                    ifelse(isTRUE(flgp == TRUE) == TRUE, xdfpq <- subset(xdfpq, 
+                      select = -c(people)), NA)
                     if (isTRUE(na.rm == TRUE) == TRUE) {
                       if (isTRUE(nrow(xdfpq) != 0) == TRUE && 
                         isTRUE(addID == TRUE) == TRUE) {
