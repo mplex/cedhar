@@ -1,9 +1,9 @@
 
 ## 
 ## FUNCTION prex() to compute probability of existence ot time events
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.1.3 (14-06-2022)
+## version 0.1.5 (10-05-2023)
 ##
 ## PARAMETERS
 ## x        (list or data frame object with dating data)
@@ -12,7 +12,7 @@
 ## tpq      (terminus post quem)
 ## vars     (vector, variables or attributes to be chosen from x)
 ## bins     (bin periods, integer)
-## cp       (chronological periods)
+## cp       (chronological periods, list or list of lists)
 ##
 ## OPTIONAL PARAMETERS
 ##

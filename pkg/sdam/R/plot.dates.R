@@ -1,9 +1,9 @@
 
 ## 
 ## PLOT FUNCTION plot.dates() to plot time intervals
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.1.7 (09-08-2022)
+## version 0.1.8 (10-05-2023)
 ##
 ## PARAMETERS
 ## x      (data frame or table of variables and observations)

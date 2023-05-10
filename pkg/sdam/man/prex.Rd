@@ -44,7 +44,7 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
 
          \code{"bin8"} eight-bins from the antiquity period
 
-         list with a customized chronological phase
+         list or list of lists with a customized chronological phases
 }
   \item{weight}{
   value to observations (optional)
@@ -73,7 +73,8 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
 }
 \details{
 Currently, the probability of existence of the observations is the \emph{aoristic sum} computed across events for portions of time 
-delimited by a TAQ in \code{taq} and TPQ in \code{tpq}, which are endpoints from the stance of the timespan. 
+delimited by a \emph{terminus ante quem} or TAQ in \code{taq} and a \emph{terminus post quem} or TPQ in \code{tpq}, 
+which are endpoints from the stance of the timespan. 
 Alternatively, these two boundaries of existence of x are specified in \code{vars}. 
 
 In case the \code{bins} are set to \code{NULL}, then the time breaks take the chronological periods in \code{cp}, which by default 

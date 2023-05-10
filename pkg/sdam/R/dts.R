@@ -1,9 +1,9 @@
 
 ## 
 ## FUNCTION dts() for converting dates to numerical format
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.1.1 (21-08-2022)
+## version 0.1.2 (10-05-2023)
 ##
 ## PARAMETERS
 ## x        (scalar, vector or list with character dates)

@@ -3,7 +3,7 @@
 ## FUNCTION cln() for cleansing and re-encoding glyphs and Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.5.6 (17-04-2023)
+## version 0.5.7 (10-05-2023)
 ##
 ##
 ## PARAMETERS
@@ -17,7 +17,6 @@
 ## na.rm    (logical, remove NAs?)
 ## case     (1 for 1st uppercase, 2 lower, 3 upper)
 ## repl     (data frame with text for replacement)
-## space    (1 double to single space/space at end, 2 around -/=)
 ##
 ## DEPENDS: clv() (cleansing vector)
 ##          cs() (if 'case')
@@ -60,8 +59,14 @@ function (x, level = 1, chr.rm, na.rm, case, repl, space)
         resl <- vector("list", length = length(x1))
         for (k in seq_len(length(x1))) {
             xi <- as.character(x1[k])
-            resl[[k]] <- clv(xi, level = level, chr.rm = chr.rm, 
-                case = case, na.rm = na.rm, space = space)
+            if (isTRUE(level == 3) == TRUE) {
+                resl[[k]] <- clv(clv(xi, level = level, chr.rm = chr.rm, 
+                  case = case, na.rm = na.rm, space = space))
+            }
+            else {
+                resl[[k]] <- clv(xi, level = level, chr.rm = chr.rm, 
+                  case = case, na.rm = na.rm, space = space)
+            }
         }
         rm(k)
         resdf <- data.frame(matrix(unlist(resl), ncol = ncol(xdf), 
@@ -99,8 +104,8 @@ function (x, level = 1, chr.rm, na.rm, case, repl, space)
             TRUE) {
             is.na(resdf) <- resdf == "NULL"
             resdf[resdf == ""] <- NA
-            if (isTRUE(attr(resdf, "names")[1] == "id") == TRUE) {
-                df <- resdf[, 2:ncol(resdf)]
+            if (isTRUE("id" %in% attr(resdf, "names")) == TRUE) {
+                df <- resdf[, which(attr(resdf, "names") != "id")]
                 if (isTRUE(length(which(rowSums(is.na(df)) == 
                   ncol(df))) == 0) == TRUE) {
                   return(resdf)
@@ -111,8 +116,18 @@ function (x, level = 1, chr.rm, na.rm, case, repl, space)
                 }
             }
             else {
-                return(resdf[-which(rowSums(is.na(resdf)) == 
-                  ncol(resdf)), ])
+                if (isTRUE(ncol(xo) == 1L) == TRUE) {
+                  resdf1 <- as.data.frame(resdf[-which(rowSums(is.na(resdf)) == 
+                    ncol(resdf)), ])
+                  rownames(resdf1) <- names(which(rowSums(is.na(resdf)) != 
+                    ncol(resdf)))
+                  colnames(resdf1) <- colnames(resdf)
+                  return(resdf1)
+                }
+                else {
+                  return(resdf[-which(rowSums(is.na(resdf)) == 
+                    ncol(resdf)), ])
+                }
             }
         }
         else {
@@ -151,7 +166,7 @@ function (x, level = 1, chr.rm, na.rm, case, repl, space)
                   case = case, na.rm = na.rm, space = space)
             }
             rm(k)
-            if (isTRUE(length(x1[[1]]) == 1) == FALSE) {
+            if (isTRUE(length(x1[[1]]) == 1L) == FALSE) {
                 res <- unlist(resl, use.names = FALSE)
             }
             else {
