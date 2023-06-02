@@ -8,7 +8,7 @@ A function to plot interval dates with different forms.
 }
 \usage{
 \method{plot}{dates}(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
-    col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
+    col, cex, lwd, lty, pch, bty = NULL, main = NULL, xlab = NULL, ylab = NULL, 
     xlim = NULL, axes = TRUE, alpha, file = NULL, \dots)
 %plot.dates(x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
 %    col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
@@ -17,7 +17,7 @@ A function to plot interval dates with different forms.
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-  dataset as a data frame object of variables and observations. 
+  dataset as a data frame or list of data frames with variables and observations. 
 }
   \item{y}{
   vector of identifiers (optional)
@@ -38,7 +38,7 @@ A function to plot interval dates with different forms.
   timespan endpoint \emph{terminus post quem} (TPQ)
 }
   \item{id}{
-  IDs as variable or rownames in dataset \code{x}
+  IDs as variable, rownames in dataset \code{x}, or \code{"auto"}
 }
   \item{out}{
   integer or vector with number of outliers to omit (first entry id for latest date)
@@ -57,6 +57,9 @@ A function to plot interval dates with different forms.
 }
   \item{pch}{
   symbol for \code{taq} and \code{tpq}
+}
+  \item{bty}{
+  type of box round plot area; default \code{"o"}, (see e.g. \code{\link[graphics:par]{par}})
 }
   \item{main}{
   plot's main tile
@@ -85,7 +88,11 @@ A function to plot interval dates with different forms.
 }
 \details{
 This plot function is for time interval segments given in the dataset \code{x}, which is 
-given as a dataframe or as a ``tibble'' class object.
+given as a dataframe or as a ``tibble'' class object. 
+
+By default, the function looks for an \code{id} column in \code{x}; otherwise take the rownames. 
+Option \code{"auto"} in the \code{"id"} argument is to distribute the time blocks equally in the plot, 
+which is useful for large gaps between the id's like with the \code{EDH} dataset.
 }
 \value{
 A graphical plot.

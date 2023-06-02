@@ -7,7 +7,7 @@ Organize EDH dataset province and dates by similarity
 Wrapper function to organize \code{EDH} dataset province and dates by simple match similarity.
 }
 \usage{
-edhwpd(x = "EDH", vars, province, dates, clean, ...)
+edhwpd(x = "EDH", vars, dates, province, clean, ...)
 }
 \arguments{
   \item{x}{
@@ -16,14 +16,14 @@ edhwpd(x = "EDH", vars, province, dates, clean, ...)
   \item{vars}{
    vector with variables or attributes chosen from \code{x}
 }
-  \item{province}{
-   Roman province abbreviation as in \code{rp}
-}
   \item{dates}{
    vector with TAQ and TPQ (optional)
 }
+  \item{province}{
+   Roman province abbreviation as in \code{rp}
+}
   \item{clean}{
-   whether to remove special characters in text (optional and logical)
+   whether to handle \code{NA}s and eventually re-encode text (optional and logical)
 }
   \item{\dots}{
    additional arguments if needed
@@ -45,7 +45,8 @@ Another dependence with this function is from package \code{"multiplex"} to find
 characteristics as co-occurrence relations and for removing isolated items from the system of relations.
 
 Argument \code{clean} applies function \code{\link{cln}} to the province data frame with the chosen 
-variables to remove special characters such as \code{?*+} and, if needed, re-encode the text. 
+variables to treat missing data such as \code{NA} or \code{NULL} that is converted to \code{<NA>} 
+and, if needed, re-encode the text in \code{x}. 
 
 The output is a list of data frames with similar arguments by descending matches. The records 
 with one or less similarity matches (or having \code{NA} attribute values) are placed in the 

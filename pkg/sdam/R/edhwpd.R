@@ -1,9 +1,9 @@
 
 ## 
 ## FUNCTION edhwpd() to organize EDH dataset province and dates by similarity
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.0.3 (01-08-2022)
+## version 0.0.5 (02-06-2023)
 ##
 ## PARAMETERS
 ##
@@ -14,19 +14,32 @@
 ##
 ## x        (list, typically fragments of EDH dataset or database API)
 ## dates    (vector with TAQ and TPQ)
-## clean    (logical, to remove ?*+ characters and re-encode if needed)
+## clean    (clean NAs and re-encode? logical and optional)
 ##
 
 
 edhwpd <-
-function (x = "EDH", vars, province, dates, clean, ...) 
+function (x = "EDH", vars, dates, province, clean, ...) 
 {
     if (is.null(x) == TRUE) 
         stop("'x' is NULL")
-    ifelse(missing(dates) == TRUE, dates <- c("not_after", "not_before"), 
+    ifelse(missing(dates) == TRUE, dates <- c("not_before", "not_after"), 
         NA)
+    ifelse(missing(vars) == TRUE && isTRUE(x == "EDH") == FALSE, 
+        vars <- colnames(x)[which(!(colnames(x) %in% c(dates, 
+            "id")))], NA)
+    if (missing(province) == TRUE && is.list(x[[1]]) == TRUE) {
+        province <- x[[1]]$province_label
+    }
+    else if (missing(province) == TRUE && isTRUE(length(attr(x, 
+        "class")) == 2) == TRUE) {
+        province <- attr(x, "class")[2]
+    }
+    else {
+        province <- NULL
+    }
     if (isTRUE(x == "EDH") == TRUE) {
-        warning("\"x\" is for dataset \"EDH\".")
+        message("\"x\" is for dataset \"EDH\".")
         if (!(exists("EDH"))) {
             utils::data("EDH", package = "sdam", envir = environment())
             EDH <- get("EDH", envir = environment())
@@ -37,15 +50,14 @@ function (x = "EDH", vars, province, dates, clean, ...)
         x <- EDH
         class(x) <- NULL
         comment(x) <- NULL
-        xdf <- suppressWarnings(edhw(x = x, vars = c(dates, vars, 
+        xdf <- suppressMessages(edhw(x = x, vars = c(dates, vars, 
             "province_label"), as = "df"))
+        prv <- unique(edhw(x = xdf, vars = c(dates, vars), province = province, 
+            as = "df"))
     }
     else {
-        xdf <- edhw(x = x, vars = c(dates, vars, "province_label"), 
-            as = "df")
+        prv <- edhw(x = x, vars = c(dates, vars), as = "df")
     }
-    prv <- unique(edhw(x = xdf, vars = c(dates, vars), province = province, 
-        as = "df"))
     if (isTRUE(nrow(prv) == 0) == TRUE) 
         return(NULL)
     ifelse(missing(clean) == FALSE && isTRUE(clean == TRUE) == 

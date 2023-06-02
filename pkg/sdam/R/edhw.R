@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.5.7 (11-05-2023)
+## version 0.5.9 (02-06-2023)
 ##
 ## PARAMETERS
 ##
@@ -36,7 +36,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         TRUE) {
         if ((isTRUE(na.rm == TRUE) == TRUE) | (match.arg(as) == 
             "df")) {
-            warning("'addID' is set to TRUE for 'na.rm' and data frame output.")
+            message("\"addID\" is set to TRUE for \"na.rm\" option and data frame output.")
             addID <- TRUE
         }
         else {
@@ -73,7 +73,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         TRUE) == TRUE) {
         flgdf <- TRUE
         if (isTRUE(is.data.frame(x[[1]]) == TRUE) == TRUE) {
-            warning("\"x\" is list of data frames.")
+            message("\"x\" is list of data frames.")
             x <- data.frame(lapply(do.call("rbind.data.frame", 
                 x), as.character), stringsAsFactors = FALSE)
             rownames(x) <- NULL
@@ -144,7 +144,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   -which(!(colnames(xp) %in% c(vars, "id")))])
             }
             else if (isTRUE(length(province) > 1) == TRUE) {
-                warning("Using veral provinces with DF is experimental.")
+                message("Using several provinces as data frame is experimental.")
                 xl <- vector("list")
                 for (k in seq_len(length(province))) {
                   xp <- x[x$province_label == unlist(rp[which(names(rp) == 
@@ -201,7 +201,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                 TRUE) {
                 flglv <- FALSE
                 x <- x[[1]]
-                warning("For list of data frames only first component is taken.")
+                message("Only first component is taken for list of data frames.")
             }
             else {
                 NA
@@ -280,6 +280,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                       rm(k)
                       prvx <- xl[order(unlist(lapply(xl, `[`, 
                         "id"), use.names = FALSE))]
+                      class(prvx) <- province
                     }
                     else {
                       NA
@@ -371,8 +372,8 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                 if (match.arg(as) == "df" && (isTRUE("people" %in% 
                   vars) == TRUE || any(grepl("people.", vars, 
                   fixed = TRUE)) == TRUE)) {
-                  warning("\"people\" is disregarded for data frames with 'province'.")
-                  vars <- vars[!(vars %in% "people")]
+                  warning("\"people\" is disregarded for data frames with \"province\".")
+                  vars <- vars[which(!(vars == "people"))]
                 }
                 if (isTRUE(addID == TRUE) == TRUE) {
                   xprv <- lapply(xpr, `[`, c("id", vars))
@@ -402,9 +403,14 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   NA
                 }
                 if (match.arg(as) == "df") {
-                  return(do.call(rbind.data.frame, xprv))
+                  xprvdf <- do.call(rbind.data.frame, xprv)
+                  attr(xprvdf, "class") <- c(attr(xprvdf, "class"), 
+                    province)
+                  return(cln(xprvdf))
                 }
                 else {
+                  attr(xprv, "class") <- c(attr(xprv, "class"), 
+                    province)
                   return(xprv)
                 }
             }
@@ -419,24 +425,24 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         }
         if (isTRUE(vars != "people") == TRUE && all(vars %in% 
             xvars) == FALSE) {
-            warning(paste("Variable(s)", vars[which(!(vars %in% 
-                xvars))], "is/are not present in \"x\" and may be disregarded.", 
-                sep = " "))
+            warning(paste("Variable(s) \"", vars[which(!(vars %in% 
+                xvars))], "\" is/are not present in \"x\" and may be disregarded.", 
+                sep = ""))
             vars <- vars[which(vars %in% xvars)]
         }
         else if (all(vars %in% xvars) == FALSE && isTRUE(length(unlist(strsplit(xvars, 
             split = "people."))) > length(xvars)) == FALSE) {
-            warning(paste("Variable(s)", vars[which(!(vars %in% 
-                xvars))], "is/are not present in input data.", 
-                sep = " "))
+            warning(paste("Variable(s) \"", vars[which(!(vars %in% 
+                xvars))], "\" is/are not present in input data.", 
+                sep = ""))
         }
         else if (all(vars %in% xvars) == FALSE) {
             if (isTRUE(length(vars[which(!(vars %in% xvars))][vars[which(!(vars %in% 
                 xvars))] != "people"]) > 0) == TRUE) {
-                warning(paste("Variable(s)", paste(vars[which(!(vars %in% 
+                warning(paste("Variable(s) \"", paste(vars[which(!(vars %in% 
                   xvars))][vars[which(!(vars %in% xvars))] != 
-                  "people"], collapse = ", "), "is(are) not present in \"x\" and might been disregarded.", 
-                  sep = " "))
+                  "people"], collapse = ", "), "\" is(are) not present in \"x\" and might been disregarded.", 
+                  sep = ""))
             }
         }
         else {
@@ -844,7 +850,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                       TRUE || isTRUE(!("id" %in% colnames(xdfq))) == 
                       TRUE, NA, xdfpq$id <- paste("HD", xdfpq$id, 
                       sep = ""))
-                    ifelse(isTRUE(flgp == TRUE) == TRUE && missing(select) == 
+                    ifelse(isTRUE("people" %in% colnames(xdfpq)) == 
                       TRUE, xdfpq <- subset(xdfpq, select = -c(people)), 
                       NA)
                     if (isTRUE(na.rm == TRUE) == TRUE) {
@@ -1099,6 +1105,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                     na.last = TRUE)
                   colnames(xdfq) <- as.vector(stats::na.omit(qlbs))
                 }
+                xdfq <- cln(xdfq)
                 if (isTRUE(addID == TRUE) == TRUE) {
                   ids <- lapply(edhlm, function(x) {
                     x$id

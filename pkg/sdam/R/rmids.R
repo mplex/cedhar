@@ -1,14 +1,16 @@
 
 ## 
 ## FUNCTION rmids() for restricted multiply-imputed data subsets
-## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.0.6 (29-08-2022)
+## version 0.0.8 (02-06-2023)
 ##
 ## PARAMETERS
-## x         (data set to impute, dataframe or lists of dataframes)
-## vars      (attribute variables in x, optional vector)
-## collapse  (collapse list of dataframes?, optional and logical)
+## x        (data set to impute, dataframe or lists of dataframes)
+## vars     (attribute variables in x, optional vector)
+## collapse (collapse list of dataframes?, optional and logical)
+## pool     (pool results?, optional and logical)
+## type     (type of pooling. '1' min TAQ/max TPQ. '2' conditional)
 
 
 rmids <-
@@ -16,18 +18,25 @@ function (x, vars, collapse, pool, type = c("1", "2"))
 {
     if (is.null(x) == TRUE) 
         stop("'x' is NULL")
-    ifelse(missing(vars) == TRUE, vars <- c("not_before", "not_after"), 
-        NA)
+    ifelse(missing(vars) == TRUE, dates <- c("not_before", "not_after"), 
+        dates <- vars)
     ifelse(missing(collapse) == FALSE && isTRUE(collapse == TRUE) == 
         TRUE, collapse <- TRUE, collapse <- FALSE)
-    ifelse(missing(pool) == FALSE && isTRUE(pool == TRUE) == 
-        TRUE, pool <- TRUE, pool <- FALSE)
+    if (missing(pool) == FALSE && isTRUE(pool == TRUE) == TRUE) {
+        pool <- TRUE
+        pl <- list()
+        pln <- vector()
+    }
+    else {
+        pool <- FALSE
+    }
     ocl <- class(x)
     xc <- x
     if (isTRUE(is.data.frame(x) == TRUE) == TRUE) {
-        vrs <- c(which(colnames(x) == vars[1]), which(colnames(x) == 
-            vars[2]))
-        if (any(is.na(as.vector(x[, vrs]))) == TRUE) {
+        vrs <- c(which(colnames(x) == dates[1]), which(colnames(x) == 
+            dates[2]))
+        if (any(is.na(unlist(as.vector(x[, vrs]), use.names = FALSE))) == 
+            TRUE) {
             if (!(exists("rpd"))) {
                 utils::data("rpd", package = "sdam", envir = environment())
                 rpd <- get("rpd", envir = environment())
@@ -40,7 +49,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
             for (i in seq_len(length(rpd))) {
                 if (any(attr(rpd[[i]], "class") == as.vector(x$id)[1]) == 
                   TRUE) {
-                  message("avg taken from province.")
+                  message(paste0("In \"", paste0(as.vector(x[[k]][[i]]$id), 
+                    collapse = " "), "\", avg taken from province", 
+                    sep = ""))
                   avg <- rpd[[i]][1]
                   break
                 }
@@ -58,7 +69,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
             for (i in seq_len(length(rpd))) {
                 if (any(attr(rpd[[i]], "class") == as.vector(x$id)[1]) == 
                   TRUE) {
-                  message("min TAQ taken from province.")
+                  message(paste0("In \"", paste0(as.vector(x[[k]][[i]]$id), 
+                    collapse = " "), "\", min TAQ taken from province", 
+                    sep = ""))
                   mtaq <- rpd[[i]][2]
                   break
                 }
@@ -76,7 +89,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
             for (i in seq_len(length(rpd))) {
                 if (any(attr(rpd[[i]], "class") == as.vector(x$id)[1]) == 
                   TRUE) {
-                  message("max TPQ taken from province.")
+                  message(paste0("In \"", paste0(as.vector(x[[k]][[i]]$id), 
+                    collapse = " "), "\", max TPQ taken from province", 
+                    sep = ""))
                   mtpq <- rpd[[i]][3]
                   break
                 }
@@ -100,7 +115,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
             for (i in seq_len(length(rpd))) {
                 if (any(attr(rpd[[i]], "class") == as.vector(x$id)[1]) == 
                   TRUE) {
-                  message("avg len TS taken from province.")
+                  message(paste0("In \"", paste0(as.vector(x[[k]][[i]]$id), 
+                    collapse = " "), "\", avg len TS taken from province", 
+                    sep = ""))
                   avgts <- rpd[[i]][4]
                   break
                 }
@@ -112,10 +129,6 @@ function (x, vars, collapse, pool, type = c("1", "2"))
         }
         compl <- list()
         compln <- vector()
-        if (isTRUE(pool == TRUE) == TRUE) {
-            pl <- list()
-            pln <- vector()
-        }
         for (j in seq_len(nrow(x))) {
             if (any(is.na(x[j, vrs]) == TRUE) == FALSE) {
                 compl[[length(compl) + 1L]] <- x[j, ]
@@ -164,7 +177,7 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                 if (is.na(x[j, vrs[1]]) == FALSE && is.na(x[j, 
                   vrs[2]]) == TRUE) {
                   temp[, vrs] <- factor(temp[, vrs], levels = tpqlvls)
-                  temp[, vrs[1]] <- temptaq
+                  temp[, vrs[1]] <- min(as.numeric(temptaq))
                   temp[2, vrs[2]] <- mtpq
                   temp[3, vrs[2]] <- (as.numeric(as.vector(unlist(x[j, 
                     vrs[1]]))) + avgts)
@@ -229,10 +242,12 @@ function (x, vars, collapse, pool, type = c("1", "2"))
     }
     else {
         cnt <- vector()
+        compl <- list()
+        compln <- vector()
         for (k in seq_len(length(x))) {
             if (is.null(dim(x[[k]][[1]])) == FALSE) {
-                vrs <- c(which(colnames(x[[1]][[1]]) == vars[1]), 
-                  which(colnames(x[[1]][[1]]) == vars[2]))
+                vrs <- c(which(colnames(x[[1]][[1]]) == dates[1]), 
+                  which(colnames(x[[1]][[1]]) == dates[2]))
                 if (!(exists("rpd"))) {
                   utils::data("rpd", package = "sdam", envir = environment())
                   rpd <- get("rpd", envir = environment())
@@ -240,6 +255,7 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                 else {
                   invisible(NA)
                 }
+                x[[k]] <- lapply(x[[k]], unique)
                 for (i in seq_len(length(x[[k]]))) {
                   if (any(is.na(x[[k]][[i]][, vrs])) == TRUE) {
                     if (all(is.na(x[[k]][[i]][, vrs])) == FALSE) {
@@ -251,7 +267,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                       for (l in seq_len(length(rpd))) {
                         if (any(attr(rpd[[l]], "class") == as.vector(x[[k]][[i]]$id)[1]) == 
                           TRUE) {
-                          warning("avg taken from province.")
+                          message(paste0("In \"", paste0(as.vector(x[[k]][[i]]$id), 
+                            collapse = " "), "\", avg taken from province", 
+                            sep = ""))
                           flgna <- TRUE
                           avg <- rpd[[l]][1]
                           break
@@ -275,7 +293,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                       for (l in seq_len(length(rpd))) {
                         if (any(attr(rpd[[l]], "class") == as.vector(x[[k]][[i]]$id)[1]) == 
                           TRUE) {
-                          warning("min TAQ taken from province.")
+                          message(paste0("In \"", paste0(as.vector(x[[k]][[i]]$id), 
+                            collapse = " "), "\", min TAQ taken from province", 
+                            sep = ""))
                           flgna <- TRUE
                           mtaq <- rpd[[l]][2]
                           break
@@ -299,7 +319,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                       for (l in seq_len(length(rpd))) {
                         if (any(attr(rpd[[l]], "class") == as.vector(x[[k]][[i]]$id)[1]) == 
                           TRUE) {
-                          message("max TPQ taken from province.")
+                          message(paste0("In \"", paste0(as.vector(x[[k]][[i]]$id), 
+                            collapse = " "), "\", max TPQ taken from province", 
+                            sep = ""))
                           flgna <- TRUE
                           mtpq <- rpd[[l]][3]
                           break
@@ -325,7 +347,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                       for (l in seq_len(length(rpd))) {
                         if (any(attr(rpd[[l]], "class") == as.vector(x[[k]][[i]]$id)[1]) == 
                           TRUE) {
-                          message("avg len TS taken from province.")
+                          message(paste0("In \"", paste0(as.vector(x[[k]][[i]]$id), 
+                            collapse = " "), "\", avg len TS taken from province", 
+                            sep = ""))
                           flgna <- TRUE
                           avgts <- rpd[[l]][4]
                           break
@@ -337,12 +361,6 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                       rm(l)
                       ifelse(isTRUE(flgna == TRUE) == TRUE, NA, 
                         avgts <- 177)
-                    }
-                    compl <- list()
-                    compln <- vector()
-                    if (isTRUE(pool == TRUE) == TRUE) {
-                      pl <- list()
-                      pln <- vector()
                     }
                     for (j in seq_len(nrow(x[[k]][[i]]))) {
                       if (any(is.na(x[[k]][[i]][j, vrs]) == TRUE) == 
@@ -406,7 +424,7 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                           FALSE && is.na(x[[k]][[i]][j, vrs[2]]) == 
                           TRUE) {
                           temp[, vrs] <- factor(temp[, vrs], 
-                            levels = tpqlvls)
+                            levels = unique(tpqlvls))
                           temp[, vrs[1]] <- temptaq
                           temp[2, vrs[2]] <- mtpq
                           temp[3, vrs[2]] <- (as.numeric(x[[k]][[i]][j, 
@@ -432,7 +450,7 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                           TRUE && is.na(x[[k]][[i]][j, vrs[2]]) == 
                           FALSE) {
                           temp[, vrs] <- factor(temp[, vrs], 
-                            levels = taqlvls)
+                            levels = unique(taqlvls))
                           temp[, vrs[2]] <- temptpq
                           temp[2, vrs[1]] <- mtaq
                           temp[3, vrs[1]] <- (as.numeric(x[[k]][[i]][j, 
@@ -462,14 +480,15 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                   }
                   else if (any(is.na(x[[k]][[i]][, vrs])) == 
                     FALSE) {
-                    NA
+                    message(paste("Data frame in ", "x[[", k, 
+                      "]][[", i, "]]", " is complete", sep = ""))
                   }
                 }
                 rm(i)
             }
             else if (is.null(dim(x[[k]][[1]])) == TRUE) {
-                vrs <- c(which(colnames(x[[k]]) == vars[1]), 
-                  which(colnames(x[[k]]) == vars[2]))
+                vrs <- c(which(colnames(x[[k]]) == dates[1]), 
+                  which(colnames(x[[k]]) == dates[2]))
                 if (any(is.na(x[[k]][, vrs])) == TRUE) {
                   if (!(exists("rpd"))) {
                     utils::data("rpd", package = "sdam", envir = environment())
@@ -479,6 +498,8 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                     invisible(NA)
                   }
                   if (all(is.na(x[[k]][, vrs])) == FALSE) {
+                    message(paste0("In \"", as.vector(x[[k]]$id), 
+                      "\", avg taken from x[[", k, "]] \n", sep = ""))
                     avg <- round(mean(stats::na.omit(as.numeric(as.vector(unlist(x[[k]][, 
                       vrs]))))))
                   }
@@ -487,7 +508,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                     for (i in seq_len(length(rpd))) {
                       if (any(attr(rpd[[i]], "class") == as.vector(x[[k]]$id)[1]) == 
                         TRUE) {
-                        message("avg taken from province.")
+                        message(paste0("In \"", paste0(as.vector(x[[k]]$id), 
+                          collapse = " "), "\", avg taken from province", 
+                          sep = ""))
                         flgna <- TRUE
                         avg <- rpd[[i]][1]
                         break
@@ -502,6 +525,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                         `[`, vrs), use.names = FALSE)))))))
                   }
                   if (all(is.na(x[[k]][, vrs[1]])) == FALSE) {
+                    message(paste0("In \"", as.vector(x[[k]]$id), 
+                      "\", min TAQ taken from x[[", k, "]] \n", 
+                      sep = ""))
                     mtaq <- min(stats::na.omit(as.numeric(as.vector(unlist(x[[k]][, 
                       vrs])))))
                   }
@@ -510,7 +536,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                     for (i in seq_len(length(rpd))) {
                       if (any(attr(rpd[[i]], "class") == as.vector(x[[k]]$id)[1]) == 
                         TRUE) {
-                        message("min TAQ taken from province.")
+                        message(paste0("In \"", as.vector(x[[k]]$id), 
+                          "\", min TAQ taken from province", 
+                          sep = ""))
                         flgna <- TRUE
                         mtaq <- rpd[[i]][2]
                         break
@@ -525,6 +553,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                         `[`, vrs), use.names = FALSE))))))
                   }
                   if (all(is.na(x[[k]][, vrs[2]])) == FALSE) {
+                    message(paste0("In \"", as.vector(x[[k]]$id), 
+                      "\", max TPQ taken from x[[", k, "]] \n", 
+                      sep = ""))
                     mtpq <- max(stats::na.omit(as.numeric(as.vector(unlist(x[[k]][, 
                       vrs])))))
                   }
@@ -533,7 +564,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                     for (i in seq_len(length(rpd))) {
                       if (any(attr(rpd[[i]], "class") == as.vector(x[[k]]$id)[1]) == 
                         TRUE) {
-                        message("max TPQ taken from province.")
+                        message(paste0("In \"", as.vector(x[[k]]$id), 
+                          "\", max TPQ taken from province", 
+                          sep = ""))
                         flgna <- TRUE
                         mtpq <- rpd[[i]][3]
                         break
@@ -549,6 +582,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                   }
                   if (all(is.na(x[[k]][, vrs[1]])) == FALSE && 
                     all(is.na(x[[k]][, vrs[2]])) == FALSE) {
+                    message(paste0("In \"", as.vector(x[[k]]$id), 
+                      "\", avg TS taken from x[[", k, "]] \n", 
+                      sep = ""))
                     avgts <- round(mean(as.vector(stats::na.omit(as.numeric(as.vector(unlist(x[[k]][, 
                       vrs[2]]))) - as.numeric(as.vector(unlist(x[[k]][, 
                       vrs[1]])))))))
@@ -558,7 +594,9 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                     for (i in seq_len(length(rpd))) {
                       if (any(attr(rpd[[i]], "class") == as.vector(x[[k]]$id)[1]) == 
                         TRUE) {
-                        message("avg len TS taken from province.")
+                        message(paste0("In \"", as.vector(x[[k]]$id), 
+                          "\", avg len TS taken from province", 
+                          sep = ""))
                         flgna <- TRUE
                         avgts <- rpd[[i]][4]
                         break
@@ -573,10 +611,6 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                   }
                   compl <- list()
                   compln <- vector()
-                  if (isTRUE(pool == TRUE) == TRUE) {
-                    pl <- list()
-                    pln <- vector()
-                  }
                   for (j in seq_len(nrow(x[[k]]))) {
                     if (any(is.na(x[[k]][j, vrs]) == TRUE) == 
                       FALSE) {
@@ -629,7 +663,7 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                         if (is.na(x[[k]][j, vrs[1]]) == FALSE && 
                           is.na(x[[k]][j, vrs[2]]) == TRUE) {
                           temp[, vrs] <- factor(temp[, vrs], 
-                            levels = tpqlvls)
+                            levels = unique(tpqlvls))
                           temp[, vrs[1]] <- temptaq
                           temp[2, vrs[2]] <- mtpq
                           temp[3, vrs[2]] <- (as.numeric(x[[k]][j, 
@@ -655,7 +689,7 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                           TRUE && is.na(x[[k]][j, vrs[2]]) == 
                           FALSE) {
                           temp[, vrs] <- factor(temp[, vrs], 
-                            levels = taqlvls)
+                            levels = unique(taqlvls))
                           temp[, vrs[2]] <- temptpq
                           temp[2, vrs[1]] <- mtaq
                           temp[3, vrs[1]] <- (as.numeric(x[[k]][j, 
@@ -683,16 +717,19 @@ function (x, vars, collapse, pool, type = c("1", "2"))
                 else if (any(is.na(x[[k]][, vrs])) == FALSE) {
                   compl <- x[[k]]
                   compln <- append(compln, "complete")
+                  names(compl) <- compln
                 }
                 ifelse(isTRUE(collapse == TRUE) == TRUE && isTRUE(is.data.frame(compl) == 
                   FALSE) == TRUE, xc[[k]] <- do.call("rbind", 
                   compl), xc[[k]] <- compl)
+                ifelse(isTRUE(dimnames(summary(xc[[k]]))[[2]][1] == 
+                  "Length") == FALSE, NA, xc[[k]] <- lapply(xc[[k]], 
+                  unique))
                 cnt <- append(nrow(xc[[k]]), cnt)
             }
             cnt <- suppressWarnings(append(sum(as.numeric(summary(xc[[k]])[, 
                 1])), cnt))
         }
-        rm(k)
     }
     if (isTRUE(pool == TRUE) == TRUE) {
         if (isTRUE(collapse == TRUE) == TRUE) {
@@ -721,7 +758,7 @@ function (x, vars, collapse, pool, type = c("1", "2"))
             xcc
         }
         else {
-            class(xc) <- noquote(c(ocl, sum(cnt)))
+            class(xc) <- ocl
             xc
         }
     }

@@ -3,7 +3,7 @@
 ## PLOT FUNCTION plot.dates() to plot time intervals
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.1.8 (10-05-2023)
+## version 0.2.1 (02-06-2023)
 ##
 ## PARAMETERS
 ## x      (data frame or table of variables and observations)
@@ -13,13 +13,14 @@
 ## 
 ## OPTIONAL PARAMETERS
 ## y      (optional identifiers)
-## id     (IDs as variable or rownames in x)
+## id     (IDs as variable, rownames in x, or 'auto')
 ## out    (number of outliers to omit)
 ## col    (colors of pch and time interval segment)
 ## cex    (size of pch)
 ## lwd    (width)
 ## lty    (shape)
 ## pch    (symbol for taq and tpq)
+## bty    (box type round plot area)
 ## main   (main tile)
 ## xlab   (x label)
 ## ylab   (y label)
@@ -32,8 +33,9 @@
 
 plot.dates <-
 function (x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out, 
-    col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
-    xlim = NULL, axes = TRUE, alpha, file = NULL, ...) 
+    col, cex, lwd, lty, pch, bty = NULL, main = NULL, xlab = NULL, 
+    ylab = NULL, xlim = NULL, axes = TRUE, alpha, file = NULL, 
+    ...) 
 {
     if (missing(x) == TRUE || is.null(unlist(x)) == TRUE) 
         stop("'x' is missing or NULL.")
@@ -45,27 +47,34 @@ function (x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out,
     }
     else {
         flge <- FALSE
+        if (all(unlist(lapply(x, typeof), use.names = FALSE) == 
+            "list") == TRUE) {
+            x <- do.call(c, x)
+        }
+        else {
+            NA
+        }
     }
     if (missing(taq) == TRUE) {
-        ifelse(isTRUE(flge == TRUE) == TRUE, taq <- "not_before", 
-            taq <- colnames(x)[1])
+        ifelse(isTRUE(flge == TRUE) == TRUE || isTRUE("not_before" %in% 
+            names(x)) == TRUE, taq <- "not_before", taq <- colnames(x)[1])
     }
     else if (is.null(taq) == TRUE) {
         invisible(NA)
     }
     else {
-        ifelse(isTRUE(taq %in% names(x)) == FALSE, stop("\"taq\" not found in 'x'."), 
+        ifelse(isTRUE(taq %in% names(x)) == FALSE, stop("\"taq\" not found in \"x\"."), 
             NA)
     }
     if (missing(tpq) == TRUE) {
-        ifelse(isTRUE(flge == TRUE) == TRUE, tpq <- "not_after", 
-            tpq <- colnames(x)[2])
+        ifelse(isTRUE(flge == TRUE) == TRUE || isTRUE("not_after" %in% 
+            names(x)) == TRUE, tpq <- "not_after", tpq <- colnames(x)[2])
     }
     else if (is.null(tpq) == TRUE) {
         invisible(NA)
     }
     else {
-        ifelse(isTRUE(tpq %in% names(x)) == FALSE, stop("\"tpq\" not found in 'x'."), 
+        ifelse(isTRUE(tpq %in% names(x)) == FALSE, stop("\"tpq\" not found in \"x\"."), 
             NA)
     }
     ifelse(missing(lwd) == TRUE, lwd <- 1L, NA)
@@ -113,7 +122,7 @@ function (x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out,
                 3)[1:3], col <- col[1:3])
         }
     }
-    ifelse(missing(alpha) == TRUE, alpha <- 0.25, NA)
+    ifelse(missing(alpha) == TRUE, alpha <- 1, NA)
     ifelse(is.null(xlab) == TRUE, xlab <- "years", NA)
     if (any(c("tbl_df", "tbl") %in% class(x)) == TRUE) {
         xdates <- x <- as.data.frame(x)
@@ -136,6 +145,13 @@ function (x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out,
         }
         else if (all(rownames(x) == id) == TRUE) {
             xdates <- cbind(id = rownames(x), xdates)
+        }
+        else if (isTRUE(is.numeric(id) == TRUE) == TRUE) {
+            xdates <- cbind(id = id, xdates)
+        }
+        else if (isTRUE(id == "auto") == TRUE) {
+            xdates <- cbind(id = seq_len(nrow(x)), xdates)
+            ifelse(is.null(ylab) == TRUE, ylab <- "", NA)
         }
         else {
             NA
@@ -213,7 +229,7 @@ function (x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out,
         if (is.null(file) == TRUE) {
             plot(nb, ID, pch = pch, cex = cex, col = col[1], 
                 xlab = xlab, ylab = ylab, xlim = xlim, main = main, 
-                axes = axes, ...)
+                axes = axes, bty = bty, ...)
             points(na, ID, pch = pch, cex = cex, col = col[2])
             segments(nb, ID, na, ID, lwd = lwd, lty = lty, col = grDevices::adjustcolor(col[3], 
                 alpha = alpha))
@@ -223,7 +239,7 @@ function (x, y, type = c("ts", "mp", "rg"), taq, tpq, id, out,
             pdf(file)
             plot(nb, ID, pch = pch, cex = cex, col = col[1], 
                 xlab = xlab, ylab = ylab, xlim = xlim, main = main, 
-                axes = axes, ...)
+                axes = axes, bty = bty, ...)
             points(na, ID, pch = pch, cex = cex, col = col[2])
             segments(nb, ID, na, ID, lwd = lwd, lty = lty, col = grDevices::adjustcolor(col[3], 
                 alpha = alpha))
