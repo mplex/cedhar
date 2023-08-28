@@ -13,8 +13,8 @@
 \tabular{ll}{
 Package: \tab sdam \cr
 Type: \tab Package \cr
-Version: \tab 1.3.2 \cr
-Date: \tab 2 June 2023 \cr
+Version: \tab 1.3.4 \cr
+Date: \tab 28 August 2023 \cr
 License: \tab CC BY-SA 4.0 \cr
 }
 
