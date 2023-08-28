@@ -25,6 +25,7 @@
 ## gender   (choose EDH gender)
 ## rp       (list of Roman provinces complementing the 'rp' dataset)
 
+edhw<-
 function (x = "EDH", vars, as = c("df", "list"), type = c("long", 
     "wide", "narrow"), split, select, addID, limit, id, na.rm, 
     ldf, province, gender, rp, ...) 
