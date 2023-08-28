@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.6.1 (28-08-2023)
+## version 0.6.2 (28-08-2023)
 ##
 ## PARAMETERS
 ##
