@@ -1,4 +1,31 @@
-edhw <-
+
+## 
+## FUNCTION edhw() to manipulate data API from the EDH dataset
+## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
+##
+## version 0.6.1 (28-08-2023)
+##
+## PARAMETERS
+##
+## vars   (vector, variables or attributes to be chosen from x)
+## as     (output format: lists or data frames)
+## type   (data frame type: long or wide or narrow)
+##
+## OPTIONAL PARAMETERS
+##
+## x        (list, typically fragments of EDH dataset or database API)
+## split    (logical, divide the data into groups by id?)
+## select   (vector, people variables to select)
+## addID    (logical, add "HD id" to output?)
+## limit    (integers, vector with nr records limit in output, offset supported)
+## id       (integer or character, select only hd_nr records)
+## na.rm    (logical, remove entries with missing data?)
+## ldf      (experimental, is 'x' a list of data frames?)
+## province (choose EDH provinces, names or abbreviations)
+## gender   (choose EDH gender)
+## rp       (list of Roman provinces complementing the 'rp' dataset)
+
+edhw <- 
 function (x = "EDH", vars, as = c("df", "list"), type = c("long", 
     "wide", "narrow"), split, select, addID, limit, id, na.rm, 
     ldf, province, gender, rp, ...) 
