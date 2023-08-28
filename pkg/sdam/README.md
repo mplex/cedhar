@@ -47,7 +47,9 @@ devtools::install_github("sdam-au/sdam")
 ## load package
 library("sdam")
 packageVersion("sdam")
-#[1] ‘1.1.7’
+```
+```r
+#[1] ‘1.3.4’
 ```
 
 ```r
@@ -58,11 +60,13 @@ data("EDH")
 ```r
 ## number of inscriptions
 length(EDH)
+```
+```r
 # [1] 84701
 ```
 
 
-```r
+```
 ## object structure
 str(EDH)
 ```
@@ -82,6 +86,8 @@ iud <- get.edh(search="inscriptions", province="Iud")
 ```r
 ## number of inscriptions in Iudaea
 length(iud)
+```
+```r
 # [1] 187
 ```
 
@@ -94,9 +100,12 @@ To place Roman inscriptions in Iudaea into a data frame object `iud_df`
 ```r
 ## extract variables of interes from object `iud` and convert into data frame
 iud_df <- edhw(vars=c("not_after", "not_before"), x=iud, as="df", na.rm=FALSE)
-
+```
+```r
 ## object types
 is(iud_df)
+```
+```r
 #[1] "data.frame" "list"       "oldClass"   "vector"  
 ```
 
@@ -113,6 +122,8 @@ Compare outcomes where not available data is removed in `iud_df0`.
 ```r
 ## bind columns
 cbind(head(iud_df,10), head(iud_df0,10))
+```
+```r
 #         id not_before not_after       id not_before not_after
 #1  HD001461       0071      0130 HD001461       0071      0130
 #2  HD001958       0301      0400 HD001958       0301      0400
@@ -156,6 +167,8 @@ inscriptions by `hd_nr` id in a data frame with a long format.
 ```r
 ## four records with people entries
 edhw(vars="people", as="df", limit=4)
+```
+```r
 #        id age: years             cognomen gender                                              name    nomen person_id praenomen           status   tribus
 #1 HD000001       <NA>               Optata female                               Noniae P.f. Optatae    Nonia         1      <NA>             <NA>     <NA>
 #2 HD000001       <NA>               Artemo   male                                 C. Iulio Artemoni   Iulius         2        C.             <NA>     <NA>
@@ -172,6 +185,8 @@ while a specific record is retrieved by using the `id` argument as follows:
 ```r
 ## one entry with people entries as data frame
 edhw(vars="people", as="df", id=4444)
+```
+```r
 #        id     cognomen gender                   name    nomen person_id praenomen           status
 #1 HD004444    Gordianus   male     M. Antoni Gordiani Antonius         1        M.             <NA>
 #2 HD004444 Tranquillina female Sabiniae Tranquillinae  Sabinia         2      <NA>             <NA>
@@ -192,6 +207,8 @@ of inscriptions with two chronological phases.
 ```r
 ## aoristic sum ancient five-period bin
 prex(x=get.edh(search="inscriptions", province="Iud"), vars=c("not_before", "not_after"), cp="bin5")
+```
+```r
 #   Arch     Class      Hell       Rom       Byz 
 #    0.000     0.000  1337.904 13405.017     0.000
 ```
@@ -202,6 +219,8 @@ may be a better option.
 ```r
 ## aoristic sum ancient eight-period bin
 prex(x=get.edh(search="inscriptions", province="Iud"), vars=c("not_before", "not_after"), cp="bin8")
+```
+```r
 #   Arch     Class      Hell      ERom      MRom      LRom      EByz      LByz 
 #   0.0000    0.0000 1337.9040 2396.4529 1200.5623  320.5379    0.0000    0.0000
 ```
