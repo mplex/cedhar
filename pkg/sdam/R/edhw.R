@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.6.3 (28-08-2023)
+## version 0.6.4 (28-08-2023)
 ##
 ## PARAMETERS
 ##
@@ -25,7 +25,6 @@
 ## gender   (choose EDH gender)
 ## rp       (list of Roman provinces complementing the 'rp' dataset)
 
-edhw <- 
 function (x = "EDH", vars, as = c("df", "list"), type = c("long", 
     "wide", "narrow"), split, select, addID, limit, id, na.rm, 
     ldf, province, gender, rp, ...) 
@@ -739,12 +738,8 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                           nrow = 0))
                         colnames(tmpdf) <- plbs
                         for (i in seq_len(length(w$people))) {
-                          if (is.null(w$people[[i]]) == FALSE) {
-                            w$people[[i]] <- w$people[[i]][order(names(w$people[[i]]))]
-                          }
-                          else {
-                            NA
-                          }
+                          qual <- names(w$people[[i]])
+                          w$people[[i]] <- w$people[[i]][order(qual)]
                           w$people[[i]][lengths(w$people[[i]]) == 
                             0L] <- NA
                           tmpdf[i, which((plbs %in% attr(w$people[[i]], 
