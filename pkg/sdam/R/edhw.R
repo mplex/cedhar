@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.6.4 (28-08-2023)
+## version 0.6.5 (29-08-2023)
 ##
 ## PARAMETERS
 ##
@@ -634,6 +634,26 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   }
                 }
                 else {
+                  npvars <- vars[!(vars %in% "people")]
+                  ifelse(isTRUE(flgp == TRUE) == TRUE && isTRUE(vars == 
+                    "people") == FALSE, vars <- c("people", npvars), 
+                    vars <- npvars)
+                  ifelse(isTRUE(flgv == FALSE) == TRUE, npvars <- npvars[which(grepl("people.", 
+                    npvars, fixed = TRUE) == FALSE)], NA)
+                  if (isTRUE(flgv == TRUE) == TRUE) {
+                    edhlq <- lapply(edhlm, `[`, sort(vars[which(vars != 
+                      "people")]))
+                    edhlq <- lapply(edhlq, setNames, sort(vars[which(vars != 
+                      "people")]))
+                  }
+                  else {
+                    edhlq <- lapply(edhlm, `[`, npvars)
+                    edhlq <- lapply(edhlq, setNames, npvars)
+                  }
+                  edhlq <- lapply(edhlq, function(x) {
+                    x[sapply(x, is.null)] <- NA
+                    return(x)
+                  })
                   edhlp <- lapply(edhlm, `[`, "people")
                   edhlq <- lapply(edhlq, function(x) {
                     x[sapply(x, is.null)] <- NA
