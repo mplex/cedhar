@@ -3,11 +3,11 @@
 ## FUNCTION prex() to compute probability of existence ot time events
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.1.5 (10-05-2023)
+## version 0.1.7 (06-06-2023)
 ##
 ## PARAMETERS
 ## x        (list or data frame object with dating data)
-## type     (aoristic sum, mid point and range, other)
+## type     (aoristic sum, mid point and range, century, chronological phase, other)
 ## taq      (terminus ante quem)
 ## tpq      (terminus post quem)
 ## vars     (vector, variables or attributes to be chosen from x)
@@ -17,7 +17,6 @@
 ## OPTIONAL PARAMETERS
 ##
 ## weight   (weight to observations)
-## DF       (ignored if plot, data frame in output?)
 ## out      (number of outliers to omit)
 ## plot     (plot results?)
 ## main     (plot's main title)
@@ -27,13 +26,13 @@
 
 
 prex <-
-function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars, 
-    bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
-    ylim, keep, ...) 
+function (x, type = c("aoristic", "mp", "cent", "cp", "other"), 
+    taq, tpq, vars, bins = NULL, cp, weight = 1, out, plot = FALSE, 
+    main = NULL, ylim, keep, horiz, ...) 
 {
     if (missing(vars) == FALSE && (missing(taq) == TRUE | missing(tpq) == 
         TRUE)) {
-        ifelse(isTRUE(length(vars) == 1L) == TRUE, stop("'vars' needs two values."), 
+        ifelse(isTRUE(length(vars) == 1L) == TRUE, stop("\"vars\" needs two values."), 
             vars <- vars[1:2])
         taq <- vars[1]
         tpq <- vars[2]
@@ -49,7 +48,7 @@ function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
         which(colnames(x) %in% c(taq, tpq))]), xdf <- suppressWarnings(edhw(x = x, 
         vars = c(taq, tpq), as = "df", ...)))
     if (isTRUE(ncol(xdf) == 0) == TRUE) {
-        stop("'vars', 'taq', or 'tpq' not in 'x'.")
+        stop("\"vars\", \"taq\", or \"tpq\" not in \"x\".")
     }
     if (missing(out) == FALSE) {
         nb <- as.numeric(as.vector(xdf[, which(colnames(xdf) %in% 
@@ -73,8 +72,14 @@ function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
     else {
         NA
     }
-    if (match.arg(type) != "mp") {
-        ifelse(missing(cp) == TRUE, cp <- "bin5", NA)
+    if (!(match.arg(type) %in% c("mp", "cent"))) {
+        if (missing(cp) == TRUE) {
+            message("\"cp\" is missing, use \"bin5\" instead.")
+            cp <- "bin5"
+        }
+        else {
+            NA
+        }
         if (is.null(bins) == TRUE) {
             flgb <- FALSE
             if (isTRUE(cp == "bin8") == TRUE) {
@@ -94,7 +99,34 @@ function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
             else {
                 if (isTRUE(typeof(cp) == "list") == FALSE) 
                   stop("\"cp\" must be a list type object.")
-                bins <- cp
+                if (isTRUE(typeof(do.call(c, cp)) == "list") == 
+                  TRUE) {
+                  if (all(unlist(lapply(cp, typeof), use.names = FALSE) == 
+                    "list") == TRUE) {
+                    bins <- do.call(c, cp)
+                  }
+                  else {
+                    if (match.arg(type) == "aoristic") {
+                      tcp <- unlist(lapply(cp, typeof), use.names = FALSE)
+                      bins <- vector(mode = "list")
+                      for (k in seq_len(length(tcp))) {
+                        ifelse(isTRUE(tcp[k] == "list") == TRUE, 
+                          bins <- append(bins, do.call(c, cp[k])), 
+                          bins <- append(bins, cp[k]))
+                      }
+                      rm(k)
+                    }
+                    else {
+                      bins <- c(do.call(c, cp[which(unlist(lapply(cp, 
+                        typeof), use.names = FALSE) == "list")]), 
+                        cp[which(unlist(lapply(cp, typeof), use.names = FALSE) != 
+                          "list")])
+                    }
+                  }
+                }
+                else {
+                  bins <- cp
+                }
             }
         }
         else if (is.numeric(bins) == TRUE && isTRUE(length(bins) == 
@@ -245,7 +277,7 @@ function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
         rm(k)
         prxs <- colSums(xaor, na.rm = TRUE)
     }
-    else if (match.arg(type) == "mp" || match.arg(type) == "other") {
+    else if (match.arg(type) != "aoristic") {
         xmp <- cbind(xdf, rep(NA, nrow(xdf)), rep(NA, nrow(xdf)))
         colnames(xmp) <- c(colnames(xdf), "Mid point", "Range")
         for (k in seq_len(nrow(xdf))) {
@@ -257,7 +289,45 @@ function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
         rm(k)
         if (match.arg(type) == "mp") {
             ifelse(missing(keep) == FALSE && isTRUE(keep == TRUE) == 
-                TRUE, return(cbind(x, xmp[, 3:4])), return(xmp))
+                TRUE, return(cbind(x, xmp[, 4:3])), return(xmp$`Mid point`))
+        }
+        else if (match.arg(type) == "cent" || match.arg(type) == 
+            "cp") {
+            xmp <- xmp$`Mid point`
+            yearsBC <- which(xmp <= 0)
+            yearsAC <- which(xmp > 0)
+            yearsNA <- which(is.na(xmp))
+            cnt <- vector(length = length(xmp))
+            ifelse(isTRUE(length(yearsAC) == 0) == TRUE, NA, 
+                cnt[yearsAC] <- findInterval(xmp[yearsAC], seq(0, 
+                  max(xmp[yearsAC], na.rm = TRUE), by = 100), 
+                  all.inside = FALSE))
+            cnt[yearsNA] <- NA
+            ifelse(isTRUE(length(yearsBC) == 0) == TRUE, NA, 
+                cnt[yearsBC] <- findInterval(abs(xmp[yearsBC]), 
+                  seq(0, max(abs(xmp[yearsBC]), na.rm = TRUE), 
+                    by = 100), all.inside = FALSE) * (-1))
+            cntr <- as.character(utils::as.roman(cnt))
+            ifelse(isTRUE(length(yearsBC) == 0) == TRUE, NA, 
+                cntr[yearsBC] <- paste0(utils::as.roman(findInterval(abs(xmp[yearsBC]), 
+                  seq(0, max(abs(xmp[yearsBC]), na.rm = TRUE), 
+                    by = 100), all.inside = FALSE)), " BC"))
+            if (match.arg(type) == "cent") {
+                ifelse(missing(keep) == FALSE && isTRUE(keep == 
+                  TRUE) == TRUE, return(cbind(x, `Mid point` = xmp, 
+                  Century = noquote(cntr))), return(noquote(cntr)))
+            }
+            else if (match.arg(type) == "cp") {
+                xcp <- vector(length = length(xmp))
+                xcp[which(is.na(xmp))] <- "NA"
+                for (k in seq_len(length(bins))) {
+                  xcp[which(round(xmp) %in% bins[[k]])] <- names(bins)[k]
+                }
+                rm(k)
+                ifelse(missing(keep) == FALSE && isTRUE(keep == 
+                  TRUE) == TRUE, return(cbind(x, Century = noquote(cntr), 
+                  Period = xcp)), return(xcp))
+            }
         }
         else {
             xmph <- graphics::hist(xmp$`Mid point`, breaks = obin, 
@@ -266,17 +336,21 @@ function (x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
         }
     }
     if (isTRUE(plot == FALSE) == TRUE) {
-        if (missing(DF) == FALSE && isTRUE(DF == TRUE) == TRUE) {
-            return(list(data_frame = xdf, prxs = unlist(prxs, 
-                use.names = TRUE)))
-        }
-        else {
-            return(unlist(prxs, use.names = TRUE))
-        }
+        return(unlist(prxs, use.names = TRUE))
     }
     else {
+        if (missing(horiz) == FALSE && isTRUE(horiz == TRUE) == 
+            TRUE) {
+            horiz <- TRUE
+            las <- 1
+        }
+        else {
+            horiz <- FALSE
+            las <- NULL
+        }
         ifelse(missing(ylim) == FALSE, suppressMessages(graphics::barplot(unlist(prxs, 
-            use.names = TRUE), main = main, ylim = ylim)), suppressMessages(graphics::barplot(unlist(prxs, 
-            use.names = TRUE), main = main)))
+            use.names = TRUE), main = main, ylim = ylim, horiz = horiz, 
+            las = las)), suppressMessages(graphics::barplot(unlist(prxs, 
+            use.names = TRUE), main = main, horiz = horiz, las = las)))
     }
 }

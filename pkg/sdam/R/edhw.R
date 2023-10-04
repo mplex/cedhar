@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.6.5 (29-08-2023)
+## version 0.6.8 (03-10-2023)
 ##
 ## PARAMETERS
 ##
@@ -25,7 +25,7 @@
 ## gender   (choose EDH gender)
 ## rp       (list of Roman provinces complementing the 'rp' dataset)
 
-edhw<-
+edhw <-
 function (x = "EDH", vars, as = c("df", "list"), type = c("long", 
     "wide", "narrow"), split, select, addID, limit, id, na.rm, 
     ldf, province, gender, rp, ...) 
@@ -540,8 +540,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   }
                 }
                 else {
-                  ifelse(isTRUE(length(id) == 1L) == TRUE, return(NULL), 
-                    NA)
+                  NA
                 }
             }
             rm(i)
@@ -601,7 +600,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
             }))) == FALSE)
         }
         else {
-            stop("Argument 'vars' should be a vector.")
+            stop("Argument \"vars\" should be a vector.")
         }
     }
     else {
@@ -610,6 +609,49 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
     if (match.arg(as) == "df") {
         ifelse(missing(split) == FALSE && isTRUE(split == TRUE) == 
             TRUE, split <- TRUE, split <- FALSE)
+        if (all(is.na(unlist(edhl))) == TRUE) {
+            if (isTRUE(length(id) == 1) == TRUE) {
+                id <- paste0("HD", paste(rep(0, 6 - nchar(id)), 
+                  collapse = ""), id, sep = "")
+            }
+            else {
+                id <- as.vector(sapply(id, function(z) {
+                  paste0("HD", paste(rep(0, 6 - nchar(z)), collapse = ""), 
+                    z, sep = "")
+                }))
+            }
+            resdf <- as.data.frame(unique(edhl))
+            ifelse(isTRUE("id" %in% colnames(resdf)) == TRUE, 
+                return(resdf), return(cbind(id, resdf)))
+        }
+        else {
+            NA
+        }
+        if (missing(id) == FALSE) {
+            if (is.character(id) == TRUE && isTRUE(is.na(as.numeric(gsub("HD", 
+                "", id))) == TRUE) == TRUE) {
+                stop("Invalid \"id\".")
+            }
+            else {
+                ifelse(is.character(id) == TRUE, id <- as.numeric(gsub("HD", 
+                  "", id)), NA)
+            }
+            if (isTRUE(length(id) == 1) == TRUE) {
+                id <- paste0("HD", paste(rep(0, 6 - nchar(id)), 
+                  collapse = ""), id, sep = "")
+            }
+            else {
+                tmp <- vector()
+                for (i in seq_len(length(id))) {
+                  tmp <- append(tmp, paste0("HD", paste(rep(0, 
+                    6 - nchar(id[i])), collapse = ""), id[i], 
+                    sep = ""))
+                }
+                rm(i)
+                id <- tmp
+                rm(tmp)
+            }
+        }
         if (isTRUE(flgp == TRUE) == TRUE) {
             pnames <- lapply(edhl, "names")
             if (isTRUE(flgv == FALSE) == TRUE) {
@@ -735,7 +777,13 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
             if (match.arg(type) == "long") {
                 if (isTRUE(length(edhlp) > 0) == TRUE && is.null(unlist(edhlp)) == 
                   FALSE) {
-                  if (isTRUE(length(plbs) == 1L) == TRUE) {
+                  if (isTRUE(length(plbs) == 0) == TRUE) {
+                    resdf <- as.data.frame(c(id, edhlq[[1]], 
+                      NA))
+                    colnames(resdf) <- c("id", npvars, "people")
+                    return(resdf)
+                  }
+                  else if (isTRUE(length(plbs) == 1L) == TRUE) {
                     if (missing(select) == FALSE) {
                       xdfp <- data.frame(matrix(nrow = length(ids), 
                         ncol = length(select) + 1L, dimnames = list(NULL, 

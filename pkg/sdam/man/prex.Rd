@@ -7,9 +7,9 @@ Compute probabilities of existence
 A function to compute probabilities of existence of artefacts related events.
 }
 \usage{
-prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars, 
-     bins = NULL, cp, weight = 1, DF, out, plot = FALSE, main = NULL, 
-     ylim, keep, ...)
+prex(x, type = c("aoristic", "mp", "cent", "cp", "other"), taq, tpq, vars, 
+     bins = NULL, cp, weight = 1, out, plot = FALSE, main = NULL, ylim, 
+     keep, horiz, ...)
 }
 
 \arguments{
@@ -22,6 +22,10 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
         \code{aoristic} aoristic sum
         
         \code{mp} mid points and range
+        
+        \code{cent} century
+        
+        \code{cp} chronological phase
         
         \code{other} 
 }
@@ -49,9 +53,6 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
   \item{weight}{
   value to observations (optional)
 }
-  \item{DF}{
-  return also data frame with observations? (optional and logical)
-}
   \item{out}{
   number of outliers to omit (integer or vector where first entry id for latest date)
 }
@@ -66,6 +67,9 @@ prex(x, type = c("aoristic", "mp", "other"), taq, tpq, vars,
 }
   \item{keep}{
   for \code{mp}, keep variables in output? (optional and logical)
+}
+  \item{horiz}{
+  horizontal barplot? (optional)
 }
   \item{\dots}{
   additional optional parameters

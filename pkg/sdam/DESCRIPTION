@@ -2,8 +2,8 @@ Package: sdam
 Type: Package
 Title: Social Dynamics and Complexity in the Ancient Mediterranean (Offline version)
 Description: Social Dynamics and complexity in the Ancient Mediterranean (SDAM), a research group based at the Department of History and Classical Studies at Aarhus University that performed analyses with these digital tools. 
-Version: 1.3.5
-Date: 2023-08-28
+Version: 1.4.1
+Date: 2023-10-03
 Depends: R (>= 3.6.0)
 Imports: grImport2, multiplex
 Suggests: httr, rjson, grid, knitr, rmarkdown, multigraph
@@ -23,4 +23,4 @@ BugReports: https://github.com/sdam-au/sdam/issues/
 Repository: CRAN
 License: CC BY 4.0
 NeedsCompilation: no
-Packaged: 2023-08-28 15:11:05 UTC; aost
+Packaged: 2023-10-03 15:31:05 UTC; aost
