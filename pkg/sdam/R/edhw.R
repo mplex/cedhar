@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.6.8 (03-10-2023)
+## version 0.6.7 (01-09-2023)
 ##
 ## PARAMETERS
 ##
@@ -540,7 +540,8 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   }
                 }
                 else {
-                  NA
+                  ifelse(isTRUE(length(id) == 1L) == TRUE, return(NULL), 
+                    NA)
                 }
             }
             rm(i)
@@ -626,31 +627,6 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         }
         else {
             NA
-        }
-        if (missing(id) == FALSE) {
-            if (is.character(id) == TRUE && isTRUE(is.na(as.numeric(gsub("HD", 
-                "", id))) == TRUE) == TRUE) {
-                stop("Invalid \"id\".")
-            }
-            else {
-                ifelse(is.character(id) == TRUE, id <- as.numeric(gsub("HD", 
-                  "", id)), NA)
-            }
-            if (isTRUE(length(id) == 1) == TRUE) {
-                id <- paste0("HD", paste(rep(0, 6 - nchar(id)), 
-                  collapse = ""), id, sep = "")
-            }
-            else {
-                tmp <- vector()
-                for (i in seq_len(length(id))) {
-                  tmp <- append(tmp, paste0("HD", paste(rep(0, 
-                    6 - nchar(id[i])), collapse = ""), id[i], 
-                    sep = ""))
-                }
-                rm(i)
-                id <- tmp
-                rm(tmp)
-            }
         }
         if (isTRUE(flgp == TRUE) == TRUE) {
             pnames <- lapply(edhl, "names")
