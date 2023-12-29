@@ -1,0 +1,168 @@
+PLACE	CODE
+""	NA
+"A Palace In The Aegean"	A
+"Adriatic"	D
+"Adriatic-Brindisi-Campania"	D
+"Adriatic Via Africa, Spain, France"	D
+"Adriatic/Further East"	D
+"Aegean"	A
+"Aegean And Italy"	A,D,I
+"Aegean And Lastly Cyprus"	A,E
+"Aegean Rome"	A,T,I
+"Aegean Tripolitania Italy"	A,D,I
+"Aegean Via Cosa"	A
+"Aegean Via Southern Italy"	A,I
+"Aegean, Italy"	A,D,I
+"Aegean/Africa"	A,F
+"Aegean/N. Africa/Propontis"	A,F
+"Africa"	F
+"Alex/Pergamum/Aegean"	A
+"Alexandria"	E
+"Anhialo"	C
+"Apollonia"	D
+"Apulia-Campania"	D
+"Aquileia"	D
+"Argens"	L
+"Argolic Gulf"	A
+"Asia"	E
+"Asia Minor"	E
+"Assos"	I
+"Athens"	A
+"Athens Via Delos"	A
+"Athens, Then Mende, Then Peparethos"	A
+"Attica Euboea"	A
+"Baetica"	B
+"Baetica-Narbonne"	B,L
+"Baetica-Tarraconensis-Gaul"	B,L
+"Baetulo/Iluro, Spain"	L
+"Barcino, Spain"	L
+"Barcino/Baetulo, Spain"	L
+"Bizone"	C
+"Black Sea"	C
+"Brega, For Trans Shipment"	B
+"Cadiz"	B
+"Caesarea"	E
+"Caesarea Maritima"	E
+"Campania"	T
+"Cartagena, Spain"	P
+"Carthage"	P
+"Carthage-Spain-Sicily/Sardinia"	P
+"Carthage Aegean"	P,I,A
+"Carystos"	A
+"Cassis"	L
+"Cavalaire, South Of France"	L
+"Central Western Italy"	T
+"Chemtou, Tunisia"	P
+"Chios"	A
+"Claros, Turkey"	A
+"Cnidus"	A
+"Constantinople"	A
+"Corinth"	A
+"Cos"	A
+"Cos, Crete, Italy"	A,I
+"Cos, Rhodes"	A
+"Cos, Rhodes, Athens"	A
+"Cosa"	T
+"Crete"	A
+"Crimea"	C
+"Cyprus"	E
+"Cyprus/Levant"	E
+"Docimium/Proconnesus"	A
+"Eastern Cilicia"	E
+"Eastern Crete"	A,E
+"Eastern Mediterranean"	E
+"Egypt"	E
+"Egypt And Crete Via Campania"	E
+"Egypt Datça Peninsula"	E
+"Egypt Luna"	E
+"Egypt W. Med"	E
+"Egypt, Aegean, Campania"	E,A
+"Egypt/Cyprus"	E
+"El Rosa, Calella, Spain"	L
+"Elba"	T
+"Etruria"	T
+"Euboea"	A
+"Euboea/Aegean"	A
+"France"	L,G
+"France, Spain"	L
+"France/Spain"	L
+"French Coast, Pyrenées"	L
+"Ganos"	A
+"Gaul"	G
+"Gaul, Spain"	G
+"General Mediterranean"	M
+"Greece"	A
+"Greece Italy"	A,I
+"Greece Southern Italy"	A,I
+"Herakleia Pontica"	A
+"Ikos"	A
+"India"	X
+"Inland France"	L,G
+"Islamic Maghreb"	A,P
+"Islamic Mahgreb"	A,P
+"Israel, Egypt"	E
+"Italy"	T,I,D
+"Italy Via Crete And Rhodes"	A,I
+"Levant"	E
+"Lllobregat, Spain"	L
+"Llobregat And Maresme, Spain"	L
+"Llobregat, Spain"	L
+"Luna"	E
+"Lusitania"	B
+"Lusitania-Baetica"	B
+"Maresme, Spain"	L
+"Marseille"	L
+"Marseilles"	L
+"Marseillles"	L
+"Mesembria"	C
+"Montpellier"	L
+"NA"	NA
+"Narbonne, France"	L
+"Neapolis Nabeul North Africa"	I,F
+"Near East"	E
+"North Africa"	F
+"Northeast Mediterranean"	A,E
+"Northern Italy"	L,D
+"Northern Levant"	E
+"Odessos"	C
+"Palestine"	E
+"Palestine And Elsewhere"	E
+"Palestine Cilicia, Aegean"	E,A
+"Palestine/Rhodes"	E,A
+"Pamphylia"	E
+"Paros"	A
+"Pergamum"	A
+"Phoenicia"	P
+"Pisa"	L
+"Proconnesus"	A
+"Rhodes"	A
+"Rhodes, Cos"	A
+"Rome"	T
+"Rome/France/Spain"	T,L
+"Samos"	A
+"Sardinia"	T,P
+"Sicily"	I,T
+"Sicily/North Africa"	I,P
+"Sicily/Rome"	I,T
+"South Coast Black Sea"	C
+"South Of France"	L
+"South West France Inland France"	L,G
+"Southeast Aegean"	A
+"Southern Cyprus"	E
+"Southern Italy"	I
+"Southern Levant Or Cyprus"	E
+"Southern Spain Via Marseilles"	B
+"Spain"	B,L
+"Spain-Central/Southern Italy"	B,L,I
+"Spain, Aegean, Adriatic"	B,L,A,D
+"Spain/France"	B,L,G
+"Syria"	E
+"Syria/Palestine Via Ugarit"	E
+"Tarraconensis"	L
+"Teos, Naxos, Rome"	A,I,T
+"Tera"	A
+"Thasos"	A
+"Thasos/Asia Minor"	A
+"Thessaly, Proconnesus"	A
+"Thessaly/Euboea"	A
+"Tripolitania"	P
