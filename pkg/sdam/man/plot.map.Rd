@@ -8,9 +8,9 @@ A function to plot cartographical maps of the Roman world and Mediterranean regi
 }
 \usage{
 \method{plot}{map}(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, 
-         main, cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, new, \dots)
-%plot.map(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, 
-%         main, cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, new, ...)
+         main, compass, cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, new, \dots)
+%plot.map(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, main, compass, 
+%         cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, new, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -42,7 +42,10 @@ A function to plot cartographical maps of the Roman world and Mediterranean regi
   \item{main}{
   plot's main title (optional)
 }
-  \item{cap}{
+   \item{compass}{
+ display compass? (optional and logical)
+}
+ \item{cap}{
  display caption? (optional and logical, for provinces)
 }
   \item{date}{

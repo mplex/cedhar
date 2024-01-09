@@ -3,33 +3,34 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire and the Mediterranean Basin
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.1.4 (30-04-2022)
+## version 0.2.0 (09-01-2024)
 ##
 ## OPTIONAL PARAMETERS
 ##
-## x      (char or vector, province or region acronym)
-## type   (if x=NULL, type of c. map: plain, roman provinces, senatorial-imperial, tetrarchy, Mediterranean sea)
-## settl  (optional and logical, display settlements?)
-## roads  (optional and logical, display roads?)
-## shipr  (optional and logical, display shipping routes?)
-## main   (plot's title)
-## cap    (only province or region, logical, display caption?)
-## date   (only province or region, logical, display est date in caption?)
-## name   (only province or region, logical, display name?)
-## fsize  (title's font size)
-## fcol   (title's font color)
-## fsize2 (only province or region, date's font size)
-## fcol2  (only province or region, date's font color)
-## xd     (only province or region, x positioning for date)
-## yd     (only province or region, y positioning for date)
-## new    (optional, new plot as superimposed graphic?)
+## x       (char or vector, province or region acronym)
+## type    (if x=NULL, type of c. map: plain, roman provinces, senatorial-imperial, tetrarchy, Mediterranean sea)
+## settl   (optional and logical, display settlements?)
+## roads   (optional and logical, display roads?)
+## shipr   (optional and logical, display shipping routes?)
+## main    (plot's title)
+## compass (optional and logical, display compass?)
+## cap     (only province or region, logical, display caption?)
+## date    (only province or region, logical, display est date in caption?)
+## name    (only province or region, logical, display name?)
+## fsize   (title's font size)
+## fcol    (title's font color)
+## fsize2  (only province or region, date's font size)
+## fcol2   (only province or region, date's font color)
+## xd      (only province or region, x positioning for date)
+## yd      (only province or region, y positioning for date)
+## new     (optional, new plot as superimposed graphic?)
 ##
 
 
 plot.map <-
 function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"), 
-    settl, roads, shipr, main, cap, date, name, fsize, fcol, 
-    fsize2, fcol2, xd, yd, new, ...) 
+    settl, roads, shipr, main, compass, cap, date, name, fsize, 
+    fcol, fsize2, fcol2, xd, yd, new, ...) 
 {
     if (is.null(x) == TRUE) {
         if (!(exists("retn"))) {
@@ -47,7 +48,7 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
         }
         grid::grid.newpage()
         switch(match.arg(type), plain = {
-            grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn$rcoast", 
+            grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn$eucoast", 
                 "[[1]]", sep = "")))))
         }, rp = {
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn$rpcoast", 
@@ -98,13 +99,13 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
             invisible(NA)
         }
         if (isTRUE(x %in% names(rpmp) == FALSE)) {
-            message("could not find \"x\"")
+            message("Could not find \"x\"")
             opt <- options(show.error.messages = FALSE)
             on.exit(options(opt))
             stop()
         }
         else {
-            NA
+            invisible(NA)
         }
         grid::grid.newpage()
         grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste(paste("rpmp", 
@@ -228,5 +229,17 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
             grid::grid.text(main, x = 0.5, y = 0.966, gp = grid::gpar(fontsize = fsize, 
                 col = fcol))
         }
+    }
+    if (missing(compass) == FALSE && isTRUE(compass == TRUE) == 
+        TRUE) {
+        utils::data("retn", package = "sdam", envir = environment())
+        retn <- get("retn", envir = environment())
+        grid::pushViewport(grid::viewport(x = 0.8, y = 0.85, 
+            width = 0.11, height = 0.11, just = c("center", "bottom")))
+        grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn$compass", 
+            "[[1]]", sep = "")))))
+    }
+    else {
+        invisible(NA)
     }
 }
