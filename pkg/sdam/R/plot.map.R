@@ -3,7 +3,7 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire and the Mediterranean Basin
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.0 (09-01-2024)
+## version 0.2.2 (17-04-2024)
 ##
 ## OPTIONAL PARAMETERS
 ##
@@ -110,31 +110,47 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
         grid::grid.newpage()
         grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste(paste("rpmp", 
             x, sep = "$"), "[[1]]", sep = "")))))
-        if (missing(cap) == FALSE && isTRUE(cap == FALSE) == 
-            TRUE) {
-            invisible(NA)
-        }
-        else {
+        if ((missing(cap) == FALSE && isTRUE(cap == TRUE) == 
+            TRUE) || (missing(date) == FALSE && isTRUE(date == 
+            TRUE) == TRUE)) {
             if (!(exists("rpmcd"))) {
                 utils::data("rpmcd", package = "sdam", envir = environment())
                 rpmcd <- get("rpmcd", envir = environment())
+                ifelse(missing(fsize2) == TRUE, fsize2 <- 8, 
+                  invisible(NA))
+                ifelse(missing(fcol2) == TRUE, fcol2 <- "#808080", 
+                  invisible(NA))
             }
             else {
                 invisible(NA)
             }
-            grid::pushViewport(grid::viewport(x = 1.165, y = -0.7, 
+        }
+        if (missing(cap) == FALSE && isTRUE(cap == FALSE) == 
+            TRUE) {
+            if (missing(date) == FALSE && isTRUE(date == TRUE) == 
+                TRUE) {
+                ifelse(missing(xd) == TRUE, xd <- 0.5, xd <- xd/10)
+                ifelse(missing(yd) == TRUE, yd <- 0.1, yd <- yd/10)
+                est <- eval(parse(text = paste(paste("rpmcd[[", 
+                  which(names(rpmcd) %in% x), "]]", sep = ""), 
+                  "provd", sep = "$")))
+                grid::grid.text(paste("est.", est), x = xd, y = yd, 
+                  gp = grid::gpar(fontsize = fsize2, col = fcol2))
+            }
+            else {
+                invisible(NA)
+            }
+        }
+        else {
+            grid::pushViewport(grid::viewport(x = 1.165, y = -0.702, 
                 w = 1.25, h = 1.25, just = c("center", "bottom")))
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste(paste("rpmcd", 
                 x, sep = "$"), "[[1]]", sep = "")))))
             grid::popViewport()
             if (missing(date) == FALSE && isTRUE(date == TRUE) == 
                 TRUE) {
-                ifelse(missing(fsize2) == TRUE, fsize2 <- 8, 
-                  invisible(NA))
-                ifelse(missing(fcol2) == TRUE, fcol2 <- "#808080", 
-                  invisible(NA))
-                ifelse(missing(xd) == TRUE, xd <- 0.68, invisible(NA))
-                ifelse(missing(yd) == TRUE, yd <- 0.3, invisible(NA))
+                ifelse(missing(xd) == TRUE, xd <- 0.7, xd <- xd/10)
+                ifelse(missing(yd) == TRUE, yd <- 0.3, yd <- yd/10)
                 est <- eval(parse(text = paste(paste("rpmcd[[", 
                   which(names(rpmcd) %in% x), "]]", sep = ""), 
                   "provd", sep = "$")))
@@ -182,10 +198,6 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
                   grid::popViewport()
                   if (missing(date) == FALSE && isTRUE(date == 
                     TRUE) == TRUE) {
-                    ifelse(missing(fsize2) == TRUE, fsize2 <- 8, 
-                      invisible(NA))
-                    ifelse(missing(fcol2) == TRUE, fcol2 <- "#808080", 
-                      invisible(NA))
                     est <- eval(parse(text = paste(paste("rpmcd[[", 
                       which(names(rpmcd) %in% paste("c", x[k], 
                         sep = "")), "]]", sep = ""), "provd", 
@@ -238,6 +250,16 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
             width = 0.11, height = 0.11, just = c("center", "bottom")))
         grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn$compass", 
             "[[1]]", sep = "")))))
+        if ((missing(cap) == FALSE && isTRUE(cap == TRUE) == 
+            TRUE) && (is.null(x) == FALSE)) {
+            grid::pushViewport(grid::viewport(x = 1.75, y = -5.5, 
+                w = 0.4, h = 0.4, just = c("center", "bottom")))
+            grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste("retn$compass", 
+                "[[1]]", sep = "")))))
+        }
+        else {
+            invisible(NA)
+        }
     }
     else {
         invisible(NA)
