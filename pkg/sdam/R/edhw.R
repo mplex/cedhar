@@ -3,7 +3,7 @@
 ## FUNCTION edhw() to manipulate data API from the EDH dataset
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.7.6 (27-05-2024)
+## version 0.7.7 (31-05-2024)
 ##
 ## PARAMETERS
 ##
@@ -31,7 +31,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
     ldf, province, gender, rp, ...) 
 {
     if (isTRUE(match.arg(as) %in% c("df", "list")) == FALSE) 
-        stop("'arg' should be one of \"df\", \"list\".")
+        stop("Argument \"as\" should be \"df\" or \"list\".")
     if (missing(addID) == FALSE && isTRUE(addID == FALSE) == 
         TRUE) {
         if ((isTRUE(na.rm == TRUE) == TRUE) | (match.arg(as) == 
@@ -54,7 +54,11 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
         TRUE, na.rm <- TRUE, na.rm <- FALSE)
     flgdf <- FALSE
     if (is.null(x) == TRUE) 
-        stop("'x' is NULL")
+        stop("\"x\" is NULL")
+    if (isTRUE(x[[1]] == "") == TRUE) {
+        message("\"x\" is empty.")
+        return(NULL)
+    }
     if (isTRUE(x == "EDH") == TRUE) {
         message("\"x\" is for dataset \"EDH\".")
         flglv <- TRUE
@@ -139,7 +143,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
             if (isTRUE(length(province) == 1) == TRUE) {
                 if (isTRUE(province %in% names(rp)) == FALSE) {
                   if (isTRUE(province %in% rp) == FALSE) 
-                    stop("\"province\" not found. Use \"rp\" argument with province names.")
+                    stop("\"province\" not found; use \"rp\" argument with province names.")
                   province <- names(rp)[which(rp %in% province)]
                 }
                 else {
@@ -153,7 +157,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   -which(!(colnames(xp) %in% c(vars, "id")))])
             }
             else if (isTRUE(length(province) > 1) == TRUE) {
-                message("Using several provinces as data frame is experimental.")
+                message("Several provinces as data frame is experimental.")
                 xl <- vector("list")
                 for (k in seq_len(length(province))) {
                   xp <- x[x$province_label == unlist(rp[which(names(rp) == 
@@ -581,6 +585,7 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
                   xvars))][vars[which(!(vars %in% xvars))] != 
                   "people"], collapse = ", "), "\" is(are) not present in \"x\" and might been disregarded.", 
                   sep = ""))
+                vars <- vars[which(vars %in% xvars)]
             }
         }
         else {
@@ -714,15 +719,14 @@ function (x = "EDH", vars, as = c("df", "list"), type = c("long",
             TRUE) == TRUE) {
             edhl <- lapply(edhlm, `[`, vars)
             edhl <- lapply(edhl, setNames, vars)
-            edhl <- lapply(edhl, function(x) {
-                x[sapply(x, is.null)] <- NA
-                return(x)
-            })
             if (is.null(unlist(edhl)) == TRUE) {
-                warning("\"vars\" not in \"x\".")
                 return(NULL)
             }
             else {
+                edhl <- lapply(edhl, function(x) {
+                  x[sapply(x, is.null)] <- NA
+                  return(x)
+                })
                 if (isTRUE(na.rm == TRUE) == TRUE) {
                   valids <- which(as.vector(unlist(lapply(edhl, 
                     function(x) {
