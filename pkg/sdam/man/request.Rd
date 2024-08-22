@@ -3,7 +3,7 @@
 \alias{sddk}
 \alias{SDDK}
 \title{
-Perform an HTTP request
+Perform an HTTP Request
 }
 \description{
 A function to perform an HTTP request to \emph{\url{https://sciencedata.dk}} or other server.
@@ -23,6 +23,12 @@ request(file, URL = "https://sciencedata.dk", method = c("GET", "POST", "PUT", "
 }
   \item{method}{
    the http verb for the object
+\itemize{ 
+       \item \code{"GET"}
+       \item \code{"POST"} (not implemented)
+       \item \code{"PUT"}
+       \item \code{"DELETE"}
+       }
 }
   \item{anonymous}{
     unauthenticated user?
@@ -54,9 +60,11 @@ DEiC's \emph{\url{https://sciencedata.dk}} servers have different types of folde
 folders require authentication with credentials.
 
 The \emph{path} to the shared folders where the files are located must be specified with the \code{path} argument. 
-However, for personal folders the \code{file} argument that includes the path information. Many times, DEiC's \emph{\url{https://sciencedata.dk}} places the data on a \emph{subdomain}, and for some methods like \code{PUT} it is required to specify the subdomain as well.
+However, for personal folders the \code{file} argument that includes the path information. 
+Many times, DEiC's \emph{\url{https://sciencedata.dk}} places the data on a \emph{subdomain}, and for some methods like \code{PUT} it is required to specify the subdomain as well.
 
-When a file already exists on the remote server, there is a prompt question for overwriting the file when the \code{PUT} method is invoked, and by activating argument \code{force} we can prevent confirmation and replace the file.
+When a file already exists on the remote server, there is a prompt question for overwriting the file when the \code{PUT} method is invoked, 
+and by activating argument \code{force} we can prevent confirmation and replace the file.
 Method \code{POST} is not yet supported.
 
 In case that accessing the server requires basic authentication, then package "\code{\link{tcltk}}" is required to input the credentials with a widget prompt. 

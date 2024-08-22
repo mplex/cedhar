@@ -1,7 +1,7 @@
 \name{plot.map}
 \alias{plot.map}
 \title{
-Plot cartographical maps
+Plot Cartographical Maps
 }
 \description{
 A function to plot cartographical maps of the Roman world and Mediterranean region.
@@ -12,7 +12,6 @@ A function to plot cartographical maps of the Roman world and Mediterranean regi
 %plot.map(x = NULL, type = c("plain", "rp", "si", "tetra", "med"), settl, roads, shipr, main, compass, 
 %         cap, date, name, fsize, fcol, fsize2, fcol2, xd, yd, new, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
  acronym of ancient Roman province or Italian region (see "\code{\link{rp}}")
@@ -20,15 +19,13 @@ A function to plot cartographical maps of the Roman world and Mediterranean regi
   \item{type}{
       Type of cartographical map: 
         
-        \code{plain} most of Europe and land around the Mediterranean
-        
-        \code{rp} ancient Roman provinces
-        
-        \code{si} Senatorial-Imperial provinces
-        
-        \code{tetra} First Tetrarchy
-        
-        \code{med} Mediterranean region
+\itemize{ 
+       \item \code{plain} most of Europe and land around the Mediterranean 
+       \item \code{rp} ancient Roman provinces   
+       \item \code{si} Senatorial-Imperial provinces
+       \item \code{tetra} First Tetrarchy 
+       \item \code{med} Mediterranean region 
+       }
 }
   \item{settl}{
   display settlements? (optional and logical, for cartographical map)
@@ -87,7 +84,8 @@ however, the argument \code{main} prevails over \code{name}.
 
 The \code{type} argument allows plotting cartographical maps related to the Roman Empire and the Mediterranean basin 
 as specified in \code{rpmp} and \code{\link{rpmcd}} datasets. 
-In the cartographical maps, settlements are displayed as circles while squares are for military forts, while terrestrial and maritime routes are given as solid paths with different colours. 
+In the cartographical maps, settlements are displayed as circles while squares are for military forts, 
+while terrestrial and maritime routes are given as solid paths with different colours. 
 Shapes of places and routes are specified in the \code{retn} dataset.
 
 

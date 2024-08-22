@@ -2,7 +2,7 @@
 \docType{data}
 \alias{retn}
 \title{
-Roman Empire transport network and Mediterranean region
+Roman Empire Transport Network and Mediterranean Region
 }
 \description{
 This is a list of lists with specifications to plot different cartographical maps of the Roman Empire and 

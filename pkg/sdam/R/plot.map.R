@@ -3,7 +3,7 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire and the Mediterranean Basin
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.2 (17-04-2024)
+## version 0.2.4 (22-08-2024)
 ##
 ## OPTIONAL PARAMETERS
 ##
@@ -125,23 +125,20 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
                 invisible(NA)
             }
         }
-        if (missing(cap) == FALSE && isTRUE(cap == FALSE) == 
-            TRUE) {
-            if (missing(date) == FALSE && isTRUE(date == TRUE) == 
-                TRUE) {
-                ifelse(missing(xd) == TRUE, xd <- 0.5, xd <- xd/10)
-                ifelse(missing(yd) == TRUE, yd <- 0.1, yd <- yd/10)
-                est <- eval(parse(text = paste(paste("rpmcd[[", 
-                  which(names(rpmcd) %in% x), "]]", sep = ""), 
-                  "provd", sep = "$")))
-                grid::grid.text(paste("est.", est), x = xd, y = yd, 
-                  gp = grid::gpar(fontsize = fsize2, col = fcol2))
-            }
-            else {
-                invisible(NA)
-            }
-        }
         else {
+            invisible(NA)
+        }
+        if (missing(date) == FALSE && isTRUE(date == TRUE) == 
+            TRUE && missing(cap) == FALSE && isTRUE(cap == FALSE) == 
+            TRUE) {
+            ifelse(missing(xd) == TRUE, xd <- 0.5, xd <- xd/10)
+            ifelse(missing(yd) == TRUE, yd <- 0.1, yd <- yd/10)
+            est <- eval(parse(text = paste(paste("rpmcd[[", which(names(rpmcd) %in% 
+                x), "]]", sep = ""), "provd", sep = "$")))
+            grid::grid.text(paste("est.", est), x = xd, y = yd, 
+                gp = grid::gpar(fontsize = fsize2, col = fcol2))
+        }
+        if (missing(cap) == FALSE && isTRUE(cap == TRUE) == TRUE) {
             grid::pushViewport(grid::viewport(x = 1.165, y = -0.702, 
                 w = 1.25, h = 1.25, just = c("center", "bottom")))
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste(paste("rpmcd", 
@@ -160,6 +157,9 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
             else {
                 invisible(NA)
             }
+        }
+        else {
+            invisible(NA)
         }
         if (missing(main) == TRUE) {
             if (missing(name) == FALSE && isTRUE(name == FALSE) == 

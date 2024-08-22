@@ -1,7 +1,7 @@
 \name{plot.dates}
 \alias{plot.dates}
 \title{
-Plot interval dates
+Plot Interval Dates
 }
 \description{
 A function to plot interval dates with different forms.
@@ -14,7 +14,6 @@ A function to plot interval dates with different forms.
 %    col, cex, lwd, lty, pch, main = NULL, xlab = NULL, ylab = NULL, 
 %    xlim = NULL, axes = TRUE, alpha, file = NULL, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
   dataset as a data frame or list of data frames with variables and observations. 
@@ -25,11 +24,11 @@ A function to plot interval dates with different forms.
   \item{type}{
       Type of date format to plot: 
         
-        \code{ts} timespans with endpoints
-        
-        \code{mp} mid points and range
-        
-        \code{rg} range only
+   \itemize{
+      \item \code{ts} timespans with endpoints
+      \item \code{mp} mid points and range
+      \item \code{rg} range only
+   }
 }
   \item{taq}{
   timespan endpoint \emph{terminus ante quem} (TAQ)
@@ -80,7 +79,7 @@ A function to plot interval dates with different forms.
   alpha transparency for time interval segments
 }
   \item{file}{
-  path to produce a file with a PDF format (optional)
+  path for file in PDF format (optional)
 }
   \item{\dots}{
   additional optional parameters
@@ -88,7 +87,7 @@ A function to plot interval dates with different forms.
 }
 \details{
 This plot function is for time interval segments given in the dataset \code{x}, which is 
-given as a dataframe or as a ``tibble'' class object. 
+given as a dataframe or as a ``tibble'' class object (cf. \code{\link[tibble]{tibble}}). 
 
 By default, the function looks for an \code{id} column in \code{x}; otherwise take the rownames. 
 Option \code{"auto"} in the \code{"id"} argument is to distribute the time blocks equally in the plot, 
@@ -106,7 +105,7 @@ Antonio Rivero Ostoic
 If \code{x} is \code{NULL}, then \code{EDH} dataset is taken by default.
 }
 \seealso{
-\code{\link{dts}}, \code{\link{get.edh}}, \code{\link{edhw}}, \code{\link{prex}}, \code{\link[tibble]{tibble}}
+\code{\link{dts}}, \code{\link{get.edh}}, \code{\link{edhw}}, \code{\link{prex}}
 }
 \examples{
 \dontrun{

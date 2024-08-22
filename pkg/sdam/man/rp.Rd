@@ -2,7 +2,7 @@
 \docType{data}
 \alias{rp}
 \title{
-Roman province names and acronyms as in EDH dataset
+Roman Province Names and Acronyms as in EDH Dataset
 }
 \description{
 This is a list with Roman province names and acronyms as in the Epigraphic Database Heidelberg recorded in \code{EDH} dataset. 

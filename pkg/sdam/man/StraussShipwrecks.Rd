@@ -1,7 +1,7 @@
 \name{StraussShipwrecks}
 \alias{StraussShipwrecks}
 \title{
-Ancient Roman shipwrecks dataset
+Ancient Roman Shipwrecks Dataset
 }
 \description{
 Sets of data of ancient wrecks in the Mediterranean Basin up to 1500 AD.

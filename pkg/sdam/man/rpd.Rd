@@ -2,7 +2,7 @@
 \docType{data}
 \alias{rpd}
 \title{
-Roman provinces dates from EDH dataset
+Roman Provinces Dates from EDH Dataset
 }
 \description{
 Dataset with a list with Roman province dates from the Epigraphic Database Heidelberg as in \code{EDH} dataset.

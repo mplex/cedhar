@@ -1,7 +1,7 @@
 \name{prex}
 \alias{prex}
 \title{
-Compute probabilities of existence
+Compute Probabilities of Existence
 }
 \description{
 A function to compute probabilities of existence of artefacts related events.
@@ -18,16 +18,13 @@ prex(x, type = c("aoristic", "mp", "cent", "cp", "other"), taq, tpq, vars,
 }
   \item{type}{
       Type of date format to compute or plot: 
-        
-        \code{aoristic} aoristic sum
-        
-        \code{mp} mid points and range
-        
-        \code{cent} century
-        
-        \code{cp} chronological phase
-        
-        \code{other} 
+\itemize{ 
+       \item \code{aoristic} aoristic sum 
+       \item \code{mp} mid points and range 
+       \item \code{cent} century
+       \item \code{cp} chronological phase 
+       \item \code{other} 
+       }
 }
   \item{taq}{
   timespan endpoint \emph{terminus ante quem} (TAQ)
@@ -44,11 +41,11 @@ prex(x, type = c("aoristic", "mp", "cent", "cp", "other"), taq, tpq, vars,
   \item{cp}{
         Chronological phase:
 
-         \code{"bin5"} five-bins from the antiquity period
-
-         \code{"bin8"} eight-bins from the antiquity period
-
-         list or list of lists with a customized chronological phases
+   \itemize{
+      \item \code{"bin5"} five-bins from the antiquity period
+      \item \code{"bin8"} eight-bins from the antiquity period
+      \item list or ``list of lists'' with a customized chronological phases
+   }
 }
   \item{weight}{
   value to observations (optional)

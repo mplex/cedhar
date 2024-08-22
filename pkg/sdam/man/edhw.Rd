@@ -1,7 +1,7 @@
 \name{edhw}
 \alias{edhw}
 \title{
-Wrapper function for manipulation of the EDH dataset
+Wrapper Function for Manipulation of the EDH Dataset
 }
 \description{
 A function to obtain variable data and perform transformations on the \code{EDH} dataset.
@@ -18,11 +18,19 @@ edhw(x = "EDH", vars, as = c("df", "list"), type = c("long", "wide", "narrow"),
   \item{vars}{
    vector of variables of interest from \code{x}; if \code{x=NULL}, the entire \code{EDH} dataset is taken (optional)
 }
-  \item{as}{
-   format to return the output; either as a \code{"list"} or a data frame \code{"df"} object.
+\item{as}{format choosen output object as:
+   \itemize{
+      \item \code{"list"} (default) - a list of records
+      \item \code{"df"}: a data frame with records
+   }
 }
   \item{type}{
-   type format of data frame; either \code{"long"} or \code{"wide"} (\code{"narrow"} not yet implemented)
+   type format of data frame:
+   \itemize{
+      \item \code{"long"} (default)
+      \item \code{"wide"}
+      \item \code{"narrow"} (not yet implemented)
+   }
 }
   \item{split}{
    divide the data into groups by id? (optional and logical)
@@ -34,7 +42,7 @@ edhw(x = "EDH", vars, as = c("df", "list"), type = c("long", "wide", "narrow"),
    add identification to the output? (optional and logical)
 }
   \item{limit}{
-   integer or vector to limit the returned output. Ignored if \code{id} is specified (optional)
+   integer or vector to limit the returned output (optional, ignored if \code{id} is specified)
 }
   \item{id}{
    select only \code{hd_nr} records (optional, integer or character)
@@ -49,7 +57,12 @@ edhw(x = "EDH", vars, as = c("df", "list"), type = c("long", "wide", "narrow"),
    names or abbreviations of Roman provinces in \code{EDH} as in \code{\link{rp}} dataset
 }
   \item{gender}{
-   gender of people in \code{EDH}: \code{male} or \code{female}
+   gender of people in \code{EDH} dataset: 
+   \itemize{
+      \item \code{male} or
+      \item \code{female}
+   }
+    
 }
   \item{rp}{
    customized list of Roman provinces as in \code{\link{rp}} dataset

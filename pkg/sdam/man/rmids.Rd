@@ -1,7 +1,7 @@
 \name{rmids}
 \alias{rmids}
 \title{
-Restricted multiply-imputed data subsets
+Restricted Multiply-Imputed Data Subsets
 }
 \description{
 A function to perform multiple imputation of missing dating data in the \code{EDH} dataset.
@@ -22,8 +22,11 @@ rmids(x, vars, collapse, pool, type = c("1", "2"))
   \item{pool}{
   pool the results?  (optional and logical)
 }
-  \item{type}{
-  type of pooling: \code{"1"} for min TAQ and max TPQ. \code{"2"} for conditional pooling
+\item{type}{type of pooling:
+   \itemize{
+     \item \code{"1"} for min TAQ and max TPQ
+     \item \code{"2"} for conditional pooling
+   }
 }
 }
 \details{

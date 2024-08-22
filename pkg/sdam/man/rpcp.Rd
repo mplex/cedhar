@@ -2,7 +2,7 @@
 \docType{data}
 \alias{rpcp}
 \title{
-Roman provinces and chronological periods
+Roman Provinces and Chronological Periods
 }
 \description{
 This dataset is a list of two data frames with 45 Roman provinces and regions with 

@@ -2,7 +2,7 @@
 \docType{data}
 \alias{rpmp}
 \title{
-Maps of ancient Roman provinces and Italian regions
+Maps of Ancient Roman Provinces and Italian Regions
 }
 \description{
 This is a list with specifications to plot cartographical maps of ancient Roman provinces and Italian regions. 

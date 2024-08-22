@@ -1,7 +1,7 @@
 \name{get.edh}
 \alias{get.edh}
 \title{
-Get data from the Epigraphic Database Heidelberg API
+Get Data from the Epigraphic Database Heidelberg API
 }
 \description{
 A function to obtain data from the Epigraphic Database Heidelberg REST like API repository.

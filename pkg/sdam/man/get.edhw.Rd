@@ -1,7 +1,7 @@
 \name{get.edhw}
 \alias{get.edhw}
 \title{
-Wrapper to get data from the Epigraphic Database Heidelberg API
+Wrapper to Get Data from the Epigraphic Database Heidelberg API
 }
 \description{
 A wrapper function to obtain data from the Epigraphic Database Heidelberg REST like API repository.

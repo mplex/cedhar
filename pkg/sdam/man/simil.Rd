@@ -1,7 +1,7 @@
 \name{simil}
 \alias{simil}
 \title{
-Similarity between vectors in columns
+Similarity Between Vectors in Dataframe Columns
 }
 \description{
 A function to compute similarity between vectors from columns in a data frame based on common attribute characteristics.

@@ -1,7 +1,7 @@
 \name{cs}
 \alias{cs}
 \title{
-Change case in a text
+Change Case in a Text
 }
 \description{
 A function to change letters to uppercase and lowercase in a given text.
@@ -17,7 +17,13 @@ cs(xz, level = 1, case = 0, na.rm = FALSE)
     optional clean level, either \code{0} for no-clean, default \code{1} to most strict \code{9} (see \code{\link{cln}})
 }
   \item{case}{
-  change case: \code{1} first letter uppercase and rest lowercase, \code{2} all letters lowercase, \code{3} all letters uppercase
+  change case: 
+  
+\itemize{ 
+       \item \code{1} first letter uppercase and rest lowercase 
+       \item \code{2} all letters lowercase
+       \item \code{3} all letters uppercase 
+       }
 }
   \item{na.rm}{
    remove entries with NA data? (optional and logical)

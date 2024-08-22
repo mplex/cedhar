@@ -2,7 +2,7 @@
 \docType{data}
 \alias{rpmcd}
 \title{
-Caption maps and affiliation dates of Roman provinces 
+Caption Maps and Affiliation Dates of Roman Provinces 
 }
 \description{
 This is a list with specifications to plot caption maps of 59 Roman provinces (year 117 AD) 

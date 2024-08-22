@@ -1,7 +1,7 @@
 \name{dts}
 \alias{dts}
 \title{
-Converting dates into a numerical format
+Converting Dates into a Numerical Format
 }
 \description{
 A function for converting different types of dates into a numerical format.

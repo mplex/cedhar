@@ -1,7 +1,7 @@
 \name{edhwpd}
 \alias{edhwpd}
 \title{
-Organize EDH dataset province and dates by similarity
+Organize EDH Dataset Province and Dates by Similarity
 }
 \description{
 Wrapper function to organize \code{EDH} dataset province and dates by simple match similarity.
