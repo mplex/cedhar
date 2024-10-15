@@ -3,7 +3,7 @@
 ## FUNCTION plot.map() to plot cartographical maps of the Roman Empire and the Mediterranean Basin
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, jaro@cas.au.dk 
 ##
-## version 0.2.4 (22-08-2024)
+## version 0.2.5 (15-10-2024)
 ##
 ## OPTIONAL PARAMETERS
 ##
@@ -144,19 +144,18 @@ function (x = NULL, type = c("plain", "rp", "si", "tetra", "med"),
             grid::grid.draw(x = grImport2::pictureGrob(picture = eval(parse(text = paste(paste("rpmcd", 
                 x, sep = "$"), "[[1]]", sep = "")))))
             grid::popViewport()
-            if (missing(date) == FALSE && isTRUE(date == TRUE) == 
-                TRUE) {
-                ifelse(missing(xd) == TRUE, xd <- 0.7, xd <- xd/10)
-                ifelse(missing(yd) == TRUE, yd <- 0.3, yd <- yd/10)
-                est <- eval(parse(text = paste(paste("rpmcd[[", 
-                  which(names(rpmcd) %in% x), "]]", sep = ""), 
-                  "provd", sep = "$")))
-                grid::grid.text(paste("est.", est), x = xd, y = yd, 
-                  gp = grid::gpar(fontsize = fsize2, col = fcol2))
-            }
-            else {
-                invisible(NA)
-            }
+        }
+        else {
+            invisible(NA)
+        }
+        if (missing(date) == FALSE && isTRUE(date == TRUE) == 
+            TRUE) {
+            ifelse(missing(xd) == TRUE, xd <- 0.7, xd <- xd/10)
+            ifelse(missing(yd) == TRUE, yd <- 0.3, yd <- yd/10)
+            est <- eval(parse(text = paste(paste("rpmcd[[", which(names(rpmcd) %in% 
+                x), "]]", sep = ""), "provd", sep = "$")))
+            grid::grid.text(paste("est.", est), x = xd, y = yd, 
+                gp = grid::gpar(fontsize = fsize2, col = fcol2))
         }
         else {
             invisible(NA)
