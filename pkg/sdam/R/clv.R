@@ -3,7 +3,7 @@
 ## INTERNAL FUNCTION clv() for cleansing vectors in cln()
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.2.5 (10-05-2023)
+## version 0.2.7 (08-11-2024)
 ##
 ## PARAMETERS
 ## x        (vector with text for cleansing)
@@ -12,15 +12,14 @@
 ## chr.rm   (vector of characters to remove)
 ## na.rm    (logical, remove NAs?)
 ## space    (1 double to single space/space at end, 2 around -/=)
+## keep     (optional, keep cleansed text in output?)
 
 
 clv <-
-function (x, level = 1, case, chr.rm, na.rm = FALSE, space) 
+function (x, level = 1, case, chr.rm, na.rm = FALSE, space, keep) 
 {
     xo <- x
     ifelse(is.factor(x) == TRUE, x <- as.vector(x), NA)
-    ifelse(is.vector(x) == TRUE, flgvc <- TRUE, flgvc <- FALSE)
-    ifelse(is.list(x) == TRUE, flgvl <- TRUE, flgvl <- FALSE)
     is.na(x) <- x == "NULL"
     x[x == ""] <- NA
     x[x == "NA"] <- NA
@@ -138,7 +137,8 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE, space)
     if (isTRUE(length(c(gs1, gs2, gs2a, gs3)) == 0) == TRUE) {
         if (missing(case) == FALSE && is.numeric(case) == TRUE) {
             x1c <- cs(x1, level = level, case = case, na.rm = na.rm)
-            names(x1c) <- xo
+            ifelse(missing(keep) == FALSE && isTRUE(keep == FALSE) == 
+                TRUE, NA, names(x1c) <- xo)
             return(x1c)
         }
         else {
@@ -183,10 +183,12 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE, space)
     if (isTRUE(length(c(gs2, gs2a, gs3)) == 0) == TRUE | isTRUE(flgc == 
         FALSE) == TRUE) {
         res <- paste(xx, collapse = "")
-        names(res) <- xo
+        ifelse(missing(keep) == FALSE && isTRUE(keep == FALSE) == 
+            TRUE, NA, names(res) <- xo)
         if (missing(case) == FALSE && is.numeric(case) == TRUE) {
             resc <- cs(res, level = level, case = case, na.rm = na.rm)
-            names(resc) <- xo
+            ifelse(missing(keep) == FALSE && isTRUE(keep == FALSE) == 
+                TRUE, NA, names(resc) <- xo)
             return(resc)
         }
         else {
@@ -201,12 +203,14 @@ function (x, level = 1, case, chr.rm, na.rm = FALSE, space)
             xx2 <- try(strsplit(rawToChar(as.raw(utf8ToInt(x2))), 
                 "")[[1]])
             res <- paste(c(xx0, xx2), collapse = "")
-            names(res) <- xo
+            ifelse(missing(keep) == FALSE && isTRUE(keep == FALSE) == 
+                TRUE, NA, names(res) <- xo)
             return(res)
         }
         else {
             res <- paste(xx, collapse = "")
-            names(res) <- xo
+            ifelse(missing(keep) == FALSE && isTRUE(keep == FALSE) == 
+                TRUE, NA, names(res) <- xo)
             return(res)
         }
     }

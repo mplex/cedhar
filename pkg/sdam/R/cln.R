@@ -3,7 +3,7 @@
 ## FUNCTION cln() for cleansing and re-encoding glyphs and Greek characters
 ## (CC BY-SA 4.0) Antonio Rivero Ostoic, multiplex@post.com 
 ##
-## version 0.5.8 (06-06-2023)
+## version 0.6.0 (08-11-2024)
 ##
 ##
 ## PARAMETERS
@@ -21,6 +21,7 @@
 ## DEPENDS: clv() (cleansing vector)
 ##          cs() (if 'case')
 ##
+
 
 cln <-
 function (x, level = 1, chr.rm, na.rm, case, repl, space) 
@@ -146,7 +147,8 @@ function (x, level = 1, chr.rm, na.rm, case, repl, space)
         else {
             NA
         }
-        if (isTRUE(length(x) == 1L) == TRUE) {
+        if (is.list(x) == FALSE && isTRUE(length(x) == 1L) == 
+            TRUE) {
             names(x1) <- xo
             if (isTRUE(level == 3) == TRUE) {
                 res <- clv(clv(x1, level = level, chr.rm = chr.rm, 
@@ -162,13 +164,32 @@ function (x, level = 1, chr.rm, na.rm, case, repl, space)
             }
         }
         else {
-            resl <- vector("list", length = length(x1))
-            for (k in seq_len(length(x1))) {
-                xi <- as.character(x1[k])
-                resl[[k]] <- clv(xi, level = level, chr.rm = chr.rm, 
-                  case = case, na.rm = na.rm, space = space)
+            resl <- vector(mode = "list", length = length(x1))
+            if (is.list(x) == TRUE) {
+                for (k in seq_len(length(resl))) {
+                  xi <- x1[[k]]
+                  tmpv <- vector(mode = "list", length = length(xi))
+                  for (l in seq_len(length(xi))) {
+                    ifelse(is.na(xi[[l]]) == TRUE || is.numeric(xi[[l]]) == 
+                      TRUE, tmpv[[l]] <- xi[[l]], tmpv[[l]] <- suppressWarnings(clv(xi[[l]], 
+                      level = level, chr.rm = chr.rm, case = case, 
+                      na.rm = na.rm, space = space, keep = FALSE)))
+                  }
+                  rm(l)
+                  names(tmpv) <- names(xi)
+                  resl[[k]] <- as.vector(tmpv)
+                }
+                rm(k)
+                return(resl)
             }
-            rm(k)
+            else {
+                for (k in seq_len(length(resl))) {
+                  xi <- as.character(x1[k])
+                  resl[[k]] <- clv(xi, level = level, chr.rm = chr.rm, 
+                    case = case, na.rm = na.rm, space = space)
+                }
+                rm(k)
+            }
             if (isTRUE(length(x1[[1]]) == 1L) == FALSE) {
                 res <- unlist(resl, use.names = FALSE)
             }
